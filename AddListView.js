@@ -5,14 +5,9 @@ export default class AddListView extends Component {
 
     constructor(props) {
         super(props);
-        // this.state={data:{key:''}};
         this.state = {
-            bookitems: [
-                //{key: 'Learn react native'},
-                //{key: 'Make a to-do app'}
-            ],
+            books: [],
             isLoading: true,
-            quere: ''
         }
         // this.props.updateState(this.state);
     }
@@ -29,14 +24,12 @@ export default class AddListView extends Component {
     render() {
         return (
             <FlatList
-                data={this.props.bookitems}
-                renderItem={({ book }) => (
-                    <TouchableOpacity onPress={() => {
-                        console.warn(book.key);
-                    }}>
-                        <Text style={styles.book}>{book.title}</Text>
+                data={this.props.books}
+                renderItem={({ item }) => {
+                    return <TouchableOpacity onPress={() => console.warn(item.key)}>
+                        <Text style={styles.item}>{item.title}</Text>
                     </TouchableOpacity>
-                )}
+                }}
             />
         );
     }
@@ -48,7 +41,7 @@ const styles = StyleSheet.create({
             flex: 1,
             paddingTop: 22,
         },
-    book:
+    item:
         {
             padding: 10,
             fontSize: 18,

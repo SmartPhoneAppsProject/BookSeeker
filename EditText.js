@@ -23,7 +23,7 @@ export default class EditText extends Component {
                 <TextInput
                     placeholder="タグ検索"
                     onChangeText={(searchText) => this.setState({ searchText })}
-                    value={this.props.state.searchText}
+                    value={this.state.searchText}
                 />
 
                 <Button style={styles.seachButton} onPress={() => console.log('search')}

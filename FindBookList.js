@@ -9,12 +9,8 @@ export default class FindBookList extends React.Component {
         super(props);
 
         this.state = {
-            bookitems: [
-                //{key: 'Learn react native'},
-                //{key: 'Make a to-do app'}
-            ],
+            books: [],
             isLoading: true,
-            quere: ''
         }
         // this.updateState=this.updateState.bind(this);
         //  this.searchStart=this.searchStart.bind(this);
@@ -27,17 +23,18 @@ export default class FindBookList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://go-api-staging.herokuapp.com/books", {
-            method: "GET",
-        }).then((respJson) => {
-            var data = JSON.parse(respJson._bodyInit);
-            for (i = 0; i < Object.keys(data).length; i++) {
-                this.setState({ bookitems: this.state.bookitems.concat([{ title: data[i].title, key: data[i].id }]) });
-
-                console.log(`title: ${data[i].title}, key: ${data[i].id}`);
-            }
-            this.setState({ isLoading: false })
-        })
+        fetch("https://go-api-staging.herokuapp.com/books")
+            .then((response) => response.json())
+            .then((data) => {
+                let books = [];
+                for (i in data) {
+                    books.push({ key: data[i].id, title: data[i].title });
+                }
+                this.setState({ books });
+                this.setState({ isLoading: false });
+                console.log(this.state.books);
+            })
+            .catch((error) => console.error(error));
     }
 
     // searchStart(text){
@@ -45,22 +42,21 @@ export default class FindBookList extends React.Component {
     //       //  method: "GET",
     //    // }).then((respJson)=>{
     //         //var data = JSON.parse(respJson._bodyInit);
-    //         var data=this.state.bookitems;
+    //         var data=this.state.books;
     //         for(i=0;i<data.length;i++) {
     //             var booktitle=data[i].title;
     //             if(booktitle==text)
     //                 console.log(text)
     //             else
     //                 data.splice(i,1);
-    //             //this.setState({bookitems: this.state.bookitems.concat([{key: data[i].title}])});
+    //             //this.setState({books: this.state.books.concat([{key: data[i].title}])});
     //         }
-    //         //this.setState({bookitems:data});
+    //         //this.setState({books:data});
     //        // this.setState({isLoading:false})
     //     //})
     // }
 
     callbackst(text) {
-
         this.searchStart(text)
     }
 
@@ -97,11 +93,7 @@ export default class FindBookList extends React.Component {
                 //q={(q)=>this.setState({queue:q})}
 
                 />
-                <AddListView
-                    // updateState={this.updateState}
-                    bookitems={this.state.bookitems}
-                //_onPress={this.clickListItem}
-                />
+                <AddListView books={this.state.books} />
             </View>
 
         );
