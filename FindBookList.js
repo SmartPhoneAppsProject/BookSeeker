@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button,AppRegistry,StyleSheet, Text, View,ActivityIndicator } from 'react-native';
+import { Button, AppRegistry, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import AddListView from './AddListView';
 import EditText from './EditText';
 import Bar from './Bar';
@@ -14,29 +14,29 @@ export default class FindBookList extends React.Component {
                 //{key: 'Make a to-do app'}
             ],
             isLoading: true,
-            quere:''
+            quere: ''
         }
-       // this.updateState=this.updateState.bind(this);
-       //  this.searchStart=this.searchStart.bind(this);
+        // this.updateState=this.updateState.bind(this);
+        //  this.searchStart=this.searchStart.bind(this);
         // this.callbackst=this.callbackst.bind(this);
 
     }
 
-    updateState(){
+    updateState() {
         this.setState(this);
     }
 
     componentDidMount() {
         fetch("https://go-api-staging.herokuapp.com/books", {
             method: "GET",
-        }).then((respJson)=>{
+        }).then((respJson) => {
             var data = JSON.parse(respJson._bodyInit);
-            for(i=0;i<Object.keys(data).length;i++) {
-                console.log(data[i].title)
+            for (i = 0; i < Object.keys(data).length; i++) {
+                this.setState({ bookitems: this.state.bookitems.concat([{ title: data[i].title, key: data[i].id }]) });
 
-                this.setState({bookitems: this.state.bookitems.concat([{title: data[i].title,key:data[i].id}])});
+                console.log(`title: ${data[i].title}, key: ${data[i].id}`);
             }
-            this.setState({isLoading:false})
+            this.setState({ isLoading: false })
         })
     }
 
@@ -59,7 +59,7 @@ export default class FindBookList extends React.Component {
     //     //})
     // }
 
-    callbackst(text){
+    callbackst(text) {
 
         this.searchStart(text)
     }
@@ -67,54 +67,54 @@ export default class FindBookList extends React.Component {
     static navigationOptions = {
         title: 'FindBookList',
     };
-  render() {
-      const { navigate } = this.props.navigation;
-      if (this.state.isLoading) {
-          return (
-              <View style={{flex: 1, paddingTop: 20}}>
-                  <ActivityIndicator />
-              </View>
-          );
-      }
-    return (
-        <View>
-            <Button
-                title="新規"
-                onPress={()=>navigate('newBook')}
+    render() {
+        const { navigate } = this.props.navigation;
+        if (this.state.isLoading) {
+            return (
+                <View style={{ flex: 1, paddingTop: 20 }}>
+                    <ActivityIndicator />
+                </View>
+            );
+        }
+        return (
+            <View>
+                <Button
+                    title="新規"
+                    onPress={() => navigate('newBook')}
                 />
-            <Button
-                title="貸出・返却"
-                onPress={()=>navigate('detailBook')}
-            />
+                <Button
+                    title="貸出・返却"
+                    onPress={() => navigate('detailBook')}
+                />
 
 
-            <EditText　
+                <EditText
                 //updateState={this.updateState}
                 // callbackst={this.callbackst}
-               // onPress={(q)=>this.searchStart(q)}
+                // onPress={(q)=>this.searchStart(q)}
                 //onPress={this.callbackst}
 
                 //q={(q)=>this.setState({queue:q})}
 
-            />
-            <AddListView
-               // updateState={this.updateState}
-                bookitems={this.state.bookitems}
+                />
+                <AddListView
+                    // updateState={this.updateState}
+                    bookitems={this.state.bookitems}
                 //_onPress={this.clickListItem}
-            />
-        </View>
+                />
+            </View>
 
-    );
-  }
+        );
+    }
 }
 
 //<Bar
-  //  onPress={() =>navigate('detailBook')}
-   // onPress={()=>navigate('newBook')}
+//  onPress={() =>navigate('detailBook')}
+// onPress={()=>navigate('newBook')}
 
 ///>
 
-AppRegistry.registerComponent('findListView',()=>findListView);
+AppRegistry.registerComponent('findListView', () => findListView);
 // const styles = StyleSheet.create({
 //
 //     container: {

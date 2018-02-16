@@ -11,10 +11,10 @@ import DetailBook from './DetailBookView'
 
 
 const bookSeeker = StackNavigator({
-    findList: {screen: FindListView},
-    newBook: {screen: NewBookAdd},
-    detailBook:{screen: DetailBook},
-//}//,{
+    findList: { screen: FindListView },
+    newBook: { screen: NewBookAdd },
+    detailBook: { screen: DetailBook },
+    //}//,{
     //initialRouteName: 'findList'
 });
 export default bookSeeker;
