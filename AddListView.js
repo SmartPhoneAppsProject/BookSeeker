@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, Text, } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Details from './DetailBookView';
-import List from './FindBookList';
 
 export default class AddListView extends Component {
 
@@ -15,13 +13,12 @@ export default class AddListView extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        // console.log(this.props);
         return (
             <FlatList
                 data={this.props.books}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity onPress={() => navigate('Details')}>
+                        <TouchableOpacity onPress={() => navigate('Details', { item })}>
                             <Text style={styles.item}>{item.title}</Text>
                         </TouchableOpacity>
                     );

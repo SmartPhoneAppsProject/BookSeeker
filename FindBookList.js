@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button, AppRegistry, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import AddListView from './AddListView';
 import EditText from './EditText';
 import Bar from './Bar';
-import Details from './DetailBookView';
 
 export default class FindBookList extends React.Component {
     constructor(props) {
@@ -103,7 +102,6 @@ export default class FindBookList extends React.Component {
 
                 <AddListView books={this.state.books} navigation={this.props.navigation} />
             </View>
-
         );
     }
 }
@@ -124,4 +122,3 @@ export default class FindBookList extends React.Component {
 //         justifyContent: 'center',
 //     },
 // });
-AppRegistry.registerComponent('findListView', () => findListView);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry,StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View } from 'react-native';
 
 export default class NewBookAdd extends React.Component {
     static navigationOptions = {
@@ -13,5 +13,3 @@ export default class NewBookAdd extends React.Component {
     );
   }
 }
-
-AppRegistry.registerComponent('newBookAdd',()=>newBookAdd);
