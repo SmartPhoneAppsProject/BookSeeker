@@ -1,10 +1,12 @@
-import React from 'react';
-import { AppRegistry,StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import List from './AddListView';
 
 export default class DetailBookView extends React.Component {
-    static navigationOptions = {
-        title: 'DetailBookView',
-    };
+  static navigationOptions = {
+    title: 'DetailBookView',
+  };
   render() {
     return (
       <View >
@@ -16,4 +18,4 @@ export default class DetailBookView extends React.Component {
   }
 }
 
-AppRegistry.registerComponent('detailBookView',()=>detailBookView);
+AppRegistry.registerComponent('detailBookView', () => detailBookView);

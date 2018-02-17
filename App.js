@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-import {
-    StackNavigator,
-} from 'react-navigation';
-
-import FindListView from './FindBookList'
+import FindBookList from './FindBookList'
 import NewBookAdd from './NewBookAdd'
-import DetailBook from './DetailBookView'
+import DetailBookView from './DetailBookView';
 
 
-const bookSeeker = StackNavigator({
-    findList: { screen: FindListView },
-    newBook: { screen: NewBookAdd },
-    detailBook: { screen: DetailBook },
-    //}//,{
-    //initialRouteName: 'findList'
-});
-export default bookSeeker;
+const RootStack = StackNavigator(
+    {
+        List: {
+            screen: FindBookList,
+        },
+        New: {
+            screen: NewBookAdd,
+        },
+        Details: {
+            screen: DetailBookView,
+        },
+    },
+    {
+        initialRouteName: 'List',
+    }
+);
+
+export default class BookSeeker extends React.Component {
+    render() {
+        return <RootStack />;
+    }
+}

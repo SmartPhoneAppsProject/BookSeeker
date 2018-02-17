@@ -3,6 +3,7 @@ import { Button, AppRegistry, StyleSheet, Text, View, ActivityIndicator } from '
 import AddListView from './AddListView';
 import EditText from './EditText';
 import Bar from './Bar';
+import Details from './DetailBookView';
 
 export default class FindBookList extends React.Component {
     constructor(props) {
@@ -15,7 +16,6 @@ export default class FindBookList extends React.Component {
         // this.updateState=this.updateState.bind(this);
         //  this.searchStart=this.searchStart.bind(this);
         // this.callbackst=this.callbackst.bind(this);
-
     }
 
     updateState() {
@@ -26,13 +26,23 @@ export default class FindBookList extends React.Component {
         fetch("https://go-api-staging.herokuapp.com/books")
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 let books = [];
                 for (i in data) {
-                    books.push({ key: data[i].id, title: data[i].title });
+                    books.push({
+                        key: data[i].id,
+                        image: data[i].image,
+                        jan_code: data[i].jan_code,
+                        published_at: data[i].published_at,
+                        status: data[i].status,
+                        tags: data[i].tags,
+                        title: data[i].title,
+                        updated_at: data[i].updated_at,
+                        created_at: data[i].created_at,
+                    });
                 }
                 this.setState({ books });
                 this.setState({ isLoading: false });
-                console.log(this.state.books);
             })
             .catch((error) => console.error(error));
     }
@@ -76,24 +86,22 @@ export default class FindBookList extends React.Component {
             <View>
                 <Button
                     title="新規"
-                    onPress={() => navigate('newBook')}
+                    onPress={() => navigate('New')}
                 />
                 <Button
                     title="貸出・返却"
-                    onPress={() => navigate('detailBook')}
+                    onPress={() => navigate('Details')}
                 />
-
 
                 <EditText
                 //updateState={this.updateState}
                 // callbackst={this.callbackst}
                 // onPress={(q)=>this.searchStart(q)}
                 //onPress={this.callbackst}
-
                 //q={(q)=>this.setState({queue:q})}
-
                 />
-                <AddListView books={this.state.books} />
+
+                <AddListView books={this.state.books} navigation={this.props.navigation} />
             </View>
 
         );
@@ -106,7 +114,6 @@ export default class FindBookList extends React.Component {
 
 ///>
 
-AppRegistry.registerComponent('findListView', () => findListView);
 // const styles = StyleSheet.create({
 //
 //     container: {
@@ -117,3 +124,4 @@ AppRegistry.registerComponent('findListView', () => findListView);
 //         justifyContent: 'center',
 //     },
 // });
+AppRegistry.registerComponent('findListView', () => findListView);

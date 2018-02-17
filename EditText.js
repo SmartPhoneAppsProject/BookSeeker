@@ -5,12 +5,9 @@ export default class EditText extends Component {
 
     constructor(props) {
         super(props);
-        // var storeState = this.props.getState();
         this.state = {
             searchText: '',
         }
-        //this.props.updateState(this.state);
-        // this.props.callbackst(this.state.q);
     }
 
     clickSearchButton() {
@@ -28,10 +25,6 @@ export default class EditText extends Component {
 
                 <Button style={styles.seachButton} onPress={() => console.log('search')}
                     title="検索"
-                //onPress={this.clickSearchButton}
-                //var data={this.state.q}
-                // onPress={this.props.callbackst(this.state.q)}
-                //onPress={this.props.onPress(this.state.q)}
                 />
             </View>
 
