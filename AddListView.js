@@ -24,8 +24,8 @@ export default class AddListView extends Component {
                                 source={{ uri: item.image }} />
                             <View style={list.info}>
                                 <View style={list.infoStatus}>
-                                    <Text style={list.statusOk}>{`${item.status}`}</Text>
-                                    <Text style={list.statusNo}>{`${item.status}`}</Text>
+                                    {item.status ? <Text style={list.statusOk}>貸し出しOK</Text>
+                                        : <Text style={list.statusNo}>貸し出し中</Text>}
                                 </View>
                                 <Text style={list.infoTitle}>{item.title}</Text>
                             </View>
@@ -58,24 +58,25 @@ const list = StyleSheet.create({
     infoStatus: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
     },
     statusOk: {
-        backgroundColor: 'red',
-        width: '30%',
+        width: 90,
         fontSize: 15,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: 'green',
+        overflow: 'hidden',
         textAlign: 'center',
-        paddingHorizontal: 5,
-        paddingVertical: 1,
+
     },
     statusNo: {
-        backgroundColor: 'red',
-        width: '30%',
+        width: 90,
         fontSize: 15,
-        color: '#ABABAB',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: 'red',
+        overflow: 'hidden',
         textAlign: 'center',
-        paddingHorizontal: 5,
-        paddingVertical: 1,
     },
     infoTitle: {
         flex: 2,
