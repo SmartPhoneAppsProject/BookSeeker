@@ -27,7 +27,7 @@ export default class FindBookList extends React.Component {
                 for (i in data) {
                     books.push({
                         key: data[i].id,
-                        image: data[i].image,
+                        image: 'https://facebook.github.io/react/logo-og.png',
                         jan_code: data[i].jan_code,
                         published_at: data[i].published_at,
                         status: data[i].status,
@@ -60,7 +60,7 @@ export default class FindBookList extends React.Component {
             );
         }
         return (
-            <View>
+            <View style={styles.container}>
                 <Button
                     title="新規"
                     onPress={() => navigate('New')}
@@ -78,3 +78,12 @@ export default class FindBookList extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        backgroundColor: '#FFF',
+    },
+});
