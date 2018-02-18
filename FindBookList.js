@@ -12,9 +12,6 @@ export default class FindBookList extends React.Component {
             books: [],
             isLoading: true,
         }
-        // this.updateState=this.updateState.bind(this);
-        //  this.searchStart=this.searchStart.bind(this);
-        // this.callbackst=this.callbackst.bind(this);
     }
 
     updateState() {
@@ -46,25 +43,6 @@ export default class FindBookList extends React.Component {
             .catch((error) => console.error(error));
     }
 
-    // searchStart(text){
-    //     //fetch("https://go-api-staging.herokuapp.com/books", {
-    //       //  method: "GET",
-    //    // }).then((respJson)=>{
-    //         //var data = JSON.parse(respJson._bodyInit);
-    //         var data=this.state.books;
-    //         for(i=0;i<data.length;i++) {
-    //             var booktitle=data[i].title;
-    //             if(booktitle==text)
-    //                 console.log(text)
-    //             else
-    //                 data.splice(i,1);
-    //             //this.setState({books: this.state.books.concat([{key: data[i].title}])});
-    //         }
-    //         //this.setState({books:data});
-    //        // this.setState({isLoading:false})
-    //     //})
-    // }
-
     callbackst(text) {
         this.searchStart(text)
     }
@@ -93,11 +71,6 @@ export default class FindBookList extends React.Component {
                 />
 
                 <EditText
-                //updateState={this.updateState}
-                // callbackst={this.callbackst}
-                // onPress={(q)=>this.searchStart(q)}
-                //onPress={this.callbackst}
-                //q={(q)=>this.setState({queue:q})}
                 />
 
                 <AddListView books={this.state.books} navigation={this.props.navigation} />
@@ -105,20 +78,3 @@ export default class FindBookList extends React.Component {
         );
     }
 }
-
-//<Bar
-//  onPress={() =>navigate('detailBook')}
-// onPress={()=>navigate('newBook')}
-
-///>
-
-// const styles = StyleSheet.create({
-//
-//     container: {
-//         flex: 1,
-//         margin: 30,
-//         backgroundColor: '#fff',
-//         // alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-// });

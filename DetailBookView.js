@@ -3,13 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 export default class DetailBookView extends React.Component {
+  // static navigationOptions = ({ navigation, navigationOptions }) => {
+  //   const { params } = this.props.navigation.state;
+
+  //   return {
+  //     title: params ? params.otherParam : 'DetailBookView',
+  //     headerStyle: {
+  //       backgroundColor: navigationOptions.headerTintColor,
+  //     },
+  //     headerTintColor: navigationOptions.headerStyle.backgroundColor,
+  //   };
+  // };
   static navigationOptions = {
     title: 'DetailBookView',
   };
 
   render() {
     const { params } = this.props.navigation.state;
-    // const id = params ? params.item.key : null;
     return (
       <View >
         <Text>{JSON.stringify(id = params ? params.item.key : null)}</Text>
