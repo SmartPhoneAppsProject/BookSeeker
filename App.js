@@ -1,23 +1,42 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import FindBookList from './FindBookList'
+import NewBookAdd from './NewBookAdd'
+import DetailBookView from './DetailBookView';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+const RootStack = StackNavigator(
+    {
+        List: {
+            screen: FindBookList,
+        },
+        New: {
+            screen: NewBookAdd,
+        },
+        Details: {
+            screen: DetailBookView,
+        },
+    },
+    {
+        initialRouteName: 'List',
+        //header config
+        navigationOptions: {
+            title: 'DetailBookView',
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        },
+    }
+);
+
+export default class BookSeeker extends React.Component {
+    render() {
+        return <RootStack />;
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
