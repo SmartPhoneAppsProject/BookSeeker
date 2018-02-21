@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
       },
   titleContainer:
       {
-          // height: 40,
           flex: 1,
       },
   title:
