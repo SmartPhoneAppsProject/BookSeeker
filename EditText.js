@@ -7,7 +7,7 @@ export default class EditText extends Component {
         super(props);
         this.state = {
             searchText: '',
-        }
+        };
     }
 
     clickSearchButton() {
@@ -31,6 +31,7 @@ export default class EditText extends Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
     seachButton: {
         width: 60,

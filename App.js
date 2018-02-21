@@ -3,7 +3,7 @@ import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import FindBookList from './FindBookList'
 import DetailBookView from './DetailBookView';
-import entryScreen from './entryScreen';
+import EntryScreen from './EntryScreen';
 
 const RootStack = StackNavigator(
     {
@@ -14,8 +14,8 @@ const RootStack = StackNavigator(
             screen: DetailBookView,
         },
         Entry: {
-            screen: entryScreen,
-        }
+            screen: EntryScreen,
+        },
     },
     {
         initialRouteName: 'List',

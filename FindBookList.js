@@ -1,4 +1,4 @@
-import React, { Componet } from 'react';
+import React, { Component } from 'react';
 import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import AddListView from './AddListView';
 import EditText from './EditText';

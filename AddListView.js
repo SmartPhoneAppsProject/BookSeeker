@@ -8,7 +8,7 @@ export default class AddListView extends Component {
         super(props);
         this.state = {
             isLoading: true,
-        }
+        };
     }
 
     render() {
