@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import FindBookList from './FindBookList'
-import NewBookAdd from './NewBookAdd'
 import DetailBookView from './DetailBookView';
+import entryScreen from './entryScreen';
 
 const RootStack = StackNavigator(
     {
         List: {
             screen: FindBookList,
         },
-        New: {
-            screen: NewBookAdd,
-        },
         Details: {
             screen: DetailBookView,
         },
+        Entry: {
+            screen: entryScreen,
+        }
     },
     {
         initialRouteName: 'List',

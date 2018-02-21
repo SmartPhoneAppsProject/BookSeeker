@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Componet } from 'react';
 import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import AddListView from './AddListView';
 import EditText from './EditText';
-import Bar from './Bar';
 
-export default class FindBookList extends React.Component {
+export default class FindBookList extends Component {
     constructor(props) {
         super(props);
 
@@ -63,7 +62,7 @@ export default class FindBookList extends React.Component {
             <View style={styles.container}>
                 <Button
                     title="新規"
-                    onPress={() => navigate('New')}
+                    onPress={() => navigate('Entry')}
                 />
                 <Button
                     title="貸出・返却"
