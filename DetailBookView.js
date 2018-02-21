@@ -26,7 +26,7 @@ export default class DetailBookView extends React.Component {
             <Image style={styles.image}
                    source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
             <View style={ [styles.base, styles.tagContainer] }>
-                <Text style={styles.tag}>タグ：{JSON.stringify(tags = params ? params.item.tags : null)}</Text>
+                <Text style={styles.tag}>タグ：{params.item.tags}</Text>
             </View>
         </View>
         <View style={ [styles.base, styles.status] }>
@@ -40,16 +40,14 @@ export default class DetailBookView extends React.Component {
             }
         </View>
         <View style={ [styles.base, styles.titleContainer] }>
-            <Text style={ styles.title}>{JSON.stringify(title = params ? params.item.title : null)}</Text>
+            <Text style={ styles.title}>{params.item.title}</Text>
         </View>
         <View style={ styles.info }>
             <Text style={ styles.infoHead}>詳細情報</Text>
             <ScrollView style={ styles.infoContainer}>
-                <Text>JANコード：{JSON.stringify(jan_code = params ? params.item.jan_code : null)}</Text>
-                <Text>出版日：{JSON.stringify(published_at = params ? params.item.published_at : null)}</Text>
-                <Text>アプリへの追加日：{JSON.stringify(created_at = params ? params.item.created_at : null)}</Text>
-                <Text>情報の更新日：{JSON.stringify(updated_at = params ? params.item.updated_at : null)}</Text>
-                <Text>この本に対するコメント〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜hogehoge</Text>
+                <Text>JANコード：{params.item.jan_code}</Text>
+                <Text>出版日：{params.item.published_at}</Text>
+                <Text>アプリへの追加日：{params.item.created_at}</Text>
             </ScrollView>
         </View>
       </View>
@@ -70,9 +68,9 @@ const styles = StyleSheet.create({
       },
   imgContainer:
       {
-          height: 100,
+          flex: 1,
           flexDirection: 'row',
-          marginTop: 10,
+          marginTop: 20,
       },
   image:
       {
@@ -91,10 +89,9 @@ const styles = StyleSheet.create({
       },
   status:
       {
+          flex: 1,
           flexDirection: 'row',
-          height: 40,
-          marginTop: 10,
-
+          marginTop: 20,
       },
   statusInfo:
       {
@@ -115,7 +112,8 @@ const styles = StyleSheet.create({
       },
   titleContainer:
       {
-          height: 40,
+          // height: 40,
+          flex: 1,
       },
   title:
       {
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
       },
   info:
       {
-          flex: 1,
+          flex: 5,
           marginTop: 5,
           marginLeft: 25,
           marginRight: 25,
@@ -141,7 +139,6 @@ const styles = StyleSheet.create({
       },
   infoContainer:
       {
-          marginTop: 5,
           marginLeft: 20,
       },
 });
