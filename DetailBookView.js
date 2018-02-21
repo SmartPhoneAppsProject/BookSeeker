@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
           width: 60,
           height: 30,
           backgroundColor: '#ccc',
-          textAlign: 'center'
+          textAlign: 'center',
+          overflow: 'hidden',
       },
   statusColor:
       {
