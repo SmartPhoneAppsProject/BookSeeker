@@ -43,9 +43,15 @@ export default class FindBookList extends React.Component {
             .catch((error) => console.error(error));
     }
 
-    callbackst(text) {
-        this.searchStart(text)
+
+
+    searchBack(books){
+        let newbook=[];
+        newbook=books.slice()
+        this.setState({books:newbook});
+        console.log(newbook)
     }
+
 
     static navigationOptions = {
         title: 'FindBookList',
@@ -71,6 +77,8 @@ export default class FindBookList extends React.Component {
                 />
 
                 <EditText
+                    books={this.state.books}
+                    searchBack={this.searchBack.bind(this)}
                 />
 
                 <AddListView books={this.state.books} navigation={this.props.navigation} />

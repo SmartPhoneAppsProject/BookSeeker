@@ -10,8 +10,16 @@ export default class EditText extends Component {
         }
     }
 
-    clickSearchButton() {
-
+    seachStart(text) {
+        console.log(text)
+        let newbooks = [];
+        let data = this.props.books;
+        for (i in data) {
+            if (text == data[i].title) {
+                newbooks.push(data[i])
+            }
+        }
+        this.props.searchBack(newbooks)
     }
 
     render() {
@@ -23,7 +31,7 @@ export default class EditText extends Component {
                     value={this.state.searchText}
                 />
 
-                <Button style={styles.seachButton} onPress={() => console.log('search')}
+                <Button style={styles.seachButton} onPress={() => this.seachStart(this.state.searchText)}
                     title="検索"
                 />
             </View>
