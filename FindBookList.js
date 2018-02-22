@@ -20,7 +20,15 @@ export default class FindBookList extends React.Component {
 
     componentDidMount() {
         fetch("https://go-api-staging.herokuapp.com/books")
-            .then((response) => response.json())
+            .then((response) => {
+                if(response.ok) {
+                    response.json()
+                } else {
+                    console.log('internal server error! 500!の時はもう一回fetchするぜ！');
+                    fetch("https://go-api-staging.herokuapp.com/books")
+                        .then((response) => response.json())
+                }
+            })
             .then((data) => {
                 console.log(data);
                 let books = [];
