@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Text, Image } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, TextInput, View, Text, Image, Button } from 'react-native';
 
 export default class EntryScreen extends Component {
 
@@ -12,6 +12,7 @@ export default class EntryScreen extends Component {
     }
 
     render() {
+      const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Image
@@ -26,6 +27,10 @@ export default class EntryScreen extends Component {
                 <TextInput
                     onChangeText={(text) => this.setState({ title })}
                     value={this.state.text}
+                />
+                <Button
+                onPress={() => navigate('Camera')}
+                title='Camera'
                 />
             </View>
         );

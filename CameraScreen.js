@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Slider } from 'react-native';
-import GalleryScreen from './GalleryScreen';
 import { Camera, Permissions, FileSystem, Constants } from 'expo';
 
 export default class CameraScreen extends React.Component {
@@ -70,7 +69,10 @@ export default class CameraScreen extends React.Component {
   }
 
   renderGallery() {
-    return <Button onPress={this.toggleView.bind(this)} />;
+    return <Button
+      onPress={this.toggleView.bind(this)}
+      title='Gallery'
+     />;
   }
 
   renderNoPermissions() {

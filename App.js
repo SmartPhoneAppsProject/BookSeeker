@@ -4,39 +4,43 @@ import { StackNavigator } from 'react-navigation';
 import FindBookList from './FindBookList'
 import DetailBookView from './DetailBookView';
 import EntryScreen from './EntryScreen';
+import CameraScreen from './CameraScreen';
 
 const RootStack = StackNavigator(
-    {
-        List: {
-            screen: FindBookList,
-        },
-        Details: {
-            screen: DetailBookView,
-        },
-        Entry: {
-            screen: EntryScreen,
-        },
+  {
+    List: {
+      screen: FindBookList,
     },
-    {
-        initialRouteName: 'List',
-        //header config
-        navigationOptions: {
-            title: 'DetailBookView',
-            headerStyle: {
-                backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        },
+    Details: {
+      screen: DetailBookView,
+    },
+    Entry: {
+      screen: EntryScreen,
+    },
+    Camera: {
+      screen: CameraScreen,
     }
+  },
+  {
+    initialRouteName: 'List',
+    //header config
+    navigationOptions: {
+      title: 'DetailBookView',
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
 );
 
 export default class BookSeeker extends React.Component {
-    render() {
-        return <RootStack />;
-    }
+  render() {
+    return <RootStack />;
+  }
 }
 
 AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
