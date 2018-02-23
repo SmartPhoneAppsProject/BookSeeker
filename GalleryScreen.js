@@ -14,16 +14,17 @@ export default class GalleryScreen extends React.Component {
 
   componentDidMount() {
     this._mounted = true;
-    FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'photos').then(photos => {
-      if (this._mounted) {
-        this.setState(
-          {
-            photos,
-          },
-          this.detectFaces
-        );
-      }
-    });
+    FileSystem.readDirectoryAsync(FileSystem.documentDirectory + 'photos').
+      then(photos => {
+        if (this._mounted) {
+          this.setState(
+            {
+              photos,
+            },
+            this.detectFaces
+          );
+        }
+      });
   }
 
   componentWillUnmount() {

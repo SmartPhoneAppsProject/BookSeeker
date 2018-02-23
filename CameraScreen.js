@@ -21,9 +21,9 @@ export default class CameraScreen extends React.Component {
 
   componentDidMount() {
     FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos')
-    .catch(e => {
-      console.log(e, 'Directory exists');
-    });
+      .catch(e => {
+        console.log(e, 'Directory exists');
+      });
   }
 
   toggleView() {
@@ -50,9 +50,6 @@ export default class CameraScreen extends React.Component {
   }
 
   async takePicture() {
-    // if (this.camera) {
-    //   let phone = await this.camera.takePictureAsync();
-    // };
     if (this.camera) {
       this.camera.takePictureAsync()
         .then((data) => {
@@ -65,9 +62,14 @@ export default class CameraScreen extends React.Component {
           this.setState({
             photoId: this.state.photoId + 1,
           });
+          this.backScreen();
         })
         .catch((e) => console.error(e));
     }
+  }
+
+  backScreen() {
+    this.props.navigation.goBack();
   }
 
   renderGallery() {
