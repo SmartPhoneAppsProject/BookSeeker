@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Slider } from 'react-native';
 import { Camera, Permissions, FileSystem, Constants } from 'expo';
+import GalleryScreen from './GalleryScreen';
 
 export default class CameraScreen extends React.Component {
   state = {
@@ -19,7 +20,8 @@ export default class CameraScreen extends React.Component {
   }
 
   componentDidMount() {
-    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos')
+    .catch(e => {
       console.log(e, 'Directory exists');
     });
   }
@@ -56,7 +58,7 @@ export default class CameraScreen extends React.Component {
         .then((data) => {
           FileSystem.moveAsync({
             from: data.uri,
-            to: `${FileSystem.documentDirectoryDirectory}photos/Phot_${this.state.photoId}.jpg`,
+            to: `${FileSystem.documentDirectory}photos/Phot_${this.state.photoId}.jpg`,
           })
         })
         .then(() => {
@@ -69,16 +71,13 @@ export default class CameraScreen extends React.Component {
   }
 
   renderGallery() {
-    return <Button
-      onPress={this.toggleView.bind(this)}
-      title='Gallery'
-     />;
+    return <GalleryScreen onPress={this.toggleView.bind(this)} />;
   }
 
   renderNoPermissions() {
     return (
       <View style={styles.noPermissions} >
-        <Text style={{ color: 'white' }}>
+        <Text style={styles.noPermissionsText}>
           Camera permissions not granted - cannot open camera preview.
         </Text>
       </View>
@@ -146,6 +145,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
+  },
+  noPermissionsText: {
+    color: 'white'
   },
   camera: {
     flex: 1,

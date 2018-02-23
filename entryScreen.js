@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, TextInput, View, Text, Image, Button } from 'react-native';
 
 export default class EntryScreen extends Component {
@@ -18,6 +18,10 @@ export default class EntryScreen extends Component {
                 <Image
                     source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
                 />
+                <Button
+                onPress={() => navigate('Camera')}
+                title='Camera'
+                />
                 <Text>Title</Text>
                 <TextInput
                     onChangeText={(text) => this.setState({ title })}
@@ -27,10 +31,6 @@ export default class EntryScreen extends Component {
                 <TextInput
                     onChangeText={(text) => this.setState({ title })}
                     value={this.state.text}
-                />
-                <Button
-                onPress={() => navigate('Camera')}
-                title='Camera'
                 />
             </View>
         );
