@@ -10,6 +10,7 @@ export default class FindBookList extends React.Component {
 
         this.state = {
             books: [],
+            resultbooks:[],
             isLoading: true,
         }
     }
@@ -38,6 +39,7 @@ export default class FindBookList extends React.Component {
                     });
                 }
                 this.setState({ books });
+                this.setState({resultbooks:books})
                 this.setState({ isLoading: false });
             })
             .catch((error) => console.error(error));
@@ -48,7 +50,7 @@ export default class FindBookList extends React.Component {
     searchBack(books){
         let newbook=[];
         newbook=books.slice()
-        this.setState({books:newbook});
+        this.setState({resultbooks:newbook});
         console.log(newbook)
     }
 
@@ -81,7 +83,7 @@ export default class FindBookList extends React.Component {
                     searchBack={this.searchBack.bind(this)}
                 />
 
-                <AddListView books={this.state.books} navigation={this.props.navigation} />
+                <AddListView books={this.state.resultbooks} navigation={this.props.navigation} />
             </View>
         );
     }

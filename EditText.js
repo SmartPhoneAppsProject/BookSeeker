@@ -14,8 +14,9 @@ export default class EditText extends Component {
         console.log(text)
         let newbooks = [];
         let data = this.props.books;
+        console.log(data[0].tags[0].name)
         for (i in data) {
-            if (text == data[i].title) {
+            if (text == data[0].tags[0].name) {
                 newbooks.push(data[i])
             }
         }
