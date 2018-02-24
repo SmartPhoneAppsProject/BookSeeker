@@ -8,7 +8,7 @@ export default class CameraScreen extends React.Component {
     zoom: 0,
     autoFocus: 'on',
     type: 'back',
-    ratio: '16:9',
+    ratio: '4:3',
     photoId: 1,
     showGallery: false,
     permissionsGranted: false,
@@ -53,22 +53,24 @@ export default class CameraScreen extends React.Component {
     if (this.camera) {
       this.camera.takePictureAsync()
         .then((data) => {
-          FileSystem.moveAsync({
-            from: data.uri,
-            to: `${FileSystem.documentDirectory}photos/Phot_${this.state.photoId}.jpg`,
-          })
+          // FileSystem.moveAsync({
+          //   from: data.uri,
+          //   to: `${FileSystem.documentDirectory}photos/Phot_${this.state.photoId}.jpg`,
+          // })
+          return data;
         })
-        .then(() => {
+        .then((photo) => {
           this.setState({
             photoId: this.state.photoId + 1,
           });
-          this.backScreen();
+          this.goBackScreen(photo);
         })
         .catch((e) => console.error(e));
     }
   }
 
-  backScreen() {
+  goBackScreen(data) {
+    this.props.navigation.state.params.returnData(data);
     this.props.navigation.goBack();
   }
 
@@ -132,7 +134,9 @@ export default class CameraScreen extends React.Component {
     const cameraScreenContent = this.state.permissionsGranted
       ? this.renderCamera()
       : this.renderNoPermissions();
-    const content = this.state.showGallery ? this.renderGallery() : cameraScreenContent;
+    const content = this.state.showGallery
+      ? this.renderGallery()
+      : cameraScreenContent;
     return <View style={styles.container}>{content}</View>;
   }
 }

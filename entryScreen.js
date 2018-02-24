@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Text, Image, Button } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Image, Button, Dimensions } from 'react-native';
 
 export default class EntryScreen extends Component {
 
@@ -12,21 +12,29 @@ export default class EntryScreen extends Component {
     };
   }
 
+  returnData(data) {
+    this.setState({ photo: data });
+  }
+
+  renderPhotoSection() {
+    const photo = this.state.photo
+      ? <Image style={styles.photo} source={{ uri: this.state.photo.uri }} />
+      : null;
+    return (
+      <View style={styles.photoSection} >
+        {photo}
+        <Button style={styles.takePhoto}
+          onPress={() => this.props.navigation.navigate('Camera', { returnData: this.returnData.bind(this) })}
+          title='Camera' />
+      </View>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View style={styles.imageSection}>
-          {this.state.photo
-            ? <Image
-              source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-            />
-            : <Button
-              onPress={() => navigate('Camera')}
-              title='Camera'
-            />
-          }
-        </View>
+        {this.renderPhotoSection()}
         <View style={styles.titleSection}>
           <Text>Title</Text>
           <TextInput
@@ -46,18 +54,28 @@ export default class EntryScreen extends Component {
   }
 }
 
+const { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+    alignItems: 'center',
   },
-  imageSection: {
+  photoSection: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  image: {
-    width: 30,
-    height: 30,
+  photo: {
+    width: width / 3,
+    height: (4 / 3 * width) / 3,
+    alignSelf: 'center',
+  },
+  takePhoto: {
+    flex: 1,
+    alignSelf: 'center',
   },
   titleSection: {
     flex: 1,
@@ -67,6 +85,7 @@ const styles = StyleSheet.create({
   },
   tagSection: {
     flex: 1,
+    justifyContent: 'center',
   },
   tags: {
     flex: 1,
