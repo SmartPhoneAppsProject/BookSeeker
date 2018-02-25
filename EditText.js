@@ -12,12 +12,18 @@ export default class EditText extends Component {
 
     seachStart(text) {
         console.log(text)
+        let searchtext=text.split(" ")
         let newbooks = [];
         let data = this.props.books;
-        console.log(data[0].tags[0].name)
+
         for (i in data) {
-            if (text == data[0].tags[0].name) {
-                newbooks.push(data[i])
+            for(let k=0;k<data[0].tags.length;k++) {
+                for(let j=0; j<  searchtext.length;j++) {
+                    if (searchtext[j].toUpperCase() == data[0].tags[k].name.toUpperCase()
+                        ||searchtext[j]==data[i].title) {
+                            newbooks.push(data[i])
+                    }
+                }
             }
         }
         this.props.searchBack(newbooks)
