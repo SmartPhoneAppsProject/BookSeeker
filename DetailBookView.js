@@ -23,28 +23,28 @@ export default class DetailBookView extends React.Component {
     return (
       <View style={ styles.container }>
         <View style={ [styles.base, styles.imgContainer] }>
-            <Image style={styles.image}
+            <Image style={styles.img}
                    source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
             <View style={ [styles.base, styles.tagContainer] }>
                 <Text style={styles.tag}>タグ：{params.item.tags}</Text>
             </View>
         </View>
-        <View style={ [styles.base, styles.status] }>
+        <View style={ [styles.base, styles.statusContainer] }>
             {params.item.status ?
-                <Text style={ styles.statusInfo }>貸出OK</Text>
-                : <Text style={ [styles.statusInfo, styles.statusColor] }>貸出OK</Text>
+                <Text style={ styles.status }>貸出OK</Text>
+                : <Text style={ [styles.status, styles.statusColor] }>貸出OK</Text>
             }
             {params.item.status ?
-                <Text style={ [styles.statusInfo, styles.statusColor] }>貸出中</Text>
-                : <Text style={ styles.statusInfo }>貸出中</Text>
+                <Text style={ [styles.status, styles.statusColor] }>貸出中</Text>
+                : <Text style={ styles.status }>貸出中</Text>
             }
         </View>
         <View style={ [styles.base, styles.titleContainer] }>
             <Text style={ styles.title}>{params.item.title}</Text>
         </View>
-        <View style={ styles.info }>
+        <View style={ styles.infoContainer }>
             <Text style={ styles.infoHead}>詳細情報</Text>
-            <ScrollView style={ styles.infoContainer}>
+            <ScrollView style={ styles.infoBody}>
                 <Text>JANコード：{params.item.jan_code}</Text>
                 <Text>出版日：{params.item.published_at}</Text>
                 <Text>アプリへの追加日：{params.item.created_at}</Text>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   container:
       {
           flex: 1,
-          backgroundColor: 'white',
+          backgroundColor: '#fff',
       },
   base:
       {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
           flexDirection: 'row',
           marginTop: 20,
       },
-  image:
+  img:
       {
           height: 90,
           width: 90,
@@ -87,13 +87,13 @@ const styles = StyleSheet.create({
       {
           fontSize: 15,
       },
-  status:
+  statusContainer:
       {
           flex: 1,
           flexDirection: 'row',
           marginTop: 20,
       },
-  statusInfo:
+  status:
       {
           borderWidth: 1,
           borderColor: '#999',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
       },
   statusColor:
       {
-          color: 'red',
+          color: '#ff0000',
       },
   titleContainer:
       {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
       {
           fontSize: 20,
       },
-  info:
+  infoContainer:
       {
           flex: 5,
           marginTop: 5,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
           height: 30,
           width: 200,
       },
-  infoContainer:
+  infoBody:
       {
           marginLeft: 20,
       },
