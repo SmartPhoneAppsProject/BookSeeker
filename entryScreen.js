@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Text, Image, Button, Dimensions } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Image, Button, Dimensions, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 export default class EntryScreen extends Component {
 
@@ -12,16 +12,22 @@ export default class EntryScreen extends Component {
     };
   }
 
+  onButtonPress() {
+    return;
+  }
+
   returnData(data) {
     this.setState({ photo: data });
   }
 
-  renderPhotoSection() {
+  renderPhotoContainer() {
     const photo = this.state.photo
-      ? <Image style={styles.photo} source={{ uri: this.state.photo.uri }} />
+      ? <Image resizeMode='contain'
+        style={styles.photo}
+        source={{ uri: this.state.photo.uri }} />
       : null;
     return (
-      <View style={styles.photoSection} >
+      <View style={styles.photoContainer} >
         {photo}
         <Button style={styles.takePhoto}
           onPress={() => this.props.navigation.navigate('Camera', { returnData: this.returnData.bind(this) })}
@@ -30,26 +36,44 @@ export default class EntryScreen extends Component {
     );
   }
 
+  renderFormContainer() {
+    return (
+      <View style={styles.formContainer}>
+        <Text style={styles.tag}>Title</Text>
+        <TextInput style={styles.input}
+          onChangeText={(text) => this.setState({ title: text })}
+          value={this.state.title}
+          onSubmitEditing={() => this.tagInput.focus()}
+          returnKeyType='next'
+          placeholder='title'
+          maxLenghth={100} />
+
+        <Text style={styles.tag}>Tags</Text>
+        <TextInput style={styles.input}
+          onChangeText={(text) => this.setState({ tags: text })}
+          value={this.state.tags}
+          returnKeyType='go'
+          ref={(input) => this.tagInput = input}
+          placeholder='tags'
+          maxLenghth={100} />
+
+        <TouchableOpacity style={styles.buttonContainer}
+          onPress={this.onButtonPress}>
+          <Text style={styles.buttonText}>submit</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
+    const photoContainer = this.renderPhotoContainer();
+    const formContainer = this.renderFormContainer();
     return (
-      <View style={styles.container}>
-        {this.renderPhotoSection()}
-        <View style={styles.titleSection}>
-          <Text>Title</Text>
-          <TextInput
-            onChangeText={(text) => this.setState({ title })}
-            value={this.state.text}
-          />
-        </View>
-        <View style={styles.tagSection}>
-          <Text>Tag</Text>
-          <TextInput
-            onChangeText={(text) => this.setState({ title })}
-            value={this.state.text}
-          />
-        </View>
-      </View>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
+        {photoContainer}
+        {formContainer}
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -60,34 +84,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20,
-    alignItems: 'center',
   },
-  photoSection: {
+  photoContainer: {
     flex: 1,
+    flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'center',
   },
   photo: {
     width: width / 3,
     height: (4 / 3 * width) / 3,
-    alignSelf: 'center',
   },
   takePhoto: {
     flex: 1,
-    alignSelf: 'center',
-  },
-  titleSection: {
-    flex: 1,
-  },
-  title: {
-    flex: 1,
-  },
-  tagSection: {
-    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  tags: {
-    flex: 1,
+  formContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    padding: 20,
   },
+  tag: {
+    alignSelf: 'stretch',
+    height: 40,
+    marginBottom: 10,
+    padding: 10,
+  },
+  input: {
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: 10,
+    padding: 10,
+  },
+  buttonContainer: {
+    backgroundColor: '#2980b6',
+    paddingVertical: 15,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: '700',
+  }
 });

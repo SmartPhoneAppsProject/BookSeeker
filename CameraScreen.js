@@ -37,6 +37,7 @@ export default class CameraScreen extends React.Component {
       type: this.state.type === 'back' ? 'front' : 'back',
     });
   }
+
   zoomOut() {
     this.setState({
       zoom: this.state.zoom - 0.1 < 0 ? 0 : this.state.zoom - 0.1,
@@ -96,8 +97,7 @@ export default class CameraScreen extends React.Component {
         type={this.state.type}
         autoFocus={this.state.autoFocus}
         zoom={this.state.zoom}
-        ratio={this.state.ratio}
-      >
+        ratio={this.state.ratio}>
         <View style={styles.cameraHeader}>
           <TouchableOpacity style={styles.flipButton}
             onPress={this.toggleFacing.bind(this)}>
