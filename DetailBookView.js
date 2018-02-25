@@ -26,7 +26,8 @@ export default class DetailBookView extends React.Component {
             <Image style={styles.img}
                    source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
             <View style={ [styles.base, styles.tagContainer] }>
-                <Text style={styles.tag}>タグ：{params.item.tags}</Text>
+                {/*タグの処理を別けてタグ名だけを取得するようにしなければいけないです。*/}
+                <Text style={styles.tag}>タグ：{JSON.stringify(tags = params ? params.item.tags : null)}</Text>
             </View>
         </View>
         <View style={ [styles.base, styles.statusContainer] }>
