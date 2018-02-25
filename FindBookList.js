@@ -13,16 +13,11 @@ export default class FindBookList extends React.Component {
     this.state = {
       books: [],
       isLoading: true,
-    }
+    };
     
     this._refresh = this._refresh.bind(this);
-    
   }
 
-  updateState() {
-    this.setState(this);
-  }
-  
   componentDidMount() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
