@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, TouchableOpacity, Text, } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity, View, Text, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 export default class AddListView extends Component {
@@ -18,9 +18,18 @@ export default class AddListView extends Component {
                 data={this.props.books}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity onPress={() => navigate('Details', { item })}>
-                            <Text style={styles.item}>{item.title}</Text>
-                        </TouchableOpacity>
+                        <TouchableOpacity style={list.item}
+                            onPress={() => navigate('Details', { item })} >
+                            <Image style={list.image}
+                                source={{ uri: item.image }} />
+                            <View style={list.info}>
+                                <View style={list.infoStatus}>
+                                    {item.status ? <Text style={list.statusOk}>貸し出しOK</Text>
+                                        : <Text style={list.statusNo}>貸し出し中</Text>}
+                                </View>
+                                <Text style={list.infoTitle}>{item.title}</Text>
+                            </View>
+                        </TouchableOpacity >
                     );
                 }}
             />
@@ -28,16 +37,50 @@ export default class AddListView extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container:
-        {
-            flex: 1,
-            paddingTop: 22,
-        },
-    item:
-        {
-            padding: 10,
-            fontSize: 18,
-            height: 44,
-        },
+const { width } = Dimensions.get('window');
+
+const list = StyleSheet.create({
+    item: {
+        flexDirection: 'row',
+        borderColor: '#CCC',
+        borderWidth: 1,
+    },
+    image: {
+        width: 64,
+        height: 64,
+    },
+    info: {
+        width: width - 64,
+        height: 64,
+        flexDirection: 'column',
+        alignItems: 'stretch',
+    },
+    infoStatus: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    statusOk: {
+        width: 90,
+        fontSize: 15,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: 'green',
+        overflow: 'hidden',
+        textAlign: 'center',
+
+    },
+    statusNo: {
+        width: 90,
+        fontSize: 15,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: 'red',
+        overflow: 'hidden',
+        textAlign: 'center',
+    },
+    infoTitle: {
+        flex: 2,
+        fontSize: 30,
+        textAlign: 'center',
+    }
 });

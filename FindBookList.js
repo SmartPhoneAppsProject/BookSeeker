@@ -13,7 +13,6 @@ export default class FindBookList extends React.Component {
     this.state = {
       books: [],
       isLoading: true,
-      status: true,
     }
     
     this._refresh = this._refresh.bind(this);
@@ -23,7 +22,7 @@ export default class FindBookList extends React.Component {
   updateState() {
     this.setState(this);
   }
-
+  
   componentDidMount() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
@@ -51,7 +50,7 @@ export default class FindBookList extends React.Component {
   callbackst(text) {
     this.searchStart(text)
   }
-
+  
   static navigationOptions = {
     title: 'FindBookList',
   };
@@ -95,3 +94,12 @@ export default class FindBookList extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        backgroundColor: '#FFF',
+    },
+});
