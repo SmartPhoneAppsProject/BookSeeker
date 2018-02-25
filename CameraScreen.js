@@ -9,7 +9,7 @@ export default class CameraScreen extends React.Component {
     autoFocus: 'on',
     type: 'back',
     ratio: '4:3',
-    photoId: 1,
+    // photoId: 1,
     showGallery: false,
     permissionsGranted: false,
   };
@@ -19,12 +19,12 @@ export default class CameraScreen extends React.Component {
     this.setState({ permissionsGranted: status === 'granted' });
   }
 
-  componentDidMount() {
-    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos')
-      .catch(e => {
-        console.log(e, 'Directory exists');
-      });
-  }
+  // componentDidMount() {
+  //   FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos')
+  //     .catch(e => {
+  //       console.log(e, 'Directory exists');
+  //     });
+  // }
 
   toggleView() {
     this.setState({
@@ -52,7 +52,7 @@ export default class CameraScreen extends React.Component {
 
   async takePicture() {
     if (this.camera) {
-      this.camera.takePictureAsync()
+      this.camera.takePictureAsync({ base64: true })
         .then((data) => {
           // FileSystem.moveAsync({
           //   from: data.uri,
@@ -61,9 +61,9 @@ export default class CameraScreen extends React.Component {
           return data;
         })
         .then((photo) => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          });
+          // this.setState({
+          //   photoId: this.state.photoId + 1,
+          // });
           this.goBackScreen(photo);
         })
         .catch((e) => console.error(e));
