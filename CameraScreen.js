@@ -71,7 +71,7 @@ export default class CameraScreen extends React.Component {
   }
 
   goBackScreen(data) {
-    this.props.navigation.state.params.returnData(data);
+    this.props.navigation.state.params.returnDataFromChild(data);
     this.props.navigation.goBack();
   }
 

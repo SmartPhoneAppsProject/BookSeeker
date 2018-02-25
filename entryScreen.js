@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { StyleSheet, TextInput, View, Text, Image, Button, Dimensions, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 export default class EntryScreen extends Component {
+  static navigationOptions = {
+    title: 'ScanScreen',
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       tags: '',
-      photo: false,
+      photo: null,
     };
   }
 
-  onButtonPress() {
-    return;
+  goScanScreen() {
+    this.props.navigation.navigate('Scan', {title: this.state.title, tags: this.state.tags, photo: this.state.photo})
   }
 
-  returnData(data) {
+  returnDataFromChild(data) {
     this.setState({ photo: data });
   }
 
@@ -30,13 +33,14 @@ export default class EntryScreen extends Component {
       <View style={styles.photoContainer} >
         {photo}
         <Button style={styles.takePhoto}
-          onPress={() => this.props.navigation.navigate('Camera', { returnData: this.returnData.bind(this) })}
+          onPress={() => this.props.navigation.navigate('Camera', { returnDataFromChild: this.returnDataFromChild.bind(this) })}
           title='Camera' />
       </View>
     );
   }
 
   renderFormContainer() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.formContainer}>
         <Text style={styles.tag}>Title</Text>
@@ -58,7 +62,7 @@ export default class EntryScreen extends Component {
           maxLenghth={100} />
 
         <TouchableOpacity style={styles.buttonContainer}
-          onPress={this.onButtonPress}>
+          onPress={() => navigate('Scan', {title: this.state.title, tags: this.state.tags, photo: this.state.photo})}>
           <Text style={styles.buttonText}>submit</Text>
         </TouchableOpacity>
       </View>

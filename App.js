@@ -5,6 +5,7 @@ import FindBookList from './FindBookList'
 import DetailBookView from './DetailBookView';
 import EntryScreen from './EntryScreen';
 import CameraScreen from './CameraScreen';
+import ScanScreen from './ScanScreen';
 
 const RootStack = StackNavigator(
   {
@@ -19,7 +20,10 @@ const RootStack = StackNavigator(
     },
     Camera: {
       screen: CameraScreen,
-    }
+    },
+    Scan: {
+      screen: ScanScreen,
+    },
   },
   {
     initialRouteName: 'List',
