@@ -21,8 +21,6 @@ export default class ScanScreen extends React.Component {
   }
 
   render() {
-    //todo debug
-    console.log(this.state);
     const { hasCameraPermission } = this.state;
 
     if (hasCameraPermission === null) {
@@ -31,10 +29,10 @@ export default class ScanScreen extends React.Component {
       return <Text>カメラにアクセスできません</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
           <BarCodeScanner
             onBarCodeRead={this._handleBarCodeRead}
-            style={StyleSheet.absoluteFill}
+            style={styles.reader}
           />
         </View>
       );
@@ -43,12 +41,19 @@ export default class ScanScreen extends React.Component {
 
   _handleBarCodeRead = ({ type, data }) => {
     if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) { //janCodeを読み取ったとき
-      if (978 == data.slice(0, 3)) {
+      if (978 == data.slice(0, 3) && this.state.janCode != data) {
         this.setState({ janCode: data });
-        alert(this.state.janCode);
-      } else {
-        alert("無効な値です");
+        alert(data);
       }
     }
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  reader: {
+    flex: 1,
+  },
+});

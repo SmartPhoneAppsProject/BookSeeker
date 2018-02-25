@@ -16,7 +16,11 @@ export default class EntryScreen extends Component {
   }
 
   goScanScreen() {
-    this.props.navigation.navigate('Scan', {title: this.state.title, tags: this.state.tags, photo: this.state.photo})
+    this.props.navigation.navigate('Scan', {
+      title: this.state.title,
+      tags: this.state.tags,
+      photo: this.state.photo
+    });
   }
 
   returnDataFromChild(data) {
@@ -40,7 +44,6 @@ export default class EntryScreen extends Component {
   }
 
   renderFormContainer() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.formContainer}>
         <Text style={styles.tag}>Title</Text>
@@ -62,7 +65,7 @@ export default class EntryScreen extends Component {
           maxLenghth={100} />
 
         <TouchableOpacity style={styles.buttonContainer}
-          onPress={() => navigate('Scan', {title: this.state.title, tags: this.state.tags, photo: this.state.photo})}>
+          onPress={this.goScanScreen.bind(this)}>
           <Text style={styles.buttonText}>submit</Text>
         </TouchableOpacity>
       </View>
