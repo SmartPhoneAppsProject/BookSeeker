@@ -15,6 +15,9 @@ export default class FindBookList extends React.Component {
       isLoading: true,
       status: true,
     }
+    
+    this._refresh = this._refresh.bind(this);
+    
   }
 
   updateState() {
@@ -31,6 +34,19 @@ export default class FindBookList extends React.Component {
       })
       .catch((error) => console.error(error));
   }
+  
+  _refresh() {
+    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
+
+    reqBook(bookSeeker)
+      .then((books) => {
+        console.log(books);
+        this.setState({ books });
+        this.setState({ isLoading: false });
+      })
+      .catch((error) => console.error(error));
+  }
+  
 
   callbackst(text) {
     this.searchStart(text)
@@ -55,7 +71,7 @@ export default class FindBookList extends React.Component {
     if (this.state.books.length === 0) {
       return (
         <PullRefresh
-          onRefresh={(books) => this.setState({books})}
+          refresh={this._refresh}
         />
       )
     }

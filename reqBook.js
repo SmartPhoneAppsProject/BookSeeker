@@ -1,3 +1,6 @@
+import React from 'react';
+import PullRefresh from './pullRefresh';
+
 export default function reqBook(uri) {
   return new Promise((resolve, reject) => {
     fetch(uri)
@@ -6,7 +9,7 @@ export default function reqBook(uri) {
           console.log('ok');
           return response.json()
         } else {
-          console.log('データを取得できませんでした。');
+          console.log('OMG!ʕ◔ϖ◔ʔ');
         }
       })
       .then((data) => {
