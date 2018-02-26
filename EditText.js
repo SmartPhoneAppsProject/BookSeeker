@@ -20,18 +20,20 @@ export default class EditText extends Component {
         for (i in data) {
             let check=0
             for(let j=0; j<  searchtext.length;j++) {
-                if(data[i].tags.size!=0) {
-                    for (let k = 0; k < data[i].tags.length; k++) {
-                        if (searchtext[j].toUpperCase() == data[i].tags[k].name.toUpperCase()) {
-                            check+=1
+                if(searchtext[j].slice(0,1)=="＃"||searchtext[j].slice(0,1)=="#") {
+                    searchtext[j]=searchtext[j].slice(1)
+                    if (data[i].tags.size != 0) {
+                        for (let k = 0; k < data[i].tags.length; k++) {
+                            if (searchtext[j].toUpperCase() == data[i].tags[k].name.toUpperCase()) {
+                                check+=1
+                            }
                         }
                     }
-                }
-                if( searchtext[j] == data[i].title){
-                    check+=1;
+                }else if( searchtext[j] == data[i].title){
+                    check+=1
                 }
             }
-            if(check>=searchtext.length){
+            if(check==searchtext.length){
                 newbooks.push(data[i])
             }
         }
