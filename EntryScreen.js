@@ -24,11 +24,12 @@ export default class EntryScreen extends Component {
       chosenDate: new Date(),
       tags: '',
       photo: null,
-      showDatePicker: false,
+      // showDatePicker: false,
+      showDatePicker: true
     };
 
     this.setDate = this.setDate.bind(this);
-    this.setDatePicker = this.setDatePicker.bind(this);
+    // this.setDatePicker = this.setDatePicker.bind(this);
   }
 
   //コンストラクタでthisをバインドすることで呼び出し場所に左右されない
@@ -36,9 +37,9 @@ export default class EntryScreen extends Component {
     this.setState({ chosenDate: newDate });
   }
 
-  setDatePicker() {
-    this.setState({ showDatePicker: !this.state.showDatePicker });
-  }
+  // setDatePicker() {
+  //   this.setState({ showDatePicker: !this.state.showDatePicker });
+  // }
 
   goScanScreen() {
     this.props.navigation.navigate('Scan', {
@@ -58,20 +59,20 @@ export default class EntryScreen extends Component {
         style={styles.photo}
         source={{ uri: this.state.photo.uri }} />
       : <View />;
+
     return (
       <View style={styles.photoContainer} >
         {photo}
-        <Button style={styles.takePhoto}
+        <Button style={styles.takePhotoButton}
           onPress={() => this.props.navigation.navigate('Camera', { returnDataFromChild: this.returnDataFromChild.bind(this) })}
           title='Camera' />
       </View>
     );
   }
 
-  renderFormContainer() {
-    const datePicker = this.renderDatePicker();
+  renderTitleContainer() {
     return (
-      <View style={styles.formContainer}>
+      <View style={styles.childContainer}>
         <Text style={styles.tag}>Title</Text>
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ title: text })}
@@ -80,7 +81,13 @@ export default class EntryScreen extends Component {
           returnKeyType='next'
           placeholder='title'
           maxLenghth={100} />
+      </View>
+    );
+  }
 
+  renderTagsContainer() {
+    return (
+      <View style={styles.childContainer}>
         <Text style={styles.tag}>Tags</Text>
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ tags: text })}
@@ -89,44 +96,66 @@ export default class EntryScreen extends Component {
           ref={(input) => this.tagInput = input}
           placeholder='tags'
           maxLenghth={100} />
+      </View >
+    );
+  }
 
-        <View style={styles.datePickerContainer}>
-          <Text style={styles.tag}>Published_at</Text>
-          <TouchableOpacity style={styles.datePicker}
-            onPress={this.setDatePicker}>
-            <Text>{`${this.state.chosenDate}`}</Text>
-          </TouchableOpacity>
-          {datePicker}
-        </View>
+  renderDateContainer() {
+    // const showDatePicker = this.state.showDatePicker
+    // ? <DatePickerIOS
+    // date={this.state.chosenDate}
+    // onDateChange={this.setDate}
+    // mode='date'
+    // locale='ja' />
+    // : <View />;
+    // console.log(showDatePicker);
 
-        <TouchableOpacity style={styles.buttonContainer}
-          onPress={this.goScanScreen.bind(this)}>
-          <Text style={styles.buttonText}>submit</Text>
+    return (
+      <View style={styles.childContainer}>
+        {/* <Text style={styles.tag}>Published_at</Text> */}
+        {/*<TouchableOpacity style={styles.datePicker}
+          onPress={this.setDatePicker}>
+          <Text>{`${this.state.chosenDate}`}</Text>
         </TouchableOpacity>
+        <View style={styles.datePicker}>
+        {showDatePicker}
+        </View> */}
+        <DatePickerIOS style={{flex: 1}}
+          date={this.state.chosenDate}
+          onDateChange={this.setDate}
+          mode='date'
+          locale='ja' />
       </View>
     );
   }
 
-  renderDatePicker() {
-    const showDatePicker = this.state.showDatePicker
-      ? <DatePickerIOS
-        date={this.state.chosenDate}
-        onDateChange={this.setDate}
-        mode='date'
-        locale='ja' />
-      : <View />;
-
-    return showDatePicker;
+  renderButtonContainer() {
+    return (
+      <View style={styles.childContainer}>
+        <TouchableOpacity style={styles.buttonContainer}
+          onPress={this.goScanScreen.bind(this)}>
+          <Text style={styles.buttonText}>submit</Text>
+        </TouchableOpacity>
+      </View >
+    );
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const photoContainer = this.renderPhotoContainer();
-    const formContainer = this.renderFormContainer();
+    const titleContainer = this.renderTitleContainer();
+    const tagsContainer = this.renderTagsContainer();
+    const dateContainer = this.renderDateContainer();
+    const buttonContainer = this.renderButtonContainer();
+
     return (
-      <KeyboardAvoidingView behavior='padding' style={styles.container}>
+      <KeyboardAvoidingView behavior='padding'
+        style={styles.container}>
         {photoContainer}
-        {formContainer}
+        {titleContainer}
+        {tagsContainer}
+        {dateContainer}
+        {buttonContainer}
       </KeyboardAvoidingView>
     );
   }
@@ -149,33 +178,26 @@ const styles = StyleSheet.create({
     width: width / 3,
     height: (4 / 3 * width) / 3,
   },
-  takePhoto: {
+  takePhotoButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  formContainer: {
-    flex: 2,
+  childContainer: {
+    flex: 1,
+    // flexWrap: 'wrap',
     justifyContent: 'center',
     padding: 20,
   },
   tag: {
     alignSelf: 'stretch',
-    height: 40,
     marginBottom: 10,
     padding: 10,
   },
   input: {
-    height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 10,
     padding: 10,
-  },
-  datePickerContainer: {
-    flex: 1,
-  },
-  datePicker: {
-    flex: 1,
   },
   buttonContainer: {
     backgroundColor: '#2980b6',
