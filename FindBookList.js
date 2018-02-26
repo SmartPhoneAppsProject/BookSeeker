@@ -45,8 +45,6 @@ export default class FindBookList extends React.Component {
             .catch((error) => console.error(error));
     }
 
-
-
     searchBack(books){
         let newbook=[];
         newbook=books.slice()
