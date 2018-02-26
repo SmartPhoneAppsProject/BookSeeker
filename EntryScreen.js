@@ -19,9 +19,14 @@ export default class EntryScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    const date = new Date();
+    const formatDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
     this.state = {
       title: '',
       chosenDate: new Date(),
+      PublishedAt: formatDate,
       tags: '',
       photo: null,
       showDatePicker: false,
@@ -33,7 +38,12 @@ export default class EntryScreen extends Component {
 
   //コンストラクタでthisをバインドすることで呼び出し場所に左右されない
   setDate(newDate) {
-    this.setState({ chosenDate: newDate });
+    console.log(newDate);
+    const formatDate = `${newDate.getFullYear()}-${newDate.getMonth()}-${newDate.getDate()}`;
+    this.setState({
+      chosenDate: newDate,
+      PublishedAt: formatDate
+    });
   }
 
   setDatePicker() {
@@ -113,7 +123,7 @@ export default class EntryScreen extends Component {
         <Text style={styles.tag}>Published_at</Text>
         <TouchableOpacity style={styles.datePicker}
           onPress={this.setDatePicker}>
-          <Text>{`${this.state.chosenDate}`}</Text>
+          <Text>{`${this.state.PublishedAt}`}</Text>
         </TouchableOpacity>
         <View style={styles.showDatePicker}>
           {showDatePicker}
