@@ -24,12 +24,11 @@ export default class EntryScreen extends Component {
       chosenDate: new Date(),
       tags: '',
       photo: null,
-      // showDatePicker: false,
-      showDatePicker: true
+      showDatePicker: false,
     };
 
     this.setDate = this.setDate.bind(this);
-    // this.setDatePicker = this.setDatePicker.bind(this);
+    this.setDatePicker = this.setDatePicker.bind(this);
   }
 
   //コンストラクタでthisをバインドすることで呼び出し場所に左右されない
@@ -37,9 +36,9 @@ export default class EntryScreen extends Component {
     this.setState({ chosenDate: newDate });
   }
 
-  // setDatePicker() {
-  //   this.setState({ showDatePicker: !this.state.showDatePicker });
-  // }
+  setDatePicker() {
+    this.setState({ showDatePicker: !this.state.showDatePicker });
+  }
 
   goScanScreen() {
     this.props.navigation.navigate('Scan', {
@@ -101,30 +100,24 @@ export default class EntryScreen extends Component {
   }
 
   renderDateContainer() {
-    // const showDatePicker = this.state.showDatePicker
-    // ? <DatePickerIOS
-    // date={this.state.chosenDate}
-    // onDateChange={this.setDate}
-    // mode='date'
-    // locale='ja' />
-    // : <View />;
-    // console.log(showDatePicker);
+    const showDatePicker = this.state.showDatePicker
+      ? <DatePickerIOS
+        date={this.state.chosenDate}
+        onDateChange={this.setDate}
+        mode='date'
+        locale='ja' />
+      : <View />;
 
     return (
       <View style={styles.childContainer}>
-        {/* <Text style={styles.tag}>Published_at</Text> */}
-        {/*<TouchableOpacity style={styles.datePicker}
+        <Text style={styles.tag}>Published_at</Text>
+        <TouchableOpacity style={styles.datePicker}
           onPress={this.setDatePicker}>
           <Text>{`${this.state.chosenDate}`}</Text>
         </TouchableOpacity>
-        <View style={styles.datePicker}>
-        {showDatePicker}
-        </View> */}
-        <DatePickerIOS style={{flex: 1}}
-          date={this.state.chosenDate}
-          onDateChange={this.setDate}
-          mode='date'
-          locale='ja' />
+        <View style={styles.showDatePicker}>
+          {showDatePicker}
+        </View>
       </View>
     );
   }
@@ -185,8 +178,6 @@ const styles = StyleSheet.create({
   },
   childContainer: {
     flex: 1,
-    // flexWrap: 'wrap',
-    justifyContent: 'center',
     padding: 20,
   },
   tag: {
