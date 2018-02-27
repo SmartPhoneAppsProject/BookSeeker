@@ -91,9 +91,8 @@ export default class CameraScreen extends React.Component {
 
   renderCamera() {
     return (
-      <Camera
+      <Camera style={styles.camera}
         ref={ref => { this.camera = ref; }}
-        style={styles.camera}
         type={this.state.type}
         autoFocus={this.state.autoFocus}
         zoom={this.state.zoom}

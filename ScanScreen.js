@@ -1,32 +1,42 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import { Camera, BarCodeScanner, Permissions } from 'expo';
 
 export default class ScanScreen extends React.Component {
   static navigationOptions = {
-    title: 'ScanScreen',
+    title: 'バーコードリーダー',
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      hasCameraPermission: null,
       janCode: null,
+      permissionsGranted: false,
+      status: 'reading',
     };
   }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    this.setState({ permissionsGranted: status === 'granted' });
   }
 
   _handleBarCodeRead = ({ type, data }) => {
-    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type || 978 == data.slice(0, 3)) { //ISBNを読み取ったとき
-      if (this.state.janCode != data) {
-        this.setState({ janCode: data });
-        this.bundleData(data);
+    console.log(data);
+    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
+      if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
+        if (this.state.janCode != data) {
+          this.setState({
+            janCode: data,
+            status: 'ok'
+          });
+          this.bundleData(data);
+        }
       } else {
-        console.log('diff');
+        this.setState({ status: 'invalid' });
+        setTimeout(() => {
+          this.setState({ status: 'reading' });
+        }, 1000);
       }
     }
   }
@@ -40,7 +50,7 @@ export default class ScanScreen extends React.Component {
       published_at: params.publishedAt,
       jan_code: janCode
     });
-    
+
     console.log('object is parsed to JSON');
 
     // const tags = {
@@ -73,24 +83,43 @@ export default class ScanScreen extends React.Component {
       console.log(response);
       return response;
     } catch (error) {
-      console.log('e:');
       console.error(error);
     }
   }
 
   render() {
-    const { hasCameraPermission } = this.state;
+    const { permissionsGranted } = this.state;
+    let statusText = <View />;
+    if (this.state.status == 'ok') {
+      statusText = <Text style={styles.statusOk}>読み取りました</Text>;
+    } else if (this.state.status == 'invalid') {
+      statusText = <Text style={styles.statusNo}>無効な値です</Text>;
+    }
 
-    if (hasCameraPermission === null) {
+    if (permissionsGranted === null) {
       return <Text>カメラを使用できません</Text>;
-    } else if (hasCameraPermission === false) {
+    } else if (permissionsGranted === false) {
       return <Text>カメラにアクセスできません</Text>;
     } else {
       return (
         <View style={styles.container}>
-          <BarCodeScanner
-            onBarCodeRead={this._handleBarCodeRead}
-            style={styles.reader} />
+          <View style={styles.header}>
+            <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
+          </View>
+          <View style={styles.reader}>
+            <View style={styles.cameraSide}>
+              <Text></Text>
+            </View>
+            <BarCodeScanner style={styles.camera}
+              onBarCodeRead={this._handleBarCodeRead}
+            />
+            <View style={styles.cameraSide}>
+              <Text></Text>
+            </View>
+          </View>
+          <View style={styles.footer}>
+            {statusText}
+          </View>
         </View>
       );
     }
@@ -100,8 +129,47 @@ export default class ScanScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#16160e',
+  },
+  text: {
+    color: '#f3f3f3',
+    textAlign: 'center',
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'space-around',
+    margin: 5,
+  },
+  headerWarn: {
+    color: '#fef263',
   },
   reader: {
     flex: 1,
+    flexDirection: 'row',
+  },
+  cameraSide: {
+    flex: 1,
+  },
+  camera: {
+    flex: 8,
+    borderColor: '#f3f3f3',
+    borderWidth: 1,
+  },
+  footer: {
+    flex: 5,
+    justifyContent: 'space-around',
+    margin: 5,
+  },
+  statusOk: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: '#3eb370'
+  },
+  statusNo: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: '#e95464'
   },
 });
