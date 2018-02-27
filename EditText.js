@@ -29,8 +29,12 @@ export default class EditText extends Component {
                             }
                         }
                     }
-                }else if( searchtext[j] == data[i].title){
-                    check+=1
+                }else {
+                    for(let k=0;k<data[i].title.length;k++) {
+                        if (searchtext[j] == data[i].title.slice(k, searchtext[j].length+k)) {
+                            check += 1
+                        }
+                    }
                 }
             }
             if(check==searchtext.length){
