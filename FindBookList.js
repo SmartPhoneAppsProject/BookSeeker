@@ -27,12 +27,16 @@ export default class FindBookList extends React.Component {
       .then((books) => {
         console.log(books);
         if (!books) {
-          this.setState({ respStatus: false })
-          this.setState({ isLoading: false });
+          this.setState({
+            respStatus: false,
+            isLoading: false
+          });
         } else {
-          this.setState({ books });
-          this.setState({ respStatus: true })
-          this.setState({ isLoading: false });
+          this.setState({
+            books,
+            respStatus: true,
+            isLoading: false
+          });
         }
       })
       .catch((error) => console.error(error));
@@ -44,13 +48,17 @@ export default class FindBookList extends React.Component {
     reqBook(bookSeeker)
       .then((books) => {
         console.log(books);
-        if (books === '') {
-          this.setState({ respStatus: false })
-          this.setState({ isLoading: false });
+        if (!books) {
+          this.setState({
+            respStatus: false,
+            isLoading: false
+          });
         } else {
-          this.setState({ books });
-          this.setState({ respStatus: true })
-          this.setState({ isLoading: false });
+          this.setState({
+            books,
+            respStatus: true,
+            isLoading: false
+          });
         }
       })
       .catch((error) => console.error(error));
