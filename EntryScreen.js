@@ -26,7 +26,7 @@ export default class EntryScreen extends Component {
     this.state = {
       title: '',
       chosenDate: new Date(),
-      PublishedAt: formatDate,
+      publishedAt: formatDate,
       tags: '',
       photo: null,
       showDatePicker: false,
@@ -38,11 +38,10 @@ export default class EntryScreen extends Component {
 
   //コンストラクタでthisをバインドすることで呼び出し場所に左右されない
   setDate(newDate) {
-    console.log(newDate);
-    const formatDate = `${newDate.getFullYear()}-${newDate.getMonth()}-${newDate.getDate()}`;
+    const formatDate = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
     this.setState({
       chosenDate: newDate,
-      PublishedAt: formatDate
+      publishedAt: formatDate
     });
   }
 
@@ -50,16 +49,17 @@ export default class EntryScreen extends Component {
     this.setState({ showDatePicker: !this.state.showDatePicker });
   }
 
+  returnDataFromChild(data) {
+    this.setState({ photo: data });
+  }
+
   goScanScreen() {
     this.props.navigation.navigate('Scan', {
       title: this.state.title,
       tags: this.state.tags,
-      photo: this.state.photo
+      photo: this.state.photo,
+      publishedAt: this.state.publishedAt,
     });
-  }
-
-  returnDataFromChild(data) {
-    this.setState({ photo: data });
   }
 
   renderPhotoContainer() {
@@ -123,7 +123,7 @@ export default class EntryScreen extends Component {
         <Text style={styles.tag}>Published_at</Text>
         <TouchableOpacity style={styles.datePicker}
           onPress={this.setDatePicker}>
-          <Text>{`${this.state.PublishedAt}`}</Text>
+          <Text>{`${this.state.publishedAt}`}</Text>
         </TouchableOpacity>
         <View style={styles.showDatePicker}>
           {showDatePicker}

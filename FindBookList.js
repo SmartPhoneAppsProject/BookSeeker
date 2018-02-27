@@ -10,7 +10,7 @@ export default class FindBookList extends Component {
         this.state = {
             books: [],
             isLoading: true,
-        }
+        };
     }
 
     updateState() {

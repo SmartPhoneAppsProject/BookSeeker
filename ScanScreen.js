@@ -11,6 +11,7 @@ export default class ScanScreen extends React.Component {
     super(props);
     this.state = {
       hasCameraPermission: null,
+      janCode: null,
     };
   }
 
@@ -22,25 +23,59 @@ export default class ScanScreen extends React.Component {
   _handleBarCodeRead = ({ type, data }) => {
     if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type || 978 == data.slice(0, 3)) { //ISBNを読み取ったとき
       if (this.state.janCode != data) {
-        this.postData(data);
+        this.setState({ janCode: data });
+        this.bundleData(data);
       } else {
         console.log('diff');
       }
     }
   }
 
-  postData(janCode) {
+  bundleData(janCode) {
     const { params } = this.props.navigation.state;
-    const book = {
+
+    const json = JSON.stringify({
       title: params.title,
       image: params.photo.base64,
-      published_at: '',
+      published_at: params.publishedAt,
       jan_code: janCode
+    });
+    
+    console.log('object is parsed to JSON');
+
+    // const tags = {
+    //   tags: params.tags,
+    // };
+    // console.log(tags);
+
+    this.postData(json);
+  }
+
+  async postData(json) {
+    const uri = 'https://go-api-staging.herokuapp.com/books';
+    const headers = new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    });
+    const options = {
+      method: 'POST',
+      headers: headers,
+      body: json,
     };
-    const tags = {
-      tags: params.tags,
-    };
-    console.log(tags);
+    const request = new Request(uri, options);
+
+    try {
+      // fix
+      console.log('try post');
+
+      const response = await fetch(request);
+      // const responseJson = await response.json();
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log('e:');
+      console.error(error);
+    }
   }
 
   render() {
@@ -55,7 +90,7 @@ export default class ScanScreen extends React.Component {
         <View style={styles.container}>
           <BarCodeScanner
             onBarCodeRead={this._handleBarCodeRead}
-            style={styles.reader}/>
+            style={styles.reader} />
         </View>
       );
     }
