@@ -30,14 +30,15 @@ export default class ScanScreen extends React.Component {
             janCode: data,
             status: 'ok'
           });
-          this.bundleData(data);
+          setTimeout(() => {
+            this.bundleData(data);
+          }, 1000);
         }
-      } else {
+      } else { //バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
-        setTimeout(() => {
-          this.setState({ status: 'reading' });
-        }, 1000);
       }
+    } else { //バーコードでないとき
+      this.setState({ status: 'reading' });
     }
   }
 
