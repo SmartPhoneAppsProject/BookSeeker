@@ -46,8 +46,6 @@ export default class EntryScreen extends Component {
   }
 
   handleDatePicked(date) {
-    //fix debug
-    console.log(date);
     const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     this.setState({
       chosenDate: date,
@@ -89,7 +87,7 @@ export default class EntryScreen extends Component {
   renderTitleContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>Title</Text>
+        <Text style={styles.tag}>タイトル</Text>
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ title: text })}
           value={this.state.title}
@@ -104,7 +102,7 @@ export default class EntryScreen extends Component {
   renderTagsContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>Tags</Text>
+        <Text style={styles.tag}>タグ</Text>
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ tags: text })}
           value={this.state.tags}
@@ -119,7 +117,7 @@ export default class EntryScreen extends Component {
   renderDateContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>Published_at</Text>
+        <Text style={styles.tag}>発行日</Text>
         <TouchableOpacity style={styles.input}
           onPress={this.showDateTimePicker}>
           <Text>{this.state.publishedAt}</Text>
@@ -135,7 +133,7 @@ export default class EntryScreen extends Component {
             titleIOS={'発行日を選択する'}
             cancelTextIOS={'キャンセル'}
             confirmTextIOS={'決定'}
-            />
+          />
         </View>
       </View>
     );
@@ -187,13 +185,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   photo: {
-    width: width / 3,
-    height: (4 / 3 * width) / 3,
+    width: width / 6,
+    height: (4 / 3 * width) / 6,
   },
   takePhotoButton: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   childContainer: {
     flex: 1,
