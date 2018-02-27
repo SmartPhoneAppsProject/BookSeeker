@@ -1,19 +1,20 @@
 import React from 'react';
-import PullRefresh from './pullRefresh';
 
 export default function reqBook(uri) {
   return new Promise((resolve, reject) => {
     fetch(uri)
       .then((response) => {
+        console.log(response);
         if (response.ok) {
-          console.log('ok');
+          console.log('Success');
           return response.json()
         } else {
-          console.log('OMG!ʕ◔ϖ◔ʔ');
+          console.log('Fail');
+          let books = '';
+          resolve(books)
         }
       })
       .then((data) => {
-        console.log(data);
         let books = [];
         for (i in data) {
           books.push({

@@ -13,8 +13,10 @@ export default class FindBookList extends React.Component {
     this.state = {
       books: [],
       isLoading: true,
+      respStatus: true,
+
     };
-    
+
     this._refresh = this._refresh.bind(this);
   }
 
@@ -23,29 +25,42 @@ export default class FindBookList extends React.Component {
 
     reqBook(bookSeeker)
       .then((books) => {
-        this.setState({ books });
-        this.setState({ isLoading: false });
+        console.log(books);
+        if (books === '') {
+          this.setState({ respStatus: false })
+          this.setState({ isLoading: false });
+        } else {
+          this.setState({ books });
+          this.setState({ respStatus: true })
+          this.setState({ isLoading: false });
+        }
       })
       .catch((error) => console.error(error));
   }
-  
+
   _refresh() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
     reqBook(bookSeeker)
       .then((books) => {
         console.log(books);
-        this.setState({ books });
-        this.setState({ isLoading: false });
+        if (books === '') {
+          this.setState({ respStatus: false })
+          this.setState({ isLoading: false });
+        } else {
+          this.setState({ books });
+          this.setState({ respStatus: true })
+          this.setState({ isLoading: false });
+        }
       })
       .catch((error) => console.error(error));
   }
-  
+
 
   callbackst(text) {
     this.searchStart(text)
   }
-  
+
   static navigationOptions = {
     title: 'FindBookList',
   };
@@ -61,13 +76,11 @@ export default class FindBookList extends React.Component {
       );
     }
 
-    console.log(this.state.books.length);
-    if (this.state.books.length === 0) {
+    console.log(this.state.respStatus);
+    if (!this.state.respStatus) {
       return (
-        <PullRefresh
-          refresh={this._refresh}
-        />
-      )
+        <PullRefresh refresh={this._refresh} />
+      );
     }
 
     return (
@@ -80,7 +93,7 @@ export default class FindBookList extends React.Component {
           title="貸出・返却"
           onPress={() => navigate('Details')}
         />
-        
+
         <EditText
         />
 
