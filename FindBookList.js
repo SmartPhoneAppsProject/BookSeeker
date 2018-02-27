@@ -26,7 +26,7 @@ export default class FindBookList extends React.Component {
     reqBook(bookSeeker)
       .then((books) => {
         console.log(books);
-        if (books === '') {
+        if (!books) {
           this.setState({ respStatus: false })
           this.setState({ isLoading: false });
         } else {
