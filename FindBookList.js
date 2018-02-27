@@ -46,10 +46,7 @@ export default class FindBookList extends React.Component {
     }
 
     searchBack(books){
-        let newbook=[];
-        newbook=books.slice()
-        this.setState({resultbooks:newbook});
-        console.log(newbook)
+        this.setState({resultbooks:books});
     }
 
 

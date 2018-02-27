@@ -11,9 +11,7 @@ export default class EditText extends Component {
     }
 
     seachStart(text) {
-        console.log(text)
-
-        let searchtext=text.split(" ")
+        const searchtext=text.split(" ")
         let newbooks = [];
         let data = this.props.books;
 
@@ -44,6 +42,10 @@ export default class EditText extends Component {
         this.props.searchBack(newbooks)
     }
 
+    clickCancel(){
+        this.props.searchBack(this.props.books)
+    }
+
     render() {
         return (
             <View>
@@ -52,21 +54,31 @@ export default class EditText extends Component {
                     onChangeText={(searchText) => this.setState({ searchText })}
                     value={this.state.searchText}
                 />
-
-                <Button style={styles.seachButton} onPress={() => this.seachStart(this.state.searchText)}
-                    title="検索"
-                />
+                <View style={styles.buttonView}>
+                    <Button style={styles.seachButton} onPress={() => this.seachStart(this.state.searchText)}
+                        title="検索"
+                    />
+                    <Button onPress={()=>this.clickCancel()}
+                        title="キャンセル"
+                    />
+                </View>
             </View>
-
         );
     }
 }
 const styles = StyleSheet.create({
+    buttonView:{
+      flexDirection:"row",
+    },
     seachButton: {
-        width: 60,
+        width: 100,
         height: 40,
         backgroundColor: 'blue',
-        flexDirection: 'row',
-        //justifyContent: 'space-between',
+
     },
+    cancelButton:{
+        width: 100,
+        height: 40,
+        backgroundColor: 'blue',
+    }
 });
