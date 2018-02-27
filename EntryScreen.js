@@ -9,8 +9,8 @@ import {
   Dimensions,
   TouchableOpacity,
   KeyboardAvoidingView,
-  DatePickerIOS
 } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class EntryScreen extends Component {
   static navigationOptions = {
@@ -29,24 +29,31 @@ export default class EntryScreen extends Component {
       publishedAt: formatDate,
       tags: '',
       photo: null,
-      showDatePicker: false,
+      isDateTimePickerVisible: false,
     };
 
-    this.setDate = this.setDate.bind(this);
-    this.setDatePicker = this.setDatePicker.bind(this);
+    this.showDateTimePicker = this.showDateTimePicker.bind(this);
+    this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
+    this.handleDatePicked = this.handleDatePicked.bind(this);
   }
 
-  //コンストラクタでthisをバインドすることで呼び出し場所に左右されない
-  setDate(newDate) {
-    const formatDate = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+  showDateTimePicker() {
+    this.setState({ isDateTimePickerVisible: true });
+  }
+
+  hideDateTimePicker() {
+    this.setState({ isDateTimePickerVisible: false });
+  }
+
+  handleDatePicked(date) {
+    //fix debug
+    console.log(date);
+    const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     this.setState({
-      chosenDate: newDate,
-      publishedAt: formatDate
+      chosenDate: date,
+      publishedAt: formatDate,
     });
-  }
-
-  setDatePicker() {
-    this.setState({ showDatePicker: !this.state.showDatePicker });
+    this.hideDateTimePicker();
   }
 
   returnDataFromChild(data) {
@@ -110,23 +117,25 @@ export default class EntryScreen extends Component {
   }
 
   renderDateContainer() {
-    const showDatePicker = this.state.showDatePicker
-      ? <DatePickerIOS
-        date={this.state.chosenDate}
-        onDateChange={this.setDate}
-        mode='date'
-        locale='ja' />
-      : <View />;
-
     return (
       <View style={styles.childContainer}>
         <Text style={styles.tag}>Published_at</Text>
-        <TouchableOpacity style={styles.datePicker}
-          onPress={this.setDatePicker}>
-          <Text>{`${this.state.publishedAt}`}</Text>
+        <TouchableOpacity style={styles.input}
+          onPress={this.showDateTimePicker}>
+          <Text>{this.state.publishedAt}</Text>
         </TouchableOpacity>
-        <View style={styles.showDatePicker}>
-          {showDatePicker}
+        <View style={styles.showDateTimePicker}>
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={this.handleDatePicked}
+            onCancel={this.hideDateTimePicker}
+            date={this.state.chosenDate}
+            locale={'ja'}
+            maximumDate={new Date()}
+            titleIOS={'発行日を選択する'}
+            cancelTextIOS={'キャンセル'}
+            confirmTextIOS={'決定'}
+            />
         </View>
       </View>
     );
