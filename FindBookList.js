@@ -70,7 +70,7 @@ export default class FindBookList extends React.Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={styles.indicator}>
           <ActivityIndicator />
         </View>
       );
@@ -104,10 +104,16 @@ export default class FindBookList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container:
+      {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'stretch',
         backgroundColor: '#FFF',
-    },
+      },
+    indicator:
+      {
+        flex: 1,
+        paddingTop: 20,
+      }
 });
