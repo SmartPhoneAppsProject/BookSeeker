@@ -1,35 +1,31 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Slider } from 'react-native';
-import { Camera, Permissions, FileSystem, Constants } from 'expo';
-import GalleryScreen from './GalleryScreen';
+import { Camera, Permissions, Constants } from 'expo';
 
 export default class CameraScreen extends React.Component {
-  state = {
-    zoom: 0,
-    autoFocus: 'on',
-    type: 'back',
-    ratio: '4:3',
-    // photoId: 1,
-    showGallery: false,
-    permissionsGranted: false,
+  static navigationOption = {
+    title: 'カメラ',
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      zoom: 0,
+      autoFocus: 'on',
+      type: 'back',
+      ratio: '4:3',
+      permissionsGranted: false,
+    };
+
+    this.toggleFacing = this.toggleFacing.bind(this);
+    this.zoomOut = this.zoomOut.bind(this);
+    this.zoomIn = this.zoomIn.bind(this);
+    this.takePicture = this.takePicture.bind(this);
+  }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ permissionsGranted: status === 'granted' });
-  }
-
-  // componentDidMount() {
-  //   FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos')
-  //     .catch(e => {
-  //       console.log(e, 'Directory exists');
-  //     });
-  // }
-
-  toggleView() {
-    this.setState({
-      showGallery: !this.state.showGallery,
-    });
   }
 
   toggleFacing() {
@@ -53,20 +49,10 @@ export default class CameraScreen extends React.Component {
   async takePicture() {
     if (this.camera) {
       this.camera.takePictureAsync({ base64: true })
-        .then((data) => {
-          // FileSystem.moveAsync({
-          //   from: data.uri,
-          //   to: `${FileSystem.documentDirectory}photos/Phot_${this.state.photoId}.jpg`,
-          // })
-          return data;
-        })
         .then((photo) => {
-          // this.setState({
-          //   photoId: this.state.photoId + 1,
-          // });
           this.goBackScreen(photo);
         })
-        .catch((e) => console.error(e));
+        .catch((error) => console.error(error));
     }
   }
 
@@ -75,15 +61,11 @@ export default class CameraScreen extends React.Component {
     this.props.navigation.goBack();
   }
 
-  renderGallery() {
-    return <GalleryScreen onPress={this.toggleView.bind(this)} />;
-  }
-
   renderNoPermissions() {
     return (
       <View style={styles.noPermissions} >
         <Text style={styles.noPermissionsText}>
-          Camera permissions not granted - cannot open camera preview.
+          カメラを使用できません
         </Text>
       </View>
     );
@@ -99,7 +81,7 @@ export default class CameraScreen extends React.Component {
         ratio={this.state.ratio}>
         <View style={styles.cameraHeader}>
           <TouchableOpacity style={styles.flipButton}
-            onPress={this.toggleFacing.bind(this)}>
+            onPress={this.toggleFacing}>
             <Text style={styles.flipText}>FLIP</Text>
           </ TouchableOpacity>
         </View>
@@ -107,22 +89,17 @@ export default class CameraScreen extends React.Component {
         </View>
         <View style={styles.cameraFooter}>
           <TouchableOpacity style={[styles.flipButton, styles.zoom]}
-            onPress={this.zoomIn.bind(this)}>
+            onPress={this.zoomIn}>
             <Text style={styles.flipText}> + </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.flipButton, styles.zoom]}
-            onPress={this.zoomOut.bind(this)}>
+            onPress={this.zoomOut}>
             <Text style={styles.flipText}> - </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.flipButton, styles.picButton, styles.snap]}
-            onPress={this.takePicture.bind(this)}>
+            onPress={this.takePicture}>
             <Text style={styles.flipText}> SNAP </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.flipButton, styles.galleryButton, styles.gallery]}
-            onPress={this.toggleView.bind(this)}>
-            <Text style={styles.flipText}> Gallery </Text>
           </TouchableOpacity>
         </View>
       </Camera>
@@ -130,13 +107,10 @@ export default class CameraScreen extends React.Component {
   }
 
   render() {
-    const cameraScreenContent = this.state.permissionsGranted
+    const cameraScreen = this.state.permissionsGranted
       ? this.renderCamera()
       : this.renderNoPermissions();
-    const content = this.state.showGallery
-      ? this.renderGallery()
-      : cameraScreenContent;
-    return <View style={styles.container}>{content}</View>;
+    return <View style={styles.container}>{cameraScreen}</View>;
   }
 }
 
@@ -187,9 +161,6 @@ const styles = StyleSheet.create({
   },
   snap: {
     flex: 0.3,
-  },
-  gallery: {
-    flex: 0.25,
   },
   flipButton: {
     flex: 0.3,

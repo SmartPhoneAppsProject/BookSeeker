@@ -35,6 +35,8 @@ export default class EntryScreen extends Component {
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
     this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
     this.handleDatePicked = this.handleDatePicked.bind(this);
+    this.goScanScreen = this.goScanScreen.bind(this);
+    this.returnDataFromChild = this.returnDataFromChild.bind(this)
   }
 
   showDateTimePicker() {
@@ -78,7 +80,7 @@ export default class EntryScreen extends Component {
       <View style={styles.photoContainer} >
         {photo}
         <Button style={styles.takePhotoButton}
-          onPress={() => this.props.navigation.navigate('Camera', { returnDataFromChild: this.returnDataFromChild.bind(this) })}
+          onPress={() => this.props.navigation.navigate('Camera', { returnDataFromChild: this.returnDataFromChild })}
           title='Camera' />
       </View>
     );
@@ -143,7 +145,7 @@ export default class EntryScreen extends Component {
     return (
       <View style={styles.childContainer}>
         <TouchableOpacity style={styles.buttonContainer}
-          onPress={this.goScanScreen.bind(this)}>
+          onPress={this.goScanScreen}>
           <Text style={styles.buttonText}>submit</Text>
         </TouchableOpacity>
       </View >

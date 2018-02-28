@@ -88,7 +88,17 @@ export default class ScanScreen extends React.Component {
     }
   }
 
-  render() {
+  renderNoPermissions() {
+    return (
+      <View style={styles.noPermissions} >
+        <Text style={styles.noPermissionsText}>
+          カメラを使用できません
+        </Text>
+      </View>
+    );
+  }
+
+  renderCamera() {
     const { permissionsGranted } = this.state;
     let statusText = <View />;
     if (this.state.status == 'ok') {
@@ -97,38 +107,52 @@ export default class ScanScreen extends React.Component {
       statusText = <Text style={styles.statusNo}>無効な値です</Text>;
     }
 
-    if (permissionsGranted === null) {
-      return <Text>カメラを使用できません</Text>;
-    } else if (permissionsGranted === false) {
-      return <Text>カメラにアクセスできません</Text>;
-    } else {
-      return (
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
+    return (
+      <View style={styles.cameraScreen}>
+        <View style={styles.header}>
+          <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
+        </View>
+        <View style={styles.reader}>
+          <View style={styles.cameraSide}>
+            <Text></Text>
           </View>
-          <View style={styles.reader}>
-            <View style={styles.cameraSide}>
-              <Text></Text>
-            </View>
-            <BarCodeScanner style={styles.camera}
-              onBarCodeRead={this._handleBarCodeRead}
-            />
-            <View style={styles.cameraSide}>
-              <Text></Text>
-            </View>
-          </View>
-          <View style={styles.footer}>
-            {statusText}
+          <BarCodeScanner style={styles.camera}
+            onBarCodeRead={this._handleBarCodeRead}
+          />
+          <View style={styles.cameraSide}>
+            <Text></Text>
           </View>
         </View>
-      );
-    }
+        <View style={styles.footer}>
+          {statusText}
+        </View>
+      </View>
+    );
+  }
+
+  render() {
+    const cameraScreen = this.state.permissionsGranted
+      ? this.renderCamera()
+      : this.renderNoPermissions();
+    return <View style={styles.container}>{cameraScreen}</View>;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  noPermissions: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  noPermissionsText: {
+    color: 'white'
+  },
+  cameraScreen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
