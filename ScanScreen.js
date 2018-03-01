@@ -76,7 +76,6 @@ export default class ScanScreen extends React.Component {
     const request = new Request(uri, options);
 
     try {
-      // fix
       console.log('try post');
 
       const response = await fetch(request);

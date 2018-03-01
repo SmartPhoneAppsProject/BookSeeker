@@ -6,7 +6,7 @@ export const pickPhoto = async () => {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: 'Images',
     allowsEditing: true,
-    aspect: [4, 3],
+    aspect: [1, 1],
     base64: true,
   });
 
@@ -22,7 +22,7 @@ export const takePhoto = async () => {
 
   const result = await ImagePicker.launchCameraAsync({
     allowsEditing: true,
-    aspect: [4, 3],
+    aspect: [1, 1],
     base64: true,
   });
 

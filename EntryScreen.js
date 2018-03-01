@@ -8,9 +8,11 @@ import {
   Button,
   Dimensions,
   TouchableOpacity,
+  TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 import { pickPhoto, takePhoto } from './ImagePicker';
 
@@ -88,12 +90,16 @@ export default class EntryScreen extends Component {
     return (
       <View style={styles.photoContainer} >
         {photo}
-        <Button style={styles.photoButton}
+        <TouchableHighlight style={styles.photoButton}
           onPress={() => this._takePhoto()}
-          title='Camera' />
-        <Button style={styles.photoButton}
+          underlayColor='#dcdcdc' >
+          <MaterialIcons name='photo-camera' size={40} color='#a9a9a9' />
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.photoButton}
           onPress={() => this._pickPhoto()}
-          title='Liblary' />
+          underlayColor='#dcdcdc' >
+          <FontAwesome name='photo' size={40} color='#a9a9a9' />
+        </TouchableHighlight>
       </View>
     );
   }
@@ -197,13 +203,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   photo: {
     width: width / 6,
-    height: (3 * width / 4) / 6,
+    height: (4 * width / 3) / 6,
   },
   photoButton: {
-    flex: 1,
+    padding: 5,
+    margin: 5,
   },
   childContainer: {
     flex: 1,
