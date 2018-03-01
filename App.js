@@ -4,7 +4,6 @@ import { StackNavigator } from 'react-navigation';
 import FindBookList from './FindBookList'
 import DetailBookView from './DetailBookView';
 import EntryScreen from './EntryScreen';
-import CameraScreen from './CameraScreen';
 import ScanScreen from './ScanScreen';
 
 const RootStack = StackNavigator(
@@ -17,9 +16,6 @@ const RootStack = StackNavigator(
     },
     Entry: {
       screen: EntryScreen,
-    },
-    Camera: {
-      screen: CameraScreen,
     },
     Scan: {
       screen: ScanScreen,

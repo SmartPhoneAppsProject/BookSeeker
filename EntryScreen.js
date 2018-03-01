@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
+import { pickPhoto, takePhoto } from './ImagePicker';
+
 export default class EntryScreen extends Component {
   static navigationOptions = {
     title: 'ScanScreen',
@@ -36,7 +38,6 @@ export default class EntryScreen extends Component {
     this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
     this.handleDatePicked = this.handleDatePicked.bind(this);
     this.goScanScreen = this.goScanScreen.bind(this);
-    this.returnDataFromChild = this.returnDataFromChild.bind(this)
   }
 
   showDateTimePicker() {
@@ -56,8 +57,16 @@ export default class EntryScreen extends Component {
     this.hideDateTimePicker();
   }
 
-  returnDataFromChild(data) {
-    this.setState({ photo: data });
+  async _takePhoto() {
+    const photo = await takePhoto();
+    this.setState({ photo: photo });
+    console.log(this.state.photo);
+  }
+
+  async _pickPhoto() {
+    const photo = await pickPhoto();
+    this.setState({ photo: photo });
+    console.log(this.state.photo);
   }
 
   goScanScreen() {
@@ -71,17 +80,20 @@ export default class EntryScreen extends Component {
 
   renderPhotoContainer() {
     const photo = this.state.photo
-      ? <Image resizeMode='contain'
-        style={styles.photo}
+      ? <Image style={styles.photo}
+        resizeMode='contain'
         source={{ uri: this.state.photo.uri }} />
       : <View />;
 
     return (
       <View style={styles.photoContainer} >
         {photo}
-        <Button style={styles.takePhotoButton}
-          onPress={() => this.props.navigation.navigate('Camera', { returnDataFromChild: this.returnDataFromChild })}
+        <Button style={styles.photoButton}
+          onPress={() => this._takePhoto()}
           title='Camera' />
+        <Button style={styles.photoButton}
+          onPress={() => this._pickPhoto()}
+          title='Liblary' />
       </View>
     );
   }
@@ -188,9 +200,9 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: width / 6,
-    height: (4 / 3 * width) / 6,
+    height: (3 * width / 4) / 6,
   },
-  takePhotoButton: {
+  photoButton: {
     flex: 1,
   },
   childContainer: {
