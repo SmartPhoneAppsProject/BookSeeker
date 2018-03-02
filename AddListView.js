@@ -24,10 +24,10 @@ export default class AddListView extends Component {
               <Image style={styles.image}
                 source={{ uri: item.image }} />
               <View style={styles.item}>
-                  {item.status
-                    ? <Text style={styles.statusOk}>貸し出しOK</Text>
-                    : <Text style={styles.statusNo}>貸し出し中</Text>
-                  }
+                {item.status
+                  ? <Text style={styles.statusNo}>貸し出し中</Text>
+                  : <Text style={styles.statusOk}>貸し出しOK</Text>
+                }
                 <Text style={styles.title}>{item.title}</Text>
                 <View style={styles.tagsContainer}>
                   {item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
