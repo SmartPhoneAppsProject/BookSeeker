@@ -20,30 +20,58 @@ export default class DetailScreen extends React.Component {
     const { params } = this.props.navigation.state;
     this.state = {
       currentStatus: params.item.status
-    }
+    };
+
+    this._lendBook = this._lendBook.bind(this);
+    this._returnBook = this._returnBook.bind(this);
+    this.putData = this.putData.bind(this);
   }
 
   _lendBook() {
     this.setState({
       currentStatus: true
     });
+
+    console.log(this.state.currentStatus);
+    this.putData();
   }
 
   _returnBook() {
     this.setState({
       currentStatus: false
     });
+
+    console.log(this.state.currentStatus);
+    this.putData();
   }
 
-  _switchStatus() {
-    const { params } = this.props.navigation.state;
-
+  async putData() {
+    const uri = 'https://go-api-staging.herokuapp.com/books';
+    const headers = new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    });
     const json = JSON.stringify({
-      jan_code: params.item.jan_code,
+      jan_code: this.props.navigation.state.params.item.jan_code,
       status: this.state.currentStatus
     });
+    const options = {
+      method: 'PUT',
+      headers: headers,
+      body: json
+    };
 
-    console.log('object is parsed to json');
+    const request = new Request(uri, options);
+
+    try {
+      console.log('try put');
+
+      const response = await fetch(request);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   render() {
@@ -59,11 +87,11 @@ export default class DetailScreen extends React.Component {
             </View>
         </View>
         <View style={ [styles.base, styles.statusContainer] }>
-            {params.item.status ?
+            {this.state.currentStatus ?
                 <Text style={ styles.status }>貸出OK</Text>
                 : <Text style={ [styles.status, styles.statusColor] }>貸出OK</Text>
             }
-            {params.item.status ?
+            {this.state.currentStatus ?
                 <Text style={ [styles.status, styles.statusColor] }>貸出中</Text>
                 : <Text style={ styles.status }>貸出中</Text>
             }
@@ -80,7 +108,7 @@ export default class DetailScreen extends React.Component {
             </ScrollView>
         </View>
         <View style={ [styles.base, styles.buttonContainer]}>
-          {params.item.status ?
+          {this.state.currentStatus ?
             <Button title="返却" onPress={this._returnBook} />
             : <Button title="貸出" onPress={this._lendBook}/>
           }
