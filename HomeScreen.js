@@ -22,8 +22,10 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       books: [],
+      resultbooks: [],
       isLoading: true,
       respStatus: true,
     };
@@ -45,9 +47,11 @@ export default class HomeScreen extends Component {
         } else {
           this.setState({
             books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
+
         }
       })
       .catch((error) => console.error(error));
@@ -67,12 +71,17 @@ export default class HomeScreen extends Component {
         } else {
           this.setState({
             books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
         }
       })
       .catch((error) => console.error(error));
+  }
+
+  searchBack(books) {
+    this.setState({ resultbooks: books });
   }
 
   render() {
@@ -94,7 +103,13 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
+
+        <EditText
+          books={this.state.books}
+          searchBack={this.searchBack.bind(this)} />
+
         <ListView books={this.state.books} navigation={this.props.navigation} />
+        {/* <AddListView books={this.state.resultbooks} navigation={this.props.navigation} /> */}
       </View>
     );
   }
@@ -102,7 +117,7 @@ export default class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   navigationContainer: {
-flexDirection: 'row',
+    flexDirection: 'row',
   },
   container:
     {
