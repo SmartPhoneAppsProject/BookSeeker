@@ -94,7 +94,6 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <EditText/>
         <ListView books={this.state.books} navigation={this.props.navigation} />
       </View>
     );

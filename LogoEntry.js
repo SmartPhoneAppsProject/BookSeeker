@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class LogoEntry extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class LogoEntry extends Component {
     return (
       <TouchableOpacity style={styles.container}
         onPress={() => navigation.navigate('New')}>
-        <MaterialIcons name='add-circle-outline' size={30} color='white' />
+        <MaterialCommunityIcons name='book-plus' size={30} color='white' />
       </TouchableOpacity>
     );
   }
