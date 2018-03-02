@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import FindBookList from './FindBookList'
+import HomeScreen from './HomeScreen'
 import NewBookAdd from './NewBookAdd'
 import DetailBookView from './DetailBookView';
 
 const RootStack = StackNavigator(
     {
-        List: {
-            screen: FindBookList,
+        Home: {
+            screen: HomeScreen,
         },
         New: {
             screen: NewBookAdd,
@@ -18,10 +18,9 @@ const RootStack = StackNavigator(
         },
     },
     {
-        initialRouteName: 'List',
+        initialRouteName: 'Home',
         //header config
         navigationOptions: {
-            title: 'DetailBookView',
             headerStyle: {
                 backgroundColor: '#f4511e',
             },

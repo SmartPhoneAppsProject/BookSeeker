@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import AddListView from './AddListView';
+import ListView from './ListView';
 import EditText from './EditText';
-import PullRefresh from './pullRefresh'
-import Bar from './Bar';
-import reqBook from './reqBook'
+import PullRefresh from './pullRefresh';
+import reqBook from './reqBook';
+import LogoEntry from './LogoEntry';
+import LogoSearch from './LogoSearch';
 
-export default class FindBookList extends React.Component {
+export default class HomeScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight:
+        <View style={styles.navigationContainer}>
+          <LogoEntry navigation={navigation} />
+          <LogoSearch navigation={navigation} />
+        </View>
+    };
+  };
+
   constructor(props) {
     super(props);
 
@@ -14,7 +26,6 @@ export default class FindBookList extends React.Component {
       books: [],
       isLoading: true,
       respStatus: true,
-
     };
 
     this._refresh = this._refresh.bind(this);
@@ -64,15 +75,6 @@ export default class FindBookList extends React.Component {
       .catch((error) => console.error(error));
   }
 
-
-  callbackst(text) {
-    this.searchStart(text)
-  }
-
-  static navigationOptions = {
-    title: 'FindBookList',
-  };
-
   render() {
     const { navigate } = this.props.navigation;
 
@@ -84,7 +86,6 @@ export default class FindBookList extends React.Component {
       );
     }
 
-    console.log(this.state.respStatus);
     if (!this.state.respStatus) {
       return (
         <PullRefresh refresh={this._refresh} />
@@ -92,36 +93,28 @@ export default class FindBookList extends React.Component {
     }
 
     return (
-      <View>
-        <Button
-          title="新規"
-          onPress={() => navigate('New')}
-        />
-        <Button
-          title="貸出・返却"
-          onPress={() => navigate('Details')}
-        />
-
-        <EditText
-        />
-
-        <AddListView books={this.state.books} navigation={this.props.navigation} />
+      <View style={styles.container}>
+        <EditText/>
+        <ListView books={this.state.books} navigation={this.props.navigation} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container:
-      {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        backgroundColor: '#FFF',
-      },
-    indicator:
-      {
-        flex: 1,
-        paddingTop: 20,
-      }
+  navigationContainer: {
+flexDirection: 'row',
+  },
+  container:
+    {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignItems: 'stretch',
+      backgroundColor: '#fff',
+    },
+  indicator:
+    {
+      flex: 1,
+      paddingTop: 20,
+    }
 });
