@@ -1,23 +1,51 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Button,
+} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-export default class DetailBookView extends React.Component {
-  // static navigationOptions = ({ navigation, navigationOptions }) => {
-  //   const { params } = this.props.navigation.state;
-
-  //   return {
-  //     title: params ? params.otherParam : 'DetailBookView',
-  //     headerStyle: {
-  //       backgroundColor: navigationOptions.headerTintColor,
-  //     },
-  //     headerTintColor: navigationOptions.headerStyle.backgroundColor,
-  //   };
-  // };
+export default class DetailScreen extends React.Component {
   static navigationOptions = {
-    title: 'DetailBookView',
+    title: 'DetailScreen',
   };
 
+  constructor(props) {
+    super(props);
+
+    const { params } = this.props.navigation.state;
+    this.state = {
+      currentStatus: params.item.status
+    }
+  }
+
+  _lendBook() {
+    this.setState({
+      currentStatus: true
+    });
+  }
+
+  _returnBook() {
+    this.setState({
+      currentStatus: false
+    });
+  }
+
+  _switchStatus() {
+    const { params } = this.props.navigation.state;
+
+    const json = JSON.stringify({
+      jan_code: params.item.jan_code,
+      status: this.state.currentStatus
+    });
+
+    console.log('object is parsed to json');
+  }
+  
   render() {
     const { params } = this.props.navigation.state;
     return (
@@ -50,6 +78,12 @@ export default class DetailBookView extends React.Component {
                 <Text>出版日：{params.item.published_at}</Text>
                 <Text>アプリへの追加日：{params.item.created_at}</Text>
             </ScrollView>
+        </View>
+        <View style={ [styles.base, styles.buttonContainer]}>
+          {params.item.status ?
+            <Button title="返却" onPress={this._returnBook} />
+            : <Button title="貸出" onPress={this._lendBook}/>
+          }
         </View>
       </View>
     );
@@ -122,7 +156,7 @@ const styles = StyleSheet.create({
       },
   infoContainer:
       {
-          flex: 5,
+          flex: 3,
           marginTop: 5,
           marginLeft: 25,
           marginRight: 25,
@@ -142,4 +176,8 @@ const styles = StyleSheet.create({
       {
           marginLeft: 20,
       },
+  buttonContainer:
+    {
+      flex: 2,
+    },
 });
