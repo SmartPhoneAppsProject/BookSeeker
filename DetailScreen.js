@@ -32,8 +32,7 @@ export default class DetailScreen extends React.Component {
       currentStatus: true
     });
 
-    console.log(this.state.currentStatus);
-    this.putData();
+    this.putData(true);
   }
 
   _returnBook() {
@@ -41,11 +40,10 @@ export default class DetailScreen extends React.Component {
       currentStatus: false
     });
 
-    console.log(this.state.currentStatus);
-    this.putData();
+    this.putData(false);
   }
 
-  async putData() {
+  async putData(status) {
     const uri = 'https://go-api-staging.herokuapp.com/books';
     const headers = new Headers({
       Accept: 'application/json',
@@ -53,7 +51,7 @@ export default class DetailScreen extends React.Component {
     });
     const json = JSON.stringify({
       jan_code: this.props.navigation.state.params.item.jan_code,
-      status: this.state.currentStatus
+      status: status
     });
     const options = {
       method: 'PUT',
@@ -88,12 +86,8 @@ export default class DetailScreen extends React.Component {
         </View>
         <View style={ [styles.base, styles.statusContainer] }>
             {this.state.currentStatus ?
-                <Text style={ styles.status }>貸出OK</Text>
-                : <Text style={ [styles.status, styles.statusColor] }>貸出OK</Text>
-            }
-            {this.state.currentStatus ?
-                <Text style={ [styles.status, styles.statusColor] }>貸出中</Text>
-                : <Text style={ styles.status }>貸出中</Text>
+                <Text style={ [styles.status, styles.statusNo] }>貸し出し中</Text>
+                : <Text style={ [styles.status, styles.statusOk] }>貸し出OK</Text>
             }
         </View>
         <View style={ [styles.base, styles.titleContainer] }>
@@ -164,15 +158,21 @@ const styles = StyleSheet.create({
           marginLeft: 40,
           marginRight: 30,
           paddingTop: 5,
-          width: 60,
+          width: 100,
           height: 30,
           backgroundColor: '#ccc',
           textAlign: 'center',
           overflow: 'hidden',
       },
-  statusColor:
+  statusOk:
+      {
+          color: '#008000',
+          borderColor: '#008000'
+      },
+  statusNo:
       {
           color: '#ff0000',
+          borderColor: '#ff0000'
       },
   titleContainer:
       {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
           marginLeft: 20,
       },
   buttonContainer:
-    {
-      flex: 2,
-    },
+      {
+          flex: 2,
+      },
 });
