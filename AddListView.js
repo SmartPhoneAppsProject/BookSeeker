@@ -39,19 +39,8 @@ export default class AddListView extends Component {
       />
     );
   }
-
-  renderTags(tags) {
-    if (tags) {
-      let list = [];
-      for (const i in tags) {
-        console.log(tags[i].name);
-        list.push(<Text key={i}>{tags[i].name}</Text>);
-        console.log(list);
-      }
-      return <View>{list}</View>;
-    }
-  }
 }
+
 const { width } = Dimensions.get('window');
 const imageSide = 70;
 
