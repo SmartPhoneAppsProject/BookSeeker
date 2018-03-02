@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 6.9
+dependencies:
+  pre:
+    - npm install -g exp@48.0.4
+  test:
+    override:
+      - echo "no tests"
+deployment:
+  appr:
+    branch: /.*/
+    commands:
+      - 'if [ "$CI_PULL_REQUEST" != "" ]; then npm run appr; fi'
