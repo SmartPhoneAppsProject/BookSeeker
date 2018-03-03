@@ -13,7 +13,6 @@ export default class AddListView extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    showTags = this.renderTags;
     return (
       <FlatList
         data={this.props.books}
