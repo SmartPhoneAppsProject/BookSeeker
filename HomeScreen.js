@@ -22,7 +22,6 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       books: [],
       resultbooks: [],
@@ -80,9 +79,9 @@ export default class HomeScreen extends Component {
       .catch((error) => console.error(error));
   }
 
-  searchBack(books) {
-    this.setState({ resultbooks: books });
-  }
+  // searchBack(books) {
+  //   this.setState({ resultbooks: books });
+  // }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -106,10 +105,10 @@ export default class HomeScreen extends Component {
 
         <EditText
           books={this.state.books}
-          searchBack={this.searchBack.bind(this)} />
+          navigation={this.props.navigation} />
+          {/* searchBack={this.searchBack.bind(this)} /> */}
 
         <ListView books={this.state.books} navigation={this.props.navigation} />
-        {/* <AddListView books={this.state.resultbooks} navigation={this.props.navigation} /> */}
       </View>
     );
   }
