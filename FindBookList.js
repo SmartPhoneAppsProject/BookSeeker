@@ -10,11 +10,12 @@ export default class FindBookList extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       books: [],
+      resultbooks: [],
       isLoading: true,
       respStatus: true,
-
     };
 
     this._refresh = this._refresh.bind(this);
@@ -34,9 +35,11 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
+            resultbooks:books,
             respStatus: true,
             isLoading: false
           });
+
         }
       })
       .catch((error) => console.error(error));
@@ -56,6 +59,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
+            resultbooks:books,
             respStatus: true,
             isLoading: false
           });
@@ -65,9 +69,9 @@ export default class FindBookList extends React.Component {
   }
 
 
-  callbackst(text) {
-    this.searchStart(text)
-  }
+    searchBack(books){
+        this.setState({resultbooks:books});
+    }
 
   static navigationOptions = {
     title: 'FindBookList',
@@ -103,9 +107,11 @@ export default class FindBookList extends React.Component {
         />
 
         <EditText
+            books={this.state.books}
+            searchBack={this.searchBack.bind(this)}
         />
 
-        <AddListView books={this.state.books} navigation={this.props.navigation} />
+        <AddListView books={this.state.resultbooks} navigation={this.props.navigation} />
       </View>
     );
   }
