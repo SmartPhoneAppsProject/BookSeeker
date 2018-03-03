@@ -29,41 +29,30 @@ export default class SearchScreen extends Component {
   search() {
     console.log(this.props.books);
     const queries = this.state.searchText.split(' ') //searchText 'j' => '', searchText 'jj' => 'j'
-    let data = this.props.books;
+    let books = this.props.books;
     let results = [];
+    let tmpArray = [];
+    // let set = new Set();
 
-    for (i in queries) {
-      if (queries[i]) { //比較する文字列があるか
-        if ('#' != queries[i].charAt(0)) { //titleのとき
-          results = [];
-          for (j in data) {
-            if (data[j].title.toLowerCase().includes(queries[i].toLowerCase())) {
-              results.push(data[j]);
-            }
-          }
-          data = results;
-        }
-        // if ('#' == queries[i].charAt(0)) { //tagのとき
-        //   for (j in data) {
-        //     results = [];
-        //     for (k in data[j].tags) {
-        //       let counter = 0;
-        //       if (data[j].tags[k].name.toLowerCase().includes(queries[i].replace('#', '').toLowerCase())) {
-        //         results.push(data[j]);
-        //       }
-        //     }
-        //     data = results;
-        //   }
-        // }
-        if ('#' == queries[i].charAt(0)) { //tagのとき
-          for (j in data) {
-            for (k in data[j].tags) {
-              if (data[j].tags[k].name.toLowerCase().includes(queries[i].replace('#', '').toLowerCase())) {
-                results.push(data[j]);
-                console.log(data[j].tags[k].name.toLowerCase());
+    for (let query of queries) {
+      if (query) { //比較する文字列があるか
+        if ('#' == query.charAt(0)) { //tagのとき
+          for (let book of books) {
+            for (let tag of book.tags) {
+              if (tag.name.toLowerCase().includes(query.replace('#', '').toLowerCase())) {
+                tmpArray.push(book);
               }
             }
           }
+          results = Array.from(new Set(tmpArray)); //配列の重複を取り除く
+        } else { //titleのとき
+          results = [];
+          for (let book of books) {
+            if (book.title.toLowerCase().includes(query.toLowerCase())) {
+              results.push(book);
+            }
+          }
+          books = results;
         }
       }
     }
@@ -108,23 +97,3 @@ const styles = StyleSheet.create({
     flex: 2,
   },
 });
-
-  //title or
-  // for(i in queries){
-  //   for(j in data){
-  //     if(data[j].title.toLowerCase().includes(queries[i].toLowerCase())){
-  //       results.push(data[j]);
-  //     }
-  //   }
-  // }
-
-  //tag or
-  // for(i in queries){
-  //   for(j in data){
-  //     for(k in data[j].tags) {
-  //       if(data[j].tags[k].toLowerCase().includes(queries[i].toLowerCase())){
-  //         results.push(data[j].tags[k]);
-  //       }
-  //     }
-  //   }
-  // }
