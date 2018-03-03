@@ -17,6 +17,11 @@ export default class SearchScreen extends Component {
     this.search = this.search.bind(this);
   }
 
+  cancel() {
+    this.setState({ searchText: '' });
+    this.props.setBooksOnList(this.props.books)
+  }
+
   search() {
     console.log(this.props.books);
     const queries = this.state.searchText.split(' ') //searchText 'j' => '', searchText 'jj' => 'j'
@@ -38,6 +43,7 @@ export default class SearchScreen extends Component {
         //   for (j in data) {
         //     results = [];
         //     for (k in data[j].tags) {
+        //       let counter = 0;
         //       if (data[j].tags[k].name.toLowerCase().includes(queries[i].replace('#', '').toLowerCase())) {
         //         results.push(data[j]);
         //       }
@@ -50,11 +56,6 @@ export default class SearchScreen extends Component {
 
     this.setState({ books: results });
     this.props.setBooksOnList(results);
-  }
-
-  cancel() {
-    this.setState({ searchText: '' });
-    this.props.setBooksOnList(this.props.books)
   }
 
   render() {

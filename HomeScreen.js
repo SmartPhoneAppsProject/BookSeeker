@@ -51,7 +51,6 @@ export default class HomeScreen extends Component {
             respStatus: true,
             isLoading: false
           });
-
         }
       })
       .catch((error) => console.error(error));
@@ -71,7 +70,7 @@ export default class HomeScreen extends Component {
         } else {
           this.setState({
             books,
-            resultbooks: books,
+            tmpBooks: books,
             respStatus: true,
             isLoading: false
           });
