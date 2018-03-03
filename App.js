@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from './HomeScreen'
 import NewBookAdd from './NewBookAdd'
 import DetailBookView from './DetailBookView';
+import SearchScreen from './SearchScreen';
 
 const RootStack = StackNavigator(
     {
@@ -15,6 +16,9 @@ const RootStack = StackNavigator(
         },
         Details: {
             screen: DetailBookView,
+        },
+        Search: {
+          screen: SearchScreen,
         },
     },
     {

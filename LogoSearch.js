@@ -10,7 +10,7 @@ export default class LogoSearch extends Component {
     const navigation = this.props.navigation;
     return (
       <TouchableOpacity style={styles.container}
-        onPress={() => navigation.navigate('New')}>
+        onPress={() => navigation.navigate('Search', { books: this.props.books })}>
         <MaterialIcons name='search' size={30} color='white' />
       </TouchableOpacity>
     );

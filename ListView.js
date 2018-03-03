@@ -14,7 +14,7 @@ export default class ListView extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <FlatList
+      <FlatList style={list.container}
         data={this.props.books}
         renderItem={({ item }) => {
           return (
@@ -40,6 +40,9 @@ export default class ListView extends Component {
 const { width } = Dimensions.get('window');
 
 const list = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   item: {
     flexDirection: 'row',
     borderColor: '#CCC',
