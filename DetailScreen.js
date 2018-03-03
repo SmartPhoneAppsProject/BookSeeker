@@ -16,10 +16,9 @@ export default class DetailScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
-    const { params } = this.props.navigation.state;
+    
     this.state = {
-      currentStatus: params.item.status
+      currentStatus: this.props.navigation.state.params.item.status
     };
 
     this._lendBook = this._lendBook.bind(this);
@@ -66,9 +65,8 @@ export default class DetailScreen extends React.Component {
 
       const response = await fetch(request);
       console.log(response);
-      return response;
     } catch (error) {
-      console.log(error)
+      console.log('try put failed')
     }
   }
   
