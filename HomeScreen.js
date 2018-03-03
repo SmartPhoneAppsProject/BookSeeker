@@ -5,7 +5,6 @@ import ListView from './ListView';
 import PullRefresh from './pullRefresh';
 import reqBook from './reqBook';
 import LogoEntry from './LogoEntry';
-import LogoSearch from './LogoSearch';
 import SearchScreen from './SearchScreen';
 
 export default class HomeScreen extends Component {
@@ -15,7 +14,6 @@ export default class HomeScreen extends Component {
       headerRight:
         <View style={styles.navigationContainer}>
           <LogoEntry navigation={navigation} />
-          <LogoSearch navigation={navigation} />
         </View>
     };
   };
