@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Button
+} from 'react-native';
 
 import ListView from './ListView';
 
 export default class SearchScreen extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -51,6 +55,16 @@ export default class SearchScreen extends Component {
         //     data = results;
         //   }
         // }
+        if ('#' == queries[i].charAt(0)) { //tagのとき
+          for (j in data) {
+            for (k in data[j].tags) {
+              if (data[j].tags[k].name.toLowerCase().includes(queries[i].replace('#', '').toLowerCase())) {
+                results.push(data[j]);
+                console.log(data[j].tags[k].name.toLowerCase());
+              }
+            }
+          }
+        }
       }
     }
 
