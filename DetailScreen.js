@@ -7,7 +7,6 @@ import {
   Image,
   Button,
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = {
@@ -16,7 +15,7 @@ export default class DetailScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       currentStatus: this.props.navigation.state.params.item.status
     };
