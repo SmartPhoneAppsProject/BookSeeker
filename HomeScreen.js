@@ -49,7 +49,7 @@ export default class HomeScreen extends Component {
             books,
             tmpBooks: books,
             respStatus: true,
-            isLoading: false
+            isLoading: false,
           });
         }
       })
