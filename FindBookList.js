@@ -96,7 +96,7 @@ export default class FindBookList extends React.Component {
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <Button
           title="新規"
           onPress={() => navigate('New')}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'stretch',
-        backgroundColor: '#FFF',
+        backgroundColor: '#fff',
       },
     indicator:
       {

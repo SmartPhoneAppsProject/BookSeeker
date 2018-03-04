@@ -19,7 +19,8 @@ export default function reqBook(uri) {
         for (i in data) {
           books.push({
             key: data[i].id,
-            image: data[i].image,
+            // image: data[i].image,
+            image: 'https://facebook.github.io/react/logo-og.png',
             jan_code: data[i].jan_code,
             published_at: data[i].published_at,
             status: data[i].status,

@@ -4,83 +4,97 @@ import { StackNavigator } from 'react-navigation';
 
 export default class AddListView extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
     }
+  }
 
-    render() {
-        const { navigate } = this.props.navigation;
-        return (
-            <FlatList
-                data={this.props.books}
-                renderItem={({ item }) => {
-                    return (
-                        <TouchableOpacity style={list.item}
-                            onPress={() => navigate('Details', { item })} >
-                            <Image style={list.image}
-                                source={{ uri: item.image }} />
-                            <View style={list.info}>
-                                <View style={list.infoStatus}>
-                                    {item.status ? <Text style={list.statusOk}>貸し出しOK</Text>
-                                        : <Text style={list.statusNo}>貸し出し中</Text>}
-                                </View>
-                                <Text style={list.infoTitle}>{item.title}</Text>
-                            </View>
-                        </TouchableOpacity >
-                    );
-                }}
-            />
-        );
-    }
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <FlatList
+        data={this.props.books}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity style={styles.itemContainer}
+              onPress={() => navigate('Details', { item })} >
+              <Image style={styles.image}
+                source={{ uri: item.image }} />
+              <View style={styles.item}>
+                {item.status
+                  ? <Text style={styles.statusNo}>貸し出し中</Text>
+                  : <Text style={styles.statusOk}>貸し出しOK</Text>
+                }
+                <Text style={styles.title}>{item.title}</Text>
+                <View style={styles.tagsContainer}>
+                  {item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
+                </View>
+              </View>
+            </TouchableOpacity >
+          );
+        }}
+      />
+    );
+  }
 }
 
 const { width } = Dimensions.get('window');
+const imageSide = 70;
 
-const list = StyleSheet.create({
-    item: {
-        flexDirection: 'row',
-        borderColor: '#CCC',
-        borderWidth: 1,
-    },
-    image: {
-        width: 64,
-        height: 64,
-    },
-    info: {
-        width: width - 64,
-        height: 64,
-        flexDirection: 'column',
-        alignItems: 'stretch',
-    },
-    infoStatus: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    statusOk: {
-        width: 90,
-        fontSize: 15,
-        borderRadius: 4,
-        borderWidth: 1,
-        borderColor: 'green',
-        overflow: 'hidden',
-        textAlign: 'center',
-
-    },
-    statusNo: {
-        width: 90,
-        fontSize: 15,
-        borderRadius: 4,
-        borderWidth: 1,
-        borderColor: 'red',
-        overflow: 'hidden',
-        textAlign: 'center',
-    },
-    infoTitle: {
-        flex: 2,
-        fontSize: 30,
-        textAlign: 'center',
-    }
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    borderColor: '#CCC',
+    borderWidth: 1,
+  },
+  image: {
+    width: imageSide,
+    height: imageSide,
+  },
+  item: {
+    width: width - imageSide,
+    height: imageSide,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
+  statusOk: {
+    width: 90,
+    fontSize: 15,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'green',
+    overflow: 'hidden',
+    textAlign: 'center',
+  },
+  statusNo: {
+    width: 90,
+    fontSize: 15,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'red',
+    overflow: 'hidden',
+    textAlign: 'center',
+  },
+  title: {
+    flex: 2,
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  tagsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  tag: {
+    marginLeft: 5,
+    backgroundColor: '#f5f5f5',
+    borderColor: '#f5f5f5',
+    borderRadius: 4,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
 });
