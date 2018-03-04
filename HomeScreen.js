@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator
+} from 'react-native';
 
 import ListView from './ListView';
 import PullRefresh from './pullRefresh';
@@ -88,7 +94,7 @@ export default class HomeScreen extends Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={styles.indicator}>
+        <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
         </View>
       );
