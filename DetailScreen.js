@@ -1,23 +1,74 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Button,
+} from 'react-native';
 
-export default class DetailBookView extends React.Component {
-  // static navigationOptions = ({ navigation, navigationOptions }) => {
-  //   const { params } = this.props.navigation.state;
-
-  //   return {
-  //     title: params ? params.otherParam : 'DetailBookView',
-  //     headerStyle: {
-  //       backgroundColor: navigationOptions.headerTintColor,
-  //     },
-  //     headerTintColor: navigationOptions.headerStyle.backgroundColor,
-  //   };
-  // };
+export default class DetailScreen extends React.Component {
   static navigationOptions = {
-    title: 'DetailBookView',
+    title: 'DetailScreen',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentStatus: this.props.navigation.state.params.item.status
+    };
+
+    this._lendBook = this._lendBook.bind(this);
+    this._returnBook = this._returnBook.bind(this);
+    this.putData = this.putData.bind(this);
+  }
+
+  _lendBook() {
+    this.setState({
+      currentStatus: true
+    });
+
+    this.putData(true);
+  }
+
+  _returnBook() {
+    this.setState({
+      currentStatus: false
+    });
+
+    this.putData(false);
+  }
+
+  async putData(status) {
+    const uri = 'https://go-api-staging.herokuapp.com/books';
+    const headers = new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    });
+    const json = JSON.stringify({
+      jan_code: this.props.navigation.state.params.item.jan_code,
+      status: status
+    });
+    const options = {
+      method: 'PUT',
+      headers: headers,
+      body: json
+    };
+
+    const request = new Request(uri, options);
+
+    try {
+      console.log('try put');
+
+      const response = await fetch(request);
+      console.log(response);
+    } catch (error) {
+      console.log('try put failed')
+    }
+  }
+  
   render() {
     const { params } = this.props.navigation.state;
     return (
@@ -31,13 +82,9 @@ export default class DetailBookView extends React.Component {
             </View>
         </View>
         <View style={ [styles.base, styles.statusContainer] }>
-            {params.item.status ?
-                <Text style={ styles.status }>貸出OK</Text>
-                : <Text style={ [styles.status, styles.statusColor] }>貸出OK</Text>
-            }
-            {params.item.status ?
-                <Text style={ [styles.status, styles.statusColor] }>貸出中</Text>
-                : <Text style={ styles.status }>貸出中</Text>
+            {this.state.currentStatus ?
+                <Text style={ [styles.status, styles.statusNo] }>貸し出し中</Text>
+                : <Text style={ [styles.status, styles.statusOk] }>貸し出OK</Text>
             }
         </View>
         <View style={ [styles.base, styles.titleContainer] }>
@@ -50,6 +97,12 @@ export default class DetailBookView extends React.Component {
                 <Text>出版日：{params.item.published_at}</Text>
                 <Text>アプリへの追加日：{params.item.created_at}</Text>
             </ScrollView>
+        </View>
+        <View style={ [styles.base, styles.buttonContainer]}>
+          {this.state.currentStatus ?
+            <Button title="返却" onPress={this._returnBook} />
+            : <Button title="貸出" onPress={this._lendBook}/>
+          }
         </View>
       </View>
     );
@@ -102,15 +155,21 @@ const styles = StyleSheet.create({
           marginLeft: 40,
           marginRight: 30,
           paddingTop: 5,
-          width: 60,
+          width: 100,
           height: 30,
           backgroundColor: '#ccc',
           textAlign: 'center',
           overflow: 'hidden',
       },
-  statusColor:
+  statusOk:
+      {
+          color: '#008000',
+          borderColor: '#008000'
+      },
+  statusNo:
       {
           color: '#ff0000',
+          borderColor: '#ff0000'
       },
   titleContainer:
       {
@@ -122,7 +181,7 @@ const styles = StyleSheet.create({
       },
   infoContainer:
       {
-          flex: 5,
+          flex: 3,
           marginTop: 5,
           marginLeft: 25,
           marginRight: 25,
@@ -141,5 +200,9 @@ const styles = StyleSheet.create({
   infoBody:
       {
           marginLeft: 20,
+      },
+  buttonContainer:
+      {
+          flex: 2,
       },
 });
