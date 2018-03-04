@@ -8,16 +8,20 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import FindBookList from './FindBookList'
-import NewBookAdd from './NewBookAdd'
 import DetailScreen from './DetailScreen';
+import EntryScreen from './EntryScreen';
+import ScanScreen from './ScanScreen';
 
 const RootStack = StackNavigator(
   {
     List: {
       screen: FindBookList,
     },
-    New: {
-      screen: NewBookAdd,
+    Entry: {
+      screen: EntryScreen,
+    },
+    Scan: {
+      screen: ScanScreen,
     },
     Detail: {
       screen: DetailScreen,

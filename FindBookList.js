@@ -45,7 +45,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks:books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -69,7 +69,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks:books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -79,9 +79,9 @@ export default class FindBookList extends React.Component {
   }
 
 
-    searchBack(books){
-        this.setState({resultbooks:books});
-    }
+  searchBack(books) {
+    this.setState({ resultbooks: books });
+  }
 
   static navigationOptions = {
     title: 'FindBookList',
@@ -105,7 +105,7 @@ export default class FindBookList extends React.Component {
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <Button
           title="新規"
           onPress={() => navigate('Entry')}
@@ -116,8 +116,8 @@ export default class FindBookList extends React.Component {
         />
 
         <EditText
-            books={this.state.books}
-            searchBack={this.searchBack.bind(this)}
+          books={this.state.books}
+          searchBack={this.searchBack.bind(this)}
         />
 
         <AddListView books={this.state.resultbooks} navigation={this.props.navigation} />
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'flex-start',
       alignItems: 'stretch',
-      backgroundColor: '#FFF',
+      backgroundColor: '#fff',
     },
   indicator:
     {

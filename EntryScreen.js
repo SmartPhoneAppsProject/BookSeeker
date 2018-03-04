@@ -119,21 +119,6 @@ export default class EntryScreen extends Component {
     );
   }
 
-  renderTagsContainer() {
-    return (
-      <View style={styles.childContainer}>
-        <Text style={styles.tag}>タグ</Text>
-        <TextInput style={styles.input}
-          onChangeText={(text) => this.setState({ tags: text })}
-          value={this.state.tags}
-          returnKeyType='go'
-          ref={(input) => this.tagInput = input}
-          placeholder='tags'
-          maxLenghth={100} />
-      </View >
-    );
-  }
-
   renderDateContainer() {
     return (
       <View style={styles.childContainer}>
@@ -174,7 +159,6 @@ export default class EntryScreen extends Component {
     const { navigate } = this.props.navigation;
     const photoContainer = this.renderPhotoContainer();
     const titleContainer = this.renderTitleContainer();
-    const tagsContainer = this.renderTagsContainer();
     const dateContainer = this.renderDateContainer();
     const buttonContainer = this.renderButtonContainer();
 
@@ -183,7 +167,6 @@ export default class EntryScreen extends Component {
         style={styles.container}>
         {photoContainer}
         {titleContainer}
-        {tagsContainer}
         {dateContainer}
         {buttonContainer}
       </KeyboardAvoidingView>

@@ -68,40 +68,41 @@ export default class DetailScreen extends React.Component {
       console.log('try put failed')
     }
   }
-  
+
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View style={ styles.container }>
-        <View style={ [styles.base, styles.imgContainer] }>
-            <Image style={styles.img}
-                   source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
-            <View style={ [styles.base, styles.tagContainer] }>
-                {/*タグの処理を別けてタグ名だけを取得するようにしなければいけないです。*/}
-                <Text style={styles.tag}>タグ：{JSON.stringify(tags = params ? params.item.tags : null)}</Text>
+      <View style={styles.container}>
+        <View style={[styles.base, styles.imgContainer]}>
+          <Image style={styles.img}
+            source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
+          <View style={[styles.base, styles.tagContainer]}>
+            <View style={styles.tagsContainer}>
+              {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
             </View>
+          </View>
         </View>
-        <View style={ [styles.base, styles.statusContainer] }>
-            {this.state.currentStatus
-              ? <Text style={ [styles.status, styles.statusNo] }>貸し出し中</Text>
-              : <Text style={ [styles.status, styles.statusOk] }>貸し出OK</Text>
-            }
+        <View style={[styles.base, styles.statusContainer]}>
+          {this.state.currentStatus
+            ? <Text style={[styles.status, styles.statusNo]}>貸し出し中</Text>
+            : <Text style={[styles.status, styles.statusOk]}>貸し出OK</Text>
+          }
         </View>
-        <View style={ [styles.base, styles.titleContainer] }>
-            <Text style={styles.title}>{params.item.title}</Text>
+        <View style={[styles.base, styles.titleContainer]}>
+          <Text style={styles.title}>{params.item.title}</Text>
         </View>
         <View style={styles.infoContainer}>
-            <Text style={styles.infoHead}>詳細情報</Text>
-            <ScrollView style={styles.infoBody}>
-                <Text>JANコード：{params.item.jan_code}</Text>
-                <Text>出版日：{params.item.published_at}</Text>
-                <Text>アプリへの追加日：{params.item.created_at}</Text>
-            </ScrollView>
+          <Text style={styles.infoHead}>詳細情報</Text>
+          <ScrollView style={styles.infoBody}>
+            <Text>JANコード：{params.item.jan_code}</Text>
+            <Text>出版日：{params.item.published_at}</Text>
+            <Text>アプリへの追加日：{params.item.created_at}</Text>
+          </ScrollView>
         </View>
-        <View style={ [styles.base, styles.buttonContainer] }>
+        <View style={[styles.base, styles.buttonContainer]}>
           {this.state.currentStatus
             ? <Button title="返却" onPress={this._returnBook} />
-            : <Button title="貸出" onPress={this._lendBook}/>
+            : <Button title="貸出" onPress={this._lendBook} />
           }
         </View>
       </View>
@@ -137,10 +138,14 @@ const styles = StyleSheet.create({
       marginLeft: 40,
       marginTop: 30,
     },
-  tag:
-    {
-      fontSize: 15,
-    },
+  tag: {
+    margin: 3,
+    backgroundColor: '#f5f5f5',
+    borderColor: '#f5f5f5',
+    borderRadius: 4,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
   statusContainer:
     {
       flex: 1,
