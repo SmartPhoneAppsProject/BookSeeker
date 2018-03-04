@@ -102,7 +102,6 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
-
         <SearchScreen
           books={this.state.books}
           tmpBooks={this.state.tmpBooks}

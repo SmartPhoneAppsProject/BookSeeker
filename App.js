@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+
 import HomeScreen from './HomeScreen'
 import NewBookAdd from './NewBookAdd'
-import DetailBookView from './DetailBookView';
 import SearchScreen from './SearchScreen';
+import DetailScreen from './DetailScreen';
 
 const RootStack = StackNavigator(
   {
