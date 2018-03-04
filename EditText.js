@@ -10,8 +10,40 @@ export default class EditText extends Component {
         };
     }
 
-    clickSearchButton() {
+    seachStart(text) {
+        const searchtext=text.split(" ")
+        let newbooks = [];
+        let data = this.props.books;
 
+        for (i in data) {
+            let check=0
+            for(let j=0; j<  searchtext.length;j++) {
+                if(searchtext[j].slice(0,1)=="＃"||searchtext[j].slice(0,1)=="#") {
+                    searchtext[j]=searchtext[j].slice(1)
+                    if (data[i].tags.size != 0) {
+                        for (let k = 0; k < data[i].tags.length; k++) {
+                            if (searchtext[j].toUpperCase() == data[i].tags[k].name.toUpperCase()) {
+                                check+=1
+                            }
+                        }
+                    }
+                }else {
+                    for(let k=0;k<data[i].title.length;k++) {
+                        if (searchtext[j] == data[i].title.slice(k, searchtext[j].length+k)) {
+                            check += 1
+                        }
+                    }
+                }
+            }
+            if(check==searchtext.length){
+                newbooks.push(data[i])
+            }
+        }
+        this.props.searchBack(newbooks)
+    }
+
+    clickCancel(){
+        this.props.searchBack(this.props.books)
     }
 
     render() {
@@ -22,22 +54,32 @@ export default class EditText extends Component {
                     onChangeText={(searchText) => this.setState({ searchText })}
                     value={this.state.searchText}
                 />
-
-                <Button style={styles.seachButton} onPress={() => console.log('search')}
-                    title="検索"
-                />
+                <View style={styles.buttonView}>
+                    <Button style={styles.seachButton} onPress={() => this.seachStart(this.state.searchText)}
+                        title="検索"
+                    />
+                    <Button onPress={()=>this.clickCancel()}
+                        title="キャンセル"
+                    />
+                </View>
             </View>
-
         );
     }
 }
 
 const styles = StyleSheet.create({
+    buttonView:{
+      flexDirection:"row",
+    },
     seachButton: {
-        width: 60,
+        width: 100,
         height: 40,
         backgroundColor: 'blue',
-        flexDirection: 'row',
-        //justifyContent: 'space-between',
+
     },
+    cancelButton:{
+        width: 100,
+        height: 40,
+        backgroundColor: 'blue',
+    }
 });

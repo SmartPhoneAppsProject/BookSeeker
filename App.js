@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 import { StackNavigator } from 'react-navigation';
+
 import FindBookList from './FindBookList'
-import DetailBookView from './DetailBookView';
-import EntryScreen from './EntryScreen';
-import ScanScreen from './ScanScreen';
+import NewBookAdd from './NewBookAdd'
+import DetailScreen from './DetailScreen';
 
 const RootStack = StackNavigator(
   {
     List: {
       screen: FindBookList,
     },
-    Details: {
-      screen: DetailBookView,
+    New: {
+      screen: NewBookAdd,
     },
-    Entry: {
-      screen: EntryScreen,
-    },
-    Scan: {
-      screen: ScanScreen,
+    Detail: {
+      screen: DetailScreen,
     },
   },
   {
     initialRouteName: 'List',
     //header config
     navigationOptions: {
-      title: 'DetailBookView',
+      title: 'DetailScreen',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
