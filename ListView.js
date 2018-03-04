@@ -19,7 +19,7 @@ export default class ListView extends Component {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity style={list.item}
-              onPress={() => navigate('Details', { item })} >
+              onPress={() => navigate('Detail', { item })} >
               <Image style={list.image}
                 source={{ uri: item.image }} />
               <View style={list.info}>

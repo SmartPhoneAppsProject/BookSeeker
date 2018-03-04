@@ -15,8 +15,8 @@ const RootStack = StackNavigator(
     New: {
       screen: NewBookAdd,
     },
-    Details: {
-      screen: DetailBookView,
+    Detail: {
+      screen: DetailScreen,
     },
     Search: {
       screen: SearchScreen,
