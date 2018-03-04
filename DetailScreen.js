@@ -83,8 +83,8 @@ export default class DetailScreen extends React.Component {
           </View>
         </View>
         <View style={[styles.base, styles.statusContainer]}>
-          {this.state.currentStatus ?
-            <Text style={[styles.status, styles.statusNo]}>貸し出し中</Text>
+          {this.state.currentStatus
+            ? <Text style={[styles.status, styles.statusNo]}>貸し出し中</Text>
             : <Text style={[styles.status, styles.statusOk]}>貸し出OK</Text>
           }
         </View>
@@ -100,8 +100,8 @@ export default class DetailScreen extends React.Component {
           </ScrollView>
         </View>
         <View style={[styles.base, styles.buttonContainer]}>
-          {this.state.currentStatus ?
-            <Button title="返却" onPress={this._returnBook} />
+          {this.state.currentStatus
+            ? <Button title="返却" onPress={this._returnBook} />
             : <Button title="貸出" onPress={this._lendBook} />
           }
         </View>
