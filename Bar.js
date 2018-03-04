@@ -1,6 +1,5 @@
 import React ,{Component} from 'react';
 import {Alert,StyleSheet,Button,View} from 'react-native';
-import clickNewBookButton from './App'
 //import {TabNavigator} from 'react-navigation';
 
 //const util=require('util');

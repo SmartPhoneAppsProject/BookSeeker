@@ -7,7 +7,7 @@ export default class EditText extends Component {
         super(props);
         this.state = {
             searchText: '',
-        }
+        };
     }
 
     seachStart(text) {
@@ -66,6 +66,7 @@ export default class EditText extends Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
     buttonView:{
       flexDirection:"row",

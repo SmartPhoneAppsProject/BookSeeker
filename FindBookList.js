@@ -1,12 +1,22 @@
-import React from 'react';
-import { Button, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import React, { Component } from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator
+} from 'react-native';
+
+import PullRefresh from './pullRefresh'
 import AddListView from './AddListView';
 import EditText from './EditText';
-import PullRefresh from './pullRefresh'
-import Bar from './Bar';
 import reqBook from './reqBook'
 
 export default class FindBookList extends React.Component {
+  static navigationOptions = {
+    title: 'FindBookList',
+  };
+
   constructor(props) {
     super(props);
 
@@ -35,7 +45,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks:books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -59,7 +69,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks:books,
+            resultbooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -69,9 +79,9 @@ export default class FindBookList extends React.Component {
   }
 
 
-    searchBack(books){
-        this.setState({resultbooks:books});
-    }
+  searchBack(books) {
+    this.setState({ resultbooks: books });
+  }
 
   static navigationOptions = {
     title: 'FindBookList',
@@ -82,13 +92,12 @@ export default class FindBookList extends React.Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={styles.indicator}>
+        <View style={{ flex: 1, paddingTop: 20 }}>
           <ActivityIndicator />
         </View>
       );
     }
 
-    console.log(this.state.respStatus);
     if (!this.state.respStatus) {
       return (
         <PullRefresh refresh={this._refresh} />
@@ -99,16 +108,16 @@ export default class FindBookList extends React.Component {
       <View style={styles.container}>
         <Button
           title="新規"
-          onPress={() => navigate('New')}
+          onPress={() => navigate('Entry')}
         />
         <Button
           title="貸出・返却"
-          onPress={() => navigate('Details')}
+          onPress={() => navigate('Detail')}
         />
 
         <EditText
-            books={this.state.books}
-            searchBack={this.searchBack.bind(this)}
+          books={this.state.books}
+          searchBack={this.searchBack.bind(this)}
         />
 
         <AddListView books={this.state.resultbooks} navigation={this.props.navigation} />
@@ -118,16 +127,16 @@ export default class FindBookList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container:
-      {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        backgroundColor: '#fff',
-      },
-    indicator:
-      {
-        flex: 1,
-        paddingTop: 20,
-      }
+  container:
+    {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignItems: 'stretch',
+      backgroundColor: '#fff',
+    },
+  indicator:
+    {
+      flex: 1,
+      paddingTop: 20,
+    }
 });
