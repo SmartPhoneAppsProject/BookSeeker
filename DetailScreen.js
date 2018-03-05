@@ -38,35 +38,44 @@ export default class DetailScreen extends React.Component {
       currentStatus: false
     });
 
-    this.putData(false);
+    this.putData(false)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+
+      })
+      .catch(error => {
+        console.warn(error);
+        this.putData(json)
+          .then(response => response.json())
+          .then(responseJson => {
+            console.log(responseJson);
+          })
+          .catch(error => console.error(error));
+      });
   }
 
-  async putData(status) {
-    const uri = 'https://go-api-staging.herokuapp.com/books';
-    const headers = new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+  putData(status) {
+    return new Promise((resolve, reject) => {
+      const uri = 'https://go-api-staging.herokuapp.com/books';
+      const headers = new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      const json = JSON.stringify({
+        jan_code: this.props.navigation.state.params.item.jan_code,
+        status: status
+      });
+      const options = {
+        method: 'PUT',
+        headers: headers,
+        body: json
+      };
+      const request = new Request(uri, options);
+
+      fetch(request)
+        .then(response => resolve(response));
     });
-    const json = JSON.stringify({
-      jan_code: this.props.navigation.state.params.item.jan_code,
-      status: status
-    });
-    const options = {
-      method: 'PUT',
-      headers: headers,
-      body: json
-    };
-
-    const request = new Request(uri, options);
-
-    try {
-      console.log('try put');
-
-      const response = await fetch(request);
-      console.log(response);
-    } catch (error) {
-      console.log('try put failed')
-    }
   }
 
   render() {

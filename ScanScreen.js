@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Camera, BarCodeScanner, Permissions } from 'expo';
+import {
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import {
+  Camera,
+  BarCodeScanner,
+  Permissions
+} from 'expo';
+import { NavigationActions } from 'react-navigation';
 
 export default class ScanScreen extends React.Component {
   static navigationOptions = {
@@ -14,6 +23,7 @@ export default class ScanScreen extends React.Component {
       permissionsGranted: false,
       status: 'reading',
     };
+    this.props.navigation.state.key = 'Home';
   }
 
   async componentWillMount() {
@@ -31,7 +41,7 @@ export default class ScanScreen extends React.Component {
             status: 'ok'
           });
           setTimeout(() => {
-            this.bundleData(data);
+            this.registerBook(data);
           }, 1000);
         }
       } else { //バーコードであるがISBNでないとき
@@ -42,8 +52,17 @@ export default class ScanScreen extends React.Component {
     }
   }
 
-  bundleData(janCode) {
+  registerBook(janCode) {
     const { params } = this.props.navigation.state;
+    // https://github.com/react-navigation/react-navigation/issues/1448
+    const actions = [NavigationActions.navigate({ routeName: 'Home' })]
+
+    const resetAction = NavigationActions.reset({
+      index: actions.length - 1,
+      actions
+    });
+
+    this.props.navigation.dispatch(resetAction)
 
     const json = JSON.stringify({
       title: params.title,
@@ -52,39 +71,42 @@ export default class ScanScreen extends React.Component {
       jan_code: janCode
     });
 
-    console.log('object is parsed to JSON');
+    this.postData(json)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+        // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
 
-    // const tags = {
-    //   tags: params.tags,
-    // };
-    // console.log(tags);
-
-    this.postData(json);
+      })
+      .catch(error => {
+        console.warn(error);
+        this.postData(json)
+          .then(response => response.json())
+          .then(responseJson => {
+            console.log(responseJson);
+            // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
+          })
+          .catch(error => console.error(error));
+      });
   }
 
-  async postData(json) {
-    const uri = 'https://go-api-staging.herokuapp.com/books';
-    const headers = new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+  postData(json) {
+    return new Promise((resolve, reject) => {
+      const uri = 'https://go-api-staging.herokuapp.com/books';
+      const headers = new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      });
+      const options = {
+        method: 'POST',
+        headers: headers,
+        body: json,
+      };
+      const request = new Request(uri, options);
+
+      fetch(request)
+        .then(response => resolve(response));
     });
-    const options = {
-      method: 'POST',
-      headers: headers,
-      body: json,
-    };
-    const request = new Request(uri, options);
-
-    try {
-      console.log('try post');
-
-      const response = await fetch(request);
-      // const responseJson = await response.json();
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   renderNoPermissions() {
