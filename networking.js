@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const reqBook = uri => {
+export const getData = uri => {
   return new Promise((resolve, reject) => {
     fetch(uri)
       .then((response) => {

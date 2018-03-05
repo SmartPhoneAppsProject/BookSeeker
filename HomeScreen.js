@@ -9,7 +9,7 @@ import {
 
 import ListView from './ListView';
 import PullRefresh from './PullRefresh';
-import { reqBook } from './networking';
+import { getData } from './networking';
 import LogoEntry from './LogoEntry';
 import SearchScreen from './SearchScreen';
 
@@ -41,7 +41,7 @@ export default class HomeScreen extends Component {
   componentDidMount() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    reqBook(bookSeeker)
+    getData(bookSeeker)
       .then((books) => {
         if (!books) {
           this.setState({
@@ -63,7 +63,7 @@ export default class HomeScreen extends Component {
   _refresh() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    reqBook(bookSeeker)
+    getData(bookSeeker)
       .then((books) => {
         if (!books) {
           this.setState({
