@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import ListView from './ListView';
-import PullRefresh from './pullRefresh';
-import reqBook from './reqBook';
+import PullRefresh from './PullRefresh';
+import { reqBook } from './networking';
 import LogoEntry from './LogoEntry';
 import SearchScreen from './SearchScreen';
 
@@ -30,7 +30,6 @@ export default class HomeScreen extends Component {
     this.state = {
       books: [],
       tmpBooks: [],
-      resultbooks: [],
       isLoading: true,
       respStatus: true,
     };
@@ -44,7 +43,6 @@ export default class HomeScreen extends Component {
 
     reqBook(bookSeeker)
       .then((books) => {
-        console.log(books);
         if (!books) {
           this.setState({
             respStatus: false,
@@ -67,7 +65,6 @@ export default class HomeScreen extends Component {
 
     reqBook(bookSeeker)
       .then((books) => {
-        console.log(books);
         if (!books) {
           this.setState({
             respStatus: false,
