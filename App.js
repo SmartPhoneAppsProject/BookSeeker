@@ -7,15 +7,16 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import FindBookList from './FindBookList'
+import HomeScreen from './HomeScreen'
+import SearchScreen from './SearchScreen';
 import DetailScreen from './DetailScreen';
 import EntryScreen from './EntryScreen';
 import ScanScreen from './ScanScreen';
 
 const RootStack = StackNavigator(
   {
-    List: {
-      screen: FindBookList,
+    Home: {
+      screen: HomeScreen,
     },
     Entry: {
       screen: EntryScreen,
@@ -26,12 +27,14 @@ const RootStack = StackNavigator(
     Detail: {
       screen: DetailScreen,
     },
+    Search: {
+      screen: SearchScreen,
+    },
   },
   {
-    initialRouteName: 'List',
+    initialRouteName: 'Home',
     //header config
     navigationOptions: {
-      title: 'DetailScreen',
       headerStyle: {
         backgroundColor: '#f4511e',
       },

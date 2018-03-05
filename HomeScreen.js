@@ -7,28 +7,36 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import PullRefresh from './pullRefresh'
-import AddListView from './AddListView';
-import EditText from './EditText';
-import reqBook from './reqBook'
+import ListView from './ListView';
+import PullRefresh from './pullRefresh';
+import reqBook from './reqBook';
+import LogoEntry from './LogoEntry';
+import SearchScreen from './SearchScreen';
 
-export default class FindBookList extends React.Component {
-  static navigationOptions = {
-    title: 'FindBookList',
+export default class HomeScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight:
+        <View style={styles.navigationContainer}>
+          <LogoEntry navigation={navigation} />
+        </View>
+    };
   };
 
   constructor(props) {
     super(props);
 
-
     this.state = {
       books: [],
+      tmpBooks: [],
       resultbooks: [],
       isLoading: true,
       respStatus: true,
     };
 
     this._refresh = this._refresh.bind(this);
+    this.setBooksOnList = this.setBooksOnList.bind(this)
   }
 
   componentDidMount() {
@@ -45,11 +53,10 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks: books,
+            tmpBooks: books,
             respStatus: true,
-            isLoading: false
+            isLoading: false,
           });
-
         }
       })
       .catch((error) => console.error(error));
@@ -69,7 +76,7 @@ export default class FindBookList extends React.Component {
         } else {
           this.setState({
             books,
-            resultbooks: books,
+            tmpBooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -78,14 +85,9 @@ export default class FindBookList extends React.Component {
       .catch((error) => console.error(error));
   }
 
-
-  searchBack(books) {
-    this.setState({ resultbooks: books });
+  setBooksOnList(books) {
+    this.setState({ tmpBooks: books });
   }
-
-  static navigationOptions = {
-    title: 'FindBookList',
-  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -106,37 +108,29 @@ export default class FindBookList extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Button
-          title="新規"
-          onPress={() => navigate('Entry')}
-        />
-        <Button
-          title="貸出・返却"
-          onPress={() => navigate('Detail')}
-        />
-
-        <EditText
+        <SearchScreen
           books={this.state.books}
-          searchBack={this.searchBack.bind(this)}
-        />
+          tmpBooks={this.state.tmpBooks}
+          setBooksOnList={this.setBooksOnList} />
 
-        <AddListView books={this.state.resultbooks} navigation={this.props.navigation} />
+        <ListView books={this.state.tmpBooks} navigation={this.props.navigation} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container:
-    {
-      flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'stretch',
-      backgroundColor: '#fff',
-    },
-  indicator:
-    {
-      flex: 1,
-      paddingTop: 20,
-    }
+  navigationContainer: {
+    flexDirection: 'row',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    backgroundColor: '#fff',
+  },
+  indicator: {
+    flex: 1,
+    paddingTop: 20,
+  }
 });
