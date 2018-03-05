@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import ListView from './ListView';
-import PullRefresh from './pullRefresh';
+import PullRefresh from './PullRefresh';
 import reqBook from './reqBook';
 import LogoEntry from './LogoEntry';
 import SearchScreen from './SearchScreen';
