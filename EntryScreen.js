@@ -104,7 +104,7 @@ export default class EntryScreen extends Component {
     );
   }
 
-  renderTitleContainer() {
+  renderTitleContainer() {{id: this.state.id, text: this.state.text})
     return (
       <View style={styles.childContainer}>
         <Text style={styles.tag}>タイトル</Text>
@@ -114,7 +114,7 @@ export default class EntryScreen extends Component {
           onSubmitEditing={() => this.tagInput.focus()}
           returnKeyType='next'
           placeholder='title'
-          maxLenghth={100} />
+          maxLength={100} />
       </View>
     );
   }

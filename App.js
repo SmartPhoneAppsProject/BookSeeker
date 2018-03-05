@@ -36,12 +36,16 @@ const RootStack = StackNavigator(
     //header config
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: '#c0c0c0',
+        shadowColor: 'transparent',
+        elevation: 0,       //remove shadow on Android
+        shadowOpacity: 0,   //remove shadow on iOS
+        shadowOffset: {
+          height: 0,
+        },
+        shadowRadius: 0,
       },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+      headerTintColor: '#ffffff',
     },
   }
 );

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, TouchableOpacity, View, Text, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { List, ListItem } from 'react-native-elements';
+import { MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 
 export default class ListView extends Component {
 
@@ -11,31 +13,40 @@ export default class ListView extends Component {
     };
   }
 
+  _renderItem = ({ item }) => {
+    const status = item.status
+      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
+      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />
+    const tags = item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>);
+    return (
+      <ListItem
+        onPress={() => navigate('Detail', { item })}
+        roundAvatar
+        avatar={{ uri: item.image }}
+        title={item.title}
+        subtitle={
+          <View style={styles.tagsContainer}>
+            {tags}
+          </View>
+        }
+        subtitleNumberOfLines={1}
+        rightTitle={status}
+      />
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <FlatList style={styles.container}
-        data={this.props.books}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity style={styles.itemContainer}
-              onPress={() => navigate('Detail', { item })} >
-              <Image style={styles.image}
-                source={{ uri: item.image }} />
-              <View style={styles.item}>
-                {item.status
-                  ? <Text style={styles.statusOk}>貸し出しOK</Text>
-                  : <Text style={styles.statusNo}>貸し出し中</Text>
-                }
-                <Text style={styles.title}>{item.title}</Text>
-                <View style={styles.tagsContainer}>
-                  {item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
-                </View>
-              </View>
-            </TouchableOpacity >
-          );
-        }}
-      />
+      <List style={styles.container}>
+        <FlatList
+          data={this.props.books}
+          // keyExtractor={item => item.id}
+          // ListHeaderComponent={this.renderHeader}
+          // extraData={this.state.searchResult.contacts}
+          renderItem={this._renderItem}
+        />
+      </List >
     );
   }
 }
@@ -88,12 +99,13 @@ const styles = StyleSheet.create({
   tagsContainer: {
     flex: 1,
     flexDirection: 'row',
+    marginTop: 5,
   },
   tag: {
     marginLeft: 5,
     backgroundColor: '#f5f5f5',
     borderColor: '#f5f5f5',
-    borderRadius: 4,
+    borderRadius: 3,
     borderWidth: 1,
     overflow: 'hidden',
   },

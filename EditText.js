@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput, View, Button } from 'react-native';
+import { StyleSheet,
+  TextInput, View, Button } from 'react-native';
 
 export default class EditText extends Component {
 
@@ -10,7 +11,7 @@ export default class EditText extends Component {
         };
     }
 
-    seachStart(text) {
+    searchStart(text) {
         const searchtext=text.split(" ")
         let newbooks = [];
         let data = this.props.books;
@@ -55,7 +56,7 @@ export default class EditText extends Component {
                     value={this.state.searchText}
                 />
                 <View style={styles.buttonView}>
-                    <Button style={styles.seachButton} onPress={() => this.seachStart(this.state.searchText)}
+                    <Button style={styles.seachButton} onPress={() => this.searchStart(this.state.searchText)}
                         title="検索"
                     />
                     <Button onPress={()=>this.clickCancel()}
