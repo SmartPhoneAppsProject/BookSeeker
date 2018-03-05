@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, TouchableOpacity, View, Text, Image, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  View,
+  Text,
+  Image,
+  Dimensions
+} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
-import { MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
+import {
+  MaterialCommunityIcons,
+  Octicons
+} from '@expo/vector-icons';
 
 export default class ListView extends Component {
 
@@ -14,6 +25,7 @@ export default class ListView extends Component {
   }
 
   _renderItem = ({ item }) => {
+    const { navigate } = this.props.navigation;
     const status = item.status
       ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
       : <Octicons name='circle-slash' size={25} color='#cd5c5c' />
@@ -36,7 +48,6 @@ export default class ListView extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <List style={styles.container}>
         <FlatList

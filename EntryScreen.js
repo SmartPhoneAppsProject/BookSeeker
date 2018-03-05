@@ -104,7 +104,7 @@ export default class EntryScreen extends Component {
     );
   }
 
-  renderTitleContainer() {{id: this.state.id, text: this.state.text})
+  renderTitleContainer() {
     return (
       <View style={styles.childContainer}>
         <Text style={styles.tag}>タイトル</Text>
