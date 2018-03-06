@@ -27,9 +27,16 @@ export default class ListView extends Component {
     };
   }
 
-  renderTags(tags) {
-    return tags.map(tag => <View key={tag.id}><Text><IconRuby size={14} />{tag.name}</Text></View>);
+  renderTags = (tags) => {
+    return tags.map(tag =>
+      <View
+        style={styles.subtitleView}
+        key={tag.id}>
+        <Text style={styles.ratingText}><IconRuby size={14} />{tag.name}</Text>
+      </View>
+    );
   }
+
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
@@ -78,50 +85,13 @@ const styles = StyleSheet.create({
     borderColor: '#CCC',
     borderWidth: 1,
   },
-  image: {
-    width: imageSide,
-    height: imageSide,
-  },
-  item: {
-    width: width - imageSide,
-    height: imageSide,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-  },
-  statusOk: {
-    width: 90,
-    fontSize: 15,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: 'green',
-    overflow: 'hidden',
-    textAlign: 'center',
-  },
-  statusNo: {
-    width: 90,
-    fontSize: 15,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: 'red',
-    overflow: 'hidden',
-    textAlign: 'center',
-  },
-  title: {
-    flex: 2,
-    fontSize: 30,
-    textAlign: 'center',
-  },
-  tagsContainer: {
-    flex: 1,
+  subtitleView: {
     flexDirection: 'row',
-    marginTop: 5,
+    paddingLeft: 10,
+    paddingTop: 5,
   },
-  tag: {
-    marginLeft: 5,
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderRadius: 3,
-    borderWidth: 1,
-    overflow: 'hidden',
+  ratingText: {
+    paddingLeft: 10,
+    color: '#808080',
   },
 });
