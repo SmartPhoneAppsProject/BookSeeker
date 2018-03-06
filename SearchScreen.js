@@ -3,7 +3,8 @@ import {
   StyleSheet,
   TextInput,
   View,
-  Button
+  Button,
+  Keyboard,
 } from 'react-native';
 
 import ListView from './ListView';
@@ -23,7 +24,7 @@ export default class SearchScreen extends Component {
       searching: true,
       searchText: text,
     });
-    const results = await this.search();
+    const results = await this.search(text);
     this.props.setBooks(results);
   }
 
@@ -35,8 +36,8 @@ export default class SearchScreen extends Component {
     this.props.resetBooks();
   }
 
-  search = async () => {
-    const queries = this.state.searchText.split(' ');
+  search = async (text) => {
+    const queries = text.split(' ');
     let books = this.state.books;
     let results = [];
     let tmpResults = [];
@@ -82,9 +83,12 @@ export default class SearchScreen extends Component {
     return (
       <View style={styles.container}>
         <TextInput style={styles.input}
-          onChangeText={(text) => this.startSearch(text)}
+          onChangeText={(text) => {console.log(text); this.startSearch(text)}}
           value={this.state.searchText}
-          placeholder='検索' />
+          returnKeyType='done'
+          placeholder='検索'
+          clearButtonMode='while-editing'
+          />
         {cancelButton}
       </View >
     );
