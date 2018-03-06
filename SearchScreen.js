@@ -15,17 +15,16 @@ export default class SearchScreen extends Component {
       searching: false,
       searchText: '',
       books: this.props.books,
-      staticBooks: this.props.books,
     };
   }
 
-  startSearch = (text) => {
+  startSearch = async (text) => {
     this.setState({
       searching: true,
       searchText: text,
     });
-    this.search();
-    // this.props.setBooks(this.state.books);
+    const results = await this.search();
+    this.props.setBooks(results);
   }
 
   cancelSearch = () => {
@@ -36,9 +35,9 @@ export default class SearchScreen extends Component {
     this.props.resetBooks();
   }
 
-  search = () => {
+  search = async () => {
     const queries = this.state.searchText.split(' ');
-    let books = this.state.staticBooks;
+    let books = this.state.books;
     let results = [];
     let tmpResults = [];
 
@@ -64,8 +63,7 @@ export default class SearchScreen extends Component {
         }
       }
     }
-    console.log(results);
-    this.props.setBooks(results);
+    return (results);
   }
 
   renderCancelButton = () => {
