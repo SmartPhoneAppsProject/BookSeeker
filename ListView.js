@@ -15,8 +15,11 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-export default class ListView extends Component {
+import {
+  IconRuby
+} from './icons';
 
+export default class ListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,17 +27,18 @@ export default class ListView extends Component {
     };
   }
 
+  renderTags(tags) {
+    return tags.map(tag => <View key={tag.id}><Text><IconRuby size={14} />{tag.name}</Text></View>);
+  }
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
       ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
-      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />
-    const tags = item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>);
+      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
+    const tags = this.renderTags(item.tags);
     return (
       <ListItem
         onPress={() => navigate('Detail', { item })}
-        roundAvatar
-        avatar={{ uri: item.image }}
         title={item.title}
         subtitle={
           <View style={styles.tagsContainer}>
@@ -42,7 +46,7 @@ export default class ListView extends Component {
           </View>
         }
         subtitleNumberOfLines={1}
-        rightTitle={status}
+        badge={{ element: status }}
       />
     );
   }

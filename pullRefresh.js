@@ -13,7 +13,7 @@ export default class PullRefresh extends React.Component {
           </View>
         </PTRView>
       </View>
-    )
+    );
   }
 }
 
