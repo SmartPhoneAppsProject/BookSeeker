@@ -15,6 +15,7 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
+import SearchScreen from './SearchScreen';
 import {
   IconRuby
 } from './icons';
@@ -23,15 +24,25 @@ export default class ListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      refreshing: false,
+      books: this.props.books
     };
+  }
+
+  setBooks = (books) => {
+    this.setState({ books: books });
+  }
+
+  resetBooks = () => {
+    this.setState({ books: this.props.books });
   }
 
   renderTags = (tags) => {
     return tags.map(tag =>
       <View
         style={styles.subtitleView}
-        key={tag.id}>
+        key={tag.id}
+      >
         <Text style={styles.ratingText}><IconRuby size={14} />{tag.name}</Text>
       </View>
     );
@@ -43,8 +54,10 @@ export default class ListView extends Component {
       ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
       : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
     const tags = this.renderTags(item.tags);
+
     return (
       <ListItem
+        chevronColor='#c0c0c0'
         onPress={() => navigate('Detail', { item })}
         title={item.title}
         subtitle={
@@ -60,12 +73,19 @@ export default class ListView extends Component {
 
   render() {
     return (
-      <List style={styles.container}>
+      <List
+        containerStyle={{ marginTop: 0, padding: 0 }}
+      >
         <FlatList
-          data={this.props.books}
-          // keyExtractor={item => item.id}
-          // ListHeaderComponent={this.renderHeader}
-          // extraData={this.state.searchResult.contacts}
+          ListHeaderComponent={
+            <SearchScreen
+              books={this.state.books}
+              setBooks={this.setBooks}
+              resetBooks={this.resetBooks}
+            />
+          }
+          data={this.state.books}
+          extraData={this.state.books}
           renderItem={this._renderItem}
         />
       </List >
@@ -73,17 +93,9 @@ export default class ListView extends Component {
   }
 }
 
-const { width } = Dimensions.get('window');
-const imageSide = 70;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    borderColor: '#CCC',
-    borderWidth: 1,
   },
   subtitleView: {
     flexDirection: 'row',
