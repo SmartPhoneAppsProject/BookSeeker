@@ -11,11 +11,16 @@ import ListView from './ListView';
 import PullRefresh from './PullRefresh';
 import { getData } from './networking';
 import LogoEntry from './LogoEntry';
+import LogoSAP from './LogoSAP';
 import SearchScreen from './SearchScreen';
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
+      headerLeft:
+        <View style={styles.navigationContainer}>
+          <LogoSAP />
+        </View>,
       title: 'Home',
       headerRight:
         <View style={styles.navigationContainer}>
