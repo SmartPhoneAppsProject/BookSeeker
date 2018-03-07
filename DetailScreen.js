@@ -5,8 +5,13 @@ import {
   View,
   ScrollView,
   Image,
-  Button,
+  Dimensions,
+  TouchableHighlight,
 } from 'react-native';
+import {
+  Button,
+} from 'react-native-elements';
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome, Octicons } from '@expo/vector-icons';
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = {
@@ -17,7 +22,7 @@ export default class DetailScreen extends React.Component {
     super(props);
 
     this.state = {
-      currentStatus: this.props.navigation.state.params.item.status
+      currentStatus: this.props.navigation.state.params.item.status,
     };
 
     this._lendBook = this._lendBook.bind(this);
@@ -73,42 +78,97 @@ export default class DetailScreen extends React.Component {
     const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
+
         <View style={[styles.base, styles.imgContainer]}>
           <Image style={styles.img}
-            source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
-          <View style={[styles.base, styles.tagContainer]}>
-            <View style={styles.tagsContainer}>
-              {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
+            source={{ uri: params.item.image }} />
+        </View>
+
+        <View style={styles.mainContainer}>
+
+          <View style={styles.head}>
+            <View style={[styles.base, styles.titleContainer]}>
+              <Text style={styles.title}>{params.item.title}</Text>
+            </View>
+            <View style={[styles.base, styles.infoContainer]}>
+              <Text style={styles.infoHead} >出版日：{params.item.published_at}</Text>
             </View>
           </View>
-        </View>
-        <View style={[styles.base, styles.statusContainer]}>
-          {this.state.currentStatus
-            ? <Text style={[styles.status, styles.statusNo]}>貸し出し中</Text>
-            : <Text style={[styles.status, styles.statusOk]}>貸し出OK</Text>
-          }
-        </View>
-        <View style={[styles.base, styles.titleContainer]}>
-          <Text style={styles.title}>{params.item.title}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoHead}>詳細情報</Text>
-          <ScrollView style={styles.infoBody}>
-            <Text>JANコード：{params.item.jan_code}</Text>
-            <Text>出版日：{params.item.published_at}</Text>
-            <Text>アプリへの追加日：{params.item.created_at}</Text>
-          </ScrollView>
-        </View>
-        <View style={[styles.base, styles.buttonContainer]}>
-          {this.state.currentStatus
-            ? <Button title="返却" onPress={this._returnBook} />
-            : <Button title="貸出" onPress={this._lendBook} />
-          }
+
+          <View style={[styles.base, styles.tagContainer]}>
+            <ScrollView horizontal={true} style={styles.tagsContainer}>
+              {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
+            </ScrollView>
+          </View>
+
+          <View style={styles.statusContainer}>
+            <View style={[styles.base, styles.status]}>
+              {this.state.currentStatus
+                ? <Octicons
+                  name='circle-slash'
+                  size={40}
+                  color='red'
+                />
+                : <MaterialCommunityIcons
+                  name='check-circle-outline'
+                  size={40}
+                  color='green'
+                />
+              }
+            </View>
+
+            <View style={[styles.base, styles.buttonContainer]}>
+              {this.state.currentStatus
+                ? <Button
+                  icon={
+                    <MaterialCommunityIcons
+                      name='keyboard-return'
+                      size={30}
+                      color='white'
+                    />
+                  }
+                  text="返却"
+                  textStyle={{ fontWeight: "700" }}
+                  buttonStyle={{
+                    width: 100,
+                    height: 60,
+                    backgroundColor: 'red',
+                  }}
+                  iconContainerStyle={{
+                    marginRight: 10,
+                  }}
+                  onPress={this._returnBook}
+                />
+                : <Button
+                  icon={
+                    <MaterialCommunityIcons
+                      name='book-open-page-variant'
+                      size={30}
+                      color='white'
+                    />
+                  }
+                  text="貸出"
+                  textStyle={{ fontWeight: "700" }}
+                  buttonStyle={{
+                    width: 100,
+                    height: 60,
+                    backgroundColor: 'green'
+                  }}
+                  iconContainerStyle={{
+                    marginRight: 10,
+                  }}
+                  onPress={this._lendBook}
+                />
+              }
+            </View>
+          </View>
         </View>
       </View>
     );
   }
 }
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container:
@@ -124,19 +184,41 @@ const styles = StyleSheet.create({
   imgContainer:
     {
       flex: 1,
-      flexDirection: 'row',
-      marginTop: 20,
     },
   img:
     {
-      height: 90,
-      width: 90,
+      height: 300,
+      width: width,
+    },
+  head:
+    {
+      flex: 1,
+      flexDirection: 'row',
+    },
+  titleContainer:
+    {
+      flex: 1,
+    },
+  title:
+    {
+      fontSize: 30,
+    },
+  infoContainer:
+    {
+      flex: 1,
+    },
+  infoHead:
+    {
+      fontSize: 20,
+    },
+  infoBody:
+    {
+      marginLeft: 20,
     },
   tagContainer:
     {
-      height: 40,
-      marginLeft: 40,
-      marginTop: 30,
+      flex: 1,
+      margin: 10,
     },
   tag: {
     margin: 3,
@@ -150,64 +232,21 @@ const styles = StyleSheet.create({
     {
       flex: 1,
       flexDirection: 'row',
-      marginTop: 20,
     },
   status:
     {
-      borderWidth: 1,
-      borderColor: '#999',
-      borderRadius: 5,
-      marginLeft: 40,
-      marginRight: 30,
-      paddingTop: 5,
-      width: 100,
-      height: 30,
-      backgroundColor: '#ccc',
-      textAlign: 'center',
-      overflow: 'hidden',
-    },
-  statusOk:
-    {
-      color: '#008000',
-      borderColor: '#008000'
-    },
-  statusNo:
-    {
-      color: '#ff0000',
-      borderColor: '#ff0000'
-    },
-  titleContainer:
-    {
       flex: 1,
-    },
-  title:
-    {
-      fontSize: 20,
-    },
-  infoContainer:
-    {
-      flex: 3,
-      marginTop: 5,
-      marginLeft: 25,
-      marginRight: 25,
-      marginBottom: 10,
-    },
-  infoHead:
-    {
-      fontSize: 18,
-      marginTop: 5,
-      marginLeft: 5,
-      paddingTop: 3,
-      paddingLeft: 5,
-      height: 30,
-      width: 200,
-    },
-  infoBody:
-    {
-      marginLeft: 20,
     },
   buttonContainer:
     {
-      flex: 2,
+      flex: 1,
     },
+  button:
+    {
+      width: 70,
+    },
+  mainContainer:
+    {
+      flex: 1
+    }
 });
