@@ -6,12 +6,18 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  TouchableHighlight,
 } from 'react-native';
+
 import {
   Button,
 } from 'react-native-elements';
-import { MaterialCommunityIcons, MaterialIcons, FontAwesome, Octicons } from '@expo/vector-icons';
+
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome,
+  Octicons
+} from '@expo/vector-icons';
 
 import { putData } from './networking';
 
@@ -24,7 +30,7 @@ export default class DetailScreen extends React.Component {
     super(props);
 
     this.state = {
-      currentStatus: this.props.navigation.state.params.item.status,
+      currentStatus: this.props.navigation.state.params.item.status
     };
 
     this._lendBook = this._lendBook.bind(this);
@@ -42,7 +48,7 @@ export default class DetailScreen extends React.Component {
     });
 
     this.changeBookStatus(json);
-  }
+  };
 
   _returnBook = () => {
     this.setState({
@@ -55,7 +61,7 @@ export default class DetailScreen extends React.Component {
     });
 
     this.changeBookStatus(json);
-  }
+  };
 
   changeBookStatus = (json) => {
     putData(json)
@@ -73,7 +79,7 @@ export default class DetailScreen extends React.Component {
           })
           .catch(error => console.error(error));
       });
-  }
+  };
 
   render() {
     const { params } = this.props.navigation.state;
@@ -86,20 +92,15 @@ export default class DetailScreen extends React.Component {
         </View>
 
         <View style={styles.mainContainer}>
-
-          <View style={styles.head}>
-            <View style={[styles.base, styles.titleContainer]}>
-              <Text style={styles.title}>{params.item.title}</Text>
-            </View>
-            <View style={[styles.base, styles.infoContainer]}>
-              <Text style={styles.infoHead} >出版日：{params.item.published_at}</Text>
-            </View>
-          </View>
-
           <View style={[styles.base, styles.tagContainer]}>
             <ScrollView horizontal={true} style={styles.tagsContainer}>
               {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
             </ScrollView>
+          </View>
+
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{params.item.title}</Text>
+            <Text style={styles.date} >出版日：{params.item.published_at}</Text>
           </View>
 
           <View style={styles.statusContainer}>
@@ -108,12 +109,12 @@ export default class DetailScreen extends React.Component {
                 ? <Octicons
                   name='circle-slash'
                   size={40}
-                  color='red'
+                  color='#cd5c5c'
                 />
                 : <MaterialCommunityIcons
                   name='check-circle-outline'
                   size={40}
-                  color='green'
+                  color='#2e8b57'
                 />
               }
             </View>
@@ -133,7 +134,7 @@ export default class DetailScreen extends React.Component {
                   buttonStyle={{
                     width: 100,
                     height: 60,
-                    backgroundColor: 'red',
+                    backgroundColor: '#cd5c5c',
                   }}
                   iconContainerStyle={{
                     marginRight: 10,
@@ -153,7 +154,7 @@ export default class DetailScreen extends React.Component {
                   buttonStyle={{
                     width: 100,
                     height: 60,
-                    backgroundColor: 'green'
+                    backgroundColor: '#2e8b57'
                   }}
                   iconContainerStyle={{
                     marginRight: 10,
@@ -191,34 +192,33 @@ const styles = StyleSheet.create({
       height: 300,
       width: width,
     },
-  head:
+  mainContainer:
     {
-      flex: 1,
-      flexDirection: 'row',
+      flex: 1
     },
   titleContainer:
     {
       flex: 1,
+      justifyContent: 'center',
+      marginLeft: 50,
     },
   title:
     {
-      fontSize: 30,
-    },
-  infoContainer:
-    {
-      flex: 1,
-    },
-  infoHead:
-    {
       fontSize: 20,
+      marginBottom: 10,
     },
-  infoBody:
+  dateContainer:
     {
-      marginLeft: 20,
+      flex: 0.4,
+    },
+  date:
+    {
+      fontSize: 14,
+      color: '#6E6E6E',
     },
   tagContainer:
     {
-      flex: 1,
+      flex: 0.5,
       margin: 10,
     },
   tag: {
@@ -228,11 +228,15 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     overflow: 'hidden',
+    paddingRight: 8,
+    paddingLeft: 8,
+    paddingTop: 13,
   },
   statusContainer:
     {
       flex: 1,
       flexDirection: 'row',
+      marginBottom: 15,
     },
   status:
     {
@@ -246,8 +250,4 @@ const styles = StyleSheet.create({
     {
       width: 70,
     },
-  mainContainer:
-    {
-      flex: 1
-    }
 });
