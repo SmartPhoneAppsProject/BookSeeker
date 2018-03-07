@@ -85,24 +85,20 @@ export default class DetailScreen extends React.Component {
     const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
-
         <View style={[styles.base, styles.imgContainer]}>
           <Image style={styles.img}
             source={{ uri: params.item.image }} />
         </View>
-
         <View style={styles.mainContainer}>
           <View style={[styles.base, styles.tagContainer]}>
             <ScrollView horizontal={true} style={styles.tagsContainer}>
               {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
             </ScrollView>
           </View>
-
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{params.item.title}</Text>
             <Text style={styles.date} >出版日：{params.item.published_at}</Text>
           </View>
-
           <View style={styles.statusContainer}>
             <View style={[styles.base, styles.status]}>
               {this.state.currentStatus
@@ -118,7 +114,6 @@ export default class DetailScreen extends React.Component {
                 />
               }
             </View>
-
             <View style={[styles.base, styles.buttonContainer]}>
               {this.state.currentStatus
                 ? <Button
@@ -196,6 +191,23 @@ const styles = StyleSheet.create({
     {
       flex: 1
     },
+  tagContainer:
+    {
+      flex: 0.5,
+      margin: 10,
+    },
+  tag:
+    {
+      margin: 3,
+      backgroundColor: '#f5f5f5',
+      borderColor: '#f5f5f5',
+      borderRadius: 4,
+      borderWidth: 1,
+      overflow: 'hidden',
+      paddingRight: 8,
+      paddingLeft: 8,
+      paddingTop: 13,
+    },
   titleContainer:
     {
       flex: 1,
@@ -216,22 +228,6 @@ const styles = StyleSheet.create({
       fontSize: 14,
       color: '#6E6E6E',
     },
-  tagContainer:
-    {
-      flex: 0.5,
-      margin: 10,
-    },
-  tag: {
-    margin: 3,
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderRadius: 4,
-    borderWidth: 1,
-    overflow: 'hidden',
-    paddingRight: 8,
-    paddingLeft: 8,
-    paddingTop: 13,
-  },
   statusContainer:
     {
       flex: 1,
