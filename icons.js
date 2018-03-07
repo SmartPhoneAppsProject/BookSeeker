@@ -10,7 +10,7 @@ export const IconRuby = ({size}) => {
   return <Octicons name='ruby' size={size} color='#808080' />;
 };
 
-export const IconAndrggoid = ({size}) => {
+export const IconAndroid = ({size}) => {
   return <MaterialCommunityIcons name='android' size={size} color='#808080' />;
 };
 

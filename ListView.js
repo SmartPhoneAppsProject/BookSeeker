@@ -9,15 +9,19 @@ import {
   Dimensions
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { List, ListItem } from 'react-native-elements';
+import {
+  List,
+  ListItem
+} from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Octicons
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
+import reqBook from './reqBook';
 import {
-  IconRuby
+  IconAndroid
 } from './icons';
 
 export default class ListView extends Component {
@@ -43,9 +47,26 @@ export default class ListView extends Component {
         style={styles.subtitleView}
         key={tag.id}
       >
-        <Text style={styles.ratingText}><IconRuby size={14} />{tag.name}</Text>
+        <Text style={styles.ratingText}><IconAndroid size={14} />{tag.name}</Text>
       </View>
     );
+  }
+
+  _onRefresh = () => {
+    this.setState({ onRefresh: true });
+
+    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
+
+    reqBook(bookSeeker)
+      .then((books) => {
+        console.log(books);
+        if (!books) {
+          this.setState({ books: '' });
+        } else {
+          this.setState({ books });
+        }
+      })
+      .catch((error) => console.error(error));
   }
 
   _renderItem = ({ item }) => {
@@ -87,6 +108,8 @@ export default class ListView extends Component {
           data={this.state.books}
           extraData={this.state.books}
           renderItem={this._renderItem}
+          onRefresh={this._onRefresh}
+          refreshing={this.state.refreshing}
         />
       </List >
     );

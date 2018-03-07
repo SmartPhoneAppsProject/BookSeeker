@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
-  Button,
   Keyboard,
 } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import {
+  Input,
+  Button,
+  SearchBar,
+} from 'react-native-elements';
 
 import ListView from './ListView';
 
@@ -69,9 +73,17 @@ export default class SearchScreen extends Component {
 
   renderCancelButton = () => {
     const cancelButton = this.state.searching
-      ? <Button style={styles.button}
-        onPress={this.cancelSearch}
-        title='キャンセル' />
+      ? <View style={styles.buttonContainer}>
+        <Button
+        titleStyle={styles.buttonText}
+          textStyle={styles.buttonText}
+          buttonStyle={styles.button}
+          onPress={this.cancelSearch}
+          text='キャンセル'
+          fontSize={10}
+          color='#f5f5f5'
+        />
+      </View>
       : <View />
 
     return cancelButton;
@@ -82,13 +94,18 @@ export default class SearchScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input}
-          onChangeText={(text) => {console.log(text); this.startSearch(text)}}
+        <Input style={styles.input}
+          containerStyle={styles.containerStyle}
+          onChangeText={(text) => { console.log(text); this.startSearch(text) }}
           value={this.state.searchText}
           returnKeyType='done'
           placeholder='検索'
+          placeholderTextColor='#f5f5f5'
           clearButtonMode='while-editing'
-          />
+          color='#ffffff'
+          leftIcon={<MaterialIcons name='search' size={13} color='#ffffff' />}
+          leftIconContainerStyle={styles.icon}
+        />
         {cancelButton}
       </View >
     );
@@ -99,13 +116,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.05,
     flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#cbd2d9',
+    borderBottomColor: '#c0c0c0',
+    backgroundColor: '#c0c0c0',
+    padding: 3,
+  },
+  icon: {
+    margin: 3,
   },
   input: {
     flex: 8,
   },
-  button: {
+  containerStyle: {
+    height: 25,
+    marginHorizontal: 5,
+    backgroundColor: '#d3d3d3',
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+    borderRadius: 20,
+  },
+  buttonContainer: {
     flex: 2,
+  },
+  buttonText: {
+    fontWeight: '700',
+    fontSize: 13,
+    padding: 1,
+  },
+  button: {
+    height: 25,
+    backgroundColor: "#c0c0c0",
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 5
   },
 });
