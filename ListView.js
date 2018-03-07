@@ -19,9 +19,11 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
-import reqBook from './reqBook';
+import { getData } from './networking';
 import {
-  IconAndroid
+  IconAndroid,
+  icon,
+  showTag,
 } from './icons';
 
 export default class ListView extends Component {
@@ -47,7 +49,11 @@ export default class ListView extends Component {
         style={styles.subtitleView}
         key={tag.id}
       >
-        <Text style={styles.ratingText}><IconAndroid size={14} />{tag.name}</Text>
+        <Text style={styles.ratingText}>{icon(tag.name)}{tag.name}</Text>
+        {/* <View style={styles.tagsContainer}>
+            {tags}
+          </View> */}
+        {/* {showTag(tag.name)} */}
       </View>
     );
   }
@@ -57,7 +63,7 @@ export default class ListView extends Component {
 
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    reqBook(bookSeeker)
+    getData(bookSeeker)
       .then((books) => {
         console.log(books);
         if (!books) {

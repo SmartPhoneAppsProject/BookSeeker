@@ -1,58 +1,125 @@
-import React, { Component } from 'react';
+import React, {
+  View,
+  Text,
+  Component
+} from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Octicons,
   MaterialCommunityIcons,
-
+  SimpleLineIcons,
 } from '@expo/vector-icons';
 
-export const IconRuby = ({size}) => {
-  return <Octicons name='ruby' size={size} color='#808080' />;
+const size = 14;
+const color = '#808080'
+
+export const showTag = (name) => {
+  return <View>{icon(name)}<Text style={{ paddingLeft: 10, color: '#808080', }}>{name}</Text></View>;
+}
+
+export const icon = (name) => {
+  let icon;
+
+  switch (name) {
+    case 'Ruby':
+      icon = IconRuby();
+      break;
+    case 'Android':
+      icon = IconAndroid();
+      break;
+    case 'Swift':
+      icon = IconSwift();
+      break;
+    case 'Go':
+      icon = IconGo();
+      break;
+    case 'Python':
+      icon = IconPython();
+      break;
+    case 'C':
+      icon = IconC();
+      break;
+    case 'Python':
+      icon = IconPython();
+      break;
+    case 'C':
+      icon = IconC();
+      break;
+    case 'HTML':
+      icon = IconHTML();
+      break;
+    case 'CSS':
+      icon = IconCSS();
+      break;
+    case 'JavaScript':
+      icon = IconJS();
+      break;
+    case 'TypeScript':
+      icon = IconTS();
+      break;
+    case 'PHP':
+      icon = IconPHP();
+      break;
+    case 'People':
+      icon = IconPeople();
+      break;
+    default:
+      icon = IconOther();
+  }
+  return icon;
+}
+
+export const IconRuby = () => {
+  return <Octicons name='ruby' size={size} color={color} />;
 };
 
-export const IconAndroid = ({size}) => {
-  return <MaterialCommunityIcons name='android' size={size} color='#808080' />;
+export const IconAndroid = () => {
+  return <MaterialCommunityIcons name='android' size={size} color={color} />;
 };
 
-export const IconSwift = ({size}) => {
-  return <MaterialCommunityIcons name='language-swift' size={size} color='#808080' />;
+export const IconSwift = () => {
+  return <MaterialCommunityIcons name='language-swift' size={size} color={color} />;
 };
 
-export const IconGo = ({size}) => {
-  return <MaterialCommunityIcons name='language-go' size={size} color='#808080' />;
+export const IconGo = () => {
+  return <MaterialCommunityIcons name='language-go' size={size} color={color} />;
 };
 
-export const IconPython = ({size}) => {
-  return <MaterialCommunityIcons name='language-python' size={size} color='#808080' />;
+export const IconPython = () => {
+  return <MaterialCommunityIcons name='language-python' size={size} color={color} />;
 };
 
-export const IconC = ({size}) => {
-  return <MaterialCommunityIcons name='language-c' size={size} color='#808080' />;
+export const IconC = () => {
+  return <MaterialCommunityIcons name='language-c' size={size} color={color} />;
 };
 
-export const IconHTML = ({size}) => {
-  return <MaterialCommunityIcons name='language-html5' size={size} color='#808080' />;
+export const IconHTML = () => {
+  return <MaterialCommunityIcons name='language-html5' size={size} color={color} />;
 };
 
-export const IconCSS = ({size}) => {
-  return <MaterialCommunityIcons name='language-css3' size={size} color='#808080' />;
+export const IconCSS = () => {
+  return <MaterialCommunityIcons name='language-css3' size={size} color={color} />;
 };
 
-export const IconJS = ({size}) => {
-  return <MaterialCommunityIcons name='language-javascript' size={size} color='#808080' />;
+export const IconJS = () => {
+  return <MaterialCommunityIcons name='language-javascript' size={size} color={color} />;
 };
 
-export const IconTS = ({size}) => {
-  return <MaterialCommunityIcons name='language-typescript' size={size} color='#808080' />;
+export const IconTS = () => {
+  return <MaterialCommunityIcons name='language-typescript' size={size} color={color} />;
 };
 
-export const IconPHP = ({size}) => {
-  return <MaterialCommunityIcons name='language-php' size={size} color='#808080' />;
+export const IconPHP = () => {
+  return <MaterialCommunityIcons name='language-php' size={size} color={color} />;
 };
 
-export const IconPeople = ({size}) => {
-  return <Ionicons name='ios-people' size={size} color='#808080' />;
+export const IconPeople = () => {
+  return <Ionicons name='ios-people' size={size} color={color} />;
 };
+
+export const IconOther = () => {
+  return <SimpleLineIcons name='question' size={size} color={color} />;
+}
 
 const styles = StyleSheet.create({
   container: {
