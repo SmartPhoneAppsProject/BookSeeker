@@ -13,6 +13,8 @@ import {
 } from 'react-native-elements';
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome, Octicons } from '@expo/vector-icons';
 
+import { putData } from './networking';
+
 export default class DetailScreen extends React.Component {
   static navigationOptions = {
     title: 'DetailScreen',
@@ -27,51 +29,50 @@ export default class DetailScreen extends React.Component {
 
     this._lendBook = this._lendBook.bind(this);
     this._returnBook = this._returnBook.bind(this);
-    this.putData = this.putData.bind(this);
   }
 
-  _lendBook() {
+  _lendBook = () => {
     this.setState({
       currentStatus: true
     });
 
-    this.putData(true);
+    const json = JSON.stringify({
+      jan_code: this.props.navigation.state.params.item.jan_code,
+      status: true
+    });
+
+    this.changeBookStatus(json);
   }
 
-  _returnBook() {
+  _returnBook = () => {
     this.setState({
       currentStatus: false
     });
 
-    this.putData(false);
-  }
-
-  async putData(status) {
-    const uri = 'https://go-api-staging.herokuapp.com/books';
-    const headers = new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    });
     const json = JSON.stringify({
       jan_code: this.props.navigation.state.params.item.jan_code,
-      status: status
+      status: false
     });
-    const options = {
-      method: 'PUT',
-      headers: headers,
-      body: json
-    };
 
-    const request = new Request(uri, options);
+    this.changeBookStatus(json);
+  }
 
-    try {
-      console.log('try put');
+  changeBookStatus = (json) => {
+    putData(json)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
 
-      const response = await fetch(request);
-      console.log(response);
-    } catch (error) {
-      console.log('try put failed')
-    }
+      })
+      .catch(error => {
+        console.warn(error);
+        putData(json)
+          .then(response => response.json())
+          .then(responseJson => {
+            console.log(responseJson);
+          })
+          .catch(error => console.error(error));
+      });
   }
 
   render() {
