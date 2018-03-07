@@ -31,7 +31,6 @@ export default class EntryScreen extends Component {
       title: '',
       chosenDate: new Date(),
       publishedAt: formatDate,
-      tags: '',
       photo: null,
       isDateTimePickerVisible: false,
     };
@@ -74,7 +73,6 @@ export default class EntryScreen extends Component {
   goScanScreen() {
     this.props.navigation.navigate('Scan', {
       title: this.state.title,
-      tags: this.state.tags,
       photo: this.state.photo,
       publishedAt: this.state.publishedAt,
     });
@@ -111,8 +109,7 @@ export default class EntryScreen extends Component {
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ title: text })}
           value={this.state.title}
-          onSubmitEditing={() => this.tagInput.focus()}
-          returnKeyType='next'
+          returnKeyType='done'
           placeholder='title'
           maxLength={100} />
       </View>
@@ -149,7 +146,7 @@ export default class EntryScreen extends Component {
       <View style={styles.childContainer}>
         <TouchableOpacity style={styles.buttonContainer}
           onPress={this.goScanScreen}>
-          <Text style={styles.buttonText}>submit</Text>
+          <Text style={styles.buttonText}>バーコード読み取り</Text>
         </TouchableOpacity>
       </View >
     );

@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import ListView from './ListView';
-import PullRefresh from './pullRefresh';
-import reqBook from './reqBook';
+import PullRefresh from './PullRefresh';
+import { getData } from './networking';
 import LogoEntry from './LogoEntry';
 
 export default class HomeScreen extends Component {
@@ -38,9 +38,8 @@ export default class HomeScreen extends Component {
   componentDidMount() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    reqBook(bookSeeker)
+    getData(bookSeeker)
       .then((books) => {
-        console.log(books);
         if (!books) {
           this.setState({
             respStatus: false,
@@ -60,9 +59,8 @@ export default class HomeScreen extends Component {
   _refresh() {
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    reqBook(bookSeeker)
+    getData(bookSeeker)
       .then((books) => {
-        console.log(books);
         if (!books) {
           this.setState({
             respStatus: false,
