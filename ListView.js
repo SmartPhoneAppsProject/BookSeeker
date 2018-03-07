@@ -44,18 +44,32 @@ export default class ListView extends Component {
   }
 
   renderTags = (tags) => {
-    return tags.map(tag =>
-      <View
-        style={styles.subtitleView}
-        key={tag.id}
-      >
-        <Text style={styles.ratingText}>{icon(tag.name)}{tag.name}</Text>
-        {/* <View style={styles.tagsContainer}>
-            {tags}
-          </View> */}
-        {/* {showTag(tag.name)} */}
-      </View>
-    );
+    let formated = [];
+    let tag;
+    for (i in tags) {
+      console.log(i);
+      if (i < 3) {
+        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
+      } else if (i == 3) {
+        tag = <Text style={styles.tagText}>...</Text>;
+      } else if (i > 3) {
+        tag = <View />;
+      }
+      
+      formated.push(
+        <View
+          style={styles.subtitleView}
+          key={i}
+        >
+          {tag}
+        </View>
+      );
+    }
+
+    return <View
+      style={styles.tagsContainer}>
+      {formated}
+    </View >;
   }
 
   _onRefresh = () => {
@@ -80,6 +94,7 @@ export default class ListView extends Component {
     const status = item.status
       ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
       : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
+
     const tags = this.renderTags(item.tags);
 
     return (
@@ -88,9 +103,7 @@ export default class ListView extends Component {
         onPress={() => navigate('Detail', { item })}
         title={item.title}
         subtitle={
-          <View style={styles.tagsContainer}>
-            {tags}
-          </View>
+          tags
         }
         subtitleNumberOfLines={1}
         badge={{ element: status }}
@@ -126,13 +139,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
+  tagsContainer: {
+    flexDirection: 'row',
+    paddingTop: 5,
+    paddingLeft: 10,
+  },
   subtitleView: {
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingTop: 5,
   },
-  ratingText: {
-    paddingLeft: 10,
+  tagText: {
+    paddingRight: 5,
     color: '#808080',
   },
 });

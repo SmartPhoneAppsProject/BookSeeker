@@ -17,23 +17,6 @@ const RootStack = StackNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOptions: {
-        headerStyle: {
-          backgroundColor: '#c0c0c0',
-          borderColor: "transparent",
-          borderWidth: 0,
-          shadowColor: 'transparent',
-          shadowRadius: 0,
-          elevation: 0,       //remove shadow on Android
-          shadowOpacity: 0,   //remove shadow on iOS
-          shadowOffset: {
-            height: 0,
-            width: 0,
-          },
-          shadowRadius: 0,
-        },
-        headerTintColor: '#ffffff',
-      },
     },
     Entry: {
       screen: EntryScreen,

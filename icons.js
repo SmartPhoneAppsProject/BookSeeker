@@ -14,10 +14,20 @@ const size = 14;
 const color = '#808080'
 
 export const showTag = (name) => {
-  return <View>{icon(name)}<Text style={{ paddingLeft: 10, color: '#808080', }}>{name}</Text></View>;
+  return (
+    <View
+      style={styles.subtitleView}
+      key={tag.id}
+    >
+      {icon(name)}
+      <Text style={{ paddingLeft: 10, color: color, }}>
+        {name}
+      </Text>
+    </View>
+  );
 }
 
-export const icon = (name) => {
+export const icon = name => {
   let icon;
 
   switch (name) {
@@ -32,12 +42,6 @@ export const icon = (name) => {
       break;
     case 'Go':
       icon = IconGo();
-      break;
-    case 'Python':
-      icon = IconPython();
-      break;
-    case 'C':
-      icon = IconC();
       break;
     case 'Python':
       icon = IconPython();
