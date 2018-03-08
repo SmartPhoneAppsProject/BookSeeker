@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   FlatList,
-  TouchableOpacity,
   View,
   Text,
-  Image,
-  Dimensions
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import {
   List,
   ListItem
@@ -21,9 +17,7 @@ import {
 import SearchScreen from './SearchScreen';
 import { getData } from './networking';
 import {
-  IconAndroid,
   icon,
-  showTag,
 } from './icons';
 
 export default class ListView extends Component {
