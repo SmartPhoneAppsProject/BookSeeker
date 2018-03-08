@@ -11,6 +11,7 @@ import {
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
+
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
@@ -105,12 +106,11 @@ export default class EntryScreen extends Component {
   renderTitleContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>タイトル</Text>
         <TextInput style={styles.input}
           onChangeText={(text) => this.setState({ title: text })}
           value={this.state.title}
           returnKeyType='done'
-          placeholder='title'
+          placeholder='TITLE'
           maxLength={100} />
       </View>
     );
@@ -134,8 +134,7 @@ export default class EntryScreen extends Component {
             maximumDate={new Date()}
             titleIOS={'発行日を選択する'}
             cancelTextIOS={'キャンセル'}
-            confirmTextIOS={'決定'}
-          />
+            confirmTextIOS={'決定'} />
         </View>
       </View>
     );
@@ -206,6 +205,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 10,
     padding: 10,
+    borderBottomWidth: 1,
+    borderColor: '#A4A4A4'
   },
   buttonContainer: {
     backgroundColor: '#2980b6',
