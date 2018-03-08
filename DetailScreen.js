@@ -20,6 +20,7 @@ import {
 } from '@expo/vector-icons';
 
 import { putData } from './networking';
+import {icon} from "./icons";
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = {
@@ -80,13 +81,34 @@ export default class DetailScreen extends React.Component {
       });
   };
 
+  _renderImage() {
+    return (
+      <View style={[styles.base, styles.imgContainer]}>
+        <Image
+          style={styles.img}
+          source={{ uri: this.props.navigation.state.params.item.image }} />
+      </View>
+    )
+  }
+
   _renderTags() {
-    const { params } = this.props.navigation.state;
+    const tags = this.props.navigation.state.params.item.tags;
+
+    let formated = [];
+    let tag;
+    for (i in tags) {
+      tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
+      formated.push(
+        <View style={styles.tag} key={i}>
+          {tag}
+        </View>
+      )
+    }
 
     return (
       <View style={[styles.base, styles.tagContainer]}>
-        <ScrollView horizontal={true} style={styles.tagsContainer}>
-          {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
+        <ScrollView horizontal={true}>
+          {formated}
         </ScrollView>
       </View>
     )
@@ -138,16 +160,14 @@ export default class DetailScreen extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
+    const renderImage = this._renderImage();
+    const renderTags = this._renderTags();
     const renderIcon = this._renderIcon();
     const renderButton = this._renderButton();
-    const renderTags = this._renderTags();
 
     return (
       <View style={styles.container}>
-        <View style={[styles.base, styles.imgContainer]}>
-          <Image style={styles.img}
-            source={{ uri: params.item.image }} />
-        </View>
+        {renderImage}
         <View style={styles.mainContainer}>
           {renderTags}
           <View style={styles.titleContainer}>
@@ -206,6 +226,11 @@ const styles = StyleSheet.create({
       paddingRight: 8,
       paddingLeft: 8,
       paddingTop: 13,
+    },
+  tagText:
+    {
+      paddingRight: 5,
+      color: '#808080',
     },
   titleContainer:
     {

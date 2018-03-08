@@ -31,11 +31,11 @@ export default class ListView extends Component {
 
   setBooks = (books) => {
     this.setState({ books: books });
-  }
+  };
 
   resetBooks = () => {
     this.setState({ books: this.props.books });
-  }
+  };
 
   renderTags = (tags) => {
     let formated = [];
@@ -60,11 +60,12 @@ export default class ListView extends Component {
       );
     }
 
-    return <View
-      style={styles.tagsContainer}>
-      {formated}
-    </View >;
-  }
+    return (
+      <View style={styles.tagsContainer}>
+        {formated}
+      </View >
+    )
+  };
 
   _onRefresh = () => {
     this.setState({ onRefresh: true });
@@ -81,7 +82,7 @@ export default class ListView extends Component {
         }
       })
       .catch((error) => console.error(error));
-  }
+  };
 
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
