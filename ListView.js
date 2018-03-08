@@ -1,100 +1,148 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, TouchableOpacity, View, Text, Image, Dimensions } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Text,
+} from 'react-native';
+import {
+  List,
+  ListItem
+} from 'react-native-elements';
+import {
+  MaterialCommunityIcons,
+  Octicons
+} from '@expo/vector-icons';
+
+import SearchScreen from './SearchScreen';
+import { getData } from './networking';
+import {
+  icon,
+} from './icons';
 
 export default class ListView extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      refreshing: false,
+      books: this.props.books
     };
   }
 
-  render() {
+  setBooks = (books) => {
+    this.setState({ books: books });
+  }
+
+  resetBooks = () => {
+    this.setState({ books: this.props.books });
+  }
+
+  renderTags = (tags) => {
+    let formated = [];
+    let tag;
+    for (i in tags) {
+      console.log(i);
+      if (i < 3) {
+        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
+      } else if (i == 3) {
+        tag = <Text style={styles.tagText}>...</Text>;
+      } else if (i > 3) {
+        tag = <View />;
+      }
+      
+      formated.push(
+        <View
+          style={styles.subtitleView}
+          key={i}
+        >
+          {tag}
+        </View>
+      );
+    }
+
+    return <View
+      style={styles.tagsContainer}>
+      {formated}
+    </View >;
+  }
+
+  _onRefresh = () => {
+    this.setState({ onRefresh: true });
+
+    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
+
+    getData(bookSeeker)
+      .then((books) => {
+        console.log(books);
+        if (!books) {
+          this.setState({ books: '' });
+        } else {
+          this.setState({ books });
+        }
+      })
+      .catch((error) => console.error(error));
+  }
+
+  _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
+    const status = item.status
+      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
+      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
+
+    const tags = this.renderTags(item.tags);
+
     return (
-      <FlatList style={styles.container}
-        data={this.props.books}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity style={styles.itemContainer}
-              onPress={() => navigate('Detail', { item })} >
-              <Image style={styles.image}
-                source={{ uri: item.image }} />
-              <View style={styles.item}>
-                {item.status
-                  ? <Text style={styles.statusOk}>貸し出しOK</Text>
-                  : <Text style={styles.statusNo}>貸し出し中</Text>
-                }
-                <Text style={styles.title}>{item.title}</Text>
-                <View style={styles.tagsContainer}>
-                  {item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
-                </View>
-              </View>
-            </TouchableOpacity >
-          );
-        }}
+      <ListItem
+        chevronColor='#c0c0c0'
+        onPress={() => navigate('Detail', { item })}
+        title={item.title}
+        subtitle={
+          tags
+        }
+        subtitleNumberOfLines={1}
+        badge={{ element: status }}
       />
     );
   }
-}
 
-const { width } = Dimensions.get('window');
-const imageSide = 70;
+  render() {
+    return (
+      <List
+        containerStyle={{ marginTop: 0, padding: 0 }}
+      >
+        <FlatList
+          ListHeaderComponent={
+            <SearchScreen
+              books={this.state.books}
+              setBooks={this.setBooks}
+              resetBooks={this.resetBooks}
+            />
+          }
+          data={this.state.books}
+          extraData={this.state.books}
+          renderItem={this._renderItem}
+          onRefresh={this._onRefresh}
+          refreshing={this.state.refreshing}
+        />
+      </List >
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
-  itemContainer: {
-    flexDirection: 'row',
-    borderColor: '#CCC',
-    borderWidth: 1,
-  },
-  image: {
-    width: imageSide,
-    height: imageSide,
-  },
-  item: {
-    width: width - imageSide,
-    height: imageSide,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-  },
-  statusOk: {
-    width: 90,
-    fontSize: 15,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: 'green',
-    overflow: 'hidden',
-    textAlign: 'center',
-  },
-  statusNo: {
-    width: 90,
-    fontSize: 15,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: 'red',
-    overflow: 'hidden',
-    textAlign: 'center',
-  },
-  title: {
-    flex: 2,
-    fontSize: 30,
-    textAlign: 'center',
-  },
   tagsContainer: {
-    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 5,
+    paddingLeft: 10,
+  },
+  subtitleView: {
     flexDirection: 'row',
   },
-  tag: {
-    marginLeft: 5,
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderRadius: 4,
-    borderWidth: 1,
-    overflow: 'hidden',
+  tagText: {
+    paddingRight: 5,
+    color: '#808080',
   },
 });
