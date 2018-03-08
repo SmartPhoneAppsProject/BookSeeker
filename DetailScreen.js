@@ -15,7 +15,6 @@ import {
 import {
   MaterialCommunityIcons,
   MaterialIcons,
-  FontAwesome,
   Octicons
 } from '@expo/vector-icons';
 
@@ -82,11 +81,21 @@ export default class DetailScreen extends React.Component {
   };
 
   _renderImage() {
+    const reactLogoUri = 'https://facebook.github.io/react/logo-og.png';
+    const imageUri = this.props.navigation.state.params.item.image;
+    let image = '';
+
+    console.log(typeof imageUri);
+    console.log(imageUri);
+    if (imageUri) {
+      image = reactLogoUri;
+    } else {
+      image = imageUri;
+    }
+
     return (
       <View style={[styles.base, styles.imgContainer]}>
-        <Image
-          style={styles.img}
-          source={{ uri: this.props.navigation.state.params.item.image }} />
+        <Image style={styles.img} source={{ uri: image }}/>
       </View>
     )
   }
