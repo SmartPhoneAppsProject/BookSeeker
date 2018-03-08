@@ -39,7 +39,6 @@ export const getData = () => {
 
 export const putData = json => {
   return new Promise((resolve, reject) => {
-    // const uri = 'https://go-api-staging.herokuapp.com/books';
     const headers = new Headers({
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -58,7 +57,6 @@ export const putData = json => {
 
 export const postData = json => {
   return new Promise((resolve, reject) => {
-    // const uri = 'https://go-api-staging.herokuapp.com/books';
     const headers = new Headers({
       Accept: 'application/json',
       'Content-Type': 'application/json'
