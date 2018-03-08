@@ -5,8 +5,19 @@ import {
   View,
   ScrollView,
   Image,
-  Button,
+  Dimensions,
 } from 'react-native';
+
+import {
+  Button,
+} from 'react-native-elements';
+
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome,
+  Octicons
+} from '@expo/vector-icons';
 
 import { putData } from './networking';
 
@@ -37,7 +48,7 @@ export default class DetailScreen extends React.Component {
     });
 
     this.changeBookStatus(json);
-  }
+  };
 
   _returnBook = () => {
     this.setState({
@@ -50,7 +61,7 @@ export default class DetailScreen extends React.Component {
     });
 
     this.changeBookStatus(json);
-  }
+  };
 
   changeBookStatus = (json) => {
     putData(json)
@@ -68,7 +79,7 @@ export default class DetailScreen extends React.Component {
           })
           .catch(error => console.error(error));
       });
-  }
+  };
 
   render() {
     const { params } = this.props.navigation.state;
@@ -76,40 +87,85 @@ export default class DetailScreen extends React.Component {
       <View style={styles.container}>
         <View style={[styles.base, styles.imgContainer]}>
           <Image style={styles.img}
-            source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
+            source={{ uri: params.item.image }} />
+        </View>
+        <View style={styles.mainContainer}>
           <View style={[styles.base, styles.tagContainer]}>
-            <View style={styles.tagsContainer}>
+            <ScrollView horizontal={true} style={styles.tagsContainer}>
               {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
+            </ScrollView>
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{params.item.title}</Text>
+            <Text style={styles.date} >出版日：{params.item.published_at}</Text>
+          </View>
+          <View style={styles.statusContainer}>
+            <View style={[styles.base, styles.status]}>
+              {this.state.currentStatus
+                ? <Octicons
+                  name='circle-slash'
+                  size={40}
+                  color='#cd5c5c'
+                />
+                : <MaterialCommunityIcons
+                  name='check-circle-outline'
+                  size={40}
+                  color='#2e8b57'
+                />
+              }
+            </View>
+            <View style={[styles.base, styles.buttonContainer]}>
+              {this.state.currentStatus
+                ? <Button
+                  icon={
+                    <MaterialCommunityIcons
+                      name='keyboard-return'
+                      size={30}
+                      color='white'
+                    />
+                  }
+                  text="返却"
+                  textStyle={{ fontWeight: "700" }}
+                  buttonStyle={{
+                    width: 100,
+                    height: 60,
+                    backgroundColor: '#cd5c5c',
+                  }}
+                  iconContainerStyle={{
+                    marginRight: 10,
+                  }}
+                  onPress={this._returnBook}
+                />
+                : <Button
+                  icon={
+                    <MaterialCommunityIcons
+                      name='book-open-page-variant'
+                      size={30}
+                      color='white'
+                    />
+                  }
+                  text="貸出"
+                  textStyle={{ fontWeight: "700" }}
+                  buttonStyle={{
+                    width: 100,
+                    height: 60,
+                    backgroundColor: '#2e8b57'
+                  }}
+                  iconContainerStyle={{
+                    marginRight: 10,
+                  }}
+                  onPress={this._lendBook}
+                />
+              }
             </View>
           </View>
-        </View>
-        <View style={[styles.base, styles.statusContainer]}>
-          {this.state.currentStatus
-            ? <Text style={[styles.status, styles.statusNo]}>貸し出し中</Text>
-            : <Text style={[styles.status, styles.statusOk]}>貸し出OK</Text>
-          }
-        </View>
-        <View style={[styles.base, styles.titleContainer]}>
-          <Text style={styles.title}>{params.item.title}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoHead}>詳細情報</Text>
-          <ScrollView style={styles.infoBody}>
-            <Text>JANコード：{params.item.jan_code}</Text>
-            <Text>出版日：{params.item.published_at}</Text>
-            <Text>アプリへの追加日：{params.item.created_at}</Text>
-          </ScrollView>
-        </View>
-        <View style={[styles.base, styles.buttonContainer]}>
-          {this.state.currentStatus
-            ? <Button title="返却" onPress={this._returnBook} />
-            : <Button title="貸出" onPress={this._lendBook} />
-          }
         </View>
       </View>
     );
   }
 }
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container:
@@ -125,90 +181,69 @@ const styles = StyleSheet.create({
   imgContainer:
     {
       flex: 1,
-      flexDirection: 'row',
-      marginTop: 20,
     },
   img:
     {
-      height: 90,
-      width: 90,
+      height: 300,
+      width: width,
+    },
+  mainContainer:
+    {
+      flex: 1
     },
   tagContainer:
     {
-      height: 40,
-      marginLeft: 40,
-      marginTop: 30,
+      flex: 0.5,
+      margin: 10,
     },
-  tag: {
-    margin: 3,
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderRadius: 4,
-    borderWidth: 1,
-    overflow: 'hidden',
-  },
-  statusContainer:
+  tag:
     {
-      flex: 1,
-      flexDirection: 'row',
-      marginTop: 20,
-    },
-  status:
-    {
+      margin: 3,
+      backgroundColor: '#f5f5f5',
+      borderColor: '#f5f5f5',
+      borderRadius: 4,
       borderWidth: 1,
-      borderColor: '#999',
-      borderRadius: 5,
-      marginLeft: 40,
-      marginRight: 30,
-      paddingTop: 5,
-      width: 100,
-      height: 30,
-      backgroundColor: '#ccc',
-      textAlign: 'center',
       overflow: 'hidden',
-    },
-  statusOk:
-    {
-      color: '#008000',
-      borderColor: '#008000'
-    },
-  statusNo:
-    {
-      color: '#ff0000',
-      borderColor: '#ff0000'
+      paddingRight: 8,
+      paddingLeft: 8,
+      paddingTop: 13,
     },
   titleContainer:
     {
       flex: 1,
+      justifyContent: 'center',
+      marginLeft: 50,
     },
   title:
     {
       fontSize: 20,
-    },
-  infoContainer:
-    {
-      flex: 3,
-      marginTop: 5,
-      marginLeft: 25,
-      marginRight: 25,
       marginBottom: 10,
     },
-  infoHead:
+  dateContainer:
     {
-      fontSize: 18,
-      marginTop: 5,
-      marginLeft: 5,
-      paddingTop: 3,
-      paddingLeft: 5,
-      height: 30,
-      width: 200,
+      flex: 0.4,
     },
-  infoBody:
+  date:
     {
-      marginLeft: 20,
+      fontSize: 14,
+      color: '#6E6E6E',
+    },
+  statusContainer:
+    {
+      flex: 1,
+      flexDirection: 'row',
+      marginBottom: 15,
+    },
+  status:
+    {
+      flex: 1,
     },
   buttonContainer:
     {
-      flex: 2,
+      flex: 1,
+    },
+  button:
+    {
+      width: 70,
     },
 });
