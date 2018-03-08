@@ -70,9 +70,7 @@ export default class ListView extends Component {
   _onRefresh = () => {
     this.setState({ onRefresh: true });
 
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getData(bookSeeker)
+    getData()
       .then((books) => {
         console.log(books);
         if (!books) {
@@ -104,7 +102,7 @@ export default class ListView extends Component {
         badge={{ element: status }}
       />
     );
-  }
+  };
 
   render() {
     return (
