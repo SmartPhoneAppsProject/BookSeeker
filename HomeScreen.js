@@ -60,9 +60,7 @@ export default class HomeScreen extends Component {
   }
 
   _refresh() {
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getData(bookSeeker)
+    getData()
       .then((books) => {
         if (!books) {
           this.setState({
