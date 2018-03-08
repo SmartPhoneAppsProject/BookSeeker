@@ -1,10 +1,6 @@
-// @flow
-
 import React, { Component } from 'react';
 import {
-  Button,
   StyleSheet,
-  Text,
   View,
   ActivityIndicator
 } from 'react-native';
@@ -13,11 +9,21 @@ import ListView from './ListView';
 import PullRefresh from './PullRefresh';
 import { getData } from './networking';
 import LogoEntry from './LogoEntry';
-import SearchScreen from './SearchScreen';
+import LogoSAP from './LogoSAP';
 
-export default class HomeScreen extends Component {
+type State = {
+    books: [],
+    isLoading: boolean,
+    resqState: boolean,
+};
+
+export default class HomeScreen extends Component<State> {
   static navigationOptions = ({ navigation }) => {
     return {
+      headerLeft:
+        <View style={styles.navigationContainer}>
+          <LogoSAP />
+        </View>,
       title: 'Home',
       headerRight:
         <View style={styles.navigationContainer}>
@@ -31,13 +37,11 @@ export default class HomeScreen extends Component {
 
     this.state = {
       books: [],
-      tmpBooks: [],
       isLoading: true,
       respStatus: true,
     };
 
     this._refresh = this._refresh.bind(this);
-    this.setBooksOnList = this.setBooksOnList.bind(this)
   }
 
   componentDidMount() {
@@ -53,7 +57,6 @@ export default class HomeScreen extends Component {
         } else {
           this.setState({
             books,
-            tmpBooks: books,
             respStatus: true,
             isLoading: false,
           });
@@ -75,7 +78,6 @@ export default class HomeScreen extends Component {
         } else {
           this.setState({
             books,
-            tmpBooks: books,
             respStatus: true,
             isLoading: false
           });
@@ -84,16 +86,12 @@ export default class HomeScreen extends Component {
       .catch((error) => console.error(error));
   }
 
-  setBooksOnList(books) {
-    this.setState({ tmpBooks: books });
-  }
-
   render() {
     const { navigate } = this.props.navigation;
 
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={styles.isLoading}>
           <ActivityIndicator />
         </View>
       );
@@ -107,12 +105,10 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <SearchScreen
+        <ListView
           books={this.state.books}
-          tmpBooks={this.state.tmpBooks}
-          setBooksOnList={this.setBooksOnList} />
-
-        <ListView books={this.state.tmpBooks} navigation={this.props.navigation} />
+          navigation={this.props.navigation}
+        />
       </View>
     );
   }
@@ -122,10 +118,12 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: 'row',
   },
+  isLoading: {
+    flex: 1,
+    paddingTop: 20
+  },
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
     backgroundColor: '#fff',
   },
   indicator: {
