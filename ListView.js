@@ -47,13 +47,13 @@ export default class ListView extends Component {
       } else if (i == 3) {
         tag = <Text style={styles.tagText}>...</Text>;
       } else if (i > 3) {
-        tag = <View />;
+        tag = <View/>;
       }
-      
+
       formated.push(
         <View
           style={styles.subtitleView}
-          key={i}
+          key={tags[i].id}
         >
           {tag}
         </View>
@@ -63,15 +63,13 @@ export default class ListView extends Component {
     return <View
       style={styles.tagsContainer}>
       {formated}
-    </View >;
+    </View>;
   }
 
   _onRefresh = () => {
     this.setState({ onRefresh: true });
 
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getData(bookSeeker)
+    getData()
       .then((books) => {
         console.log(books);
         if (!books) {
@@ -86,8 +84,8 @@ export default class ListView extends Component {
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
-      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
+      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>
+      : <Octicons name='circle-slash' size={25} color='#cd5c5c'/>;
 
     const tags = this.renderTags(item.tags);
 
@@ -124,7 +122,7 @@ export default class ListView extends Component {
           onRefresh={this._onRefresh}
           refreshing={this.state.refreshing}
         />
-      </List >
+      </List>
     );
   }
 }
