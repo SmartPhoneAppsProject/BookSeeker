@@ -35,8 +35,6 @@ export default class ScanScreen extends React.Component {
 
   _handleBarCodeRead = ({ type, data }) => {
 	  console.log(data);
-	  const testInt = parseInt(data);
-	  console.log(typeof testInt);
     if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
 	    if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
 	      if (this.state.janCode != data) {
