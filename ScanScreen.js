@@ -95,8 +95,8 @@ export default class ScanScreen extends React.Component {
 
   renderNoPermissions() {
     return (
-      <View style={ styles.noPermissions }>
-        <Text style={ styles.noPermissionsText }>
+      <View style={styles.noPermissions}>
+        <Text style={styles.noPermissionsText}>
           カメラを使用できません
         </Text>
       </View>
@@ -106,29 +106,29 @@ export default class ScanScreen extends React.Component {
   renderCamera() {
     let statusText = <View/>;
     if (this.state.status == 'ok') {
-      statusText = <Text style={ styles.statusOk }>読み取りました</Text>;
+      statusText = <Text style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status == 'invalid') {
-      statusText = <Text style={ styles.statusNo }>無効な値です</Text>;
+      statusText = <Text style={styles.statusNo}>無効な値です</Text>;
     }
 
     return (
-      <View style={ styles.cameraScreen }>
-        <View style={ styles.header }>
-          <Text style={ styles.headerWarn }>978<Text style={ styles.text }>から始まるバーコードを画面に合わせてください</Text></Text>
+      <View style={styles.cameraScreen}>
+        <View style={styles.header}>
+          <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
         </View>
-        <View style={ styles.reader }>
-          <View style={ styles.cameraSide }>
+        <View style={styles.reader}>
+          <View style={styles.cameraSide}>
             <Text></Text>
           </View>
-          <BarCodeScanner style={ styles.camera }
-                          onBarCodeRead={ this._handleBarCodeRead }
+          <BarCodeScanner style={styles.camera}
+                          onBarCodeRead={this._handleBarCodeRead}
           />
-          <View style={ styles.cameraSide }>
+          <View style={styles.cameraSide}>
             <Text></Text>
           </View>
         </View>
-        <View style={ styles.footer }>
-          { statusText }
+        <View style={styles.footer}>
+          {statusText}
         </View>
       </View>
     );
@@ -138,7 +138,7 @@ export default class ScanScreen extends React.Component {
     const cameraScreen = this.state.permissionsGranted
       ? this.renderCamera()
       : this.renderNoPermissions();
-    return <View style={ styles.container }>{ cameraScreen }</View>;
+    return <View style={styles.container}>{cameraScreen}</View>;
   }
 }
 
