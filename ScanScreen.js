@@ -37,23 +37,24 @@ export default class ScanScreen extends React.Component {
 	  console.log(data);
 	  const testInt = parseInt(data);
 	  console.log(typeof testInt);
-    // if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
-	   //  if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
-	   //    if (this.state.janCode != data) {
-    //       this.setState({
-    //         janCode: data,
-    //         status: 'ok'
-    //       });
-    //       setTimeout(() => {
-    //         this.registerBook(data);
-    //       }, 1000);
-    //     }
-    //   } else { //バーコードであるがISBNでないとき
-    //     this.setState({ status: 'invalid' });
-    //   }
-    // } else { //バーコードでないとき
-    //   this.setState({ status: 'reading' });
-    // }
+    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
+	    if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
+	      if (this.state.janCode != data) {
+          this.setState({
+            janCode: data,
+            status: 'ok'
+          });
+          setTimeout(() => {
+            const janCode= parseInt(data);
+            this.registerBook(janCode);
+          }, 1000);
+        }
+      } else { //バーコードであるがISBNでないとき
+        this.setState({ status: 'invalid' });
+      }
+    } else { //バーコードでないとき
+      this.setState({ status: 'reading' });
+    }
   }
 
   registerBook(janCode) {
@@ -74,6 +75,8 @@ export default class ScanScreen extends React.Component {
       published_at: params.publishedAt,
       jan_code: janCode
     });
+
+    console.log(json);
 
     postData(json)
       .then(response => response.json())
