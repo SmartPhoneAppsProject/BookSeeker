@@ -43,7 +43,8 @@ export default class ScanScreen extends React.Component {
             status: 'ok'
           });
           setTimeout(() => {
-            this.registerBook(data);
+            const janCode = parseInt(data)
+            this.registerBook(janCode);
           }, 1000);
         }
       } else { //バーコードであるがISBNでないとき
@@ -68,7 +69,8 @@ export default class ScanScreen extends React.Component {
 
     const json = JSON.stringify({
       title: params.title,
-      image: params.photo.base64,
+      // image: params.photo.base64,
+      image: '',
       published_at: params.publishedAt,
       jan_code: janCode
     });
