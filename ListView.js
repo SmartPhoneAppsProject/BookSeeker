@@ -41,7 +41,6 @@ export default class ListView extends Component {
     let formated = [];
     let tag;
     for (i in tags) {
-      console.log(i);
       if (i < 3) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
       } else if (i == 3) {
