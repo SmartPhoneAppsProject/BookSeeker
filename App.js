@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './HomeScreen'
@@ -58,10 +52,10 @@ const RootStack = StackNavigator(
   }
 );
 
-export default class BookSeeker extends React.Component {
+export default class BookSeeker extends Component {
   render() {
-    return <RootStack />;
+    return <RootStack/>;
   }
 }
 
-AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
+// AppRegistry.registerComponent('BookSeeker', () => BookSeeker);

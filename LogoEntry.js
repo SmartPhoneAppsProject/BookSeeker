@@ -6,13 +6,17 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class LogoEntry extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const navigation = this.props.navigation;
     return (
       <TouchableOpacity style={styles.container}
         // onPress={() => navigation.navigate('Entry')}>
-        onPress={() => { console.log('onpress'); navigation.navigate('EntryTags')}}>
-        <MaterialCommunityIcons name='book-plus' size={30} color='white' />
+                        onPress={() => navigation.navigate('EntryTags')}>
+        <MaterialCommunityIcons name='book-plus' size={30} color='white'/>
       </TouchableOpacity>
     );
   }
