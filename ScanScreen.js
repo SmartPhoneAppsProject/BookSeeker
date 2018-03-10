@@ -43,7 +43,8 @@ export default class ScanScreen extends React.Component {
             status: 'ok'
           });
           setTimeout(() => {
-            this.registerBook(data);
+            const janCode = parseInt(data);
+            this.registerBook(janCode);
           }, 1000);
         }
       } else { //バーコードであるがISBNでないとき
@@ -94,7 +95,7 @@ export default class ScanScreen extends React.Component {
 
   renderNoPermissions() {
     return (
-      <View style={styles.noPermissions} >
+      <View style={styles.noPermissions}>
         <Text style={styles.noPermissionsText}>
           カメラを使用できません
         </Text>
@@ -103,8 +104,7 @@ export default class ScanScreen extends React.Component {
   }
 
   renderCamera() {
-    const { permissionsGranted } = this.state;
-    let statusText = <View />;
+    let statusText = <View/>;
     if (this.state.status == 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status == 'invalid') {
@@ -121,7 +121,7 @@ export default class ScanScreen extends React.Component {
             <Text></Text>
           </View>
           <BarCodeScanner style={styles.camera}
-            onBarCodeRead={this._handleBarCodeRead}
+                          onBarCodeRead={this._handleBarCodeRead}
           />
           <View style={styles.cameraSide}>
             <Text></Text>

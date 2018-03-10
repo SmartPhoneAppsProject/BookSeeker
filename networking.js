@@ -1,6 +1,6 @@
 import React from 'react';
 
-const baseUri = 'https://go-api-staging.herokuapp.com/books';
+const baseUri = 'https://book-seeker-staging.herokuapp.com/books';
 
 export const getData = () => {
   return new Promise((resolve, reject) => {
