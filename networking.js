@@ -2,7 +2,7 @@ import React from 'react';
 
 const baseUri = 'https://book-seeker-staging.herokuapp.com';
 
-export const getData = () => {
+export const getBooks = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUri}/books`)
       .then((response) => {
@@ -37,7 +37,7 @@ export const getData = () => {
   });
 };
 
-export const putData = json => {
+export const rentBook = json => {
   return new Promise((resolve, reject) => {
     const headers = new Headers({
       Accept: 'application/json',
@@ -55,7 +55,7 @@ export const putData = json => {
   });
 };
 
-export const postData = json => {
+export const postBook = json => {
   return new Promise((resolve, reject) => {
     const headers = new Headers({
       Accept: 'application/json',

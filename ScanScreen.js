@@ -10,7 +10,7 @@ import {
 } from 'expo';
 import { NavigationActions } from 'react-navigation';
 
-import { postData } from './networking';
+import { postBook } from './networking';
 
 export default class ScanScreen extends Component {
   static navigationOptions = {
@@ -73,7 +73,7 @@ export default class ScanScreen extends Component {
       jan_code: janCode
     });
 
-    postData(json)
+    postBook(json)
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
@@ -82,7 +82,7 @@ export default class ScanScreen extends Component {
       })
       .catch(error => {
         console.warn(error);
-        postData(json)
+        postBook(json)
           .then(response => response.json())
           .then(responseJson => {
             console.log(responseJson);
