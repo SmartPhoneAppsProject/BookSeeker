@@ -5,7 +5,6 @@ import {
   View
 } from 'react-native';
 import {
-  Camera,
   BarCodeScanner,
   Permissions
 } from 'expo';
@@ -13,7 +12,7 @@ import { NavigationActions } from 'react-navigation';
 
 import { postData } from './networking';
 
-export default class ScanScreen extends React.Component {
+export default class ScanScreen extends Component {
   static navigationOptions = {
     title: 'バーコードリーダー',
   };
@@ -114,14 +113,20 @@ export default class ScanScreen extends React.Component {
     return (
       <View style={styles.cameraScreen}>
         <View style={styles.header}>
-          <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
+          <Text style={styles.headerWarn}>
+            978
+            <Text style={styles.text}>
+              から始まるバーコードを画面に合わせてください
+            </Text>
+          </Text>
         </View>
         <View style={styles.reader}>
           <View style={styles.cameraSide}>
             <Text></Text>
           </View>
-          <BarCodeScanner style={styles.camera}
-                          onBarCodeRead={this._handleBarCodeRead}
+          <BarCodeScanner
+            style={styles.camera}
+            onBarCodeRead={this._handleBarCodeRead}
           />
           <View style={styles.cameraSide}>
             <Text></Text>
