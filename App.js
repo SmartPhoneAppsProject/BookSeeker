@@ -12,6 +12,7 @@ import SearchScreen from './SearchScreen';
 import DetailScreen from './DetailScreen';
 import EntryScreen from './EntryScreen';
 import ScanScreen from './ScanScreen';
+import EntryTagsScreen from "./EntryTagsScreen";
 
 const RootStack = StackNavigator(
   {
@@ -23,6 +24,9 @@ const RootStack = StackNavigator(
     },
     Scan: {
       screen: ScanScreen,
+    },
+    EntryTags: {
+      screen: EntryTagsScreen,
     },
     Detail: {
       screen: DetailScreen,

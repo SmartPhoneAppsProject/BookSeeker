@@ -55,8 +55,7 @@ export default class ScanScreen extends React.Component {
     }
   }
 
-  registerBook(janCode) {
-    const { params } = this.props.navigation.state;
+  goToHomeScreen(){
     // https://github.com/react-navigation/react-navigation/issues/1448
     const actions = [NavigationActions.navigate({ routeName: 'Home' })]
 
@@ -66,6 +65,10 @@ export default class ScanScreen extends React.Component {
     });
 
     this.props.navigation.dispatch(resetAction)
+  }
+
+  registerBook(janCode) {
+    const { params } = this.props.navigation.state;
 
     const json = JSON.stringify({
       title: params.title,
@@ -92,6 +95,10 @@ export default class ScanScreen extends React.Component {
           })
           .catch(error => console.error(error));
       });
+
+
+    // this.goToHomeScreen();
+    this.props.navigation.navigate('EntryTags');
   }
 
   renderNoPermissions() {
