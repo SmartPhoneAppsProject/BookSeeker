@@ -81,21 +81,14 @@ export default class DetailScreen extends React.Component {
   };
 
   _renderImage() {
-    const reactLogoUri = 'https://facebook.github.io/react/logo-og.png';
-    const imageUri = this.props.navigation.state.params.item.image;
-    let image = '';
-
-    console.log(typeof imageUri);
-    console.log(imageUri);
-    if (imageUri) {
-      image = reactLogoUri;
-    } else {
-      image = imageUri;
+    let imageUri = this.props.navigation.state.params.item.image;
+    if(!imageUri){
+      imageUri = 'https://facebook.github.io/react/logo-og.png';
     }
 
     return (
       <View style={[styles.base, styles.imgContainer]}>
-        <Image style={styles.img} source={{ uri: image }}/>
+        <Image style={styles.img} source={{ uri: imageUri }}/>
       </View>
     )
   }
@@ -105,7 +98,7 @@ export default class DetailScreen extends React.Component {
 
     let formated = [];
     let tag;
-    for (i in tags) {
+    for (let i of tags) {
       tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
       formated.push(
         <View style={styles.tag} key={i}>
