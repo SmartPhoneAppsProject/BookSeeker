@@ -15,7 +15,7 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
-import { getData } from './networking';
+import { getBooks } from './networking';
 import {
   icon,
 } from './icons';
@@ -68,7 +68,7 @@ export default class ListView extends Component {
   _onRefresh = () => {
     this.setState({ onRefresh: true });
 
-    getData()
+    getBooks()
       .then((books) => {
         console.log(books);
         if (!books) {

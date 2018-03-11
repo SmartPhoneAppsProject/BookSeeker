@@ -19,7 +19,7 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import { putData } from './networking';
+import { rentBook } from './networking';
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = {
@@ -64,7 +64,7 @@ export default class DetailScreen extends React.Component {
   };
 
   changeBookStatus = (json) => {
-    putData(json)
+    rentBook(json)
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
@@ -72,7 +72,7 @@ export default class DetailScreen extends React.Component {
       })
       .catch(error => {
         console.warn(error);
-        putData(json)
+        rentBook(json)
           .then(response => response.json())
           .then(responseJson => {
             console.log(responseJson);
