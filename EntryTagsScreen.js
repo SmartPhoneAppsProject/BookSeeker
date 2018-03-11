@@ -134,7 +134,7 @@ export default class EntryTagsScreen extends Component {
     }
   };
 
-  renderTagsList() {
+  renderTagsList = () => {
     return (
       <List containerStyle={styles.list}>
         <FlatList
@@ -145,12 +145,12 @@ export default class EntryTagsScreen extends Component {
         />
       </List>
     );
-  }
+  };
 
   _renderItem = ({ item }) => {
     return (
       <ListItem
-        onPress={() => console.log(item.id)}
+        onPress={() => this.itemChosen(item.name)}
         title={` ${item.name}`}
         leftIcon={
           icon(item.name)
@@ -158,6 +158,12 @@ export default class EntryTagsScreen extends Component {
         hideChevron={true}
       />
     );
+  };
+
+  itemChosen = (tagName) => {
+    this.setState({
+      tagText: `${this.state.tagText} ${tagName}`,
+    });
   };
 
   render() {

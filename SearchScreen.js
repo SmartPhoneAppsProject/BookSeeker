@@ -30,7 +30,7 @@ export default class SearchScreen extends Component {
     });
     const results = await this.search(text);
     this.props.setBooks(results);
-  }
+  };
 
   cancelSearch = () => {
     this.setState({
@@ -38,7 +38,7 @@ export default class SearchScreen extends Component {
       searchText: '',
     });
     this.props.resetBooks();
-  }
+  };
 
   search = async (text) => {
     const queries = text.split(' ');
@@ -69,7 +69,7 @@ export default class SearchScreen extends Component {
       }
     }
     return (results);
-  }
+  };
 
   renderCancelButton = () => {
     const cancelButton = this.state.searching
@@ -87,7 +87,7 @@ export default class SearchScreen extends Component {
       : <View />
 
     return cancelButton;
-  }
+  };
 
   render() {
     cancelButton = this.renderCancelButton();
