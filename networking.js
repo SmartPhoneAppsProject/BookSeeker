@@ -72,3 +72,46 @@ export const postData = json => {
       .then(response => resolve(response));
   });
 };
+
+export const getTags = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`https://book-seeker-staging.herokuapp.com/tags`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          reject(response);
+        }
+      })
+      .then((data) => {
+        let tags = [];
+        for (let tag of data) {
+          console.log(tag);
+          tags.push({
+            id: tag.id,
+            name: tag.name,
+          });
+        }
+        resolve(tags);
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+export const tagLinkBook = json => {
+  return new Promise((resolve, reject) => {
+    const headers = new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    });
+    const options = {
+      method: 'POST',
+      headers: headers,
+      body: json,
+    };
+    const request = new Request(`${baseUri}/books/tags`, options);
+
+    fetch(request)
+      .then(response => resolve(response));
+  });
+};

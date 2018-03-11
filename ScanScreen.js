@@ -12,6 +12,11 @@ import {
 import { NavigationActions } from 'react-navigation';
 
 import { postData } from './networking';
+import {
+  IconAndroid, IconC, IconCSS, IconGo, IconHTML, IconJS, IconOther, IconPeople, IconPHP, IconPython, IconRuby,
+  IconSwift,
+  IconTS
+} from "./icons";
 
 export default class ScanScreen extends React.Component {
   static navigationOptions = {
