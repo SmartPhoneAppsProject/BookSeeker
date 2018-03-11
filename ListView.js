@@ -63,7 +63,7 @@ export default class ListView extends Component {
       style={styles.tagsContainer}>
       {formated}
     </View>;
-  }
+  };
 
   _onRefresh = () => {
     this.setState({ onRefresh: true });
@@ -78,7 +78,7 @@ export default class ListView extends Component {
         }
       })
       .catch((error) => console.error(error));
-  }
+  };
 
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
@@ -93,19 +93,17 @@ export default class ListView extends Component {
         chevronColor='#c0c0c0'
         onPress={() => navigate('Detail', { item })}
         title={item.title}
-        subtitle={
-          tags
-        }
+        subtitle={tags}
         subtitleNumberOfLines={1}
         badge={{ element: status }}
       />
     );
-  }
+  };
 
   render() {
     return (
       <List
-        containerStyle={{ marginTop: 0, padding: 0 }}
+        containerStyle={styles.list}
       >
         <FlatList
           ListHeaderComponent={
@@ -127,8 +125,10 @@ export default class ListView extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
+  list: {
+    flex: 1,
+    marginTop: 0,
+    padding: 0
   },
   tagsContainer: {
     flexDirection: 'row',

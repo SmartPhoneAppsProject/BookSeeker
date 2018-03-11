@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  TextInput,
-  Text,
-  TouchableOpacity,
   ActivityIndicator,
+  FlatList,
 } from 'react-native';
 import {
   MaterialCommunityIcons,
   Octicons
 } from '@expo/vector-icons';
 import {
-  FormLabel, FormInput
+  Input,
+  Button,
+  List,
+  ListItem,
 } from 'react-native-elements';
+
 import {
   getTags,
   tagLinkBook,
 } from "./networking";
+import { icon } from "./icons";
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {
@@ -28,8 +31,10 @@ export default class EntryTagsScreen extends Component {
     super(props);
     this.state = {
       tagText: '',
-      isLoading: true,
+      appState: 'isLoading', // or error or success
       tags: [],
+      validation: false,
+      errorMessage: ' ',
     };
   }
 
@@ -37,7 +42,7 @@ export default class EntryTagsScreen extends Component {
     getTags()
       .then((tags) => {
         this.setState({
-          isLoading: false,
+          appStatue: 'success',
           tags,
         });
       })
@@ -45,11 +50,6 @@ export default class EntryTagsScreen extends Component {
         console.warn(error)
       });
   }
-
-  _onChangeText = (text) => {
-    console.log(text);
-    this.setState({ tagText: text });
-  };
 
   tagsAssociateToBook = (tagId) => {
     const { params } = this.props.navigation.state;
@@ -76,51 +76,94 @@ export default class EntryTagsScreen extends Component {
       });
   };
 
-  renderTags = () => {
-    let tags = [];
-    this.state.tags.map(tag => {
-      tags.push(<Text style={styles.tag} key={tag.id}>
-          {tag.name}
-        </Text>
-      );
-    });
-    return tags;
-  };
 
   renderForm = () => {
     return (
-      <View style={styles.childContainer}>
-        <Text style={styles.tag}>タグ</Text>
-        <TextInput
-          style={styles.input}
+      <View style={styles.form}>
+        <Input
+          containerStyle={styles.formInput}
+          leftIcon={
+            <MaterialCommunityIcons
+              name='tag'
+              size={15}
+              color='#808080'
+            />
+          }
           onChangeText={(text) => this._onChangeText(text)}
           value={this.state.tagText}
           returnKeyType='done'
           placeholder='tag'
           autoFocus={true}
+          shake={this.state.validation}
+          displayError={true}
+          errorStyle={{ color: '#cd5c5c' }}
+          errorMessage={this.state.errorMessage}
           maxLength={20}
+        />
+        <Button
+          containerStyle={styles.buttonContainer}
+          buttonStyle={styles.formButton}
+          text='submit'
+          onPress={() => console.log('onPress')}
+          iconRight={true}
+          icon={
+            <MaterialCommunityIcons
+              name='arrow-right'
+              size={15}
+              color='#ffffff'
+            />
+          }
         />
       </View>
     );
   };
 
-  renderButton = () => {
+  _onChangeText = (text) => {
+    console.log(text);
+    this.setState({
+      tagText: text,
+      validation: false,
+      errorMessage: ' ',
+    });
+
+    if (!text) {
+      this.setState({
+        validation: true,
+        errorMessage: '無効な値です'
+      });
+    }
+  };
+
+  renderTagsList() {
     return (
-      <View style={styles.childContainer}>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-        >
-          <Text style={styles.buttonText}>submit</Text>
-        </TouchableOpacity>
-      </View>
+      <List containerStyle={styles.list}>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={this.state.tags}
+          extraData={this.state.tags}
+          renderItem={this._renderItem}
+        />
+      </List>
+    );
+  }
+
+  _renderItem = ({ item }) => {
+    return (
+      <ListItem
+        onPress={() => console.log(item.id)}
+        title={` ${item.name}`}
+        leftIcon={
+          icon(item.name)
+        }
+        hideChevron={true}
+      />
     );
   };
 
   render() {
-    const tags = this.renderTags();
+    const tags = this.renderTagsList();
     const form = this.renderForm();
-    const button = this.renderButton();
-    if (this.state.isLoading) {
+    if (this.state.appState == 'success') {
       return (
         <View style={styles.isLoading}>
           <ActivityIndicator/>
@@ -129,9 +172,8 @@ export default class EntryTagsScreen extends Component {
     }
     return (
       <View style={styles.container}>
-        {tags}
         {form}
-        {button}
+        {tags}
       </View>
     );
   }
@@ -146,27 +188,24 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20
   },
-  childContainer: {
+  form: {
     flex: 1,
-    padding: 20,
+    flexDirection: 'row',
+    margin: 5,
   },
-  tag: {
-    alignSelf: 'stretch',
-    marginBottom: 10,
-    padding: 10,
-  },
-  input: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 10,
-    padding: 10,
+  formInput: {
+    flex: 8,
   },
   buttonContainer: {
-    backgroundColor: '#2980b6',
-    paddingVertical: 15,
+    flex: 2,
+    height: 35,
   },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: '700',
+  formButton: {
+    backgroundColor: '#c0c0c0',
+    borderWidth: 0,
+    borderRadius: 20,
   },
+  list: {
+    flex: 9,
+  }
 });
