@@ -15,7 +15,7 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
-import { getData } from './networking';
+import { getBooks } from './networking';
 import {
   icon,
 } from './icons';
@@ -70,7 +70,7 @@ export default class ListView extends Component {
 
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    getData(bookSeeker)
+    getBooks(bookSeeker)
       .then((books) => {
         console.log(books);
         if (!books) {
