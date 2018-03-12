@@ -41,6 +41,9 @@ export default class EntryTagsScreen extends Component {
   componentDidMount() {
     getTags()
       .then((tags) => {
+        for (let tag of tags) {
+          tag.chosen = false;
+        }
         this.setState({
           appStatue: 'success',
           tags,
@@ -76,67 +79,9 @@ export default class EntryTagsScreen extends Component {
       });
   };
 
-
-  renderForm = () => {
-    return (
-      <View style={styles.form}>
-        <Input
-          containerStyle={styles.formInput}
-          leftIcon={
-            <MaterialCommunityIcons
-              name='tag'
-              size={15}
-              color='#808080'
-            />
-          }
-          onChangeText={(text) => this._onChangeText(text)}
-          value={this.state.tagText}
-          returnKeyType='done'
-          placeholder='tag'
-          autoFocus={true}
-          shake={this.state.validation}
-          displayError={true}
-          errorStyle={{ color: '#cd5c5c' }}
-          errorMessage={this.state.errorMessage}
-          maxLength={20}
-        />
-        <Button
-          containerStyle={styles.buttonContainer}
-          buttonStyle={styles.formButton}
-          text='submit'
-          onPress={() => console.log('onPress')}
-          iconRight={true}
-          icon={
-            <MaterialCommunityIcons
-              name='arrow-right'
-              size={15}
-              color='#ffffff'
-            />
-          }
-        />
-      </View>
-    );
-  };
-
-  _onChangeText = (text) => {
-    console.log(text);
-    this.setState({
-      tagText: text,
-      validation: false,
-      errorMessage: ' ',
-    });
-
-    if (!text) {
-      this.setState({
-        validation: true,
-        errorMessage: '無効な値です'
-      });
-    }
-  };
-
   renderTagsList = () => {
     return (
-      <List containerStyle={styles.list}>
+      <List containerStyle={styles.listContainer}>
         <FlatList
           keyExtractor={(item) => item.id}
           data={this.state.tags}
@@ -147,28 +92,51 @@ export default class EntryTagsScreen extends Component {
     );
   };
 
-  _renderItem = ({ item }) => {
+  _renderItem = ({ item, index }) => {
+    const status = item.chosen
+      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>
+      : <View/>;
+
     return (
       <ListItem
-        onPress={() => this.itemChosen(item.name)}
+        onPress={() => {
+          let { tags } = this.state;
+          tags[index].chosen = !tags[index].chosen;
+          this.setState({ tags });
+          console.log(tags);
+        }}
         title={` ${item.name}`}
         leftIcon={
           icon(item.name)
         }
+        badge={{ element: status }}
         hideChevron={true}
       />
     );
   };
 
-  itemChosen = (tagName) => {
-    this.setState({
-      tagText: `${this.state.tagText} ${tagName}`,
-    });
+  renderButton = () => {
+    return (
+      <Button
+        containerStyle={styles.buttonContainer}
+        buttonStyle={styles.formButton}
+        text='submit'
+        onPress={() => console.log('onPress')}
+        iconRight={true}
+        icon={
+          <MaterialCommunityIcons
+            name='arrow-right'
+            size={15}
+            color='#ffffff'
+          />
+        }
+      />
+    );
   };
 
   render() {
     const tags = this.renderTagsList();
-    const form = this.renderForm();
+    const button = this.renderButton();
     if (this.state.appState == 'success') {
       return (
         <View style={styles.isLoading}>
@@ -178,8 +146,8 @@ export default class EntryTagsScreen extends Component {
     }
     return (
       <View style={styles.container}>
-        {form}
         {tags}
+        {button}
       </View>
     );
   }
@@ -194,24 +162,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20
   },
-  form: {
-    flex: 1,
-    flexDirection: 'row',
-    margin: 5,
-  },
-  formInput: {
-    flex: 8,
+  listContainer: {
+    flex: 9,
+    marginTop: 0,
   },
   buttonContainer: {
-    flex: 2,
-    height: 35,
+    flex: 1,
   },
   formButton: {
     backgroundColor: '#c0c0c0',
     borderWidth: 0,
     borderRadius: 20,
   },
-  list: {
-    flex: 9,
-  }
 });

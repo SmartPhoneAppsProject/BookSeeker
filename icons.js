@@ -1,31 +1,17 @@
 import React, {
   View,
   Text,
-  Component
 } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   Octicons,
   MaterialCommunityIcons,
   SimpleLineIcons,
+  Ionicons,
 } from '@expo/vector-icons';
 
 const size = 14;
-const color = '#808080'
-
-export const showTag = (name) => {
-  return (
-    <View
-      style={styles.subtitleView}
-      key={tag.id}
-    >
-      {icon(name)}
-      <Text style={{ paddingLeft: 10, color: color, }}>
-        {name}
-      </Text>
-    </View>
-  );
-}
+const color = '#808080';
 
 export const icon = name => {
   let icon;
@@ -71,7 +57,7 @@ export const icon = name => {
       icon = IconOther();
   }
   return icon;
-}
+};
 
 export const IconRuby = () => {
   return <Octicons name='ruby' size={size} color={color} />;
@@ -123,7 +109,7 @@ export const IconPeople = () => {
 
 export const IconOther = () => {
   return <SimpleLineIcons name='question' size={size} color={color} />;
-}
+};
 
 const styles = StyleSheet.create({
   container: {
