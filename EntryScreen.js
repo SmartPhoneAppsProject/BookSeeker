@@ -13,10 +13,11 @@ import {
 
 import {
   Input,
+  Button,
 } from 'react-native-elements';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
 
 import { pickPhoto, takePhoto } from './ImagePicker';
 
@@ -111,7 +112,6 @@ export default class EntryScreen extends Component {
       <View style={styles.childContainer}>
         <Input
           containerStyle={styles.input}
-          leftIcon={<MaterialIcons name='title' size={15} color='#808080'/>}
           onChangeText={(text) => this._changeText(text)}
           value={this.state.title}
           returnKeyType='done'
@@ -145,11 +145,15 @@ export default class EntryScreen extends Component {
   renderDateContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>発行日</Text>
-        <TouchableOpacity style={styles.input}
-          onPress={this.showDateTimePicker}>
-          <Text>{this.state.publishedAt}</Text>
-        </TouchableOpacity>
+        <Text style={styles.tag}>発行日を選択</Text>
+        <Button
+          iconRight
+          icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
+          text={this.state.publishedAt}
+          textStyle={{color: '#A4A4A4', fontWeight: "700"}}
+          buttonStyle={styles.dateButton}
+          iconContainerStyle={{marginRight: 10, marginLeft: 110}}
+          onPress={this.showDateTimePicker}/>
         <View style={styles.showDateTimePicker}>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
@@ -169,11 +173,14 @@ export default class EntryScreen extends Component {
   renderButtonContainer() {
     return (
       <View style={styles.childContainer}>
-        <TouchableOpacity style={styles.buttonContainer}
-          onPress={this.goScanScreen}>
-          <Text style={styles.buttonText}>バーコード読み取り</Text>
-        </TouchableOpacity>
-      </View >
+        <Button
+          icon={<FontAwesome name='barcode' size={22} color='white'/>}
+          text='バーコード読み取り'
+          onPress={this.goScanScreen}
+          textStyle={styles.buttonText}
+          buttonStyle={styles.buttonContainer}
+          iconContainerStyle={{marginRight: 10}}/>
+      </View>
     );
   }
 
@@ -220,7 +227,7 @@ const styles = StyleSheet.create({
   },
   childContainer: {
     flex: 1,
-    padding: 20,
+    padding: 15,
   },
   tag: {
     alignSelf: 'stretch',
@@ -234,9 +241,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#A4A4A4'
   },
+  dateButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    margin: 10,
+    width: width - 60,
+    paddingLeft: 18,
+    paddingRight: 18,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderWidth: 2,
+    borderColor: '#A4A4A4',
+    borderRadius: 7,
+
+  },
   buttonContainer: {
     backgroundColor: '#2980b6',
-    paddingVertical: 15,
+    paddingVertical: 20,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   buttonText: {
     color: '#fff',
