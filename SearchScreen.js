@@ -102,7 +102,6 @@ export default class SearchScreen extends Component {
           placeholder='検索'
           placeholderTextColor='#f5f5f5'
           clearButtonMode='while-editing'
-          color='#ffffff'
           leftIcon={<MaterialIcons name='search' size={13} color='#ffffff' />}
           leftIconContainerStyle={styles.icon}
         />
