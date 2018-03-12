@@ -113,16 +113,11 @@ export default class EntryScreen extends Component {
       <View style={styles.childContainer}>
         <Input
           containerStyle={styles.input}
-          leftIcon={
-            <MaterialIcons
-              name='title'
-              size={15}
-              color='#808080'/>
-          }
+          leftIcon={<MaterialIcons name='title' size={15} color='#808080'/>}
           onChangeText={(text) => this._changeText(text)}
           value={this.state.title}
           returnKeyType='done'
-          placeholder='TITLE'
+          placeholder='タイトル'
           autoFocus={true}
           shake={this.state.validation}
           displayError={true}
