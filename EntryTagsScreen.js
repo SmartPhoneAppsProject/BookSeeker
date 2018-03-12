@@ -33,9 +33,8 @@ export default class EntryTagsScreen extends Component {
       tagText: '',
       appState: 'isLoading', // or error or success
       tags: [],
+      chosenIds: [],
       updated: true,
-      validation: false,
-      errorMessage: ' ',
     };
   }
 
@@ -54,31 +53,6 @@ export default class EntryTagsScreen extends Component {
         console.warn(error)
       });
   }
-
-  tagsAssociateToBook = (tagId) => {
-    const { params } = this.props.navigation.state;
-
-    const json = JSON.stringify({
-      book_id: params.id,
-      tag_id: tagId
-    });
-
-    tagLinkBook(json)
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-
-      })
-      .catch(error => {
-        console.warn(error);
-        tagLinkBook(json)
-          .then(response => response.json())
-          .then(responseJson => {
-            console.log(responseJson);
-          })
-          .catch(error => console.error(error));
-      });
-  };
 
   renderTagsList = () => {
     return (
@@ -100,7 +74,7 @@ export default class EntryTagsScreen extends Component {
 
     return (
       <ListItem
-        onPress={() => this.listItemOnPress(index)}
+        onPress={() => this.changeTagChosen(item, index)}
         title={` ${item.name}`}
         leftIcon={
           icon(item.name)
@@ -111,12 +85,26 @@ export default class EntryTagsScreen extends Component {
     );
   };
 
-  listItemOnPress = (itemIndex) => {
-    let { tags } = this.state;
+  //todo indexから要素のidに変更
+  changeTagChosen = (tag, itemIndex) => {
+    let { tags, chosenIds } = this.state;
+
     tags[itemIndex].chosen = !tags[itemIndex].chosen;
+
+    if (tags[itemIndex].chosen) {
+      chosenIds.push(tag.id);
+    } else {
+      const searchIndex = tags.indexOf(tag.id);
+      chosenIds.splice(searchIndex, 1);
+    }
+
+    console.log(tag);
+    console.log(this.state.chosenIds);
+
     this.setState({
       tags,
-      updated: !this.state.updated //re-render ListView
+      updated: !this.state.updated, //re-render ListView
+      chosenIds,
     });
   };
 
@@ -126,7 +114,7 @@ export default class EntryTagsScreen extends Component {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.formButton}
         text='submit'
-        onPress={() => console.log('onPress')}
+        onPress={this.buttonOnPress}
         iconRight={true}
         icon={
           <MaterialCommunityIcons
@@ -137,6 +125,40 @@ export default class EntryTagsScreen extends Component {
         }
       />
     );
+  };
+
+  buttonOnPress = () => {
+    const { book } = this.props.navigation.state.params;
+    console.log('book id: ' + book.id);
+
+    for (let id of this.state.chosenIds) {
+      this.tagsAssociateToBook(id);
+    }
+  };
+
+  tagsAssociateToBook = (tagId) => {
+    const { book } = this.props.navigation.state.params;
+    console.log(book.id);
+
+    const json = JSON.stringify({
+      book_id: book.id,
+      tag_id: tagId
+    });
+
+    tagLinkBook(json)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+      })
+      .catch(error => {
+        console.warn(error);
+        tagLinkBook(json)
+          .then(response => response.json())
+          .then(responseJson => {
+            console.log(responseJson);
+          })
+          .catch(error => console.error(error));
+      });
   };
 
   render() {

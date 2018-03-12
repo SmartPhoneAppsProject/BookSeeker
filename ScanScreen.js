@@ -52,9 +52,9 @@ export default class ScanScreen extends Component {
     } else { //バーコードでないとき
       this.setState({ status: 'reading' });
     }
-  }
+  };
 
-  goToHomeScreen(){
+  goToHomeScreen = () => {
     // https://github.com/react-navigation/react-navigation/issues/1448
     const actions = [NavigationActions.navigate({ routeName: 'Home' })]
 
@@ -64,9 +64,10 @@ export default class ScanScreen extends Component {
     });
 
     this.props.navigation.dispatch(resetAction)
-  }
+  };
 
-  registerBook(janCode) {
+  registerBook = (janCode) => {
+    const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
 
     const json = JSON.stringify({
@@ -81,6 +82,11 @@ export default class ScanScreen extends Component {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
+        const book = {
+          id: responseJson.id,
+        };
+        navigate('EntryTags', { book });
+        // this.goToHomeScreen();
         // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
 
       })
@@ -90,17 +96,19 @@ export default class ScanScreen extends Component {
           .then(response => response.json())
           .then(responseJson => {
             console.log(responseJson);
+            const book = {
+              id: responseJson.id,
+            };
+            navigate('EntryTags', { book });
+            // this.goToHomeScreen();
             // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
           })
           .catch(error => console.error(error));
       });
 
+  };
 
-    // this.goToHomeScreen();
-    this.props.navigation.navigate('EntryTags');
-  }
-
-  renderNoPermissions() {
+  renderNoPermissions = () => {
     return (
       <View style={styles.noPermissions}>
         <Text style={styles.noPermissionsText}>
@@ -108,9 +116,9 @@ export default class ScanScreen extends Component {
         </Text>
       </View>
     );
-  }
+  };
 
-  renderCamera() {
+  renderCamera = () => {
     let statusText = <View/>;
     if (this.state.status == 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
@@ -145,7 +153,7 @@ export default class ScanScreen extends Component {
         </View>
       </View>
     );
-  }
+  };
 
   render() {
     const cameraScreen = this.state.permissionsGranted
