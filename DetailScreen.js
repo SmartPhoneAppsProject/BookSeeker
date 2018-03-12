@@ -98,10 +98,10 @@ export default class DetailScreen extends React.Component {
 
     let formated = [];
     let tag;
-    for (let i of tags) {
-      tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
+    for (tag of tags) {
+      tag = <Text style={styles.tagText}>{icon(tags.name)}{tags.name}</Text>;
       formated.push(
-        <View style={styles.tag} key={i}>
+        <View style={styles.tag} key={tags.id}>
           {tag}
         </View>
       )
