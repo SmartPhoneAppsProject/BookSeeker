@@ -33,6 +33,7 @@ export default class EntryTagsScreen extends Component {
       tagText: '',
       appState: 'isLoading', // or error or success
       tags: [],
+      updated: true,
       validation: false,
       errorMessage: ' ',
     };
@@ -85,7 +86,7 @@ export default class EntryTagsScreen extends Component {
         <FlatList
           keyExtractor={(item) => item.id}
           data={this.state.tags}
-          extraData={this.state.tags}
+          extraData={this.state.updated}
           renderItem={this._renderItem}
         />
       </List>
@@ -99,12 +100,7 @@ export default class EntryTagsScreen extends Component {
 
     return (
       <ListItem
-        onPress={() => {
-          let { tags } = this.state;
-          tags[index].chosen = !tags[index].chosen;
-          this.setState({ tags });
-          console.log(tags);
-        }}
+        onPress={() => this.listItemOnPress(index)}
         title={` ${item.name}`}
         leftIcon={
           icon(item.name)
@@ -113,6 +109,15 @@ export default class EntryTagsScreen extends Component {
         hideChevron={true}
       />
     );
+  };
+
+  listItemOnPress = (itemIndex) => {
+    let { tags } = this.state;
+    tags[itemIndex].chosen = !tags[itemIndex].chosen;
+    this.setState({
+      tags,
+      updated: !this.state.updated //re-render ListView
+    });
   };
 
   renderButton = () => {
@@ -153,25 +158,26 @@ export default class EntryTagsScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  isLoading: {
-    flex: 1,
-    paddingTop: 20
-  },
-  listContainer: {
-    flex: 9,
-    marginTop: 0,
-  },
-  buttonContainer: {
-    flex: 1,
-  },
-  formButton: {
-    backgroundColor: '#c0c0c0',
-    borderWidth: 0,
-    borderRadius: 20,
-  },
-});
+const
+  styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#ffffff',
+    },
+    isLoading: {
+      flex: 1,
+      paddingTop: 20
+    },
+    listContainer: {
+      flex: 9,
+      marginTop: 0,
+    },
+    buttonContainer: {
+      flex: 1,
+    },
+    formButton: {
+      backgroundColor: '#c0c0c0',
+      borderWidth: 0,
+      borderRadius: 20,
+    },
+  });
