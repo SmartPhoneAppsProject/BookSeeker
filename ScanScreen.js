@@ -5,15 +5,14 @@ import {
   View
 } from 'react-native';
 import {
-  Camera,
   BarCodeScanner,
   Permissions
 } from 'expo';
 import { NavigationActions } from 'react-navigation';
 
-import { postData } from './networking';
+import { postBook } from './networking';
 
-export default class ScanScreen extends React.Component {
+export default class ScanScreen extends Component {
   static navigationOptions = {
     title: 'バーコードリーダー',
   };
@@ -43,7 +42,8 @@ export default class ScanScreen extends React.Component {
             status: 'ok'
           });
           setTimeout(() => {
-            this.registerBook(data);
+            const janCode = parseInt(data);
+            this.registerBook(janCode);
           }, 1000);
         }
       } else { //バーコードであるがISBNでないとき
@@ -73,7 +73,7 @@ export default class ScanScreen extends React.Component {
       jan_code: janCode
     });
 
-    postData(json)
+    postBook(json)
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
@@ -82,7 +82,7 @@ export default class ScanScreen extends React.Component {
       })
       .catch(error => {
         console.warn(error);
-        postData(json)
+        postBook(json)
           .then(response => response.json())
           .then(responseJson => {
             console.log(responseJson);
@@ -94,7 +94,7 @@ export default class ScanScreen extends React.Component {
 
   renderNoPermissions() {
     return (
-      <View style={styles.noPermissions} >
+      <View style={styles.noPermissions}>
         <Text style={styles.noPermissionsText}>
           カメラを使用できません
         </Text>
@@ -103,8 +103,7 @@ export default class ScanScreen extends React.Component {
   }
 
   renderCamera() {
-    const { permissionsGranted } = this.state;
-    let statusText = <View />;
+    let statusText = <View/>;
     if (this.state.status == 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status == 'invalid') {
@@ -114,13 +113,19 @@ export default class ScanScreen extends React.Component {
     return (
       <View style={styles.cameraScreen}>
         <View style={styles.header}>
-          <Text style={styles.headerWarn}>978<Text style={styles.text}>から始まるバーコードを画面に合わせてください</Text></Text>
+          <Text style={styles.headerWarn}>
+            978
+            <Text style={styles.text}>
+              から始まるバーコードを画面に合わせてください
+            </Text>
+          </Text>
         </View>
         <View style={styles.reader}>
           <View style={styles.cameraSide}>
             <Text></Text>
           </View>
-          <BarCodeScanner style={styles.camera}
+          <BarCodeScanner
+            style={styles.camera}
             onBarCodeRead={this._handleBarCodeRead}
           />
           <View style={styles.cameraSide}>
