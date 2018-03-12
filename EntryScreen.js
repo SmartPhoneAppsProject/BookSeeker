@@ -5,12 +5,15 @@ import {
   View,
   Text,
   Image,
-  Button,
   Dimensions,
   TouchableOpacity,
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
+
+import {
+  Input,
+} from 'react-native-elements';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
@@ -34,6 +37,8 @@ export default class EntryScreen extends Component {
       publishedAt: formatDate,
       photo: null,
       isDateTimePickerVisible: false,
+      validation: false,
+      errorMessage: ' ',
     };
 
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
@@ -42,22 +47,22 @@ export default class EntryScreen extends Component {
     this.goScanScreen = this.goScanScreen.bind(this);
   }
 
-  showDateTimePicker() {
+  showDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: true });
-  }
+  };
 
-  hideDateTimePicker() {
+  hideDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: false });
-  }
+  };
 
-  handleDatePicked(date) {
+  handleDatePicked = (date) => {
     const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     this.setState({
       chosenDate: date,
       publishedAt: formatDate,
     });
     this.hideDateTimePicker();
-  }
+  };
 
   async _takePhoto() {
     const photo = await takePhoto();
@@ -71,15 +76,15 @@ export default class EntryScreen extends Component {
     console.log(this.state.photo);
   }
 
-  goScanScreen() {
+  goScanScreen = () => {
     this.props.navigation.navigate('Scan', {
       title: this.state.title,
       photo: this.state.photo,
       publishedAt: this.state.publishedAt,
     });
-  }
+  };
 
-  renderPhotoContainer() {
+  renderPhotoContainer = () => {
     const photo = this.state.photo
       ? <Image style={styles.photo}
         resizeMode='contain'
@@ -101,20 +106,48 @@ export default class EntryScreen extends Component {
         </TouchableHighlight>
       </View>
     );
-  }
+  };
 
-  renderTitleContainer() {
+  renderTitleContainer = () => {
     return (
       <View style={styles.childContainer}>
-        <TextInput style={styles.input}
-          onChangeText={(text) => this.setState({ title: text })}
+        <Input
+          containerStyle={styles.input}
+          leftIcon={
+            <MaterialIcons
+              name='title'
+              size={15}
+              color='#808080'/>
+          }
+          onChangeText={(text) => this._changeText(text)}
           value={this.state.title}
           returnKeyType='done'
           placeholder='TITLE'
+          autoFocus={true}
+          shake={this.state.validation}
+          displayError={true}
+          errorStyle={{ color: '#cd5c5c' }}
+          errorMessage={this.state.errorMessage}
           maxLength={100} />
       </View>
     );
-  }
+  };
+
+  _changeText = (text) => {
+    console.log(text);
+    this.setState({
+      title: text,
+      validation: false,
+      errorMessage: ' ',
+    });
+
+    if (!text) {
+      this.setState({
+        validation: true,
+        errorMessage: '無効な値です。'
+      });
+    }
+  };
 
   renderDateContainer() {
     return (
