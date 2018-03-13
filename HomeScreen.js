@@ -7,7 +7,7 @@ import {
 
 import ListView from './ListView';
 import PullRefresh from './PullRefresh';
-import { getData } from './networking';
+import { getBooks } from './networking';
 import LogoEntry from './LogoEntry';
 import LogoSAP from './LogoSAP';
 
@@ -45,9 +45,7 @@ export default class HomeScreen extends Component<State> {
   }
 
   componentDidMount() {
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getData(bookSeeker)
+    getBooks()
       .then((books) => {
         if (!books) {
           this.setState({
@@ -66,9 +64,7 @@ export default class HomeScreen extends Component<State> {
   }
 
   _refresh() {
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getData(bookSeeker)
+    getBooks()
       .then((books) => {
         if (!books) {
           this.setState({

@@ -96,13 +96,12 @@ export default class SearchScreen extends Component {
       <View style={styles.container}>
         <Input style={styles.input}
           containerStyle={styles.containerStyle}
-          onChangeText={(text) => { console.log(text); this.startSearch(text) }}
+          onChangeText={(text) => this.startSearch(text) }
           value={this.state.searchText}
           returnKeyType='done'
           placeholder='検索'
           placeholderTextColor='#f5f5f5'
           clearButtonMode='while-editing'
-          color='#ffffff'
           leftIcon={<MaterialIcons name='search' size={13} color='#ffffff' />}
           leftIconContainerStyle={styles.icon}
         />

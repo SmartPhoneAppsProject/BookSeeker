@@ -61,13 +61,11 @@ export default class EntryScreen extends Component {
   async _takePhoto() {
     const photo = await takePhoto();
     this.setState({ photo: photo });
-    console.log(this.state.photo);
   }
 
   async _pickPhoto() {
     const photo = await pickPhoto();
     this.setState({ photo: photo });
-    console.log(this.state.photo);
   }
 
   goScanScreen() {

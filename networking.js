@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const getData = uri => {
+const baseUri = 'https://book-seeker-staging.herokuapp.com';
+
+export const getBooks = () => {
   return new Promise((resolve, reject) => {
-    fetch(uri)
+    fetch(`${baseUri}/books`)
       .then((response) => {
         if (response.ok) {
           console.log('Success');
@@ -33,11 +35,10 @@ export const getData = uri => {
       })
       .catch((error) => console.error(error));
   });
-}
+};
 
-export const putData = json => {
+export const rentBook = json => {
   return new Promise((resolve, reject) => {
-    const uri = 'https://go-api-staging.herokuapp.com/books';
     const headers = new Headers({
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -47,16 +48,15 @@ export const putData = json => {
       headers: headers,
       body: json
     };
-    const request = new Request(uri, options);
+    const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
       .then(response => resolve(response));
   });
-}
+};
 
-export const postData = json => {
+export const postBook = json => {
   return new Promise((resolve, reject) => {
-    const uri = 'https://go-api-staging.herokuapp.com/books';
     const headers = new Headers({
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -66,9 +66,9 @@ export const postData = json => {
       headers: headers,
       body: json,
     };
-    const request = new Request(uri, options);
+    const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
       .then(response => resolve(response));
   });
-}
+};

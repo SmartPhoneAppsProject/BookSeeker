@@ -15,7 +15,7 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
-import { getData } from './networking';
+import { getBooks } from './networking';
 import {
   icon,
 } from './icons';
@@ -41,7 +41,6 @@ export default class ListView extends Component {
     let formated = [];
     let tag;
     for (i in tags) {
-      console.log(i);
       if (i < 3) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
       } else if (i == 3) {
@@ -71,7 +70,7 @@ export default class ListView extends Component {
 
     const bookSeeker = "https://go-api-staging.herokuapp.com/books";
 
-    getData(bookSeeker)
+    getBooks(bookSeeker)
       .then((books) => {
         console.log(books);
         if (!books) {
