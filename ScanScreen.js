@@ -54,7 +54,7 @@ export default class ScanScreen extends Component {
     }
   }
 
-  registerBook(janCode) {
+  registerBook = (janCode) => {
     const { params } = this.props.navigation.state;
     // https://github.com/react-navigation/react-navigation/issues/1448
     const actions = [NavigationActions.navigate({ routeName: 'Home' })]
@@ -90,9 +90,9 @@ export default class ScanScreen extends Component {
           })
           .catch(error => console.error(error));
       });
-  }
+  };
 
-  renderNoPermissions() {
+  renderNoPermissions = () => {
     return (
       <View style={styles.noPermissions}>
         <Text style={styles.noPermissionsText}>
@@ -100,9 +100,22 @@ export default class ScanScreen extends Component {
         </Text>
       </View>
     );
-  }
+  };
 
-  renderCamera() {
+  renderHeader = () => {
+    return (
+      <View style={styles.header}>
+        <Text style={styles.headerWarn}>
+          978
+          <Text style={styles.text}>
+            から始まるバーコードを画面に合わせてください
+          </Text>
+        </Text>
+      </View>
+    );
+  };
+
+  renderScanScreen = () => {
     let statusText = <View/>;
     if (this.state.status == 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
@@ -110,16 +123,10 @@ export default class ScanScreen extends Component {
       statusText = <Text style={styles.statusNo}>無効な値です</Text>;
     }
 
+    const header = this.renderHeader();
     return (
       <View style={styles.cameraScreen}>
-        <View style={styles.header}>
-          <Text style={styles.headerWarn}>
-            978
-            <Text style={styles.text}>
-              から始まるバーコードを画面に合わせてください
-            </Text>
-          </Text>
-        </View>
+        {header}
         <View style={styles.reader}>
           <View style={styles.cameraSide}>
             <Text></Text>
@@ -137,13 +144,18 @@ export default class ScanScreen extends Component {
         </View>
       </View>
     );
-  }
+  };
 
   render() {
     const cameraScreen = this.state.permissionsGranted
-      ? this.renderCamera()
+      ? this.renderScanScreen()
       : this.renderNoPermissions();
-    return <View style={styles.container}>{cameraScreen}</View>;
+
+    return (
+      <View style={styles.container}>
+        {cameraScreen}
+      </View>
+    );
   }
 }
 
