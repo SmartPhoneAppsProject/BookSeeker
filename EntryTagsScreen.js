@@ -113,7 +113,7 @@ export default class EntryTagsScreen extends Component {
       <Button
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.formButton}
-        text='submit'
+        title='submit'
         onPress={this.buttonOnPress}
         iconRight={true}
         icon={
