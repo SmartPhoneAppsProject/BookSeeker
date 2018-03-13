@@ -69,7 +69,7 @@ export default class ListView extends Component {
   _onRefresh = () => {
     this.setState({ onRefresh: true });
 
-    getData()
+    getBooks()
       .then((books) => {
         console.log(books);
         if (!books) {
