@@ -82,7 +82,7 @@ export default class DetailScreen extends React.Component {
 
   _renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
-    if(!imageUri){
+    if(imageUri === 'none'){
       imageUri = 'https://facebook.github.io/react/logo-og.png';
     }
 
