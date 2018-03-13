@@ -110,18 +110,19 @@ export default class EntryScreen extends Component {
   renderTitleContainer = () => {
     return (
       <View style={styles.childContainer}>
-        <Input
-          containerStyle={styles.input}
-          onChangeText={(text) => this._changeText(text)}
-          value={this.state.title}
-          returnKeyType='done'
-          placeholder='タイトル'
-          autoFocus={true}
-          shake={this.state.validation}
-          displayError={true}
-          errorStyle={{ color: '#cd5c5c' }}
-          errorMessage={this.state.errorMessage}
-          maxLength={100} />
+        <View style={styles.inputContainer}>
+          <Input
+            containerStyle={styles.input}
+            onChangeText={(text) => this._changeText(text)}
+            value={this.state.title}
+            returnKeyType='done'
+            placeholder='タイトル'
+            shake={this.state.validation}
+            displayError={true}
+            errorStyle={{ color: '#cd5c5c' }}
+            errorMessage={this.state.errorMessage}
+            maxLength={100} />
+        </View>
       </View>
     );
   };
@@ -149,8 +150,8 @@ export default class EntryScreen extends Component {
         <Button
           iconRight
           icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
-          text={this.state.publishedAt}
-          textStyle={{color: '#A4A4A4', fontWeight: "700"}}
+          title={this.state.publishedAt}
+          titleStyle={{color: '#A4A4A4', fontWeight: "700"}}
           buttonStyle={styles.dateButton}
           iconContainerStyle={{marginRight: 10, marginLeft: 110}}
           onPress={this.showDateTimePicker}/>
@@ -175,9 +176,9 @@ export default class EntryScreen extends Component {
       <View style={styles.childContainer}>
         <Button
           icon={<FontAwesome name='barcode' size={22} color='white'/>}
-          text='バーコード読み取り'
+          title='バーコード読み取り'
           onPress={this.goScanScreen}
-          textStyle={styles.buttonText}
+          titleStyle={styles.buttonText}
           buttonStyle={styles.buttonContainer}
           iconContainerStyle={{marginRight: 10}}/>
       </View>
@@ -231,14 +232,17 @@ const styles = StyleSheet.create({
   },
   tag: {
     alignSelf: 'stretch',
-    marginBottom: 10,
-    padding: 10,
+    paddingLeft: 20,
+  },
+  inputContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
   },
   input: {
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 10,
-    padding: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderColor: '#A4A4A4'
   },
   dateButton: {
