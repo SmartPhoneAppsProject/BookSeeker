@@ -24,7 +24,7 @@
     "expo": "^25.0.0",
     "install": "^0.10.4",
     "npm": "^4.6.1",
-    "react-native-elements": "^1.0.0-beta2",
+    "react-native-elements": "^1.0.0-beta3",
     "react": "^16.2.0",
     "react-native": "^0.52.0",
     "react-native-fetch": "^1.0.0",
