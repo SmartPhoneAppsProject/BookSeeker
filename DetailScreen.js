@@ -80,7 +80,7 @@ export default class DetailScreen extends React.Component {
       });
   };
 
-  _renderImage() {
+  _renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
     if(!imageUri){
       imageUri = 'https://facebook.github.io/react/logo-og.png';
@@ -91,9 +91,9 @@ export default class DetailScreen extends React.Component {
         <Image style={styles.img} source={{ uri: imageUri }}/>
       </View>
     )
-  }
+  };
 
-  _renderTags() {
+  _renderTags = () => {
     const tags = this.props.navigation.state.params.item.tags;
 
     let formated = [];
@@ -116,7 +116,7 @@ export default class DetailScreen extends React.Component {
     )
   };
 
-  _renderIcon() {
+  _renderIcon = () => {
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.status]}>
@@ -132,14 +132,14 @@ export default class DetailScreen extends React.Component {
     }
   };
 
-  _renderButton() {
+  _renderButton = () => {
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.buttonContainer]}>
           <Button
             icon={<MaterialCommunityIcons name='keyboard-return' size={30} color='white'/>}
-            text="返却"
-            textStyle={{ fontWeight: "700" }}
+            title="返却"
+            titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
             iconContainerStyle={{ marginRight: 10 }}
             onPress={this._returnBook} />
@@ -150,8 +150,8 @@ export default class DetailScreen extends React.Component {
         <View style={[styles.base, styles.buttonContainer]}>
           <Button
             icon={<MaterialCommunityIcons name='book-open-page-variant' size={30} color='white'/>}
-            text="貸出"
-            textStyle={{ fontWeight: "700" }}
+            title="貸出"
+            titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
             iconContainerStyle={{ marginRight: 10 }}
             onPress={this._lendBook} />
