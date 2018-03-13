@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  Dimensions,
 } from 'react-native';
 import {
   BarCodeScanner,
   Permissions
 } from 'expo';
 import { NavigationActions } from 'react-navigation';
+import { Button } from 'react-native-elements';
 
 import { postBook } from './networking';
 
@@ -49,10 +52,13 @@ export default class ScanScreen extends Component {
       } else { //バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
       }
+      setTimeout(() => {
+        this.setState({ status: 'reading' });
+      }, 1000);
     } else { //バーコードでないとき
       this.setState({ status: 'reading' });
     }
-  }
+  };
 
   registerBook = (janCode) => {
     const { params } = this.props.navigation.state;
@@ -64,7 +70,7 @@ export default class ScanScreen extends Component {
       actions
     });
 
-    this.props.navigation.dispatch(resetAction)
+    this.props.navigation.dispatch(resetAction);
 
     const json = JSON.stringify({
       title: params.title,
@@ -105,7 +111,7 @@ export default class ScanScreen extends Component {
   renderHeader = () => {
     return (
       <View style={styles.header}>
-        <Text style={styles.headerWarn}>
+        <Text style={styles.stringWarn}>
           978
           <Text style={styles.text}>
             から始まるバーコードを画面に合わせてください
@@ -115,49 +121,74 @@ export default class ScanScreen extends Component {
     );
   };
 
-  renderScanScreen = () => {
+  renderCamera = () => {
+    return (
+      <View style={styles.cameraContainer}>
+        <BarCodeScanner
+          style={styles.camera}
+          onBarCodeRead={this._handleBarCodeRead}
+        >
+          <View style={styles.cameraInline}>
+            <Text/>
+          </View>
+        </BarCodeScanner>
+      </View>
+    );
+  };
+
+  renderFooter = () => {
     let statusText = <View/>;
     if (this.state.status == 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status == 'invalid') {
-      statusText = <Text style={styles.statusNo}>無効な値です</Text>;
+      statusText = <Text style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
+    return (
+      <View style={styles.footer}>
+        <Button
+          title={statusText}
+          loading={(this.state.status == 'reading')}
+          loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+          titleStyle={{ fontWeight: "700" }}
+          clear={true}
+        />
+      </View>
+    );
+  };
+
+  renderScanScreen = () => {
     const header = this.renderHeader();
+    const camera = this.renderCamera();
+    const footer = this.renderFooter();
+
     return (
       <View style={styles.cameraScreen}>
         {header}
-        <View style={styles.reader}>
-          <View style={styles.cameraSide}>
-            <Text></Text>
-          </View>
-          <BarCodeScanner
-            style={styles.camera}
-            onBarCodeRead={this._handleBarCodeRead}
-          />
-          <View style={styles.cameraSide}>
-            <Text></Text>
-          </View>
-        </View>
-        <View style={styles.footer}>
-          {statusText}
-        </View>
+        <Image
+          style={styles.imageSize}
+          source={require('./static/ISBN_sample.png')}
+        />
+        {camera}
+        {footer}
       </View>
     );
   };
 
   render() {
-    const cameraScreen = this.state.permissionsGranted
+    const screen = this.state.permissionsGranted
       ? this.renderScanScreen()
       : this.renderNoPermissions();
 
     return (
       <View style={styles.container}>
-        {cameraScreen}
+        {screen}
       </View>
     );
   }
 }
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -175,37 +206,43 @@ const styles = StyleSheet.create({
   },
   cameraScreen: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#16160e',
+  },
+  header: {
+    alignItems: 'center',
+    margin: 5,
+  },
+  stringWarn: {
+    color: '#cd5c5c',
   },
   text: {
     color: '#f3f3f3',
     textAlign: 'center',
   },
-  header: {
-    flex: 1,
-    justifyContent: 'space-around',
+  imageSize: {
+    width: 221 / 2,
+    height: 93 / 2
+  },
+  body: {
+    alignItems: 'center',
     margin: 5,
   },
-  headerWarn: {
-    color: '#fef263',
-  },
-  reader: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  cameraSide: {
-    flex: 1,
-  },
-  camera: {
-    flex: 8,
+  cameraContainer: {
+    width: width * 2 / 3,
+    height: width * 2 / 3,
     borderColor: '#f3f3f3',
     borderWidth: 1,
   },
+  camera: {
+    flex: 1,
+  },
+  cameraInline: {
+    flex: 0.5,
+    borderColor: '#cd5c5c',
+    borderBottomWidth: 1,
+  },
   footer: {
-    flex: 5,
-    justifyContent: 'space-around',
     margin: 5,
   },
   statusOk: {
