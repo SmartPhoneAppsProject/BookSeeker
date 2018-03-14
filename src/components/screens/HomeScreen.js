@@ -5,11 +5,11 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import ListView from './ListView';
-import PullRefresh from './PullRefresh';
-import { getBooks } from './Network';
-import LogoEntry from './LogoEntry';
-import LogoSAP from './LogoSAP';
+import ListView from '../ListView';
+import PullRefresh from '../PullRefresh';
+import { getBooks } from '../../modules/Network';
+import LogoEntry from '../LogoEntry';
+import LogoSAP from '../LogoSAP';
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {

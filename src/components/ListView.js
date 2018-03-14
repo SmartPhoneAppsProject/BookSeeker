@@ -14,11 +14,11 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import SearchScreen from './SearchScreen';
-import { getBooks } from './Network';
+import SearchScreen from './screens/SearchScreen';
+import { getBooks } from '../modules/Network';
 import {
   icon,
-} from './Icons';
+} from '../modules/Icons';
 
 export default class ListView extends Component {
   constructor(props) {
