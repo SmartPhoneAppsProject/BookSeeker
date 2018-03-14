@@ -38,21 +38,21 @@ export default class ListView extends Component {
   };
 
   renderTags = (tags) => {
-    let formated = [];
+    let formatted = [];
     let tag;
-    for (i in tags) {
+    for (let i in tags) {
       if (i < 3) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
-      } else if (i == 3) {
+      } else if (i === 3) {
         tag = <Text style={styles.tagText}>...</Text>;
       } else if (i > 3) {
-        tag = <View />;
+        tag = <View/>;
       }
-      
-      formated.push(
+
+      formatted.push(
         <View
           style={styles.subtitleView}
-          key={i}
+          key={tags[i].id}
         >
           {tag}
         </View>
@@ -61,9 +61,9 @@ export default class ListView extends Component {
 
     return (
       <View style={styles.tagsContainer}>
-        {formated}
-      </View >
-    )
+        {formatted}
+      </View>
+    );
   };
 
   _onRefresh = () => {
@@ -84,8 +84,8 @@ export default class ListView extends Component {
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <Octicons name='circle-slash' size={25} color='#cd5c5c' />
-      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />;
+      ? <Octicons name='circle-slash' size={25} color='#cd5c5c'/>
+      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>;
 
     const tags = this.renderTags(item.tags);
 
@@ -122,7 +122,7 @@ export default class ListView extends Component {
           onRefresh={this._onRefresh}
           refreshing={this.state.refreshing}
         />
-      </List >
+      </List>
     );
   }
 }

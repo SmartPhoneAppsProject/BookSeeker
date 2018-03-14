@@ -77,8 +77,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-
     if (this.state.isLoading) {
       return (
         <View style={styles.isLoading}>

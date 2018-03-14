@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   Image,
   Dimensions,
-  TouchableOpacity,
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -85,23 +83,29 @@ export default class EntryScreen extends Component {
 
   renderPhotoContainer = () => {
     const photo = this.state.photo
-      ? <Image style={styles.photo}
+      ? <Image
+        style={styles.photo}
         resizeMode='contain'
-        source={{ uri: this.state.photo.uri }} />
-      : <View />;
+        source={{ uri: this.state.photo.uri }}
+      />
+      : <View/>;
 
     return (
-      <View style={styles.photoContainer} >
+      <View style={styles.photoContainer}>
         {photo}
-        <TouchableHighlight style={styles.photoButton}
+        <TouchableHighlight
+          style={styles.photoButton}
           onPress={() => this._takePhoto()}
-          underlayColor='#dcdcdc' >
-          <MaterialIcons name='photo-camera' size={40} color='#a9a9a9' />
+          underlayColor='#dcdcdc'>
+          <MaterialIcons name='photo-camera' size={40} color='#a9a9a9'
+          />
         </TouchableHighlight>
-        <TouchableHighlight style={styles.photoButton}
+        <TouchableHighlight
+          style={styles.photoButton}
           onPress={() => this._pickPhoto()}
-          underlayColor='#dcdcdc' >
-          <FontAwesome name='photo' size={40} color='#a9a9a9' />
+          underlayColor='#dcdcdc'
+        >
+          <FontAwesome name='photo' size={40} color='#a9a9a9'/>
         </TouchableHighlight>
       </View>
     );
@@ -121,7 +125,7 @@ export default class EntryScreen extends Component {
             displayError={true}
             errorStyle={{ color: '#cd5c5c' }}
             errorMessage={this.state.errorMessage}
-            maxLength={100} />
+            maxLength={100}/>
         </View>
       </View>
     );
@@ -151,9 +155,9 @@ export default class EntryScreen extends Component {
           iconRight
           icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
           title={this.state.publishedAt}
-          titleStyle={{color: '#A4A4A4', fontWeight: "700"}}
+          titleStyle={{ color: '#A4A4A4', fontWeight: "700" }}
           buttonStyle={styles.dateButton}
-          iconContainerStyle={{marginRight: 10, marginLeft: 110}}
+          iconContainerStyle={{ marginRight: 10, marginLeft: 110 }}
           onPress={this.showDateTimePicker}/>
         <View style={styles.showDateTimePicker}>
           <DateTimePicker
@@ -165,7 +169,7 @@ export default class EntryScreen extends Component {
             maximumDate={new Date()}
             titleIOS={'発行日を選択する'}
             cancelTextIOS={'キャンセル'}
-            confirmTextIOS={'決定'} />
+            confirmTextIOS={'決定'}/>
         </View>
       </View>
     );
@@ -180,21 +184,22 @@ export default class EntryScreen extends Component {
           onPress={this.goScanScreen}
           titleStyle={styles.buttonText}
           buttonStyle={styles.buttonContainer}
-          iconContainerStyle={{marginRight: 10}}/>
+          iconContainerStyle={{ marginRight: 10 }}/>
       </View>
     );
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     const photoContainer = this.renderPhotoContainer();
     const titleContainer = this.renderTitleContainer();
     const dateContainer = this.renderDateContainer();
     const buttonContainer = this.renderButtonContainer();
 
     return (
-      <KeyboardAvoidingView behavior='padding'
-        style={styles.container}>
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={styles.container}
+      >
         {photoContainer}
         {titleContainer}
         {dateContainer}
@@ -204,7 +209,7 @@ export default class EntryScreen extends Component {
   }
 }
 
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {

@@ -17,17 +17,17 @@ export const getBooks = () => {
       })
       .then((data) => {
         let books = [];
-        for (i in data) {
+        for (let book of data) {
           books.push({
-            key: data[i].id,
-            image: data[i].image,
-            jan_code: data[i].jan_code,
-            published_at: data[i].published_at,
-            status: data[i].status,
-            tags: data[i].tags,
-            title: data[i].title,
-            updated_at: data[i].updated_at,
-            created_at: data[i].created_at,
+            key: book.id,
+            image: book.image,
+            jan_code: book.jan_code,
+            published_at: book.published_at,
+            status: book.status,
+            tags: book.tags,
+            title: book.title,
+            updated_at: book.updated_at,
+            created_at: book.created_at,
           });
         }
         resolve(books);

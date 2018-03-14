@@ -63,7 +63,7 @@ export default class ScanScreen extends Component {
   registerBook = (janCode) => {
     const { params } = this.props.navigation.state;
     // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })]
+    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
 
     const resetAction = NavigationActions.reset({
       index: actions.length - 1,
