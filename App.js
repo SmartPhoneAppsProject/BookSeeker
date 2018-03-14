@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './HomeScreen'
@@ -47,16 +42,15 @@ const RootStack = StackNavigator(
           height: 0,
           width: 0,
         },
-        shadowRadius: 0,
       },
       headerTintColor: '#ffffff',
     },
   }
 );
 
-export default class BookSeeker extends React.Component {
+export default class BookSeeker extends Component {
   render() {
-    return <RootStack />;
+    return <RootStack/>;
   }
 }
 
