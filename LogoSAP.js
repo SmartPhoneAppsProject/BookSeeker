@@ -12,7 +12,7 @@ export default class LogoSAP extends Component {
       <View style={styles.container}>
         <Image
           style={{ width: 35, height: 35 }}
-          source={require('./static/SAP.png')}
+          source={require('./assets/SAP.png')}
         />
       </View>
     );
