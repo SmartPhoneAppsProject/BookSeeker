@@ -15,10 +15,10 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchScreen';
-import { getBooks } from './networking';
+import { getBooks } from './Network';
 import {
   icon,
-} from './icons';
+} from './Icons';
 
 export default class ListView extends Component {
   constructor(props) {

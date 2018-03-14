@@ -7,7 +7,7 @@ import {
 
 import ListView from './ListView';
 import PullRefresh from './PullRefresh';
-import { getBooks } from './networking';
+import { getBooks } from './Network';
 import LogoEntry from './LogoEntry';
 import LogoSAP from './LogoSAP';
 

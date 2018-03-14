@@ -13,7 +13,7 @@ import {
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
-import { postBook } from './networking';
+import { postBook } from './Network';
 
 export default class ScanScreen extends Component {
   static navigationOptions = {
