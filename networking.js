@@ -1,6 +1,6 @@
-import React from 'react';
+import { API_ENDPOINT } from 'react-native-dotenv';
 
-const baseUri = 'https://book-seeker-staging.herokuapp.com';
+const baseUri = API_ENDPOINT;
 
 export const getBooks = () => {
   return new Promise((resolve, reject) => {
