@@ -31,11 +31,11 @@ export default class ListView extends Component {
 
   setBooks = (books) => {
     this.setState({ books: books });
-  }
+  };
 
   resetBooks = () => {
     this.setState({ books: this.props.books });
-  }
+  };
 
   renderTags = (tags) => {
     let formated = [];
@@ -59,10 +59,12 @@ export default class ListView extends Component {
       );
     }
 
-    return <View
+    return (
+    <View
       style={styles.tagsContainer}>
       {formated}
-    </View>;
+    </View>
+    );
   };
 
   _onRefresh = () => {
@@ -83,8 +85,8 @@ export default class ListView extends Component {
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>
-      : <Octicons name='circle-slash' size={25} color='#cd5c5c'/>;
+      ? <Octicons name='circle-slash' size={25} color='#cd5c5c' />
+      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />;
 
     const tags = this.renderTags(item.tags);
 

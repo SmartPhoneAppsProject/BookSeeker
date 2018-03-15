@@ -15,10 +15,10 @@ import {
 import {
   MaterialCommunityIcons,
   MaterialIcons,
-  FontAwesome,
   Octicons
 } from '@expo/vector-icons';
 
+import {icon} from "./icons";
 import { rentBook } from './networking';
 
 export default class DetailScreen extends React.Component {
@@ -68,7 +68,6 @@ export default class DetailScreen extends React.Component {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
-
       })
       .catch(error => {
         console.warn(error);
@@ -81,83 +80,105 @@ export default class DetailScreen extends React.Component {
       });
   };
 
+  _renderImage = () => {
+    let imageUri = this.props.navigation.state.params.item.image;
+    if(imageUri === 'none'){
+      imageUri = 'https://facebook.github.io/react/logo-og.png';
+    }
+
+    return (
+      <View style={[styles.base, styles.imgContainer]}>
+        <Image style={styles.img} source={{ uri: imageUri }}/>
+      </View>
+    )
+  };
+
+  _renderTags = () => {
+    const tags = this.props.navigation.state.params.item.tags;
+
+    let formated = [];
+    let tag;
+    for (tag of tags) {
+      tag = <Text style={styles.tagText}>{icon(tag.name)}{tag.name}</Text>;
+      formated.push(
+        <View style={styles.tag} key={tag.key}>
+          {tag}
+        </View>
+      )
+    }
+
+    return (
+      <View style={[styles.base, styles.tagContainer]}>
+        <ScrollView horizontal={true}>
+          {formated}
+        </ScrollView>
+      </View>
+    )
+  };
+
+  _renderIcon = () => {
+    if (this.state.currentStatus === true) {
+      return (
+        <View style={[styles.base, styles.status]}>
+          <Octicons name='circle-slash' size={40} color='#cd5c5c'/>
+        </View>
+      )
+    } else {
+      return (
+        <View style={[styles.base, styles.status]}>
+          <MaterialCommunityIcons name='check-circle-outline' size={40} color='#2e8b57'/>
+        </View>
+      )
+    }
+  };
+
+  _renderButton = () => {
+    if (this.state.currentStatus === true) {
+      return (
+        <View style={[styles.base, styles.buttonContainer]}>
+          <Button
+            icon={<MaterialCommunityIcons name='keyboard-return' size={30} color='white'/>}
+            title="返却"
+            titleStyle={{ fontWeight: "700" }}
+            buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
+            iconContainerStyle={{ marginRight: 10 }}
+            onPress={this._returnBook} />
+        </View>
+      )
+    } else {
+      return (
+        <View style={[styles.base, styles.buttonContainer]}>
+          <Button
+            icon={<MaterialCommunityIcons name='book-open-page-variant' size={30} color='white'/>}
+            title="貸出"
+            titleStyle={{ fontWeight: "700" }}
+            buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
+            iconContainerStyle={{ marginRight: 10 }}
+            onPress={this._lendBook} />
+        </View>
+      )
+    }
+  };
+
   render() {
     const { params } = this.props.navigation.state;
+    const renderImage = this._renderImage();
+    const renderTags = this._renderTags();
+    const renderIcon = this._renderIcon();
+    const renderButton = this._renderButton();
+
     return (
       <View style={styles.container}>
-        <View style={[styles.base, styles.imgContainer]}>
-          <Image style={styles.img}
-            source={{ uri: params.item.image }} />
-        </View>
+        {renderImage}
         <View style={styles.mainContainer}>
-          <View style={[styles.base, styles.tagContainer]}>
-            <ScrollView horizontal={true} style={styles.tagsContainer}>
-              {params.item.tags.map(tag => <Text style={styles.tag} key={tag.id}>{tag.name}</Text>)}
-            </ScrollView>
-          </View>
+          {renderTags}
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{params.item.title}</Text>
             <Text style={styles.date} >出版日：{params.item.published_at}</Text>
           </View>
           <View style={styles.statusContainer}>
-            <View style={[styles.base, styles.status]}>
-              {this.state.currentStatus
-                ? <Octicons
-                  name='circle-slash'
-                  size={40}
-                  color='#cd5c5c'
-                />
-                : <MaterialCommunityIcons
-                  name='check-circle-outline'
-                  size={40}
-                  color='#2e8b57'
-                />
-              }
-            </View>
-            <View style={[styles.base, styles.buttonContainer]}>
-              {this.state.currentStatus
-                ? <Button
-                  icon={
-                    <MaterialCommunityIcons
-                      name='keyboard-return'
-                      size={30}
-                      color='white'
-                    />
-                  }
-                  text="返却"
-                  textStyle={{ fontWeight: "700" }}
-                  buttonStyle={{
-                    width: 100,
-                    height: 60,
-                    backgroundColor: '#cd5c5c',
-                  }}
-                  iconContainerStyle={{
-                    marginRight: 10,
-                  }}
-                  onPress={this._returnBook}
-                />
-                : <Button
-                  icon={
-                    <MaterialCommunityIcons
-                      name='book-open-page-variant'
-                      size={30}
-                      color='white'
-                    />
-                  }
-                  text="貸出"
-                  textStyle={{ fontWeight: "700" }}
-                  buttonStyle={{
-                    width: 100,
-                    height: 60,
-                    backgroundColor: '#2e8b57'
-                  }}
-                  iconContainerStyle={{
-                    marginRight: 10,
-                  }}
-                  onPress={this._lendBook}
-                />
-              }
-            </View>
+            {renderIcon}
+            {renderButton}
           </View>
         </View>
       </View>
@@ -207,6 +228,11 @@ const styles = StyleSheet.create({
       paddingRight: 8,
       paddingLeft: 8,
       paddingTop: 13,
+    },
+  tagText:
+    {
+      paddingRight: 5,
+      color: '#808080',
     },
   titleContainer:
     {

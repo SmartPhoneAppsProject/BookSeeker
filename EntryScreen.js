@@ -5,14 +5,19 @@ import {
   View,
   Text,
   Image,
-  Button,
   Dimensions,
   TouchableOpacity,
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
+
+import {
+  Input,
+  Button,
+} from 'react-native-elements';
+
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
 
 import { pickPhoto, takePhoto } from './ImagePicker';
 
@@ -33,6 +38,8 @@ export default class EntryScreen extends Component {
       publishedAt: formatDate,
       photo: null,
       isDateTimePickerVisible: false,
+      validation: false,
+      errorMessage: ' ',
     };
 
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
@@ -41,22 +48,22 @@ export default class EntryScreen extends Component {
     this.goScanScreen = this.goScanScreen.bind(this);
   }
 
-  showDateTimePicker() {
+  showDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: true });
-  }
+  };
 
-  hideDateTimePicker() {
+  hideDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: false });
-  }
+  };
 
-  handleDatePicked(date) {
+  handleDatePicked = (date) => {
     const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     this.setState({
       chosenDate: date,
       publishedAt: formatDate,
     });
     this.hideDateTimePicker();
-  }
+  };
 
   async _takePhoto() {
     const photo = await takePhoto();
@@ -68,15 +75,15 @@ export default class EntryScreen extends Component {
     this.setState({ photo: photo });
   }
 
-  goScanScreen() {
+  goScanScreen = () => {
     this.props.navigation.navigate('Scan', {
       title: this.state.title,
       photo: this.state.photo,
       publishedAt: this.state.publishedAt,
     });
-  }
+  };
 
-  renderPhotoContainer() {
+  renderPhotoContainer = () => {
     const photo = this.state.photo
       ? <Image style={styles.photo}
         resizeMode='contain'
@@ -98,30 +105,56 @@ export default class EntryScreen extends Component {
         </TouchableHighlight>
       </View>
     );
-  }
+  };
 
-  renderTitleContainer() {
+  renderTitleContainer = () => {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>タイトル</Text>
-        <TextInput style={styles.input}
-          onChangeText={(text) => this.setState({ title: text })}
-          value={this.state.title}
-          returnKeyType='done'
-          placeholder='title'
-          maxLength={100} />
+        <View style={styles.inputContainer}>
+          <Input
+            containerStyle={styles.input}
+            onChangeText={(text) => this._changeText(text)}
+            value={this.state.title}
+            returnKeyType='done'
+            placeholder='タイトル'
+            shake={this.state.validation}
+            displayError={true}
+            errorStyle={{ color: '#cd5c5c' }}
+            errorMessage={this.state.errorMessage}
+            maxLength={100} />
+        </View>
       </View>
     );
-  }
+  };
+
+  _changeText = (text) => {
+    console.log(text);
+    this.setState({
+      title: text,
+      validation: false,
+      errorMessage: ' ',
+    });
+
+    if (!text) {
+      this.setState({
+        validation: true,
+        errorMessage: '無効な値です。'
+      });
+    }
+  };
 
   renderDateContainer() {
     return (
       <View style={styles.childContainer}>
-        <Text style={styles.tag}>発行日</Text>
-        <TouchableOpacity style={styles.input}
-          onPress={this.showDateTimePicker}>
-          <Text>{this.state.publishedAt}</Text>
-        </TouchableOpacity>
+        <Text style={styles.tag}>発行日を選択</Text>
+        <Button
+          iconRight
+          icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
+          title={this.state.publishedAt}
+          titleStyle={{color: '#A4A4A4', fontWeight: "700"}}
+          buttonStyle={styles.dateButton}
+          iconContainerStyle={{marginRight: 10, marginLeft: 110}}
+          onPress={this.showDateTimePicker}/>
         <View style={styles.showDateTimePicker}>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
@@ -132,8 +165,7 @@ export default class EntryScreen extends Component {
             maximumDate={new Date()}
             titleIOS={'発行日を選択する'}
             cancelTextIOS={'キャンセル'}
-            confirmTextIOS={'決定'}
-          />
+            confirmTextIOS={'決定'} />
         </View>
       </View>
     );
@@ -142,11 +174,14 @@ export default class EntryScreen extends Component {
   renderButtonContainer() {
     return (
       <View style={styles.childContainer}>
-        <TouchableOpacity style={styles.buttonContainer}
-          onPress={this.goScanScreen}>
-          <Text style={styles.buttonText}>バーコード読み取り</Text>
-        </TouchableOpacity>
-      </View >
+        <Button
+          icon={<FontAwesome name='barcode' size={22} color='white'/>}
+          title='バーコード読み取り'
+          onPress={this.goScanScreen}
+          titleStyle={styles.buttonText}
+          buttonStyle={styles.buttonContainer}
+          iconContainerStyle={{marginRight: 10}}/>
+      </View>
     );
   }
 
@@ -193,21 +228,41 @@ const styles = StyleSheet.create({
   },
   childContainer: {
     flex: 1,
-    padding: 20,
+    padding: 15,
   },
   tag: {
     alignSelf: 'stretch',
-    marginBottom: 10,
-    padding: 10,
+    paddingLeft: 20,
+  },
+  inputContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
   },
   input: {
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 10,
-    padding: 10,
+    borderBottomWidth: 2,
+    borderColor: '#A4A4A4'
+  },
+  dateButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    margin: 10,
+    width: width - 60,
+    paddingLeft: 18,
+    paddingRight: 18,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderWidth: 2,
+    borderColor: '#A4A4A4',
+    borderRadius: 7,
+
   },
   buttonContainer: {
     backgroundColor: '#2980b6',
-    paddingVertical: 15,
+    paddingVertical: 20,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   buttonText: {
     color: '#fff',

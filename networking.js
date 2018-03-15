@@ -1,6 +1,6 @@
-import React from 'react';
+import { API_ENDPOINT } from 'react-native-dotenv';
 
-const baseUri = 'https://book-seeker-staging.herokuapp.com';
+const baseUri = API_ENDPOINT;
 
 export const getBooks = () => {
   return new Promise((resolve, reject) => {
@@ -20,8 +20,7 @@ export const getBooks = () => {
         for (i in data) {
           books.push({
             key: data[i].id,
-            // image: data[i].image,
-            image: 'https://facebook.github.io/react/logo-og.png',
+            image: data[i].image,
             jan_code: data[i].jan_code,
             published_at: data[i].published_at,
             status: data[i].status,

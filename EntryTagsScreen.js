@@ -10,11 +10,11 @@ import {
   Octicons
 } from '@expo/vector-icons';
 import {
-  Input,
   Button,
   List,
   ListItem,
 } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 
 import {
   getTags,
@@ -54,6 +54,18 @@ export default class EntryTagsScreen extends Component {
       });
   }
 
+  goToHomeScreen = () => {
+    // https://github.com/react-navigation/react-navigation/issues/1448
+    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
+
+    const resetAction = NavigationActions.reset({
+      index: actions.length - 1,
+      actions
+    });
+
+    this.props.navigation.dispatch(resetAction)
+  };
+
   renderTagsList = () => {
     return (
       <List containerStyle={styles.listContainer}>
@@ -74,6 +86,7 @@ export default class EntryTagsScreen extends Component {
 
     return (
       <ListItem
+        containerStyle={styles.listItemContainer}
         onPress={() => this.changeTagChosen(item, index)}
         title={` ${item.name}`}
         leftIcon={
@@ -85,7 +98,6 @@ export default class EntryTagsScreen extends Component {
     );
   };
 
-  //todo indexから要素のidに変更
   changeTagChosen = (tag, itemIndex) => {
     let { tags, chosenIds } = this.state;
 
@@ -97,9 +109,6 @@ export default class EntryTagsScreen extends Component {
       const searchIndex = tags.indexOf(tag.id);
       chosenIds.splice(searchIndex, 1);
     }
-
-    console.log(tag);
-    console.log(this.state.chosenIds);
 
     this.setState({
       tags,
@@ -128,17 +137,14 @@ export default class EntryTagsScreen extends Component {
   };
 
   buttonOnPress = () => {
-    const { book } = this.props.navigation.state.params;
-    console.log('book id: ' + book.id);
-
     for (let id of this.state.chosenIds) {
-      this.tagsAssociateToBook(id);
+      this.tagAssociateToBook(id);
     }
   };
 
-  tagsAssociateToBook = (tagId) => {
+  tagAssociateToBook = (tagId) => {
     const { book } = this.props.navigation.state.params;
-    console.log(book.id);
+    console.warn(book.id);
 
     const json = JSON.stringify({
       book_id: book.id,
@@ -159,12 +165,14 @@ export default class EntryTagsScreen extends Component {
           })
           .catch(error => console.error(error));
       });
+
+    this.goToHomeScreen();
   };
 
   render() {
     const tags = this.renderTagsList();
     const button = this.renderButton();
-    if (this.state.appState == 'success') {
+    if (this.state.appState === 'success') {
       return (
         <View style={styles.isLoading}>
           <ActivityIndicator/>
@@ -193,6 +201,9 @@ const
     listContainer: {
       flex: 9,
       marginTop: 0,
+    },
+    listItemContainer: {
+      margin: 10,
     },
     buttonContainer: {
       flex: 1,
