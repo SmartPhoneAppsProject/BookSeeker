@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import HomeScreen from './HomeScreen'
-import SearchScreen from './SearchScreen';
-import DetailScreen from './DetailScreen';
-import EntryScreen from './EntryScreen';
-import ScanScreen from './ScanScreen';
+import HomeScreen from './src/components/screens/HomeScreen'
+import SearchScreen from './src/components/screens/SearchScreen';
+import DetailScreen from './src/components/screens/DetailScreen';
+import EntryScreen from './src/components/screens/EntryScreen';
+import ScanScreen from './src/components/screens/ScanScreen';
 
 const RootStack = StackNavigator(
   {
@@ -47,16 +42,15 @@ const RootStack = StackNavigator(
           height: 0,
           width: 0,
         },
-        shadowRadius: 0,
       },
       headerTintColor: '#ffffff',
     },
   }
 );
 
-export default class BookSeeker extends React.Component {
+export default class BookSeeker extends Component {
   render() {
-    return <RootStack />;
+    return <RootStack/>;
   }
 }
 

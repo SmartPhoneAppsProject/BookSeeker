@@ -13,7 +13,7 @@ import {
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
-import { postBook } from './networking';
+import { postBook } from '../../modules/Network';
 
 export default class ScanScreen extends Component {
   static navigationOptions = {
@@ -63,7 +63,7 @@ export default class ScanScreen extends Component {
   registerBook = (janCode) => {
     const { params } = this.props.navigation.state;
     // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })]
+    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
 
     const resetAction = NavigationActions.reset({
       index: actions.length - 1,
@@ -167,7 +167,7 @@ export default class ScanScreen extends Component {
         {header}
         <Image
           style={styles.imageSize}
-          source={require('./static/ISBN_sample.png')}
+          source={require('../../../assets/ISBN_sample.png')}
         />
         {camera}
         {footer}
