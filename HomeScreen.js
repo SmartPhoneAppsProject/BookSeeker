@@ -11,12 +11,6 @@ import { getBooks } from './networking';
 import LogoEntry from './LogoEntry';
 import LogoSAP from './LogoSAP';
 
-type State = {
-    books: [],
-    isLoading: boolean,
-    resqState: boolean,
-};
-
 export default class HomeScreen extends Component<State> {
   static navigationOptions = ({ navigation }) => {
     return {
