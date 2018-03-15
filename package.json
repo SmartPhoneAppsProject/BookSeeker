@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "appr": "^1.1.1",
+    "flow-bin": "^0.67.1",
     "jest-expo": "25.0.0",
     "react-native-dotenv": "^0.1.1",
     "react-native-scripts": "1.11.1",
