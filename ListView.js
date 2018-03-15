@@ -31,11 +31,11 @@ export default class ListView extends Component {
 
   setBooks = (books) => {
     this.setState({ books: books });
-  }
+  };
 
   resetBooks = () => {
     this.setState({ books: this.props.books });
-  }
+  };
 
   renderTags = (tags) => {
     let formated = [];
@@ -59,18 +59,17 @@ export default class ListView extends Component {
       );
     }
 
-    return <View
-      style={styles.tagsContainer}>
-      {formated}
-    </View >;
-  }
+    return (
+      <View style={styles.tagsContainer}>
+        {formated}
+      </View >
+    )
+  };
 
   _onRefresh = () => {
     this.setState({ onRefresh: true });
 
-    const bookSeeker = "https://go-api-staging.herokuapp.com/books";
-
-    getBooks(bookSeeker)
+    getBooks()
       .then((books) => {
         console.log(books);
         if (!books) {
@@ -80,13 +79,13 @@ export default class ListView extends Component {
         }
       })
       .catch((error) => console.error(error));
-  }
+  };
 
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
-      : <Octicons name='circle-slash' size={25} color='#cd5c5c' />;
+      ? <Octicons name='circle-slash' size={25} color='#cd5c5c' />
+      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />;
 
     const tags = this.renderTags(item.tags);
 
@@ -102,7 +101,7 @@ export default class ListView extends Component {
         badge={{ element: status }}
       />
     );
-  }
+  };
 
   render() {
     return (
