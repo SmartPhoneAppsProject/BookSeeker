@@ -11,7 +11,7 @@ import { getBooks } from './networking';
 import LogoEntry from './LogoEntry';
 import LogoSAP from './LogoSAP';
 
-export default class HomeScreen extends Component<State> {
+export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerLeft:
