@@ -11,7 +11,7 @@ import {
   SearchBar,
 } from 'react-native-elements';
 
-import ListView from './ListView';
+import ListView from '../ListView';
 
 export default class SearchScreen extends Component {
   constructor(props) {

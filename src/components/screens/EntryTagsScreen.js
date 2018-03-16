@@ -19,8 +19,8 @@ import { NavigationActions } from 'react-navigation';
 import {
   getTags,
   tagLinkBook,
-} from "./Network";
-import { icon } from "./Icons";
+} from "../../utils/Network";
+import { icon } from "../../utils/Icons";
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {

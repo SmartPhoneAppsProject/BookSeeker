@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import HomeScreen from './HomeScreen'
-import SearchScreen from './SearchScreen';
-import DetailScreen from './DetailScreen';
-import EntryScreen from './EntryScreen';
-import ScanScreen from './ScanScreen';
-import EntryTagsScreen from "./EntryTagsScreen";
+import HomeScreen from './src/components/screens/HomeScreen'
+import SearchScreen from './src/components/screens/SearchScreen';
+import DetailScreen from './src/components/screens/DetailScreen';
+import EntryScreen from './src/components/screens/EntryScreen';
+import ScanScreen from './src/components/screens/ScanScreen';
+import EntryTagsScreen from "./src/components/screens/EntryTagsScreen";
 
 const RootStack = StackNavigator(
   {
