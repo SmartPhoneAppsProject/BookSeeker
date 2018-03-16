@@ -64,8 +64,7 @@ export default class ScanScreen extends Component {
 
     const json = JSON.stringify({
       title: params.title,
-      // image: params.photo.base64,
-      image: '',
+      image: params.photo.base64,
       published_at: params.publishedAt,
       jan_code: janCode
     });
