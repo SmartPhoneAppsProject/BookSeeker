@@ -6,7 +6,7 @@ dependencies:
     - yarn
   pre:
     - yarn global add exp@48.0.4
-    - echo 'API_ENDPOINT=test' > .env
+    - echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env
   test:
     override:
       - echo "no tests"
