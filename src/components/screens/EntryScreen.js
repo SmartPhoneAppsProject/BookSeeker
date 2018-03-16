@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   Image,
   Dimensions,
-  TouchableOpacity,
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -19,7 +17,7 @@ import {
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
 
-import { pickPhoto, takePhoto } from './ImagePicker';
+import { pickPhoto, takePhoto } from '../ImagePicker';
 
 export default class EntryScreen extends Component {
   static navigationOptions = {

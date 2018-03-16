@@ -14,11 +14,11 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import SearchScreen from './SearchScreen';
-import { getBooks } from './networking';
+import SearchScreen from './screens/SearchScreen';
+import { getBooks } from '../utils/Network';
 import {
   icon,
-} from './icons';
+} from '../utils/Icons';
 
 export default class ListView extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export default class ListView extends Component {
   renderTags = (tags) => {
     let formated = [];
     let tag;
-    for (i in tags) {
+    for (let i in tags) {
       if (i < 3) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
       } else if (i == 3) {
@@ -60,10 +60,10 @@ export default class ListView extends Component {
     }
 
     return (
-    <View
-      style={styles.tagsContainer}>
-      {formated}
-    </View>
+      <View
+        style={styles.tagsContainer}>
+        {formated}
+      </View>
     );
   };
 
@@ -85,8 +85,8 @@ export default class ListView extends Component {
   _renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <Octicons name='circle-slash' size={25} color='#cd5c5c' />
-      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />;
+      ? <Octicons name='circle-slash' size={25} color='#cd5c5c'/>
+      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>;
 
     const tags = this.renderTags(item.tags);
 

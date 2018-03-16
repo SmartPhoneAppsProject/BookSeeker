@@ -13,8 +13,10 @@ export default class LogoEntry extends Component {
   render() {
     const navigation = this.props.navigation;
     return (
-      <TouchableOpacity style={styles.container}
-        onPress={() => navigation.navigate('Entry')}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => navigation.navigate('Entry')}
+      >
         <MaterialCommunityIcons name='book-plus' size={30} color='white'/>
       </TouchableOpacity>
     );

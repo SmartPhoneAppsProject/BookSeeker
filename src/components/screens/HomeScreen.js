@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -6,23 +5,23 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import ListView from './ListView';
-import PullRefresh from './PullRefresh';
-import { getBooks } from './networking';
-import LogoEntry from './LogoEntry';
-import LogoSAP from './LogoSAP';
+import ListView from '../ListView';
+import PullRefresh from '../PullRefresh';
+import { getBooks } from '../../utils/Network';
+import LogoEntry from '../LogoEntry';
+import LogoSAP from '../LogoSAP';
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerLeft:
         <View style={styles.navigationContainer}>
-          <LogoSAP />
+          <LogoSAP/>
         </View>,
       title: 'Home',
       headerRight:
         <View style={styles.navigationContainer}>
-          <LogoEntry navigation={navigation} />
+          <LogoEntry navigation={navigation}/>
         </View>
     };
   };
@@ -78,19 +77,17 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-
     if (this.state.isLoading) {
       return (
         <View style={styles.isLoading}>
-          <ActivityIndicator />
+          <ActivityIndicator/>
         </View>
       );
     }
 
     if (!this.state.respStatus) {
       return (
-        <PullRefresh refresh={this._refresh} />
+        <PullRefresh refresh={this._refresh}/>
       );
     }
 
