@@ -23,7 +23,7 @@ import { rentBook } from '../../utils/Network';
 
 export default class DetailScreen extends Component {
   static navigationOptions = {
-    title: 'DetailScreen',
+    title: '詳細',
   };
 
   constructor(props) {

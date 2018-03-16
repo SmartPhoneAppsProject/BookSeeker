@@ -22,7 +22,7 @@ export default class LogoSAP extends Component {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#c0c0c0',
     borderRadius: 50,
   },
 });

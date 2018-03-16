@@ -21,7 +21,7 @@ import { pickPhoto, takePhoto } from '../ImagePicker';
 
 export default class EntryScreen extends Component {
   static navigationOptions = {
-    title: 'ScanScreen',
+    title: '本の登録',
   };
 
   constructor(props) {
