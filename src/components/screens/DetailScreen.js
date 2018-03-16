@@ -20,6 +20,7 @@ import {
 
 import { icon } from "../../utils/Icons";
 import { rentBook } from '../../utils/Network';
+import LentScanScreen from "../LentScanScreen";
 
 export default class DetailScreen extends Component {
   static navigationOptions = {
@@ -34,48 +35,48 @@ export default class DetailScreen extends Component {
     };
   }
 
-  _lendBook = () => {
-    this.setState({
-      currentStatus: true
-    });
+  // lendBook = () => {
+  //   this.setState({
+  //     currentStatus: true
+  //   });
+  //
+  //   const json = JSON.stringify({
+  //     jan_code: this.props.navigation.state.params.item.jan_code,
+  //     status: true
+  //   });
+  //
+  //   this.changeBookStatus(json);
+  // };
+  //
+  // returnBook = () => {
+  //   this.setState({
+  //     currentStatus: false
+  //   });
+  //
+  //   const json = JSON.stringify({
+  //     jan_code: this.props.navigation.state.params.item.jan_code,
+  //     status: false
+  //   });
+  //
+  //   this.changeBookStatus(json);
+  // };
 
-    const json = JSON.stringify({
-      jan_code: this.props.navigation.state.params.item.jan_code,
-      status: true
-    });
-
-    this.changeBookStatus(json);
-  };
-
-  _returnBook = () => {
-    this.setState({
-      currentStatus: false
-    });
-
-    const json = JSON.stringify({
-      jan_code: this.props.navigation.state.params.item.jan_code,
-      status: false
-    });
-
-    this.changeBookStatus(json);
-  };
-
-  changeBookStatus = (json) => {
-    rentBook(json)
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-      })
-      .catch(error => {
-        console.warn(error);
-        rentBook(json)
-          .then(response => response.json())
-          .then(responseJson => {
-            console.log(responseJson);
-          })
-          .catch(error => console.error(error));
-      });
-  };
+  // changeBookStatus = (json) => {
+  //   rentBook(json)
+  //     .then(response => response.json())
+  //     .then(responseJson => {
+  //       console.log(responseJson);
+  //     })
+  //     .catch(error => {
+  //       console.warn(error);
+  //       rentBook(json)
+  //         .then(response => response.json())
+  //         .then(responseJson => {
+  //           console.log(responseJson);
+  //         })
+  //         .catch(error => console.error(error));
+  //     });
+  // };
 
   _renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
@@ -130,6 +131,8 @@ export default class DetailScreen extends Component {
   };
 
   _renderButton = () => {
+    const { navigate } = this.props.navigation;
+
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.buttonContainer]}>
@@ -139,7 +142,7 @@ export default class DetailScreen extends Component {
             titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
             iconContainerStyle={{ marginRight: 10 }}
-            onPress={this._returnBook}/>
+            onPress={() => navigate('LentScan', { action: 'return'})}/>
         </View>
       )
     } else {
@@ -151,7 +154,7 @@ export default class DetailScreen extends Component {
             titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
             iconContainerStyle={{ marginRight: 10 }}
-            onPress={this._lendBook}/>
+            onPress={() => navigate('LentScan', { action: 'lend' })}/>
         </View>
       )
     }
