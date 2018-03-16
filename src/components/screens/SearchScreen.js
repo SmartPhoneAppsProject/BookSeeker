@@ -8,10 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import {
   Input,
   Button,
-  SearchBar,
 } from 'react-native-elements';
-
-import ListView from '../ListView';
 
 export default class SearchScreen extends Component {
   constructor(props) {
@@ -48,7 +45,7 @@ export default class SearchScreen extends Component {
 
     for (let query of queries) {
       if (query) { //比較する文字列があるか
-        if ('#' == query.charAt(0)) { //tagのとき
+        if ('#' === query.charAt(0)) { //tagのとき
           for (let book of books) {
             for (let tag of book.tags) {
               if (tag.name.toLowerCase().includes(query.replace('#', '').toLowerCase())) {
@@ -75,38 +72,39 @@ export default class SearchScreen extends Component {
     const cancelButton = this.state.searching
       ? <View style={styles.buttonContainer}>
         <Button
-        titleStyle={styles.buttonText}
+          titleStyle={styles.buttonText}
           textStyle={styles.buttonText}
           buttonStyle={styles.button}
           onPress={this.cancelSearch}
-          text='キャンセル'
+          title='キャンセル'
           fontSize={10}
           color='#f5f5f5'
         />
       </View>
-      : <View />
+      : <View/>;
 
     return cancelButton;
   };
 
   render() {
-    cancelButton = this.renderCancelButton();
+    const cancelButton = this.renderCancelButton();
 
     return (
       <View style={styles.container}>
-        <Input style={styles.input}
+        <Input
+          style={styles.input}
           containerStyle={styles.containerStyle}
-          onChangeText={(text) => this.startSearch(text) }
+          onChangeText={(text) => this.startSearch(text)}
           value={this.state.searchText}
           returnKeyType='done'
           placeholder='検索'
           placeholderTextColor='#f5f5f5'
           clearButtonMode='while-editing'
-          leftIcon={<MaterialIcons name='search' size={13} color='#ffffff' />}
+          leftIcon={<MaterialIcons name='search' size={13} color='#ffffff'/>}
           leftIconContainerStyle={styles.icon}
         />
         {cancelButton}
-      </View >
+      </View>
     );
   }
 }

@@ -135,9 +135,9 @@ export default class ScanScreen extends Component {
 
   renderFooter = () => {
     let statusText = <View/>;
-    if (this.state.status == 'ok') {
+    if (this.state.status === 'ok') {
       statusText = <Text style={styles.statusOk}>読み取りました</Text>;
-    } else if (this.state.status == 'invalid') {
+    } else if (this.state.status === 'invalid') {
       statusText = <Text style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
@@ -145,7 +145,7 @@ export default class ScanScreen extends Component {
       <View style={styles.footer}>
         <Button
           title={statusText}
-          loading={(this.state.status == 'reading')}
+          loading={(this.state.status === 'reading')}
           loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
           titleStyle={{ fontWeight: "700" }}
           clear={true}
