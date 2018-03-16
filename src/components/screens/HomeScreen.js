@@ -16,12 +16,12 @@ export default class HomeScreen extends Component {
     return {
       headerLeft:
         <View style={styles.navigationContainer}>
-          <LogoSAP />
+          <LogoSAP/>
         </View>,
       title: 'Home',
       headerRight:
         <View style={styles.navigationContainer}>
-          <LogoEntry navigation={navigation} />
+          <LogoEntry navigation={navigation}/>
         </View>
     };
   };
@@ -77,19 +77,17 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-
     if (this.state.isLoading) {
       return (
         <View style={styles.isLoading}>
-          <ActivityIndicator />
+          <ActivityIndicator/>
         </View>
       );
     }
 
     if (!this.state.respStatus) {
       return (
-        <PullRefresh refresh={this._refresh} />
+        <PullRefresh refresh={this._refresh}/>
       );
     }
 

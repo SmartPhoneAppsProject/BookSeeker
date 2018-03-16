@@ -1,9 +1,9 @@
 {
   "expo": {
     "sdkVersion": "25.0.0",
-    "splash":{
+    "splash": {
       "image": "./assets/SAP_icon.png",
-      "backgroundColor":"#FFFFFF"
+      "backgroundColor": "#FFFFFF"
     }
   }
 }

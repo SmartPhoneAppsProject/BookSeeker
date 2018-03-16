@@ -18,10 +18,10 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import {icon} from "../../utils/Icons";
+import { icon } from "../../utils/Icons";
 import { rentBook } from '../../utils/Network';
 
-export default class DetailScreen extends React.Component {
+export default class DetailScreen extends Component {
   static navigationOptions = {
     title: 'DetailScreen',
   };
@@ -32,9 +32,6 @@ export default class DetailScreen extends React.Component {
     this.state = {
       currentStatus: this.props.navigation.state.params.item.status
     };
-
-    this._lendBook = this._lendBook.bind(this);
-    this._returnBook = this._returnBook.bind(this);
   }
 
   _lendBook = () => {
@@ -82,7 +79,7 @@ export default class DetailScreen extends React.Component {
 
   _renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
-    if(imageUri === 'none'){
+    if (imageUri === 'none') {
       imageUri = 'https://facebook.github.io/react/logo-og.png';
     }
 
@@ -142,7 +139,7 @@ export default class DetailScreen extends React.Component {
             titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
             iconContainerStyle={{ marginRight: 10 }}
-            onPress={this._returnBook} />
+            onPress={this._returnBook}/>
         </View>
       )
     } else {
@@ -154,7 +151,7 @@ export default class DetailScreen extends React.Component {
             titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
             iconContainerStyle={{ marginRight: 10 }}
-            onPress={this._lendBook} />
+            onPress={this._lendBook}/>
         </View>
       )
     }
@@ -174,7 +171,7 @@ export default class DetailScreen extends React.Component {
           {renderTags}
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{params.item.title}</Text>
-            <Text style={styles.date} >出版日：{params.item.published_at}</Text>
+            <Text style={styles.date}>出版日：{params.item.published_at}</Text>
           </View>
           <View style={styles.statusContainer}>
             {renderIcon}
