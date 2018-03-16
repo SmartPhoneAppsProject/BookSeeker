@@ -7,6 +7,7 @@ import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
 import EntryTagsScreen from "./src/components/screens/EntryTagsScreen";
+import LentScanScreen from "./src/components/LentScanScreen";
 
 const RootStack = StackNavigator(
   {
@@ -28,6 +29,9 @@ const RootStack = StackNavigator(
     Search: {
       screen: SearchScreen,
     },
+    LentScan: {
+      screen: LentScanScreen,
+    }
   },
   {
     initialRouteName: 'Home',
