@@ -18,8 +18,8 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import {icon} from "./icons";
-import { rentBook } from './networking';
+import {icon} from "./Icons";
+import { rentBook } from './Network';
 
 export default class DetailScreen extends React.Component {
   static navigationOptions = {

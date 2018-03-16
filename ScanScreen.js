@@ -12,7 +12,7 @@ import {
 } from 'expo';
 import { Button } from 'react-native-elements';
 
-import { postBook } from './networking';
+import { postBook } from './Network';
 
 export default class ScanScreen extends Component {
   static navigationOptions = {
@@ -164,7 +164,7 @@ export default class ScanScreen extends Component {
         {header}
         <Image
           style={styles.imageSize}
-          source={require('./static/ISBN_sample.png')}
+          source={require('./assets/ISBN_sample.png')}
         />
         {camera}
         {footer}
