@@ -18,7 +18,7 @@ export default class HomeScreen extends Component {
         <View style={styles.navigationContainer}>
           <LogoSAP/>
         </View>,
-      title: 'Home',
+      title: 'BookSeeker',
       headerRight:
         <View style={styles.navigationContainer}>
           <LogoEntry navigation={navigation}/>
