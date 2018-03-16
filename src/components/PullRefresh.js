@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
 
-export default class PullRefresh extends React.Component {
+export default class PullRefresh extends Component {
   render() {
     return (
       <View style={styles.container}>
