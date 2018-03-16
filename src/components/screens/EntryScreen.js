@@ -34,7 +34,7 @@ export default class EntryScreen extends Component {
       title: '',
       chosenDate: new Date(),
       publishedAt: formatDate,
-      photo: ' ',
+      photo: '',
       isDateTimePickerVisible: false,
       validation: false,
       errorMessage: ' ',
