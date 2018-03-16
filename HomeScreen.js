@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -96,6 +97,7 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <ListView
+          style={styles.listView}
           books={this.state.books}
           navigation={this.props.navigation}
         />
@@ -114,10 +116,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
   },
   indicator: {
     flex: 1,
     paddingTop: 20,
-  }
+  },
 });

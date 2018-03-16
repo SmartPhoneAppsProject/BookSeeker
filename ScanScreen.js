@@ -10,7 +10,6 @@ import {
   BarCodeScanner,
   Permissions
 } from 'expo';
-import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
 import { postBook } from './networking';
@@ -27,7 +26,6 @@ export default class ScanScreen extends Component {
       permissionsGranted: false,
       status: 'reading',
     };
-    this.props.navigation.state.key = 'Home';
   }
 
   async componentWillMount() {
@@ -61,20 +59,13 @@ export default class ScanScreen extends Component {
   };
 
   registerBook = (janCode) => {
+    const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })]
-
-    const resetAction = NavigationActions.reset({
-      index: actions.length - 1,
-      actions
-    });
-
-    this.props.navigation.dispatch(resetAction);
 
     const json = JSON.stringify({
       title: params.title,
-      image: params.photo.base64,
+      // image: params.photo.base64,
+      image: '',
       published_at: params.publishedAt,
       jan_code: janCode
     });
@@ -83,7 +74,10 @@ export default class ScanScreen extends Component {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
-        // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
+        const book = {
+          id: responseJson.id,
+        };
+        navigate('EntryTags', { book });
 
       })
       .catch(error => {
@@ -92,7 +86,10 @@ export default class ScanScreen extends Component {
           .then(response => response.json())
           .then(responseJson => {
             console.log(responseJson);
-            // this.props.navigation.dispatch(NavigationActions.back({ key: state.routeName }));
+            const book = {
+              id: responseJson.id,
+            };
+            navigate('EntryTags', { book });
           })
           .catch(error => console.error(error));
       });

@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './HomeScreen'
@@ -12,6 +6,7 @@ import SearchScreen from './SearchScreen';
 import DetailScreen from './DetailScreen';
 import EntryScreen from './EntryScreen';
 import ScanScreen from './ScanScreen';
+import EntryTagsScreen from "./EntryTagsScreen";
 
 const RootStack = StackNavigator(
   {
@@ -23,6 +18,9 @@ const RootStack = StackNavigator(
     },
     Scan: {
       screen: ScanScreen,
+    },
+    EntryTags: {
+      screen: EntryTagsScreen,
     },
     Detail: {
       screen: DetailScreen,
@@ -54,10 +52,10 @@ const RootStack = StackNavigator(
   }
 );
 
-export default class BookSeeker extends React.Component {
+export default class BookSeeker extends Component {
   render() {
-    return <RootStack />;
+    return <RootStack/>;
   }
 }
 
-AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
+// AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
