@@ -14,13 +14,13 @@ import {
   List,
   ListItem,
 } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation';
 
 import {
   getTags,
   tagLinkBook,
 } from "../../utils/Network";
 import { icon } from "../../utils/Icons";
+import { goToHomeScreen } from "../../utils/Navigation";
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {
@@ -53,18 +53,6 @@ export default class EntryTagsScreen extends Component {
         console.warn(error)
       });
   }
-
-  goToHomeScreen = () => {
-    // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
-
-    const resetAction = NavigationActions.reset({
-      index: actions.length - 1,
-      actions
-    });
-
-    this.props.navigation.dispatch(resetAction)
-  };
 
   renderTagsList = () => {
     return (
@@ -166,7 +154,7 @@ export default class EntryTagsScreen extends Component {
           .catch(error => console.error(error));
       });
 
-    this.goToHomeScreen();
+    goToHomeScreen();
   };
 
   render() {

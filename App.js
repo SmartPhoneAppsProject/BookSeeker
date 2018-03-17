@@ -7,7 +7,7 @@ import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
 import EntryTagsScreen from "./src/components/screens/EntryTagsScreen";
-import LentScanScreen from "./src/components/LentScanScreen";
+import LentScanScreen from "./src/components/screens/LentScanScreen";
 
 const RootStack = StackNavigator(
   {

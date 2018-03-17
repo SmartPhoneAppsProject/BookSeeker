@@ -20,7 +20,7 @@ import {
 
 import { icon } from "../../utils/Icons";
 import { rentBook } from '../../utils/Network';
-import LentScanScreen from "../LentScanScreen";
+import LentScanScreen from "./LentScanScreen";
 
 export default class DetailScreen extends Component {
   static navigationOptions = {

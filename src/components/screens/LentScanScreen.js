@@ -12,7 +12,7 @@ import {
 } from 'expo';
 import { Button } from 'react-native-elements';
 
-import { rentBook } from '../utils/Network';
+import { rentBook } from '../../utils/Network';
 import { NavigationActions } from "react-navigation";
 
 export default class lentScanScreen extends Component {
@@ -180,7 +180,7 @@ export default class lentScanScreen extends Component {
         {header}
         <Image
           style={styles.imageSize}
-          source={require('../../assets/ISBN_sample.png')}
+          source={require('../../../assets/ISBN_sample.png')}
         />
         {camera}
         {footer}
