@@ -20,7 +20,7 @@ import {
   tagLinkBook,
 } from "../../utils/Network";
 import { icon } from "../../utils/Icons";
-import { goToHomeScreen } from "../../utils/Navigation";
+import NavigationService from "../../utils/NavigationService";
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {
@@ -167,7 +167,7 @@ export default class EntryTagsScreen extends Component {
           .catch(error => console.error(error));
       });
 
-    goToHomeScreen();
+    NavigationService.navigate('Home');
   };
 
   render() {

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import {
   BarCodeScanner,
   Permissions
 } from 'expo';
-import { Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 
 import { rentBook } from '../../utils/Network';
-import { NavigationActions } from "react-navigation";
+import NavigationService from "../../utils/NavigationService";
 
 export default class lentScanScreen extends Component {
   static navigationOptions = {
@@ -33,18 +33,6 @@ export default class lentScanScreen extends Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ permissionsGranted: status === 'granted' });
   }
-
-  goToHomeScreen = () => {
-    // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
-
-    const resetAction = NavigationActions.reset({
-      index: actions.length - 1,
-      actions
-    });
-
-    this.props.navigation.dispatch(resetAction)
-  };
 
   lendBook = (janCode) => {
     const json = JSON.stringify({
@@ -98,7 +86,7 @@ export default class lentScanScreen extends Component {
           } else if (action == 'lend') {
             this.lendBook(janCode);
           }
-          this.goToHomeScreen();
+          NavigationService.navigate('Home');
         }
       } else { //バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
@@ -150,22 +138,16 @@ export default class lentScanScreen extends Component {
   };
 
   renderFooter = () => {
-    let statusText = <View/>;
+    let statusText = <ActivityIndicator size="large"/>;
     if (this.state.status === 'ok') {
-      statusText = <Text style={styles.statusOk}>読み取りました</Text>;
+      statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status === 'invalid') {
-      statusText = <Text style={styles.statusNo}>数字をお確かめください</Text>;
+      statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
     return (
       <View style={styles.footer}>
-        <Button
-          title={statusText}
-          loading={(this.state.status === 'reading')}
-          loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
-          titleStyle={{ fontWeight: "700" }}
-          clear={true}
-        />
+        {statusText}
       </View>
     );
   };
