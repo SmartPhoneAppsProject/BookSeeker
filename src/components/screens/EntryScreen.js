@@ -78,9 +78,11 @@ export default class EntryScreen extends Component {
 
   renderPhotoContainer = () => {
     const photo = this.state.photo
-      ? <Image style={styles.photo}
-               resizeMode='contain'
-               source={{ uri: this.state.photo.uri }}/>
+      ? <Image
+        style={styles.photo}
+        resizeMode='contain'
+        source={{ uri: this.state.photo.uri }}
+      />
       : <View/>;
 
     return (
@@ -117,7 +119,8 @@ export default class EntryScreen extends Component {
             displayError={true}
             errorStyle={{ color: '#cd5c5c' }}
             errorMessage={this.state.errorMessage}
-            maxLength={100}/>
+            maxLength={100}
+          />
         </View>
       </View>
     );
@@ -147,9 +150,9 @@ export default class EntryScreen extends Component {
           iconRight
           icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
           title={this.state.publishedAt}
-          titleStyle={{ color: '#A4A4A4', fontWeight: "700" }}
+          titleStyle={styles.dateTitle}
           buttonStyle={styles.dateButton}
-          iconContainerStyle={{ marginRight: 10, marginLeft: 110 }}
+          iconContainerStyle={styles.dateIcon}
           onPress={this.showDateTimePicker}/>
         <View style={styles.showDateTimePicker}>
           <DateTimePicker
@@ -176,7 +179,7 @@ export default class EntryScreen extends Component {
           onPress={this.goScanScreen}
           titleStyle={styles.buttonText}
           buttonStyle={styles.buttonContainer}
-          iconContainerStyle={{ marginRight: 10 }}/>
+          iconContainerStyle={styles.buttonIcon}/>
       </View>
     );
   }
@@ -242,6 +245,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: '#A4A4A4'
   },
+  dateTitle: {
+    color: '#A4A4A4',
+    fontWeight: "700"
+  },
+  dateIcon: {
+    marginRight: 10,
+    marginLeft: 110
+  },
   dateButton: {
     backgroundColor: 'rgba(255,255,255,0.2)',
     margin: 10,
@@ -253,7 +264,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#A4A4A4',
     borderRadius: 7,
-
   },
   buttonContainer: {
     backgroundColor: '#2980b6',
@@ -265,5 +275,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: '700',
-  }
+  },
+  buttonIcon: {
+    marginRight: 10,
+  },
 });
