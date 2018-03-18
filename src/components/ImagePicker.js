@@ -1,7 +1,7 @@
 import { ImagePicker } from 'expo';
 
 export const pickPhoto = async () => {
-  let photo = null;
+  let photo = '';
 
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: 'Images',
@@ -18,7 +18,7 @@ export const pickPhoto = async () => {
 };
 
 export const takePhoto = async () => {
-  let photo = null;
+  let photo = '';
 
   const result = await ImagePicker.launchCameraAsync({
     allowsEditing: true,
