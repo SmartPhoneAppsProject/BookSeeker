@@ -32,49 +32,45 @@ export default class HomeScreen extends Component {
     this.state = {
       books: [],
       isLoading: true,
-      respStatus: true,
+      responseStatus: false,
     };
 
     this._refresh = this._refresh.bind(this);
   }
 
   componentDidMount() {
-    getBooks()
-      .then((books) => {
-        if (!books) {
-          this.setState({
-            respStatus: false,
-            isLoading: false
-          });
-        } else {
-          this.setState({
-            books,
-            respStatus: true,
-            isLoading: false,
-          });
-        }
-      })
-      .catch((error) => console.error(error));
+    getBooks(
+      books => {
+        console.log('Success');
+        this.setState({
+          books,
+          responseStatus: true,
+          isLoading: false,
+        });
+      },
+      error => {
+        console.warn(error);
+        this.setState({ isLoading: false });
+      }
+    )
   }
 
-  _refresh() {
-    getBooks()
-      .then((books) => {
-        if (!books) {
-          this.setState({
-            respStatus: false,
-            isLoading: false
-          });
-        } else {
-          this.setState({
-            books,
-            respStatus: true,
-            isLoading: false
-          });
-        }
-      })
-      .catch((error) => console.error(error));
-  }
+  _refresh = () => {
+    getBooks(
+      books => {
+        console.log('Success');
+        this.setState({
+          books,
+          responseStatus: true,
+          isLoading: false,
+        });
+      },
+      error => {
+        console.warn(error);
+        this.setState({ isLoading: false });
+      }
+    )
+  };
 
   render() {
     if (this.state.isLoading) {
@@ -85,7 +81,7 @@ export default class HomeScreen extends Component {
       );
     }
 
-    if (!this.state.respStatus) {
+    if (!this.state.responseStatus) {
       return (
         <PullRefresh refresh={this._refresh}/>
       );
