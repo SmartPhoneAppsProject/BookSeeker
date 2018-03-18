@@ -39,18 +39,18 @@ export default class ListView extends Component {
   };
 
   renderTags = (tags) => {
-    let formated = [];
+    let formatted = [];
     let tag;
-    for (let i in tags) {
-      if (i < 3) {
+    for (let i = 0; i < tags.length; i++) {
+      if (i < 2) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
-      } else if (i == 3) {
-        tag = <Text style={styles.tagText}>...</Text>;
-      } else if (i > 3) {
-        tag = <View/>;
+      } else if (i === 2) {
+        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}...</Text>;
+      } else {
+        break;
       }
 
-      formated.push(
+      formatted.push(
         <View
           style={styles.subtitleView}
           key={tags[i].id}
@@ -63,24 +63,30 @@ export default class ListView extends Component {
     return (
       <View
         style={styles.tagsContainer}>
-        {formated}
+        {formatted}
       </View>
     );
   };
 
   _onRefresh = () => {
-    this.setState({ onRefresh: true });
+    this.setState({ refreshing: true });
 
-    getBooks()
-      .then((books) => {
-        console.log(books);
-        if (!books) {
-          this.setState({ books: '' });
-        } else {
-          this.setState({ books });
-        }
-      })
-      .catch((error) => console.error(error));
+    getBooks(
+      books => {
+        console.log('Success');
+        this.setState({
+          books,
+          refreshing: false,
+        });
+      },
+      error => {
+        console.warn(error);
+        this.setState({
+          books: [],
+          refreshing: false
+        });
+      }
+    )
   };
 
   _renderItem = ({ item }) => {

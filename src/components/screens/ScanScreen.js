@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import {
   BarCodeScanner,
   Permissions
 } from 'expo';
-import { Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 
 import { postBook } from '../../utils/Network';
 
@@ -133,22 +133,16 @@ export default class ScanScreen extends Component {
   };
 
   renderFooter = () => {
-    let statusText = <View/>;
+    let statusText = <ActivityIndicator size="large"/>;
     if (this.state.status === 'ok') {
-      statusText = <Text style={styles.statusOk}>読み取りました</Text>;
+      statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status === 'invalid') {
-      statusText = <Text style={styles.statusNo}>数字をお確かめください</Text>;
+      statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
     return (
       <View style={styles.footer}>
-        <Button
-          title={statusText}
-          loading={(this.state.status === 'reading')}
-          loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
-          titleStyle={{ fontWeight: "700" }}
-          clear={true}
-        />
+        {statusText}
       </View>
     );
   };

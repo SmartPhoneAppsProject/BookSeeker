@@ -19,8 +19,6 @@ import {
 } from '@expo/vector-icons';
 
 import { icon } from "../../utils/Icons";
-import { rentBook } from '../../utils/Network';
-import LentScanScreen from "./LentScanScreen";
 
 export default class DetailScreen extends Component {
   static navigationOptions = {
