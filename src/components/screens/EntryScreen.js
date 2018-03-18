@@ -86,14 +86,17 @@ export default class EntryScreen extends Component {
     return (
       <View style={styles.photoContainer}>
         {photo}
-        <TouchableHighlight style={styles.photoButton}
-                            onPress={() => this._takePhoto()}
-                            underlayColor='#dcdcdc'>
+        <TouchableHighlight
+          style={styles.photoButton}
+          onPress={() => this._takePhoto()}
+          underlayColor='#dcdcdc'>
           <MaterialIcons name='photo-camera' size={40} color='#a9a9a9'/>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.photoButton}
-                            onPress={() => this._pickPhoto()}
-                            underlayColor='#dcdcdc'>
+        <TouchableHighlight
+          style={styles.photoButton}
+          onPress={() => this._pickPhoto()}
+          underlayColor='#dcdcdc'
+        >
           <FontAwesome name='photo' size={40} color='#a9a9a9'/>
         </TouchableHighlight>
       </View>
@@ -185,8 +188,10 @@ export default class EntryScreen extends Component {
     const buttonContainer = this.renderButtonContainer();
 
     return (
-      <KeyboardAvoidingView behavior='padding'
-                            style={styles.container}>
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={styles.container}
+      >
         {photoContainer}
         {titleContainer}
         {dateContainer}
