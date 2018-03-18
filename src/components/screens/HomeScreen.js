@@ -34,8 +34,6 @@ export default class HomeScreen extends Component {
       isLoading: true,
       responseStatus: false,
     };
-
-    this._refresh = this._refresh.bind(this);
   }
 
   componentDidMount() {
