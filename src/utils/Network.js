@@ -14,7 +14,7 @@ export const getBooks = (successCallback, errorCallback) => {
     });
 };
 
-export const _getBooks = () => {
+const _getBooks = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUri}/books`)
       .then((response) => {
@@ -58,7 +58,12 @@ export const rentBook = json => {
     const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
-      .then(response => resolve(response))
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        reject(response);
+      })
       .catch(error => reject(error));
   });
 };
@@ -77,7 +82,12 @@ export const postBook = json => {
     const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
-      .then(response => resolve(response))
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        reject(response);
+      })
       .catch(error => reject(error));
   });
 };
@@ -120,7 +130,12 @@ export const tagLinkBook = json => {
     const request = new Request(`${baseUri}/books/tags`, options);
 
     fetch(request)
-      .then(response => resolve(response))
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        reject(response);
+      })
       .catch(error => reject(error));
   });
 };
