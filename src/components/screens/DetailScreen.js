@@ -167,13 +167,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     margin: 3,
-    backgroundColor: '#f5f5f5',
-    borderColor: '#f5f5f5',
-    borderRadius: 4,
-    borderWidth: 1,
-    overflow: 'hidden',
     paddingVertical: 8,
-    paddingTop: 13,
   },
   tagText: {
     paddingRight: 5,
