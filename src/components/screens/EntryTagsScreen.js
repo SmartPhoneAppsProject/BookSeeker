@@ -50,7 +50,20 @@ export default class EntryTagsScreen extends Component {
         });
       })
       .catch(error => {
-        console.warn(error)
+        console.warn(error);
+        getTags()
+          .then((tags) => {
+            for (let tag of tags) {
+              tag.chosen = false;
+            }
+            this.setState({
+              appStatue: 'success',
+              tags,
+            });
+          })
+          .catch(error => {
+            console.error(error)
+          });
       });
   }
 
