@@ -35,49 +35,6 @@ export default class DetailScreen extends Component {
     };
   }
 
-  // lendBook = () => {
-  //   this.setState({
-  //     currentStatus: true
-  //   });
-  //
-  //   const json = JSON.stringify({
-  //     jan_code: this.props.navigation.state.params.item.jan_code,
-  //     status: true
-  //   });
-  //
-  //   this.changeBookStatus(json);
-  // };
-  //
-  // returnBook = () => {
-  //   this.setState({
-  //     currentStatus: false
-  //   });
-  //
-  //   const json = JSON.stringify({
-  //     jan_code: this.props.navigation.state.params.item.jan_code,
-  //     status: false
-  //   });
-  //
-  //   this.changeBookStatus(json);
-  // };
-
-  // changeBookStatus = (json) => {
-  //   rentBook(json)
-  //     .then(response => response.json())
-  //     .then(responseJson => {
-  //       console.log(responseJson);
-  //     })
-  //     .catch(error => {
-  //       console.warn(error);
-  //       rentBook(json)
-  //         .then(response => response.json())
-  //         .then(responseJson => {
-  //           console.log(responseJson);
-  //         })
-  //         .catch(error => console.error(error));
-  //     });
-  // };
-
   _renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
     if (imageUri === 'none') {

@@ -14,7 +14,7 @@ import {
   Octicons
 } from '@expo/vector-icons';
 
-import SearchScreen from './screens/SearchScreen';
+import SearchScreen from './SearchView';
 import { getBooks } from '../utils/Network';
 import {
   icon,
@@ -29,6 +29,7 @@ export default class ListView extends Component {
     };
   }
 
+  // SearchViewからListViewを変更するためにstateとして受け渡す
   setBooks = (books) => {
     this.setState({ books: books });
   };

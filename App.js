@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './src/components/screens/HomeScreen'
-import SearchScreen from './src/components/screens/SearchScreen';
+import SearchScreen from './src/components/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
