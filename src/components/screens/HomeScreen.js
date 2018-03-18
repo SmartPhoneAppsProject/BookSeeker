@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  ActivityIndicator
 } from 'react-native';
-
+import { AppLoading } from 'expo';
 import ListView from '../ListView';
 import PullRefresh from '../PullRefresh';
 import { getBooks } from '../../utils/Network';
@@ -79,9 +78,7 @@ export default class HomeScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.isLoading}>
-          <ActivityIndicator/>
-        </View>
+        <AppLoading/>
       );
     }
 
