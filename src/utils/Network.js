@@ -32,7 +32,7 @@ export const getBooks = () => {
         }
         resolve(books);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => reject(error));
   });
 };
 
