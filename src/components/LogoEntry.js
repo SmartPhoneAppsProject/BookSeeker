@@ -6,10 +6,6 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class LogoEntry extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const navigation = this.props.navigation;
     return (

@@ -58,12 +58,12 @@ export default class EntryScreen extends Component {
 
   _takePhoto = async () => {
     const photo = await takePhoto();
-    this.setState({ photo: photo });
+    this.setState({ photo });
   };
 
   _pickPhoto = async () => {
     const photo = await pickPhoto();
-    this.setState({ photo: photo });
+    this.setState({ photo });
   };
 
   goScanScreen = () => {
@@ -72,56 +72,6 @@ export default class EntryScreen extends Component {
       photo: this.state.photo,
       publishedAt: this.state.publishedAt,
     });
-  };
-
-  renderPhotoContainer = () => {
-    const photo = this.state.photo
-      ? <Image
-        style={styles.photo}
-        resizeMode='contain'
-        source={{ uri: this.state.photo.uri }}
-      />
-      : <View/>;
-
-    return (
-      <View style={styles.photoContainer}>
-        {photo}
-        <TouchableHighlight
-          style={styles.photoButton}
-          onPress={() => this._takePhoto()}
-          underlayColor='#dcdcdc'>
-          <MaterialIcons name='photo-camera' size={40} color='#a9a9a9'/>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.photoButton}
-          onPress={() => this._pickPhoto()}
-          underlayColor='#dcdcdc'
-        >
-          <FontAwesome name='photo' size={40} color='#a9a9a9'/>
-        </TouchableHighlight>
-      </View>
-    );
-  };
-
-  renderTitleContainer = () => {
-    return (
-      <View style={styles.childContainer}>
-        <View style={styles.inputContainer}>
-          <Input
-            containerStyle={styles.input}
-            onChangeText={(text) => this._changeText(text)}
-            value={this.state.title}
-            returnKeyType='done'
-            placeholder='タイトル'
-            shake={this.state.validation}
-            displayError={true}
-            errorStyle={{ color: '#cd5c5c' }}
-            errorMessage={this.state.errorMessage}
-            maxLength={100}
-          />
-        </View>
-      </View>
-    );
   };
 
   _changeText = (text) => {
@@ -135,9 +85,62 @@ export default class EntryScreen extends Component {
     if (!text) {
       this.setState({
         validation: true,
-        errorMessage: '無効な値です。'
+        errorMessage: '無効な値です。',
       });
     }
+  };
+
+  renderTitleContainer = () => {
+    return (
+      <View style={styles.childContainer}>
+        <View style={styles.inputContainer}>
+          <Input
+            containerStyle={styles.input}
+            onChangeText={text => this._changeText(text)}
+            value={this.state.title}
+            returnKeyType="done"
+            placeholder="タイトル"
+            shake={this.state.validation}
+            displayError
+            errorStyle={{ color: '#cd5c5c' }}
+            errorMessage={this.state.errorMessage}
+            maxLength={100}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  renderPhotoContainer = () => {
+    const photo = this.state.photo
+      ? (
+        <Image
+          style={styles.photo}
+          resizeMode="contain"
+          source={{ uri: this.state.photo.uri }}
+        />
+      )
+      : <View />;
+
+    return (
+      <View style={styles.photoContainer}>
+        {photo}
+        <TouchableHighlight
+          style={styles.photoButton}
+          onPress={() => this._takePhoto()}
+          underlayColor="#dcdcdc"
+        >
+          <MaterialIcons name="photo-camera" size={40} color="#a9a9a9" />
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.photoButton}
+          onPress={() => this._pickPhoto()}
+          underlayColor="#dcdcdc"
+        >
+          <FontAwesome name="photo" size={40} color="#a9a9a9" />
+        </TouchableHighlight>
+      </View>
+    );
   };
 
   renderDateContainer() {
@@ -146,23 +149,25 @@ export default class EntryScreen extends Component {
         <Text style={styles.tag}>発行日を選択</Text>
         <Button
           iconRight
-          icon={<Entypo name='triangle-down' size={20} color='#A4A4A4'/>}
+          icon={<Entypo name="triangle-down" size={20} color="#A4A4A4" />}
           title={this.state.publishedAt}
           titleStyle={styles.dateTitle}
           buttonStyle={styles.dateButton}
           iconContainerStyle={styles.dateIcon}
-          onPress={this.showDateTimePicker}/>
+          onPress={this.showDateTimePicker}
+        />
         <View style={styles.showDateTimePicker}>
           <DateTimePicker
             isVisible={this.state.isDateTimePickerVisible}
             onConfirm={this.handleDatePicked}
             onCancel={this.hideDateTimePicker}
             date={this.state.chosenDate}
-            locale={'ja'}
+            locale="ja"
             maximumDate={new Date()}
-            titleIOS={'発行日を選択する'}
-            cancelTextIOS={'キャンセル'}
-            confirmTextIOS={'決定'}/>
+            titleIOS="発行日を選択する"
+            cancelTextIOS="キャンセル"
+            confirmTextIOS="決定"
+          />
         </View>
       </View>
     );
@@ -172,12 +177,13 @@ export default class EntryScreen extends Component {
     return (
       <View style={styles.childContainer}>
         <Button
-          icon={<FontAwesome name='barcode' size={22} color='white'/>}
-          title='バーコード読み取り'
+          icon={<FontAwesome name="barcode" size={22} color="white" />}
+          title="バーコード読み取り"
           onPress={this.goScanScreen}
           titleStyle={styles.buttonText}
           buttonStyle={styles.buttonContainer}
-          iconContainerStyle={styles.buttonIcon}/>
+          iconContainerStyle={styles.buttonIcon}
+        />
       </View>
     );
   }
@@ -190,7 +196,7 @@ export default class EntryScreen extends Component {
 
     return (
       <KeyboardAvoidingView
-        behavior='padding'
+        behavior="padding"
         style={styles.container}
       >
         {photoContainer}
@@ -218,7 +224,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: width / 6,
-    height: (4 * width / 3) / 6,
+    height: (4 * (width / 3)) / 6,
   },
   photoButton: {
     padding: 5,
@@ -241,15 +247,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 10,
     borderBottomWidth: 2,
-    borderColor: '#A4A4A4'
+    borderColor: '#A4A4A4',
   },
   dateTitle: {
     color: '#A4A4A4',
-    fontWeight: "700"
+    fontWeight: '700',
   },
   dateIcon: {
     marginRight: 10,
-    marginLeft: 110
+    marginLeft: 110,
   },
   dateButton: {
     backgroundColor: 'rgba(255,255,255,0.2)',

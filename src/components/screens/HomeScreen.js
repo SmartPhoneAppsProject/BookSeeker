@@ -15,13 +15,13 @@ export default class HomeScreen extends Component {
     return {
       headerLeft: (
         <View style={styles.navigationContainer}>
-          <LogoSAP/>
+          <LogoSAP />
         </View>
       ),
       title: 'BookSeeker',
       headerRight: (
         <View style={styles.navigationContainer}>
-          <LogoEntry navigation={navigation}/>
+          <LogoEntry navigation={navigation} />
         </View>
       ),
     };
@@ -74,13 +74,13 @@ export default class HomeScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <AppLoading/>
+        <AppLoading />
       );
     }
 
     if (!this.state.responseStatus) {
       return (
-        <PullRefresh refresh={this._refresh}/>
+        <PullRefresh refresh={this._refresh} />
       );
     }
 

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {
   BarCodeScanner,
-  Permissions
+  Permissions,
 } from 'expo';
 import { Text } from 'react-native-elements';
 
@@ -36,7 +36,7 @@ export default class ScanScreen extends Component {
   _handleBarCodeRead = ({ type, data }) => {
     console.log(data);
     if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
-      if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
+      if (978 == data.slice(0, 3)) { // ISBNを読み取ったとき
         if (this.state.janCode != data) {
           this.setState({
             janCode: data,
@@ -47,13 +47,13 @@ export default class ScanScreen extends Component {
             this.registerBook(janCode);
           }, 1000);
         }
-      } else { //バーコードであるがISBNでないとき
+      } else { // バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
       }
       setTimeout(() => {
         this.setState({ status: 'reading' });
       }, 1000);
-    } else { //バーコードでないとき
+    } else { // バーコードでないとき
       this.setState({ status: 'reading' });
     }
   };
@@ -66,31 +66,30 @@ export default class ScanScreen extends Component {
       title: params.title,
       image: params.photo.base64,
       published_at: params.publishedAt,
-      jan_code: janCode
+      jan_code: janCode,
     });
 
     postBook(json)
       .then(response => response.json())
-      .then(responseJson => {
+      .then((responseJson) => {
         console.log(responseJson);
         const book = {
           id: responseJson.id,
         };
         navigate('EntryTags', { book });
-
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         postBook(json)
           .then(response => response.json())
-          .then(responseJson => {
+          .then((responseJson) => {
             console.log(responseJson);
             const book = {
               id: responseJson.id,
             };
             navigate('EntryTags', { book });
           })
-          .catch(error => console.error(error));
+          .catch(e => console.error(e));
       });
   };
 
@@ -125,7 +124,7 @@ export default class ScanScreen extends Component {
           onBarCodeRead={this._handleBarCodeRead}
         >
           <View style={styles.cameraInline}>
-            <Text/>
+            <Text />
           </View>
         </BarCodeScanner>
       </View>
@@ -133,7 +132,7 @@ export default class ScanScreen extends Component {
   };
 
   renderFooter = () => {
-    let statusText = <ActivityIndicator size="large"/>;
+    let statusText = <ActivityIndicator size="large" />;
     if (this.state.status === 'ok') {
       statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status === 'invalid') {
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   noPermissionsText: {
-    color: 'white'
+    color: 'white',
   },
   cameraScreen: {
     flex: 1,
@@ -212,15 +211,15 @@ const styles = StyleSheet.create({
   },
   imageSize: {
     width: 221 / 2,
-    height: 93 / 2
+    height: 93 / 2,
   },
   body: {
     alignItems: 'center',
     margin: 5,
   },
   cameraContainer: {
-    width: width * 2 / 3,
-    height: width * 2 / 3,
+    width: width * (2 / 3),
+    height: width * (2 / 3),
     borderColor: '#f3f3f3',
     borderWidth: 1,
   },
@@ -238,11 +237,11 @@ const styles = StyleSheet.create({
   statusOk: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#3eb370'
+    color: '#3eb370',
   },
   statusNo: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#e95464'
+    color: '#e95464',
   },
 });

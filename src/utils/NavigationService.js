@@ -13,7 +13,7 @@ function navigate(routeName, params) {
       type: NavigationActions.NAVIGATE,
       routeName,
       params,
-    })
+    }),
   );
 }
 

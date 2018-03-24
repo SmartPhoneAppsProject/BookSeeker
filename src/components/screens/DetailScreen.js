@@ -36,7 +36,7 @@ export default class DetailScreen extends Component {
 
     return (
       <View style={[styles.base, styles.imgContainer]}>
-        <Image style={styles.img} source={{ uri: imageUri }}/>
+        <Image style={styles.img} source={{ uri: imageUri }} />
       </View>
     );
   };
@@ -71,13 +71,13 @@ export default class DetailScreen extends Component {
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.status]}>
-          <Octicons name="circle-slash" size={40} color="#cd5c5c"/>
+          <Octicons name="circle-slash" size={40} color="#cd5c5c" />
         </View>
       );
     }
     return (
       <View style={[styles.base, styles.status]}>
-        <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57"/>
+        <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57" />
       </View>
     );
   };
@@ -89,24 +89,26 @@ export default class DetailScreen extends Component {
       return (
         <View style={[styles.base, styles.buttonContainer]}>
           <Button
-            icon={<MaterialCommunityIcons name="keyboard-return" size={30} color="white"/>}
+            icon={<MaterialCommunityIcons name="keyboard-return" size={30} color="white" />}
             title="返却"
-            titleStyle={{ fontWeight: "700" }}
+            titleStyle={{ fontWeight: '700' }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
             iconContainerStyle={{ marginRight: 10 }}
-            onPress={() => navigate('LentScan', { action: 'return' })}/>
+            onPress={() => navigate('LentScan', { action: 'return' })}
+          />
         </View>
       );
     }
     return (
       <View style={[styles.base, styles.buttonContainer]}>
         <Button
-          icon={<MaterialCommunityIcons name="book-open-page-variant" size={30} color="white"/>}
+          icon={<MaterialCommunityIcons name="book-open-page-variant" size={30} color="white" />}
           title="貸出"
           titleStyle={{ fontWeight: '700' }}
           buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
           iconContainerStyle={{ marginRight: 10 }}
-          onPress={() => navigate('LentScan', { action: 'lend' })}/>
+          onPress={() => navigate('LentScan', { action: 'lend' })}
+        />
       </View>
     );
   };
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
   },
   img: {
     height: 300,
-    width: width,
+    width,
   },
   mainContainer: {
     flex: 1,

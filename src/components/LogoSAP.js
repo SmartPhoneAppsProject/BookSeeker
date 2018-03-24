@@ -4,7 +4,6 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class LogoSAP extends Component {
   render() {
