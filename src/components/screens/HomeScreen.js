@@ -13,15 +13,17 @@ import LogoSAP from '../LogoSAP';
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerLeft:
+      headerLeft: (
         <View style={styles.navigationContainer}>
           <LogoSAP/>
-        </View>,
+        </View>
+      ),
       title: 'BookSeeker',
-      headerRight:
+      headerRight: (
         <View style={styles.navigationContainer}>
           <LogoEntry navigation={navigation}/>
         </View>
+      ),
     };
   };
 
@@ -37,7 +39,7 @@ export default class HomeScreen extends Component {
 
   componentDidMount() {
     getBooks(
-      books => {
+      (books) => {
         console.log('Success');
         this.setState({
           books,
@@ -45,16 +47,16 @@ export default class HomeScreen extends Component {
           isLoading: false,
         });
       },
-      error => {
+      (error) => {
         console.warn(error);
         this.setState({ isLoading: false });
-      }
-    )
+      },
+    );
   }
 
   _refresh = () => {
     getBooks(
-      books => {
+      (books) => {
         console.log('Success');
         this.setState({
           books,
@@ -62,11 +64,11 @@ export default class HomeScreen extends Component {
           isLoading: false,
         });
       },
-      error => {
+      (error) => {
         console.warn(error);
         this.setState({ isLoading: false });
-      }
-    )
+      },
+    );
   };
 
   render() {
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
   },
   isLoading: {
     flex: 1,
-    paddingTop: 20
+    paddingTop: 20,
   },
   container: {
     flex: 1,

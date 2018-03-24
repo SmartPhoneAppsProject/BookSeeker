@@ -9,7 +9,7 @@ import {
   Button,
 } from 'react-native-elements';
 
-export default class SearchScreen extends Component {
+export default class SearchView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,15 +52,15 @@ export default class SearchScreen extends Component {
               }
             }
           }
-          results = Array.from(new Set(tmpResults)); //配列の重複を取り除く
-        } else { //titleのとき
+          results = Array.from(new Set(tmpResults)); // 配列の重複を取り除く
+        } else { // titleのとき
           results = [];
           for (let book of books) {
             if (book.title.toLowerCase().includes(query.toLowerCase())) {
               results.push(book);
             }
           }
-          books = results; //今回の検索結果を次の検索対象にする(and検索)
+          books = results; // 今回の検索結果を次の検索対象にする(and検索)
         }
       }
     }
@@ -69,17 +69,19 @@ export default class SearchScreen extends Component {
 
   renderCancelButton = () => {
     const cancelButton = this.state.searching
-      ? <View style={styles.buttonContainer}>
-        <Button
-          titleStyle={styles.buttonText}
-          textStyle={styles.buttonText}
-          buttonStyle={styles.button}
-          onPress={this.cancelSearch}
-          title='キャンセル'
-          fontSize={10}
-          color='#f5f5f5'
-        />
-      </View>
+      ? (
+        <View style={styles.buttonContainer}>
+          <Button
+            titleStyle={styles.buttonText}
+            textStyle={styles.buttonText}
+            buttonStyle={styles.button}
+            onPress={this.cancelSearch}
+            title="キャンセル"
+            fontSize={10}
+            color="#f5f5f5"
+          />
+        </View>
+      )
       : <View/>;
 
     return cancelButton;

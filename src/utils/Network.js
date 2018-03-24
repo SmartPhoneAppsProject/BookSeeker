@@ -6,11 +6,11 @@ const baseUri = API_ENDPOINT;
 export const getBooks = (successCallback, errorCallback) => {
   _getBooks()
     .then(books => successCallback(books))
-    .catch(error => {
+    .catch((error) => {
       console.warn(error);
       _getBooks()
         .then(books => successCallback(books))
-        .catch(error => errorCallback(error));
+        .catch(e => errorCallback(e));
     });
 };
 

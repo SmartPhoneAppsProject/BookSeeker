@@ -8,12 +8,10 @@ import {
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
-
 import {
   Input,
   Button,
 } from 'react-native-elements';
-
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
 

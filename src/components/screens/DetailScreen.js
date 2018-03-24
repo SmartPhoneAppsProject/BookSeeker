@@ -7,16 +7,13 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {
-  Button,
-} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons
+  Octicons,
 } from '@expo/vector-icons';
 
-import { icon } from "../../utils/Icons";
+import { icon } from '../../utils/Icons';
 
 export default class DetailScreen extends Component {
   static navigationOptions = {
@@ -31,7 +28,7 @@ export default class DetailScreen extends Component {
     };
   }
 
-  _renderImage = () => {
+  renderImage = () => {
     let imageUri = this.props.navigation.state.params.item.image;
     if (imageUri === 'none') {
       imageUri = 'https://facebook.github.io/react/logo-og.png';
@@ -44,7 +41,7 @@ export default class DetailScreen extends Component {
     );
   };
 
-  _renderTags = () => {
+  renderTags = () => {
     const { tags } = this.props.navigation.state.params.item;
     let formatted = [];
     let formattedTag;
@@ -58,41 +55,41 @@ export default class DetailScreen extends Component {
         >
           {formattedTag}
         </View>
-      )
+      );
     }
 
     return (
       <View style={[styles.base, styles.tagContainer]}>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal>
           {formatted}
         </ScrollView>
       </View>
     );
   };
 
-  _renderIcon = () => {
+  renderIcon = () => {
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.status]}>
-          <Octicons name='circle-slash' size={40} color='#cd5c5c'/>
+          <Octicons name="circle-slash" size={40} color="#cd5c5c"/>
         </View>
       );
     }
     return (
       <View style={[styles.base, styles.status]}>
-        <MaterialCommunityIcons name='check-circle-outline' size={40} color='#2e8b57'/>
+        <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57"/>
       </View>
     );
   };
 
-  _renderButton = () => {
+  renderButton = () => {
     const { navigate } = this.props.navigation;
 
     if (this.state.currentStatus === true) {
       return (
         <View style={[styles.base, styles.buttonContainer]}>
           <Button
-            icon={<MaterialCommunityIcons name='keyboard-return' size={30} color='white'/>}
+            icon={<MaterialCommunityIcons name="keyboard-return" size={30} color="white"/>}
             title="返却"
             titleStyle={{ fontWeight: "700" }}
             buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
@@ -104,9 +101,9 @@ export default class DetailScreen extends Component {
     return (
       <View style={[styles.base, styles.buttonContainer]}>
         <Button
-          icon={<MaterialCommunityIcons name='book-open-page-variant' size={30} color='white'/>}
+          icon={<MaterialCommunityIcons name="book-open-page-variant" size={30} color="white"/>}
           title="貸出"
-          titleStyle={{ fontWeight: "700" }}
+          titleStyle={{ fontWeight: '700' }}
           buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
           iconContainerStyle={{ marginRight: 10 }}
           onPress={() => navigate('LentScan', { action: 'lend' })}/>
@@ -116,10 +113,10 @@ export default class DetailScreen extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    const renderImage = this._renderImage();
-    const renderTags = this._renderTags();
-    const renderIcon = this._renderIcon();
-    const renderButton = this._renderButton();
+    const renderImage = this.renderImage();
+    const renderTags = this.renderTags();
+    const renderIcon = this.renderIcon();
+    const renderButton = this.renderButton();
 
     return (
       <View style={styles.container}>
@@ -159,7 +156,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   mainContainer: {
-    flex: 1
+    flex: 1,
   },
   tagContainer: {
     flex: 0.5,
