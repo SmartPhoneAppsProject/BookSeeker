@@ -6,21 +6,18 @@ import {
   FlatList,
 } from 'react-native';
 import {
-  MaterialCommunityIcons,
-  Octicons
-} from '@expo/vector-icons';
-import {
   Button,
   List,
   ListItem,
 } from 'react-native-elements';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import {
   getTags,
   tagLinkBook,
-} from "../../utils/Network";
-import { icon } from "../../utils/Icons";
-import NavigationService from "../../utils/NavigationService";
+} from '../../utils/Network';
+import { icon } from '../../utils/Icons';
+import { navigate } from '../../utils/NavigationService';
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {
@@ -62,38 +59,6 @@ export default class EntryTagsScreen extends Component {
       });
   }
 
-  renderTagsList = () => {
-    return (
-      <List containerStyle={styles.listContainer}>
-        <FlatList
-          keyExtractor={(item) => item.id}
-          data={this.state.tags}
-          extraData={this.state.updated}
-          renderItem={this._renderItem}
-        />
-      </List>
-    );
-  };
-
-  _renderItem = ({ item, index }) => {
-    const status = item.chosen
-      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57' />
-      : <View />;
-
-    return (
-      <ListItem
-        containerStyle={styles.listItemContainer}
-        onPress={() => this.changeTagChosen(item, index)}
-        title={` ${item.name}`}
-        leftIcon={
-          icon(item.name)
-        }
-        badge={{ element: status }}
-        hideChevron
-      />
-    );
-  };
-
   changeTagChosen = (tag, itemIndex) => {
     let { tags, chosenIds } = this.state;
 
@@ -111,25 +76,6 @@ export default class EntryTagsScreen extends Component {
       updated: !this.state.updated, // re-render ListView
       chosenIds,
     });
-  };
-
-  renderButton = () => {
-    return (
-      <Button
-        containerStyle={styles.buttonContainer}
-        buttonStyle={styles.formButton}
-        title="submit"
-        onPress={this.buttonOnPress}
-        iconRight
-        icon={
-          <MaterialCommunityIcons
-            name="arrow-right"
-            size={15}
-            color="#ffffff"
-          />
-        }
-      />
-    );
   };
 
   buttonOnPress = () => {
@@ -162,8 +108,55 @@ export default class EntryTagsScreen extends Component {
           .catch(e => console.error(e));
       });
 
-    NavigationService.navigate('Home');
+    navigate('Home');
   };
+
+  renderTagsList = () => (
+    <List containerStyle={styles.listContainer}>
+      <FlatList
+        keyExtractor={item => item.id}
+        data={this.state.tags}
+        extraData={this.state.updated}
+        renderItem={this.renderListItem}
+      />
+    </List>
+  );
+
+  renderListItem = ({ item, index }) => {
+    const status = item.chosen
+      ? <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />
+      : <View />;
+
+    return (
+      <ListItem
+        containerStyle={styles.listItemContainer}
+        onPress={() => this.changeTagChosen(item, index)}
+        title={` ${item.name}`}
+        leftIcon={
+          icon(item.name)
+        }
+        badge={{ element: status }}
+        hideChevron
+      />
+    );
+  };
+
+  renderButton = () => (
+    <Button
+      containerStyle={styles.buttonContainer}
+      buttonStyle={styles.formButton}
+      title="submit"
+      onPress={this.buttonOnPress}
+      iconRight
+      icon={
+        <MaterialCommunityIcons
+          name="arrow-right"
+          size={15}
+          color="#ffffff"
+        />
+      }
+    />
+  );
 
   render() {
     const tags = this.renderTagsList();

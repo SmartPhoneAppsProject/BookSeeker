@@ -39,42 +39,7 @@ export default class EntryScreen extends Component {
     };
   }
 
-  showDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: true });
-  };
-
-  hideDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: false });
-  };
-
-  handleDatePicked = (date) => {
-    const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    this.setState({
-      chosenDate: date,
-      publishedAt: formatDate,
-    });
-    this.hideDateTimePicker();
-  };
-
-  _takePhoto = async () => {
-    const photo = await takePhoto();
-    this.setState({ photo });
-  };
-
-  _pickPhoto = async () => {
-    const photo = await pickPhoto();
-    this.setState({ photo });
-  };
-
-  goScanScreen = () => {
-    this.props.navigation.navigate('Scan', {
-      title: this.state.title,
-      photo: this.state.photo,
-      publishedAt: this.state.publishedAt,
-    });
-  };
-
-  _changeText = (text) => {
+  onChangeTitleText = (text) => {
     console.log(text);
     this.setState({
       title: text,
@@ -90,26 +55,60 @@ export default class EntryScreen extends Component {
     }
   };
 
-  renderTitleContainer = () => {
-    return (
-      <View style={styles.childContainer}>
-        <View style={styles.inputContainer}>
-          <Input
-            containerStyle={styles.input}
-            onChangeText={text => this._changeText(text)}
-            value={this.state.title}
-            returnKeyType="done"
-            placeholder="タイトル"
-            shake={this.state.validation}
-            displayError
-            errorStyle={{ color: '#cd5c5c' }}
-            errorMessage={this.state.errorMessage}
-            maxLength={100}
-          />
-        </View>
-      </View>
-    );
+  showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
   };
+
+  hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  };
+
+  handleTakePhoto = async () => {
+    const photo = await takePhoto();
+    this.setState({ photo });
+  };
+
+  handlePickPhoto = async () => {
+    const photo = await pickPhoto();
+    this.setState({ photo });
+  };
+
+
+  handleDatePicked = (date) => {
+    const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    this.setState({
+      chosenDate: date,
+      publishedAt: formatDate,
+    });
+    this.hideDateTimePicker();
+  };
+
+  goScanScreen = () => {
+    this.props.navigation.navigate('Scan', {
+      title: this.state.title,
+      photo: this.state.photo,
+      publishedAt: this.state.publishedAt,
+    });
+  };
+
+  renderTitleContainer = () => (
+    <View style={styles.childContainer}>
+      <View style={styles.inputContainer}>
+        <Input
+          containerStyle={styles.input}
+          onChangeText={text => this.onChangeTitleText(text)}
+          value={this.state.title}
+          returnKeyType="done"
+          placeholder="タイトル"
+          shake={this.state.validation}
+          displayError
+          errorStyle={{ color: '#cd5c5c' }}
+          errorMessage={this.state.errorMessage}
+          maxLength={100}
+        />
+      </View>
+    </View>
+  );
 
   renderPhotoContainer = () => {
     const photo = this.state.photo
@@ -127,14 +126,14 @@ export default class EntryScreen extends Component {
         {photo}
         <TouchableHighlight
           style={styles.photoButton}
-          onPress={() => this._takePhoto()}
+          onPress={() => this.handleTakePhoto()}
           underlayColor="#dcdcdc"
         >
           <MaterialIcons name="photo-camera" size={40} color="#a9a9a9" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.photoButton}
-          onPress={() => this._pickPhoto()}
+          onPress={() => this.handlePickPhoto()}
           underlayColor="#dcdcdc"
         >
           <FontAwesome name="photo" size={40} color="#a9a9a9" />
@@ -143,50 +142,46 @@ export default class EntryScreen extends Component {
     );
   };
 
-  renderDateContainer() {
-    return (
-      <View style={styles.childContainer}>
-        <Text style={styles.tag}>発行日を選択</Text>
-        <Button
-          iconRight
-          icon={<Entypo name="triangle-down" size={20} color="#A4A4A4" />}
-          title={this.state.publishedAt}
-          titleStyle={styles.dateTitle}
-          buttonStyle={styles.dateButton}
-          iconContainerStyle={styles.dateIcon}
-          onPress={this.showDateTimePicker}
+  renderDateContainer = () => (
+    <View style={styles.childContainer}>
+      <Text style={styles.tag}>発行日を選択</Text>
+      <Button
+        iconRight
+        icon={<Entypo name="triangle-down" size={20} color="#A4A4A4" />}
+        title={this.state.publishedAt}
+        titleStyle={styles.dateTitle}
+        buttonStyle={styles.dateButton}
+        iconContainerStyle={styles.dateIcon}
+        onPress={this.showDateTimePicker}
+      />
+      <View style={styles.showDateTimePicker}>
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this.handleDatePicked}
+          onCancel={this.hideDateTimePicker}
+          date={this.state.chosenDate}
+          locale="ja"
+          maximumDate={new Date()}
+          titleIOS="発行日を選択する"
+          cancelTextIOS="キャンセル"
+          confirmTextIOS="決定"
         />
-        <View style={styles.showDateTimePicker}>
-          <DateTimePicker
-            isVisible={this.state.isDateTimePickerVisible}
-            onConfirm={this.handleDatePicked}
-            onCancel={this.hideDateTimePicker}
-            date={this.state.chosenDate}
-            locale="ja"
-            maximumDate={new Date()}
-            titleIOS="発行日を選択する"
-            cancelTextIOS="キャンセル"
-            confirmTextIOS="決定"
-          />
-        </View>
       </View>
-    );
-  }
+    </View>
+  );
 
-  renderButtonContainer() {
-    return (
-      <View style={styles.childContainer}>
-        <Button
-          icon={<FontAwesome name="barcode" size={22} color="white" />}
-          title="バーコード読み取り"
-          onPress={this.goScanScreen}
-          titleStyle={styles.buttonText}
-          buttonStyle={styles.buttonContainer}
-          iconContainerStyle={styles.buttonIcon}
-        />
-      </View>
-    );
-  }
+  renderButtonContainer = () => (
+    <View style={styles.childContainer}>
+      <Button
+        icon={<FontAwesome name="barcode" size={22} color="white" />}
+        title="バーコード読み取り"
+        onPress={this.goScanScreen}
+        titleStyle={styles.buttonText}
+        buttonStyle={styles.buttonContainer}
+        iconContainerStyle={styles.buttonIcon}
+      />
+    </View>
+  );
 
   render() {
     const photoContainer = this.renderPhotoContainer();

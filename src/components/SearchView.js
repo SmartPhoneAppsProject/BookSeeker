@@ -43,8 +43,8 @@ export default class SearchView extends Component {
     let tmpResults = [];
 
     for (let query of queries) {
-      if (query) { //比較する文字列があるか
-        if ('#' === query.charAt(0)) { //tagのとき
+      if (query) { // 比較する文字列があるか
+        if ('#' === query.charAt(0)) { // tagのとき
           for (let book of books) {
             for (let tag of book.tags) {
               if (tag.name.toLowerCase().includes(query.replace('#', '').toLowerCase())) {
@@ -82,7 +82,7 @@ export default class SearchView extends Component {
           />
         </View>
       )
-      : <View/>;
+      : <View />;
 
     return cancelButton;
   };
@@ -95,13 +95,13 @@ export default class SearchView extends Component {
         <Input
           style={styles.input}
           containerStyle={styles.containerStyle}
-          onChangeText={(text) => this.startSearch(text)}
+          onChangeText={text => this.startSearch(text)}
           value={this.state.searchText}
-          returnKeyType='done'
-          placeholder='検索'
-          placeholderTextColor='#f5f5f5'
-          clearButtonMode='while-editing'
-          leftIcon={<MaterialIcons name='search' size={13} color='#ffffff'/>}
+          returnKeyType="done"
+          placeholder="検索"
+          placeholderTextColor="#f5f5f5"
+          clearButtonMode="while-editing"
+          leftIcon={<MaterialIcons name="search" size={13} color="#ffffff" />}
           leftIconContainerStyle={styles.icon}
         />
         {cancelButton}
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     height: 25,
     marginHorizontal: 5,
     backgroundColor: '#d3d3d3',
-    borderColor: "#d3d3d3",
+    borderColor: '#d3d3d3',
     borderWidth: 1,
     borderRadius: 20,
   },
@@ -144,9 +144,9 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 25,
-    backgroundColor: "#c0c0c0",
-    borderColor: "transparent",
+    backgroundColor: '#c0c0c0',
+    borderColor: 'transparent',
     borderWidth: 0,
-    borderRadius: 5
+    borderRadius: 5,
   },
 });

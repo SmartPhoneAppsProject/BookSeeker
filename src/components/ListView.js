@@ -43,7 +43,7 @@ export default class ListView extends Component {
         console.warn(error);
         this.setState({
           books: [],
-          refreshing: false
+          refreshing: false,
         });
       },
     );
@@ -82,7 +82,8 @@ export default class ListView extends Component {
 
     return (
       <View
-        style={styles.tagsContainer}>
+        style={styles.tagsContainer}
+      >
         {formatted}
       </View>
     );
@@ -91,8 +92,8 @@ export default class ListView extends Component {
   renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <Octicons name="circle-slash" size={25} color="#cd5c5c"/>
-      : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57"/>;
+      ? <Octicons name="circle-slash" size={25} color="#cd5c5c" />
+      : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />;
 
     const tags = this.renderTags(item.tags);
 

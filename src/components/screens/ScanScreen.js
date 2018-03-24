@@ -33,17 +33,17 @@ export default class ScanScreen extends Component {
     this.setState({ permissionsGranted: status === 'granted' });
   }
 
-  _handleBarCodeRead = ({ type, data }) => {
+  handleBarCodeRead = ({ type, data }) => {
     console.log(data);
-    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
-      if (978 == data.slice(0, 3)) { // ISBNを読み取ったとき
-        if (this.state.janCode != data) {
+    if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
+      if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
+        if (this.state.janCode !== data) {
           this.setState({
             janCode: data,
-            status: 'ok'
+            status: 'ok',
           });
           setTimeout(() => {
-            const janCode = parseInt(data);
+            const janCode = parseInt(data, 10);
             this.registerBook(janCode);
           }, 1000);
         }
@@ -59,7 +59,7 @@ export default class ScanScreen extends Component {
   };
 
   registerBook = (janCode) => {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     const { params } = this.props.navigation.state;
 
     const json = JSON.stringify({
@@ -76,7 +76,7 @@ export default class ScanScreen extends Component {
         const book = {
           id: responseJson.id,
         };
-        navigate('EntryTags', { book });
+        navigation.navigate('EntryTags', { book });
       })
       .catch((error) => {
         console.warn(error);
@@ -87,49 +87,43 @@ export default class ScanScreen extends Component {
             const book = {
               id: responseJson.id,
             };
-            navigate('EntryTags', { book });
+            navigation.navigate('EntryTags', { book });
           })
           .catch(e => console.error(e));
       });
   };
 
-  renderNoPermissions = () => {
-    return (
-      <View style={styles.noPermissions}>
-        <Text style={styles.noPermissionsText}>
-          カメラを使用できません
-        </Text>
-      </View>
-    );
-  };
+  renderNoPermissions = () => (
+    <View style={styles.noPermissions}>
+      <Text style={styles.noPermissionsText}>
+        カメラを使用できません
+      </Text>
+    </View>
+  );
 
-  renderHeader = () => {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.stringWarn}>
-          978
-          <Text style={styles.text}>
-            から始まるバーコードを画面に合わせてください
-          </Text>
+  renderHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.stringWarn}>
+        978
+        <Text style={styles.text}>
+          から始まるバーコードを画面に合わせてください
         </Text>
-      </View>
-    );
-  };
+      </Text>
+    </View>
+  );
 
-  renderCamera = () => {
-    return (
-      <View style={styles.cameraContainer}>
-        <BarCodeScanner
-          style={styles.camera}
-          onBarCodeRead={this._handleBarCodeRead}
-        >
-          <View style={styles.cameraInline}>
-            <Text />
-          </View>
-        </BarCodeScanner>
-      </View>
-    );
-  };
+  renderCamera = () => (
+    <View style={styles.cameraContainer}>
+      <BarCodeScanner
+        style={styles.camera}
+        onBarCodeRead={this.handleBarCodeRead}
+      >
+        <View style={styles.cameraInline}>
+          <Text />
+        </View>
+      </BarCodeScanner>
+    </View>
+  );
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;

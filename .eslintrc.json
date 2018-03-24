@@ -4,6 +4,10 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "globals": {
+    "fetch": false,
+    "require": false
+  },
   "rules": {
     "indent": [
       "error",

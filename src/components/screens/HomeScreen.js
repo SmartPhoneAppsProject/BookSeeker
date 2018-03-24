@@ -7,25 +7,15 @@ import { AppLoading } from 'expo';
 import ListView from '../ListView';
 import PullRefresh from '../PullRefresh';
 import { getBooks } from '../../utils/Network';
-import LogoEntry from '../LogoEntry';
-import LogoSAP from '../LogoSAP';
+import { LogoEntry } from '../LogoEntry';
+import { LogoSAP } from '../LogoSAP';
 
 export default class HomeScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerLeft: (
-        <View style={styles.navigationContainer}>
-          <LogoSAP />
-        </View>
-      ),
-      title: 'BookSeeker',
-      headerRight: (
-        <View style={styles.navigationContainer}>
-          <LogoEntry navigation={navigation} />
-        </View>
-      ),
-    };
-  };
+  static navigationOptions = ({
+    headerLeft: <LogoSAP />,
+    title: 'BookSeeker',
+    headerRight: <LogoEntry />,
+  });
 
   constructor(props) {
     super(props);
@@ -54,7 +44,7 @@ export default class HomeScreen extends Component {
     );
   }
 
-  _refresh = () => {
+  refresh = () => {
     getBooks(
       (books) => {
         console.log('Success');
@@ -80,7 +70,7 @@ export default class HomeScreen extends Component {
 
     if (!this.state.responseStatus) {
       return (
-        <PullRefresh refresh={this._refresh} />
+        <PullRefresh refresh={this.refresh} />
       );
     }
 
@@ -97,9 +87,6 @@ export default class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  navigationContainer: {
-    flexDirection: 'row',
-  },
   isLoading: {
     flex: 1,
     paddingTop: 20,

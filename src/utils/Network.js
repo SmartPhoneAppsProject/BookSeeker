@@ -60,7 +60,7 @@ export const rentBook = json => {
     fetch(request)
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          resolve(response);
         }
         reject(response);
       })
@@ -84,7 +84,7 @@ export const postBook = json => {
     fetch(request)
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          resolve(response);
         }
         reject(response);
       })
@@ -132,7 +132,7 @@ export const tagLinkBook = json => {
     fetch(request)
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          resolve(response);
         }
         reject(response);
       })

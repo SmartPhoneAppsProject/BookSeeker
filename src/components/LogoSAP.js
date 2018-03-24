@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   Image,
   StyleSheet,
 } from 'react-native';
 
-export default class LogoSAP extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image
-          style={{ width: 35, height: 35 }}
-          source={require('../../assets/SAP.png')}
-        />
-      </View>
-    );
-  }
-}
+export const LogoSAP = () => (
+  <View style={styles.container}>
+    <Image
+      style={{ width: 35, height: 35 }}
+      source={require('../../assets/SAP.png')}
+    />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -25,3 +21,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 });
+
+export { LogoSAP as default };

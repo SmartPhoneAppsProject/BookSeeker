@@ -4,7 +4,7 @@ import {
   View,
   Image,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import {
   BarCodeScanner,
@@ -13,7 +13,7 @@ import {
 import { Text } from 'react-native-elements';
 
 import { rentBook } from '../../utils/Network';
-import NavigationService from '../../utils/NavigationService';
+import { navigate } from '../../utils/NavigationService';
 
 export default class lentScanScreen extends Component {
   static navigationOptions = {
@@ -69,24 +69,24 @@ export default class lentScanScreen extends Component {
       });
   };
 
-  _handleBarCodeRead = ({ type, data }) => {
+  handleBarCodeRead = ({ type, data }) => {
     const { action } = this.props.navigation.state.params;
 
     console.log(data);
-    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
-      if (978 == data.slice(0, 3)) { // ISBNを読み取ったとき
-        if (this.state.janCode != data) {
+    if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
+      if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
+        if (this.state.janCode !== data) {
           this.setState({
             janCode: data,
-            status: 'ok'
+            status: 'ok',
           });
-          const janCode = parseInt(data);
-          if (action == 'return') {
+          const janCode = parseInt(data, 10);
+          if (action === 'return') {
             this.returnBook(janCode);
-          } else if (action == 'lend') {
+          } else if (action === 'lend') {
             this.lendBook(janCode);
           }
-          NavigationService.navigate('Home');
+          navigate('Home');
         }
       } else { // バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
@@ -99,43 +99,37 @@ export default class lentScanScreen extends Component {
     }
   };
 
-  renderNoPermissions = () => {
-    return (
-      <View style={styles.noPermissions}>
-        <Text style={styles.noPermissionsText}>
-          カメラを使用できません
-        </Text>
-      </View>
-    );
-  };
+  renderNoPermissions = () => (
+    <View style={styles.noPermissions}>
+      <Text style={styles.noPermissionsText}>
+        カメラを使用できません
+      </Text>
+    </View>
+  );
 
-  renderHeader = () => {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.stringWarn}>
-          978
-          <Text style={styles.text}>
-            から始まるバーコードを画面に合わせてください
-          </Text>
+  renderHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.stringWarn}>
+        978
+        <Text style={styles.text}>
+          から始まるバーコードを画面に合わせてください
         </Text>
-      </View>
-    );
-  };
+      </Text>
+    </View>
+  );
 
-  renderCamera = () => {
-    return (
-      <View style={styles.cameraContainer}>
-        <BarCodeScanner
-          style={styles.camera}
-          onBarCodeRead={this._handleBarCodeRead}
-        >
-          <View style={styles.cameraInline}>
-            <Text />
-          </View>
-        </BarCodeScanner>
-      </View>
-    );
-  };
+  renderCamera = () => (
+    <View style={styles.cameraContainer}>
+      <BarCodeScanner
+        style={styles.camera}
+        onBarCodeRead={this.handleBarCodeRead}
+      >
+        <View style={styles.cameraInline}>
+          <Text />
+        </View>
+      </BarCodeScanner>
+    </View>
+  );
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;
