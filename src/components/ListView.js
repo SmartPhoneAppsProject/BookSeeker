@@ -7,30 +7,51 @@ import {
 } from 'react-native';
 import {
   List,
-  ListItem
+  ListItem,
 } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
-  Octicons
+  Octicons,
 } from '@expo/vector-icons';
 
-import SearchScreen from './screens/SearchScreen';
+import SearchScreen from './SearchView';
 import { getBooks } from '../utils/Network';
-import {
-  icon,
-} from '../utils/Icons';
+import { icon } from '../utils/Icons';
 
 export default class ListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       refreshing: false,
-      books: this.props.books
+      books: this.props.books,
     };
   }
 
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+
+    getBooks(
+      (books) => {
+        console.log('Success');
+        this.setState({
+          books,
+          refreshing: false,
+        });
+      },
+      (error) => {
+        console.warn(error);
+        this.setState({
+          books: [],
+          refreshing: false,
+        });
+      },
+    );
+  };
+
+  // SearchViewからListViewを変更するためにstateとして受け渡す
   setBooks = (books) => {
-    this.setState({ books: books });
+    this.setState({ books });
   };
 
   resetBooks = () => {
@@ -38,18 +59,18 @@ export default class ListView extends Component {
   };
 
   renderTags = (tags) => {
-    let formated = [];
+    let formatted = [];
     let tag;
-    for (let i in tags) {
-      if (i < 3) {
+    for (let i = 0; i < tags.length; i++) {
+      if (i < 2) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
-      } else if (i == 3) {
-        tag = <Text style={styles.tagText}>...</Text>;
-      } else if (i > 3) {
-        tag = <View/>;
+      } else if (i === 2) {
+        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}...</Text>;
+      } else {
+        break;
       }
 
-      formated.push(
+      formatted.push(
         <View
           style={styles.subtitleView}
           key={tags[i].id}
@@ -61,38 +82,24 @@ export default class ListView extends Component {
 
     return (
       <View
-        style={styles.tagsContainer}>
-        {formated}
+        style={styles.tagsContainer}
+      >
+        {formatted}
       </View>
     );
   };
 
-  _onRefresh = () => {
-    this.setState({ onRefresh: true });
-
-    getBooks()
-      .then((books) => {
-        console.log(books);
-        if (!books) {
-          this.setState({ books: '' });
-        } else {
-          this.setState({ books });
-        }
-      })
-      .catch((error) => console.error(error));
-  };
-
-  _renderItem = ({ item }) => {
+  renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <Octicons name='circle-slash' size={25} color='#cd5c5c'/>
-      : <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>;
+      ? <Octicons name="circle-slash" size={25} color="#cd5c5c" />
+      : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />;
 
     const tags = this.renderTags(item.tags);
 
     return (
       <ListItem
-        chevronColor='#c0c0c0'
+        chevronColor="#c0c0c0"
         onPress={() => navigate('Detail', { item })}
         title={item.title}
         subtitle={tags}
@@ -117,8 +124,8 @@ export default class ListView extends Component {
           }
           data={this.state.books}
           extraData={this.state.books}
-          renderItem={this._renderItem}
-          onRefresh={this._onRefresh}
+          renderItem={this.renderItem}
+          onRefresh={this.onRefresh}
           refreshing={this.state.refreshing}
         />
       </List>
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     marginTop: 0,
-    padding: 0
+    padding: 0,
   },
   tagsContainer: {
     flexDirection: 'row',

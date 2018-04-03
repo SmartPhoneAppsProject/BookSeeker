@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import {
   BarCodeScanner,
-  Permissions
+  Permissions,
 } from 'expo';
-import { Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 
-import { rentBook } from '../utils/Network';
-import { NavigationActions } from "react-navigation";
+import { rentBook } from '../../utils/Network';
+import { navigate } from '../../utils/NavigationService';
 
 export default class lentScanScreen extends Component {
   static navigationOptions = {
@@ -34,22 +34,10 @@ export default class lentScanScreen extends Component {
     this.setState({ permissionsGranted: status === 'granted' });
   }
 
-  goToHomeScreen = () => {
-    // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
-
-    const resetAction = NavigationActions.reset({
-      index: actions.length - 1,
-      actions
-    });
-
-    this.props.navigation.dispatch(resetAction)
-  };
-
   lendBook = (janCode) => {
     const json = JSON.stringify({
       jan_code: janCode,
-      status: true
+      status: true,
     });
 
     this.changeBookStatus(json);
@@ -58,7 +46,7 @@ export default class lentScanScreen extends Component {
   returnBook = (janCode) => {
     const json = JSON.stringify({
       jan_code: janCode,
-      status: false
+      status: false,
     });
 
     this.changeBookStatus(json);
@@ -67,105 +55,93 @@ export default class lentScanScreen extends Component {
   changeBookStatus = (json) => {
     rentBook(json)
       .then(response => response.json())
-      .then(responseJson => {
+      .then((responseJson) => {
         console.log(responseJson);
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         rentBook(json)
           .then(response => response.json())
-          .then(responseJson => {
+          .then((responseJson) => {
             console.log(responseJson);
           })
-          .catch(error => console.error(error));
+          .catch(e => console.error(e));
       });
   };
 
-  _handleBarCodeRead = ({ type, data }) => {
+  handleBarCodeRead = ({ type, data }) => {
     const { action } = this.props.navigation.state.params;
 
     console.log(data);
-    if (`${BarCodeScanner.Constants.BarCodeType.ean13}` == type) {
-      if (978 == data.slice(0, 3)) { //ISBNを読み取ったとき
-        if (this.state.janCode != data) {
+    if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
+      if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
+        if (this.state.janCode !== data) {
           this.setState({
             janCode: data,
-            status: 'ok'
+            status: 'ok',
           });
-          const janCode = parseInt(data);
-          if (action == 'return') {
+          const janCode = parseInt(data, 10);
+          if (action === 'return') {
             this.returnBook(janCode);
-          } else if (action == 'lend') {
+          } else if (action === 'lend') {
             this.lendBook(janCode);
           }
-          this.goToHomeScreen();
+          navigate('Home');
         }
-      } else { //バーコードであるがISBNでないとき
+      } else { // バーコードであるがISBNでないとき
         this.setState({ status: 'invalid' });
       }
       setTimeout(() => {
         this.setState({ status: 'reading' });
       }, 1000);
-    } else { //バーコードでないとき
+    } else { // バーコードでないとき
       this.setState({ status: 'reading' });
     }
   };
 
-  renderNoPermissions = () => {
-    return (
-      <View style={styles.noPermissions}>
-        <Text style={styles.noPermissionsText}>
-          カメラを使用できません
-        </Text>
-      </View>
-    );
-  };
+  renderNoPermissions = () => (
+    <View style={styles.noPermissions}>
+      <Text style={styles.noPermissionsText}>
+        カメラを使用できません
+      </Text>
+    </View>
+  );
 
-  renderHeader = () => {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.stringWarn}>
-          978
-          <Text style={styles.text}>
-            から始まるバーコードを画面に合わせてください
-          </Text>
+  renderHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.stringWarn}>
+        978
+        <Text style={styles.text}>
+          から始まるバーコードを画面に合わせてください
         </Text>
-      </View>
-    );
-  };
+      </Text>
+    </View>
+  );
 
-  renderCamera = () => {
-    return (
-      <View style={styles.cameraContainer}>
-        <BarCodeScanner
-          style={styles.camera}
-          onBarCodeRead={this._handleBarCodeRead}
-        >
-          <View style={styles.cameraInline}>
-            <Text/>
-          </View>
-        </BarCodeScanner>
-      </View>
-    );
-  };
+  renderCamera = () => (
+    <View style={styles.cameraContainer}>
+      <BarCodeScanner
+        style={styles.camera}
+        onBarCodeRead={this.handleBarCodeRead}
+      >
+        <View style={styles.cameraInline}>
+          <Text />
+        </View>
+      </BarCodeScanner>
+    </View>
+  );
 
   renderFooter = () => {
-    let statusText = <View/>;
+    let statusText = <ActivityIndicator size="large" />;
     if (this.state.status === 'ok') {
-      statusText = <Text style={styles.statusOk}>読み取りました</Text>;
+      statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
     } else if (this.state.status === 'invalid') {
-      statusText = <Text style={styles.statusNo}>数字をお確かめください</Text>;
+      statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
     return (
       <View style={styles.footer}>
-        <Button
-          title={statusText}
-          loading={(this.state.status === 'reading')}
-          loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
-          titleStyle={{ fontWeight: "700" }}
-          clear={true}
-        />
+        {statusText}
       </View>
     );
   };
@@ -180,7 +156,7 @@ export default class lentScanScreen extends Component {
         {header}
         <Image
           style={styles.imageSize}
-          source={require('../../assets/ISBN_sample.png')}
+          source={require('../../../assets/ISBN_sample.png')}
         />
         {camera}
         {footer}
@@ -215,7 +191,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   noPermissionsText: {
-    color: 'white'
+    color: 'white',
   },
   cameraScreen: {
     flex: 1,
@@ -235,15 +211,15 @@ const styles = StyleSheet.create({
   },
   imageSize: {
     width: 221 / 2,
-    height: 93 / 2
+    height: 93 / 2,
   },
   body: {
     alignItems: 'center',
     margin: 5,
   },
   cameraContainer: {
-    width: width * 2 / 3,
-    height: width * 2 / 3,
+    width: width * (2 / 3),
+    height: width * (2 / 3),
     borderColor: '#f3f3f3',
     borderWidth: 1,
   },
@@ -261,11 +237,11 @@ const styles = StyleSheet.create({
   statusOk: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#3eb370'
+    color: '#3eb370',
   },
   statusNo: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#e95464'
+    color: '#e95464',
   },
 });

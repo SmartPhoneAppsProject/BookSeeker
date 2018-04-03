@@ -6,21 +6,18 @@ import {
   FlatList,
 } from 'react-native';
 import {
-  MaterialCommunityIcons,
-  Octicons
-} from '@expo/vector-icons';
-import {
   Button,
   List,
   ListItem,
 } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import {
   getTags,
   tagLinkBook,
-} from "../../utils/Network";
-import { icon } from "../../utils/Icons";
+} from '../../utils/Network';
+import { icon } from '../../utils/Icons';
+import { navigate } from '../../utils/NavigationService';
 
 export default class EntryTagsScreen extends Component {
   static navigationOptions = {
@@ -30,7 +27,6 @@ export default class EntryTagsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tagText: '',
       appState: 'isLoading', // or error or success
       tags: [],
       chosenIds: [],
@@ -45,11 +41,10 @@ export default class EntryTagsScreen extends Component {
           tag.chosen = false;
         }
         this.setState({
-          appStatue: 'success',
           tags,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         getTags()
           .then((tags) => {
@@ -57,59 +52,12 @@ export default class EntryTagsScreen extends Component {
               tag.chosen = false;
             }
             this.setState({
-              appStatue: 'success',
               tags,
             });
           })
-          .catch(error => {
-            console.error(error)
-          });
+          .catch(e => console.error(e));
       });
   }
-
-  goToHomeScreen = () => {
-    // https://github.com/react-navigation/react-navigation/issues/1448
-    const actions = [NavigationActions.navigate({ routeName: 'Home' })];
-
-    const resetAction = NavigationActions.reset({
-      index: actions.length - 1,
-      actions
-    });
-
-    this.props.navigation.dispatch(resetAction)
-  };
-
-  renderTagsList = () => {
-    return (
-      <List containerStyle={styles.listContainer}>
-        <FlatList
-          keyExtractor={(item) => item.id}
-          data={this.state.tags}
-          extraData={this.state.updated}
-          renderItem={this._renderItem}
-        />
-      </List>
-    );
-  };
-
-  _renderItem = ({ item, index }) => {
-    const status = item.chosen
-      ? <MaterialCommunityIcons name='check-circle-outline' size={25} color='#2e8b57'/>
-      : <View/>;
-
-    return (
-      <ListItem
-        containerStyle={styles.listItemContainer}
-        onPress={() => this.changeTagChosen(item, index)}
-        title={` ${item.name}`}
-        leftIcon={
-          icon(item.name)
-        }
-        badge={{ element: status }}
-        hideChevron={true}
-      />
-    );
-  };
 
   changeTagChosen = (tag, itemIndex) => {
     let { tags, chosenIds } = this.state;
@@ -125,28 +73,9 @@ export default class EntryTagsScreen extends Component {
 
     this.setState({
       tags,
-      updated: !this.state.updated, //re-render ListView
+      updated: !this.state.updated, // re-render ListView
       chosenIds,
     });
-  };
-
-  renderButton = () => {
-    return (
-      <Button
-        containerStyle={styles.buttonContainer}
-        buttonStyle={styles.formButton}
-        title='submit'
-        onPress={this.buttonOnPress}
-        iconRight={true}
-        icon={
-          <MaterialCommunityIcons
-            name='arrow-right'
-            size={15}
-            color='#ffffff'
-          />
-        }
-      />
-    );
   };
 
   buttonOnPress = () => {
@@ -161,26 +90,73 @@ export default class EntryTagsScreen extends Component {
 
     const json = JSON.stringify({
       book_id: book.id,
-      tag_id: tagId
+      tag_id: tagId,
     });
 
     tagLinkBook(json)
       .then(response => response.json())
-      .then(responseJson => {
+      .then((responseJson) => {
         console.log(responseJson);
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         tagLinkBook(json)
           .then(response => response.json())
-          .then(responseJson => {
+          .then((responseJson) => {
             console.log(responseJson);
           })
-          .catch(error => console.error(error));
+          .catch(e => console.error(e));
       });
 
-    this.goToHomeScreen();
+    navigate('Home');
   };
+
+  renderTagsList = () => (
+    <List containerStyle={styles.listContainer}>
+      <FlatList
+        keyExtractor={item => item.id}
+        data={this.state.tags}
+        extraData={this.state.updated}
+        renderItem={this.renderListItem}
+      />
+    </List>
+  );
+
+  renderListItem = ({ item, index }) => {
+    const status = item.chosen
+      ? <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />
+      : <View />;
+
+    return (
+      <ListItem
+        containerStyle={styles.listItemContainer}
+        onPress={() => this.changeTagChosen(item, index)}
+        title={` ${item.name}`}
+        leftIcon={
+          icon(item.name)
+        }
+        badge={{ element: status }}
+        hideChevron
+      />
+    );
+  };
+
+  renderButton = () => (
+    <Button
+      containerStyle={styles.buttonContainer}
+      buttonStyle={styles.formButton}
+      title="submit"
+      onPress={this.buttonOnPress}
+      iconRight
+      icon={
+        <MaterialCommunityIcons
+          name="arrow-right"
+          size={15}
+          color="#ffffff"
+        />
+      }
+    />
+  );
 
   render() {
     const tags = this.renderTagsList();
@@ -188,7 +164,7 @@ export default class EntryTagsScreen extends Component {
     if (this.state.appState === 'success') {
       return (
         <View style={styles.isLoading}>
-          <ActivityIndicator/>
+          <ActivityIndicator />
         </View>
       );
     }
@@ -209,7 +185,7 @@ const
     },
     isLoading: {
       flex: 1,
-      paddingTop: 20
+      paddingTop: 20,
     },
     listContainer: {
       flex: 9,

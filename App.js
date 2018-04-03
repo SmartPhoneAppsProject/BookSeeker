@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import HomeScreen from './src/components/screens/HomeScreen'
-import SearchScreen from './src/components/screens/SearchScreen';
+import HomeScreen from './src/components/screens/HomeScreen';
+import SearchView from './src/components/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
-import EntryTagsScreen from "./src/components/screens/EntryTagsScreen";
-import LentScanScreen from "./src/components/LentScanScreen";
+import EntryTagsScreen from './src/components/screens/EntryTagsScreen';
+import LentScanScreen from './src/components/screens/LentScanScreen';
+import { setTopLevelNavigator } from './src/utils/NavigationService';
 
 const RootStack = StackNavigator(
   {
@@ -27,38 +28,41 @@ const RootStack = StackNavigator(
       screen: DetailScreen,
     },
     Search: {
-      screen: SearchScreen,
+      screen: SearchView,
     },
     LentScan: {
       screen: LentScanScreen,
-    }
+    },
   },
   {
     initialRouteName: 'Home',
-    //header config
+    // header config
     navigationOptions: {
       headerStyle: {
         backgroundColor: '#c0c0c0',
-        borderColor: "transparent",
+        borderColor: 'transparent',
         borderWidth: 0,
         shadowColor: 'transparent',
         shadowRadius: 0,
-        elevation: 0,       //remove shadow on Android
-        shadowOpacity: 0,   //remove shadow on iOS
+        elevation: 0, // remove shadow on Android
+        shadowOpacity: 0, // remove shadow on iOS
         shadowOffset: {
           height: 0,
           width: 0,
         },
-        shadowRadius: 0,
       },
       headerTintColor: '#ffffff',
     },
-  }
+  },
 );
 
 export default class BookSeeker extends Component {
   render() {
-    return <RootStack/>;
+    return (
+      <RootStack
+        ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
+      />
+    );
   }
 }
 

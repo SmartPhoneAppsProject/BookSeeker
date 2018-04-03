@@ -2,18 +2,26 @@ import { API_ENDPOINT } from 'react-native-dotenv';
 
 const baseUri = API_ENDPOINT;
 
-export const getBooks = () => {
+// Herokuがsleepしていた時にもう一度successCallbackを行う
+export const getBooks = (successCallback, errorCallback) => {
+  _getBooks()
+    .then(books => successCallback(books))
+    .catch((error) => {
+      console.warn(error);
+      _getBooks()
+        .then(books => successCallback(books))
+        .catch(e => errorCallback(e));
+    });
+};
+
+const _getBooks = () => {
   return new Promise((resolve, reject) => {
     fetch(`${baseUri}/books`)
       .then((response) => {
         if (response.ok) {
-          console.log('Success');
           return response.json()
-        } else {
-          console.log('Fail');
-          let books = '';
-          resolve(books)
         }
+        reject(response);
       })
       .then((data) => {
         let books = [];
@@ -32,7 +40,7 @@ export const getBooks = () => {
         }
         resolve(books);
       })
-      .catch((error) => reject(error));
+      .catch(error => reject(error));
   });
 };
 
@@ -50,7 +58,13 @@ export const rentBook = json => {
     const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
-      .then(response => resolve(response));
+      .then((response) => {
+        if (response.ok) {
+          resolve(response);
+        }
+        reject(response);
+      })
+      .catch(error => reject(error));
   });
 };
 
@@ -68,7 +82,13 @@ export const postBook = json => {
     const request = new Request(`${baseUri}/books`, options);
 
     fetch(request)
-      .then(response => resolve(response));
+      .then((response) => {
+        if (response.ok) {
+          resolve(response);
+        }
+        reject(response);
+      })
+      .catch(error => reject(error));
   });
 };
 
@@ -78,9 +98,8 @@ export const getTags = () => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          reject(response);
         }
+        reject(response);
       })
       .then((data) => {
         let tags = [];
@@ -111,6 +130,12 @@ export const tagLinkBook = json => {
     const request = new Request(`${baseUri}/books/tags`, options);
 
     fetch(request)
-      .then(response => resolve(response));
+      .then((response) => {
+        if (response.ok) {
+          resolve(response);
+        }
+        reject(response);
+      })
+      .catch(error => reject(error));
   });
 };
