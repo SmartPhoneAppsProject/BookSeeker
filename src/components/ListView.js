@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   FlatList,
@@ -19,6 +20,14 @@ import { getBooks } from '../utils/Network';
 import { icon } from '../utils/Icons';
 
 export default class ListView extends Component {
+  static propTypes = {
+    books: PropTypes.arrayOf(PropTypes.object),
+  };
+
+  static defaultProps = {
+    books: [],
+  };
+
   constructor(props) {
     super(props);
     this.state = {
