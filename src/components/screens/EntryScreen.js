@@ -13,7 +13,11 @@ import {
   Button,
 } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
+import {
+  MaterialIcons,
+  FontAwesome,
+  Entypo,
+} from '@expo/vector-icons';
 
 import { pickPhoto, takePhoto } from '../ImagePicker';
 
@@ -40,7 +44,6 @@ export default class EntryScreen extends Component {
   }
 
   onChangeTitleText = (text) => {
-    console.log(text);
     this.setState({
       title: text,
       validation: false,
