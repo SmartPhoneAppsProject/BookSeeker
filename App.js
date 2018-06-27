@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 
+import reducer from './src/reducers';
 import HomeScreen from './src/components/screens/HomeScreen';
 import SearchView from './src/components/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
@@ -56,12 +59,16 @@ const RootStack = StackNavigator(
   },
 );
 
-export default class BookSeeker extends Component {
+const store = createStore(reducer);
+
+export default class App extends Component {
   render() {
     return (
-      <RootStack
-        ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
-      />
+      <Provider store={store}>
+        <RootStack
+          ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
+        />
+      </Provider>
     );
   }
 }
