@@ -59,6 +59,7 @@ const RootStack = StackNavigator(
   },
 );
 
+const middleware = [thunk];
 const store = createStore(reducer);
 
 export default class App extends Component {

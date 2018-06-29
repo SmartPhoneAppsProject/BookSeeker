@@ -1,4 +1,7 @@
-import { GET_BOOKS } from '../constants/actionTypes';
+import {
+  GET_BOOKS,
+  GET_BOOK,
+} from '../constants/actionTypes';
 
 const initialState = {
   books: [],
@@ -10,6 +13,11 @@ const books = (state = initialState, action) => {
       return {
         ...state,
         books: state.books.concat([action.books]),
+      };
+    case GET_BOOK:
+      return {
+        // todo async
+        book: state.books[action.id],
       };
     default:
       return state;
