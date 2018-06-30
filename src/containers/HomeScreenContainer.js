@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { getAllBooks } from '../actions';
 import HomeScreen from '../components/screens/HomeScreen';
 
-const mapStateToProps = ({ booksReducer }) => ({
-  books: booksReducer.books,
+const mapStateToProps = ({ book }) => ({
+  books: book.books,
 });
 
 const mapDispatchToProps = dispatch => ({

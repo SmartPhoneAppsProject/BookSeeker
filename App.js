@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import { getAllBooks } from './src/actions';
 import reducer from './src/reducers';
 
-import HomeScreen from './src/components/screens/HomeScreen';
+// import HomeScreen from './src/components/HomeScreen';
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
 import SearchView from './src/components/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';

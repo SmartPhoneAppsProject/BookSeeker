@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
 });
-export default class HomeScreen extends Component {
+
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -53,7 +54,6 @@ export default class HomeScreen extends Component {
   refresh = () => {
     getBooks(
       (books) => {
-        console.log('Success');
         this.setState({
           books,
           responseStatus: true,
@@ -79,7 +79,6 @@ export default class HomeScreen extends Component {
         <PullRefresh refresh={this.refresh} />
       );
     }
-    console.log(this.props);
     const { books, navigation } = this.props;
 
     return (
@@ -115,3 +114,4 @@ HomeScreen.defaultProps = {
   books: [],
 };
 
+export default HomeScreen;

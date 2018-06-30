@@ -23,12 +23,14 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "echo no tests",
-    "appr": "appr"
+    "appr": "appr",
+    "debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "eslint": "^4.19.1",
     "expo": "^25.0.0",
     "install": "^0.10.4",
