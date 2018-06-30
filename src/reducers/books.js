@@ -12,12 +12,12 @@ const books = (state = initialState, action) => {
     case GET_BOOKS:
       return {
         ...state,
-        books: state.books.concat([action.books]),
+        books: action.payload.books,
       };
     case GET_BOOK:
       return {
-        // todo async
-        book: state.books[action.id],
+        ...state,
+        book: action.payload.book,
       };
     default:
       return state;

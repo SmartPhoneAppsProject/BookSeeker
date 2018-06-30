@@ -4,7 +4,7 @@
 import _books from './books.json';
 import _tags from './tags.json';
 
-const TIMEOUT = 100;
+const TIMEOUT = 2000;
 
 export default {
   getBooks: (callback, timeout) => setTimeout(() => callback(_books), timeout || TIMEOUT),

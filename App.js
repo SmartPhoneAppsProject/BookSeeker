@@ -4,11 +4,12 @@ import {
   applyMiddleware,
 } from 'redux';
 import { StackNavigator } from 'react-navigation';
-import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
-
+import thunk from 'redux-thunk';
 import { getAllBooks } from './src/actions';
 import reducer from './src/reducers';
+
 import HomeScreen from './src/components/screens/HomeScreen';
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
 import SearchView from './src/components/SearchView';
@@ -67,13 +68,18 @@ const RootStack = StackNavigator(
 );
 
 const middleware = [thunk];
+if (__DEV__ === true) {
+  middleware.push(createLogger());
+}
 
 const store = createStore(
   reducer,
   applyMiddleware(...middleware),
 );
 
+// 最初にAPIをリクエストする
 store.dispatch(getAllBooks());
+console.log(store.getState());
 
 export default class App extends Component {
   render() {

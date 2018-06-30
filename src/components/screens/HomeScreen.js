@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { AppLoading } from 'expo';
 import ListView from '../ListView';
 import PullRefresh from '../PullRefresh';
@@ -10,16 +11,25 @@ import { getBooks } from '../../utils/Network';
 import { LogoEntry } from '../LogoEntry';
 import { LogoSAP } from '../LogoSAP';
 
+const styles = StyleSheet.create({
+  isLoading: {
+    flex: 1,
+    paddingTop: 20,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  indicator: {
+    flex: 1,
+    paddingTop: 20,
+  },
+});
 export default class HomeScreen extends Component {
-  static navigationOptions = ({
-    headerLeft: <LogoSAP />,
-    title: 'BookSeeker',
-    headerRight: <LogoEntry />,
-  });
-
   constructor(props) {
     super(props);
 
+    console.log(props);
     this.state = {
       books: [],
       isLoading: true,
@@ -30,9 +40,7 @@ export default class HomeScreen extends Component {
   componentDidMount() {
     getBooks(
       (books) => {
-        console.log('Success');
         this.setState({
-          books,
           responseStatus: true,
           isLoading: false,
         });
@@ -78,7 +86,7 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <ListView
           style={styles.listView}
-          books={this.state.books}
+          books={this.props.books.books}
           navigation={this.props.navigation}
         />
       </View>
@@ -86,17 +94,25 @@ export default class HomeScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  isLoading: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  indicator: {
-    flex: 1,
-    paddingTop: 20,
-  },
+HomeScreen.navigationOptions = ({
+  headerLeft: <LogoSAP />,
+  title: 'BookSeeker',
+  headerRight: <LogoEntry />,
 });
+
+// HomeScreen.propTypes = {
+//   books: PropTypes.shape({
+//     books: PropTypes.arrayOf(PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       title: PropTypes.string.isRequired,
+//       image: PropTypes.string.isRequired,
+//       status: PropTypes.bool.isRequired,
+//       isbn: PropTypes.string.isRequired,
+//     })),
+//   }),
+// };
+//
+// HomeScreen.defaultProps = {
+//   books: [],
+// };
+
