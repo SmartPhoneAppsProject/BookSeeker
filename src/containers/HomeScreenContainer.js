@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import { getAllBooks } from '../actions';
 import HomeScreen from '../components/screens/HomeScreen';
 
-// Storeから必要なStateを取り出し、ComponentのPropsに割り当てる
-const mapStateToProps = ({ books }) => ({
-  books,
+const mapStateToProps = ({ booksReducer }) => ({
+  books: booksReducer.books,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -29,9 +29,7 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
     this.state = {
-      books: [],
       isLoading: true,
       responseStatus: false,
     };
@@ -81,13 +79,15 @@ export default class HomeScreen extends Component {
         <PullRefresh refresh={this.refresh} />
       );
     }
+    console.log(this.props);
+    const { books, navigation } = this.props;
 
     return (
       <View style={styles.container}>
         <ListView
           style={styles.listView}
-          books={this.props.books.books}
-          navigation={this.props.navigation}
+          books={books}
+          navigation={navigation}
         />
       </View>
     );
@@ -100,19 +100,18 @@ HomeScreen.navigationOptions = ({
   headerRight: <LogoEntry />,
 });
 
-// HomeScreen.propTypes = {
-//   books: PropTypes.shape({
-//     books: PropTypes.arrayOf(PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       title: PropTypes.string.isRequired,
-//       image: PropTypes.string.isRequired,
-//       status: PropTypes.bool.isRequired,
-//       isbn: PropTypes.string.isRequired,
-//     })),
-//   }),
-// };
-//
-// HomeScreen.defaultProps = {
-//   books: [],
-// };
+HomeScreen.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    status: PropTypes.bool.isRequired,
+    isbn: PropTypes.string.isRequired,
+  })),
+  getAllBooks: PropTypes.func.isRequired,
+};
+
+HomeScreen.defaultProps = {
+  books: [],
+};
 

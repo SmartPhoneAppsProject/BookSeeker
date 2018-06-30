@@ -77,9 +77,7 @@ const store = createStore(
   applyMiddleware(...middleware),
 );
 
-// 最初にAPIをリクエストする
 store.dispatch(getAllBooks());
-console.log(store.getState());
 
 export default class App extends Component {
   render() {

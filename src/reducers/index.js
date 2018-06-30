@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import books from './books';
-import tags from './tags';
+import booksReducer from './booksReducer';
+import tagsReducer from './tagsReducer';
 
 export default combineReducers({
-  books,
-  tags,
+  booksReducer,
+  tagsReducer,
 });
 

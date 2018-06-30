@@ -4,7 +4,7 @@ const initialState = {
   tags: [],
 };
 
-const tags = (state = initialState, action) => {
+const tagsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_TAG:
       return {
@@ -16,4 +16,4 @@ const tags = (state = initialState, action) => {
   }
 };
 
-export default tags;
+export default tagsReducer;
