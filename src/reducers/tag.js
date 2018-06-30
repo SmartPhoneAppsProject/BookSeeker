@@ -4,6 +4,7 @@ const initialState = {
   tags: [],
 };
 
+// fixme
 const tag = (state = initialState, action) => {
   switch (action.type) {
     case GET_TAG:

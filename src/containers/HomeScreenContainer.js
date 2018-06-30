@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import { getAllBooks } from '../actions';
 import HomeScreen from '../components/screens/HomeScreen';
 
-const mapStateToProps = ({ book }) => ({
+const mapStateToProps = ({ book, loading }) => ({
   books: book.books,
+  isLoading: loading.isLoading,
+  error: loading.error,
 });
 
 const mapDispatchToProps = dispatch => ({
