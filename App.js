@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import {
+  createStore,
+  applyMiddleware,
+} from 'redux';
 import { StackNavigator } from 'react-navigation';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
+import { getAllBooks } from './src/actions';
 import reducer from './src/reducers';
 import HomeScreen from './src/components/screens/HomeScreen';
+import HomeScreenContainer from './src/containers/HomeScreenContainer';
 import SearchView from './src/components/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
@@ -16,7 +22,8 @@ import { setTopLevelNavigator } from './src/utils/NavigationService';
 const RootStack = StackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      // screen: HomeScreen,
+      screen: HomeScreenContainer,
     },
     Entry: {
       screen: EntryScreen,
@@ -60,7 +67,13 @@ const RootStack = StackNavigator(
 );
 
 const middleware = [thunk];
-const store = createStore(reducer);
+
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware),
+);
+
+store.dispatch(getAllBooks());
 
 export default class App extends Component {
   render() {
