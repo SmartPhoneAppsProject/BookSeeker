@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { AppLoading } from 'expo';
-import ListView from '../ListView';
+import BookList from '../BookList';
 import PullRefresh from '../PullRefresh';
 import { LogoEntry } from '../LogoEntry';
 import { LogoSAP } from '../LogoSAP';
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HomeScreen = (props) => {
+const HomeScreen = (props) => {
   if (props.isLoading) {
     return <AppLoading />;
   }
@@ -36,10 +36,12 @@ export const HomeScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <ListView
+      <BookList
         style={styles.listView}
         books={props.books}
         navigation={props.navigation}
+        onRefresh={props.getAllBooks}
+        isLoading={props.isLoading}
       />
     </View>
   );

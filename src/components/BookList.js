@@ -16,47 +16,36 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchView';
-import { getBooks } from '../utils/Network';
 import { icon } from '../utils/Icons';
 
-export default class ListView extends Component {
-  static propTypes = {
-    books: PropTypes.arrayOf(PropTypes.object),
-  };
+const styles = StyleSheet.create({
+  list: {
+    flex: 1,
+    marginTop: 0,
+    padding: 0,
+  },
+  statusTrue: {
+    color: '#cd5c5c',
+  },
+  statusFalse: {
+    color: '#2e8b57',
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    paddingTop: 5,
+    paddingLeft: 10,
+  },
+  subtitleView: {
+    flexDirection: 'row',
+  },
+  tagText: {
+    paddingRight: 5,
+    color: '#808080',
+  },
+});
 
-  static defaultProps = {
-    books: [],
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      refreshing: false,
-      books: this.props.books,
-    };
-  }
-
-
-  onRefresh = () => {
-    this.setState({ refreshing: true });
-
-    getBooks(
-      (books) => {
-        console.log('Success');
-        this.setState({
-          books,
-          refreshing: false,
-        });
-      },
-      (error) => {
-        console.warn(error);
-        this.setState({
-          books: [],
-          refreshing: false,
-        });
-      },
-    );
-  };
+class BookList extends Component {
+  onRefresh = () => this.props.onRefresh;
 
   // SearchViewからListViewを変更するためにstateとして受け渡す
   setBooks = (books) => {
@@ -68,9 +57,9 @@ export default class ListView extends Component {
   };
 
   renderTags = (tags) => {
-    let formatted = [];
+    const formatted = [];
     let tag;
-    for (let i = 0; i < tags.length; i++) {
+    for (let i = 0; i < tags.length; i += 1) {
       if (i < 2) {
         tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
       } else if (i === 2) {
@@ -85,8 +74,7 @@ export default class ListView extends Component {
           key={tags[i].id}
         >
           {tag}
-        </View>
-      );
+        </View>);
     }
 
     return (
@@ -101,8 +89,8 @@ export default class ListView extends Component {
   renderItem = ({ item }) => {
     const { navigate } = this.props.navigation;
     const status = item.status
-      ? <Octicons name="circle-slash" size={25} color="#cd5c5c" />
-      : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />;
+      ? <Octicons name="circle-slash" size={25} color={styles.statusTrue} />
+      : <MaterialCommunityIcons name="check-circle-outline" size={25} color={styles.statusFalse} />;
 
     const tags = this.renderTags(item.tags);
 
@@ -124,40 +112,38 @@ export default class ListView extends Component {
         containerStyle={styles.list}
       >
         <FlatList
-          ListHeaderComponent={
-            <SearchScreen
-              books={this.state.books}
-              setBooks={this.setBooks}
-              resetBooks={this.resetBooks}
-            />
-          }
-          data={this.state.books}
-          extraData={this.state.books}
+          // ListHeaderComponent={
+          //   <SearchScreen
+          //     books={this.state.books}
+          //     setBooks={this.setBooks}
+          //     resetBooks={this.resetBooks}
+          //   />
+          // }
+          data={this.props.books}
+          extraData={this.props.books}
           renderItem={this.renderItem}
           onRefresh={this.onRefresh}
-          refreshing={this.state.refreshing}
+          refreshing={this.props.isLoading}
         />
       </List>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    marginTop: 0,
-    padding: 0,
-  },
-  tagsContainer: {
-    flexDirection: 'row',
-    paddingTop: 5,
-    paddingLeft: 10,
-  },
-  subtitleView: {
-    flexDirection: 'row',
-  },
-  tagText: {
-    paddingRight: 5,
-    color: '#808080',
-  },
-});
+BookList.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    status: PropTypes.bool.isRequired,
+    isbn: PropTypes.string.isRequired,
+  })),
+  onRefresh: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
+
+BookList.defaultProps = {
+  books: [],
+};
+
+export default BookList;
