@@ -1,22 +1,22 @@
 import server from '../api/server';
 import * as types from '../constants/actionTypes';
 
-export const request = () => ({
+const request = () => ({
   type: types.REQUEST_API,
 });
 
-export const requestSuccess = () => ({
+const requestSuccess = () => ({
   type: types.REQUEST_API_SUCCESS,
 });
 
-export const requestFail = error => ({
+const requestFail = error => ({
   type: types.REQUEST_API_FAIL,
   payload: {
     error,
   },
 });
 
-export const getBooks = books => ({
+const getBooks = books => ({
   type: types.GET_BOOKS,
   payload: {
     books,
@@ -45,7 +45,7 @@ export const getAllBooks = () => (dispatch) => {
       dispatch(getBooks(books));
     })
     .catch((error) => {
-      dispatch(requestFail(error));
+      dispatch(requestFail(JSON.parse(error)));
     });
 };
 

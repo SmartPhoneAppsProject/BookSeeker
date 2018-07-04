@@ -8,51 +8,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('actions', () => {
-  test('request Action Creator', () => {
-    const result = actions.request();
-    const expected = {
-      type: types.REQUEST_API,
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('requestSuccess Action Creator', () => {
-    const result = actions.requestSuccess();
-    const expected = {
-      type: types.REQUEST_API_SUCCESS,
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('requestFail Action Creator', () => {
-    const error = 'Internal server error';
-    const result = actions.requestFail(error);
-    const expected = {
-      type: types.REQUEST_API_FAIL,
-      payload: {
-        error,
-      },
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('getBooks Action Creator', () => {
-    const books = _books;
-    const result = actions.getBooks(books);
-    const expected = {
-      type: types.GET_BOOKS,
-      payload: {
-        books,
-      },
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('getAllMockBooks Action Creator', () => {
+  test('getAllMockBooks Action Creator with success', () => {
     const books = _books;
     fetch.mockResponse(JSON.stringify(books));
     const expected = [
@@ -66,6 +22,28 @@ describe('actions', () => {
         type: types.GET_BOOKS,
         payload: {
           books,
+        },
+      },
+    ];
+    const store = mockStore();
+
+    return store.dispatch(actions.getAllBooks())
+      .then(() => {
+        expect(store.getActions()).toEqual(expected);
+      });
+  });
+
+  test('getAllMockBooks Action Creator with fail', () => {
+    const error = { code: 500, message: 'Internal Server Error' };
+    fetch.mockReject(JSON.stringify(error));
+    const expected = [
+      {
+        type: types.REQUEST_API,
+      },
+      {
+        type: types.REQUEST_API_FAIL,
+        payload: {
+          error,
         },
       },
     ];
