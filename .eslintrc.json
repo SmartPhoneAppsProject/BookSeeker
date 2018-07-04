@@ -4,10 +4,14 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": ["jest"],
   "globals": {
     "fetch": false,
     "require": false,
     "__DEV__": false
+  },
+  "env": {
+    "jest/globals": true
   },
   "rules": {
     "indent": [
