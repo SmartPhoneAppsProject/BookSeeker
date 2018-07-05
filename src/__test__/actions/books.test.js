@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as actions from '../actions';
-import * as types from '../constants/actionTypes';
-import _books from '../api/books.json';
+import * as actions from '../../actions/index';
+import * as types from '../../constants/actionTypes';
+import _books from '../../api/books.json';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
