@@ -145,8 +145,12 @@
         "name": "PHP"
       },
       {
-        "id": 16,
-        "name": "PHP"
+        "id": 1,
+        "name": "Ruby"
+      },
+      {
+        "id": 2,
+        "name": "Android"
       }
     ],
     "isbn": "9784063300468",

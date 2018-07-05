@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   StyleSheet,
@@ -24,12 +24,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     padding: 0,
   },
-  statusTrue: {
-    color: '#cd5c5c',
-  },
-  statusFalse: {
-    color: '#2e8b57',
-  },
   tagsContainer: {
     flexDirection: 'row',
     paddingTop: 5,
@@ -44,91 +38,80 @@ const styles = StyleSheet.create({
   },
 });
 
-class BookList extends Component {
-  onRefresh = () => this.props.onRefresh;
-
-  // SearchViewからListViewを変更するためにstateとして受け渡す
-  setBooks = (books) => {
-    this.setState({ books });
-  };
-
-  resetBooks = () => {
-    this.setState({ books: this.props.books });
-  };
-
-  renderTags = (tags) => {
-    const formatted = [];
-    let tag;
-    for (let i = 0; i < tags.length; i += 1) {
-      if (i < 2) {
-        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
-      } else if (i === 2) {
-        tag = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}...</Text>;
-      } else {
-        break;
-      }
-
-      formatted.push(
-        <View
-          style={styles.subtitleView}
-          key={tags[i].id}
-        >
-          {tag}
-        </View>);
+const renderTags = (tags) => {
+  const formatted = [];
+  // tagが３つ以上のときtag1 tag2 tag3 ...
+  for (let i = 0; i < tags.length; i += 1) {
+    let tagName;
+    if (i < 3) {
+      tagName = <Text style={styles.tagText}>{icon(tags[i].name)}{tags[i].name}</Text>;
+    } else if (i === 3) {
+      tagName = <Text style={styles.tagText}>...</Text>;
     }
 
-    return (
+    const tag = (
       <View
-        style={styles.tagsContainer}
+        style={styles.subtitleView}
+        key={tags[i].id}
       >
-        {formatted}
+        {tagName}
       </View>
     );
-  };
-
-  renderItem = ({ item }) => {
-    const { navigate } = this.props.navigation;
-    const status = item.status
-      ? <Octicons name="circle-slash" size={25} color={styles.statusTrue} />
-      : <MaterialCommunityIcons name="check-circle-outline" size={25} color={styles.statusFalse} />;
-
-    const tags = this.renderTags(item.tags);
-
-    return (
-      <ListItem
-        chevronColor="#c0c0c0"
-        onPress={() => navigate('Detail', { item })}
-        title={item.title}
-        subtitle={tags}
-        subtitleNumberOfLines={1}
-        badge={{ element: status }}
-      />
-    );
-  };
-
-  render() {
-    return (
-      <List
-        containerStyle={styles.list}
-      >
-        <FlatList
-          // ListHeaderComponent={
-          //   <SearchScreen
-          //     books={this.state.books}
-          //     setBooks={this.setBooks}
-          //     resetBooks={this.resetBooks}
-          //   />
-          // }
-          data={this.props.books}
-          extraData={this.props.books}
-          renderItem={this.renderItem}
-          onRefresh={this.onRefresh}
-          refreshing={this.props.isLoading}
-        />
-      </List>
-    );
+    formatted.push(tag);
   }
-}
+
+  return (
+    <View style={styles.tagsContainer}>{formatted}</View>
+  );
+};
+
+const renderItem = (item, navigation) => {
+  const status = item.status
+    ? <Octicons name="circle-slash" size={25} color="#cd5c5c" />
+    : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />;
+
+  return (
+    <ListItem
+      chevronColor="#c0c0c0"
+      onPress={() => navigation.navigate('Detail', { item })}
+      title={item.title}
+      subtitle={renderTags(item.tags)}
+      subtitleNumberOfLines={1}
+      badge={{ element: status }}
+    />
+  );
+};
+
+const BookList = (props) => {
+  const {
+    books,
+    onRefresh,
+    isLoading,
+    navigation,
+  } = props;
+
+  return (
+    <List
+      containerStyle={styles.list}
+    >
+      <FlatList
+        // ListHeaderComponent={
+        //   <SearchScreen
+        //     books={this.state.books}
+        //     setBooks={this.setBooks}
+        //     resetBooks={this.resetBooks}
+        //   />
+        // }
+        data={books}
+        extraData={books}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => renderItem(item, navigation)}
+        onRefresh={onRefresh}
+        refreshing={isLoading}
+      />
+    </List>
+  );
+};
 
 BookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({

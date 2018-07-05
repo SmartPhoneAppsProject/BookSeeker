@@ -8,6 +8,10 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('actions', () => {
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
   test('getAllMockBooks Action Creator with success', () => {
     const books = _books;
     fetch.mockResponse(JSON.stringify(books));
