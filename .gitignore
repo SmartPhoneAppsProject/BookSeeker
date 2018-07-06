@@ -28,3 +28,6 @@ yarn.lock
 # enviroment variables
 .env
 .env.production
+
+# test
+__snapshots__

@@ -4,8 +4,8 @@ import * as actions from '../../actions/index';
 import * as types from '../../constants/actionTypes';
 import _books from '../../api/books.json';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const middleware = [thunk];
+const mockStore = configureMockStore(middleware);
 
 describe('actions', () => {
   beforeEach(() => {

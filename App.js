@@ -10,9 +10,8 @@ import thunk from 'redux-thunk';
 import { getAllMockBooks } from './src/actions';
 import reducer from './src/reducers';
 
-// import HomeScreen from './src/components/HomeScreen';
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
-import SearchView from './src/components/SearchView';
+import SearchView from './src/components/HomeScreen/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
@@ -23,7 +22,6 @@ import { setTopLevelNavigator } from './src/utils/NavigationService';
 const RootStack = StackNavigator(
   {
     Home: {
-      // screen: HomeScreen,
       screen: HomeScreenContainer,
     },
     Entry: {

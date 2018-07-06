@@ -16,7 +16,7 @@ import {
 } from '@expo/vector-icons';
 
 import SearchScreen from './SearchView';
-import { icon } from '../utils/Icons';
+import { icon } from '../../utils/Icons';
 
 const styles = StyleSheet.create({
   list: {

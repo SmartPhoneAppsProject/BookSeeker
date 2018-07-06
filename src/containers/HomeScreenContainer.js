@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getAllMockBooks } from '../actions';
-import HomeScreen from '../components/screens/HomeScreen';
+import HomeScreen from '../components/HomeScreen';
 
 const mapStateToProps = ({ book, loading }) => ({
   books: book.books,

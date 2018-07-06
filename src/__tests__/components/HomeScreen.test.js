@@ -2,8 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AppLoading } from 'expo';
 
-import HomeScreen from '../../components/screens/HomeScreen';
-import BookList from '../../components/BookList';
+import HomeScreen from '../../components/HomeScreen';
+import BookList from '../../components/HomeScreen/BookList';
 import PullRefresh from '../../components/PullRefresh';
 import _books from '../../api/books.json';
 
