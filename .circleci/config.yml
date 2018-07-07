@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/workspace
     docker:
-      - image: circleci/node:latest_broweres
+      - image: circleci/node:latest_browsers
     steps:
       - checkout
       - run:
