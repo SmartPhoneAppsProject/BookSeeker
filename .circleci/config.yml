@@ -9,7 +9,7 @@ jobs:
       - run:
         name: Generate .env file
         command: echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env
-      - restore_chace:
+      - restore_cache:
           key: v1-node_modules
       - run:
           name: Install npm packages
