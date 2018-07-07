@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest_broweres
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - run:
+        name: Generate .env file
+        command: echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env
+      - restore_chace:
+          key: v1-node_modules
+      - run:
+          name: Install npm packages
+          command: yarn
+      - save_cache:
+          key: v1-node_modules
+          paths:
+          - node_modules
+      - run:
+          name: Run tests
+          command: yarn test
+#  node:
+#    version: 6.9
+#dependencies:
+#  override:
+#    - yarn
+#  pre:
+#    - yarn global add exp@48.0.4
+#    - echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env
+#  test:
+#    override:
+#      - echo "no tests"
+#deployment:
+#  appr:
+#    branch: /.*/
+#    commands:
+#      - 'if [ "$CI_PULL_REQUEST" != "" ]; then yarn appr; fi'
