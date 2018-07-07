@@ -1,29 +1,12 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { AppLoading } from 'expo';
 import BookList from './BookList';
 import PullRefresh from '../PullRefresh';
 import { LogoEntry } from '../LogoEntry';
 import { LogoSAP } from '../LogoSAP';
-
-const styles = StyleSheet.create({
-  isLoading: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  indicator: {
-    flex: 1,
-    paddingTop: 20,
-  },
-});
+import { indexStyles as styles } from './Styles';
 
 const HomeScreen = (props) => {
   if (props.isLoading) {

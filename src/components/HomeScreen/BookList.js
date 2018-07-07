@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   FlatList,
   View,
   Text,
@@ -17,26 +16,7 @@ import {
 
 import SearchScreen from './SearchView';
 import { icon } from '../../utils/Icons';
-
-const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    marginTop: 0,
-    padding: 0,
-  },
-  tagsContainer: {
-    flexDirection: 'row',
-    paddingTop: 5,
-    paddingLeft: 10,
-  },
-  subtitleView: {
-    flexDirection: 'row',
-  },
-  tagText: {
-    paddingRight: 5,
-    color: '#808080',
-  },
-});
+import { BookListStyles as styles } from './Styles';
 
 const renderTags = (tags) => {
   const formatted = [];
