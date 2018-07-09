@@ -29,5 +29,3 @@ yarn.lock
 .env
 .env.production
 
-# test
-__snapshots__
