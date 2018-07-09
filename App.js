@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import {
+  createStore,
+  applyMiddleware,
+} from 'redux';
 import { StackNavigator } from 'react-navigation';
+import { createLogger } from 'redux-logger';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { getAllMockBooks } from './src/actions';
+import reducer from './src/reducers';
 
-import HomeScreen from './src/components/screens/HomeScreen';
-import SearchView from './src/components/SearchView';
+import HomeScreenContainer from './src/containers/HomeScreenContainer';
+import SearchView from './src/components/HomeScreen/SearchView';
 import DetailScreen from './src/components/screens/DetailScreen';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
@@ -13,7 +22,7 @@ import { setTopLevelNavigator } from './src/utils/NavigationService';
 const RootStack = StackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenContainer,
     },
     Entry: {
       screen: EntryScreen,
@@ -56,12 +65,26 @@ const RootStack = StackNavigator(
   },
 );
 
-export default class BookSeeker extends Component {
+const middleware = [thunk];
+if (__DEV__ === true) {
+  middleware.push(createLogger());
+}
+
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware),
+);
+
+store.dispatch(getAllMockBooks());
+
+export default class App extends Component {
   render() {
     return (
-      <RootStack
-        ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
-      />
+      <Provider store={store}>
+        <RootStack
+          ref={navigatorRef => setTopLevelNavigator(navigatorRef)}
+        />
+      </Provider>
     );
   }
 }

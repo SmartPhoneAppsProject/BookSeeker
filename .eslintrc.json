@@ -4,14 +4,22 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": ["jest"],
   "globals": {
     "fetch": false,
-    "require": false
+    "require": false,
+    "__DEV__": false
+  },
+  "env": {
+    "jest/globals": true
   },
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "react/jsx-filename-extension": [
       1,

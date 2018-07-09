@@ -13,44 +13,44 @@ export const icon = (name) => {
   let language;
 
   switch (name) {
-  case 'Ruby':
-    language = IconRuby();
-    break;
-  case 'Android':
-    language = IconAndroid();
-    break;
-  case 'Swift':
-    language = IconSwift();
-    break;
-  case 'Go':
-    language = IconGo();
-    break;
-  case 'Python':
-    language = IconPython();
-    break;
-  case 'C':
-    language = IconC();
-    break;
-  case 'HTML':
-    language = IconHTML();
-    break;
-  case 'CSS':
-    language = IconCSS();
-    break;
-  case 'JavaScript':
-    language = IconJS();
-    break;
-  case 'TypeScript':
-    language = IconTS();
-    break;
-  case 'PHP':
-    language = IconPHP();
-    break;
-  case 'People':
-    language = IconPeople();
-    break;
-  default:
-    language = IconOther();
+    case 'Ruby':
+      language = IconRuby();
+      break;
+    case 'Android':
+      language = IconAndroid();
+      break;
+    case 'Swift':
+      language = IconSwift();
+      break;
+    case 'Go':
+      language = IconGo();
+      break;
+    case 'Python':
+      language = IconPython();
+      break;
+    case 'C':
+      language = IconC();
+      break;
+    case 'HTML':
+      language = IconHTML();
+      break;
+    case 'CSS':
+      language = IconCSS();
+      break;
+    case 'JavaScript':
+      language = IconJS();
+      break;
+    case 'TypeScript':
+      language = IconTS();
+      break;
+    case 'PHP':
+      language = IconPHP();
+      break;
+    case 'People':
+      language = IconPeople();
+      break;
+    default:
+      language = IconOther();
   }
   return language;
 };

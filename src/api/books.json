@@ -1,0 +1,414 @@
+[
+  {
+    "id": 2,
+    "title": "javascript ",
+    "image": "none",
+    "status": true,
+    "published_at": "2018-02-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9784774184111",
+    "created_at": "2018-03-09T00:00:00Z",
+    "updated_at": "2018-03-09T00:00:00Z"
+  },
+  {
+    "id": 14,
+    "title": "ghj",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-12T00:00:00Z",
+    "tags": [],
+    "isbn": "9784774183923",
+    "created_at": "2018-03-12T00:00:00Z",
+    "updated_at": "2018-03-12T00:00:00Z"
+  },
+  {
+    "id": 16,
+    "title": "スターティングGo言語",
+    "image": "none",
+    "status": false,
+    "published_at": "2016-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9780004195025",
+    "created_at": "2018-03-13T00:00:00Z",
+    "updated_at": "2018-03-13T00:00:00Z"
+  },
+  {
+    "id": 17,
+    "title": "スターティングC言語",
+    "image": "none",
+    "status": false,
+    "published_at": "2016-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9780104195025",
+    "created_at": "2018-03-13T00:00:00Z",
+    "updated_at": "2018-03-13T00:00:00Z"
+  },
+  {
+    "id": 19,
+    "title": "スターティングC言語",
+    "image": "none",
+    "status": false,
+    "published_at": "2016-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9781111115025",
+    "created_at": "2018-03-13T00:00:00Z",
+    "updated_at": "2018-03-13T00:00:00Z"
+  },
+  {
+    "id": 1,
+    "title": "プログラミング言語 Ruby",
+    "image": "none",
+    "status": false,
+    "published_at": "2009-01-26T00:00:00Z",
+    "tags": [
+      {
+        "id": 1,
+        "name": "Ruby"
+      }
+    ],
+    "isbn": "9784873113944",
+    "created_at": "2018-03-09T00:00:00Z",
+    "updated_at": "2018-03-09T00:00:00Z"
+  },
+  {
+    "id": 23,
+    "title": "スターティングRuby",
+    "image": "none",
+    "status": false,
+    "published_at": "2014-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9780987678909",
+    "created_at": "2018-03-14T00:00:00Z",
+    "updated_at": "2018-03-14T00:00:00Z"
+  },
+  {
+    "id": 25,
+    "title": "スターティングR",
+    "image": "none",
+    "status": false,
+    "published_at": "2014-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9780987678988",
+    "created_at": "2018-03-14T00:00:00Z",
+    "updated_at": "2018-03-14T00:00:00Z"
+  },
+  {
+    "id": 20,
+    "title": "スターティングRuby",
+    "image": "none",
+    "status": true,
+    "published_at": "2014-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9780004195095",
+    "created_at": "2018-03-14T00:00:00Z",
+    "updated_at": "2018-03-14T00:00:00Z"
+  },
+  {
+    "id": 26,
+    "title": "Docker実践ガイド impress top gearシリーズ",
+    "image": "none",
+    "status": false,
+    "published_at": "2016-04-09T00:00:00Z",
+    "tags": [],
+    "isbn": "9789867165289",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 27,
+    "title": "ReactNative",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-15T00:00:00Z",
+    "tags": [],
+    "isbn": "9784949999120",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 28,
+    "title": "タグテスト",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-15T00:00:00Z",
+    "tags": [
+      {
+        "id": 11,
+        "name": "C"
+      },
+      {
+        "id": 13,
+        "name": "HTML"
+      },
+      {
+        "id": 16,
+        "name": "PHP"
+      },
+      {
+        "id": 1,
+        "name": "Ruby"
+      },
+      {
+        "id": 2,
+        "name": "Android"
+      }
+    ],
+    "isbn": "9784063300468",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 29,
+    "title": "ReactNative",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-15T00:00:00Z",
+    "tags": [
+      {
+        "id": 12,
+        "name": "JavaScript"
+      }
+    ],
+    "isbn": "9784797363821",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 30,
+    "title": "React",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-15T00:00:00Z",
+    "tags": [
+      {
+        "id": 1,
+        "name": "Ruby"
+      },
+      {
+        "id": 2,
+        "name": "Android"
+      }
+    ],
+    "isbn": "9784797372410",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 33,
+    "title": "バーコード最終確認",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-15T00:00:00Z",
+    "tags": [
+      {
+        "id": 13,
+        "name": "HTML"
+      },
+      {
+        "id": 14,
+        "name": "CSS"
+      }
+    ],
+    "isbn": "9784834002720",
+    "created_at": "2018-03-15T00:00:00Z",
+    "updated_at": "2018-03-15T00:00:00Z"
+  },
+  {
+    "id": 34,
+    "title": "intellj IDEA",
+    "image": "none",
+    "status": false,
+    "published_at": "2017-11-21T00:00:00Z",
+    "tags": [
+      {
+        "id": 15,
+        "name": "TypeScript"
+      },
+      {
+        "id": 17,
+        "name": "People"
+      }
+    ],
+    "isbn": "9784774193830",
+    "created_at": "2018-03-16T00:00:00Z",
+    "updated_at": "2018-03-16T00:00:00Z"
+  },
+  {
+    "id": 13,
+    "title": "基礎Ruby on Rails",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-09T00:00:00Z",
+    "tags": [
+      {
+        "id": 1,
+        "name": "Ruby"
+      }
+    ],
+    "isbn": "9784844338154",
+    "created_at": "2018-03-09T00:00:00Z",
+    "updated_at": "2018-03-09T00:00:00Z"
+  },
+  {
+    "id": 35,
+    "title": "jquery",
+    "image": "none",
+    "status": false,
+    "published_at": "2015-05-15T00:00:00Z",
+    "tags": [
+      {
+        "id": 12,
+        "name": "JavaScript"
+      }
+    ],
+    "isbn": "9784774172736",
+    "created_at": "2018-03-16T00:00:00Z",
+    "updated_at": "2018-03-16T00:00:00Z"
+  },
+  {
+    "id": 46,
+    "title": "リファクタリングRuby",
+    "image": "https://s3-ap-northeast-1.amazonaws.com/book-seeker/static/images/SatMar24090349.png",
+    "status": false,
+    "published_at": "2010-03-02T00:00:00Z",
+    "tags": [],
+    "isbn": "9784048678841",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 15,
+    "title": "リーダブルコード",
+    "image": "none",
+    "status": true,
+    "published_at": "2016-04-11T00:00:00Z",
+    "tags": [],
+    "isbn": "9784873115658",
+    "created_at": "2018-03-12T00:00:00Z",
+    "updated_at": "2018-03-12T00:00:00Z"
+  },
+  {
+    "id": 48,
+    "title": "zsh最強シェル入門",
+    "image": "https://s3-ap-northeast-1.amazonaws.com/book-seeker/static/images/SatMar24102621.png",
+    "status": false,
+    "published_at": "2008-12-03T00:00:00Z",
+    "tags": [],
+    "isbn": "9784798118154",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 36,
+    "title": "BeingGeek",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-16T00:00:00Z",
+    "tags": [
+      {
+        "id": 17,
+        "name": "People"
+      }
+    ],
+    "isbn": "9784873114996",
+    "created_at": "2018-03-16T00:00:00Z",
+    "updated_at": "2018-03-16T00:00:00Z"
+  },
+  {
+    "id": 47,
+    "title": "ランディングページデザインメソッド",
+    "image": "none",
+    "status": true,
+    "published_at": "2015-12-24T00:00:00Z",
+    "tags": [],
+    "isbn": "9784844365501",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 43,
+    "title": "てすと",
+    "image": "https://s3-ap-northeast-1.amazonaws.com/book-seeker/static/images/SunMar18111526.png",
+    "status": false,
+    "published_at": "2018-02-18T00:00:00Z",
+    "tags": [],
+    "isbn": "9784569808581",
+    "created_at": "2018-03-18T00:00:00Z",
+    "updated_at": "2018-03-18T00:00:00Z"
+  },
+  {
+    "id": 49,
+    "title": "てすと",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-03-23T00:00:00Z",
+    "tags": [],
+    "isbn": "9784865940046",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 50,
+    "title": "社畜ちゃん",
+    "image": "none",
+    "status": true,
+    "published_at": "2018-02-24T00:00:00Z",
+    "tags": [],
+    "isbn": "9784048933070",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 51,
+    "title": "デビルマン",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-24T00:00:00Z",
+    "tags": [],
+    "isbn": "9784063766417",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 52,
+    "title": "デビルマン2",
+    "image": "none",
+    "status": false,
+    "published_at": "2018-02-24T00:00:00Z",
+    "tags": [],
+    "isbn": "9784063766424",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 56,
+    "title": "デビルマン3",
+    "image": "https://s3-ap-northeast-1.amazonaws.com/book-seeker/static/images/SatMar24132702.png",
+    "status": false,
+    "published_at": "2018-02-24T00:00:00Z",
+    "tags": [],
+    "isbn": "9784063766516",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  },
+  {
+    "id": 58,
+    "title": "デビルマン4",
+    "image": "none",
+    "status": true,
+    "published_at": "2018-02-24T00:00:00Z",
+    "tags": [
+      {
+        "id": 2,
+        "name": "Android"
+      },
+      {
+        "id": 10,
+        "name": "Python"
+      }
+    ],
+    "isbn": "9784063766639",
+    "created_at": "2018-03-24T00:00:00Z",
+    "updated_at": "2018-03-24T00:00:00Z"
+  }
+]

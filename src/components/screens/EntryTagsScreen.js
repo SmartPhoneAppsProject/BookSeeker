@@ -73,7 +73,7 @@ export default class EntryTagsScreen extends Component {
 
     this.setState({
       tags,
-      updated: !this.state.updated, // re-render ListView
+      updated: !this.state.updated, // re-render BookList
       chosenIds,
     });
   };
