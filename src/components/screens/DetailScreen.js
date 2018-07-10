@@ -16,123 +16,114 @@ import {
 
 import { icon } from '../../utils/Icons';
 
+const renderTags = (tags) => {
+  const formatted = [];
+
+  for (let i = 0; i < tags.length; i += 1) {
+    const container = (
+      <View
+        style={styles.tag}
+        key={tags[i].id}
+      >
+        <Text style={styles.tagText}>
+          {icon(tags[i].name)}{tags[i].name}
+        </Text>;
+      </View>
+    );
+
+    formatted.push(container);
+  }
+
+  return (
+    <View style={[styles.base, styles.tagContainer]}>
+      <ScrollView horizontal>
+        {formatted}
+      </ScrollView>
+    </View>
+  );
+};
+
+const renderImage = (uri) => {
+  let imageUri = uri;
+  if (imageUri === 'none') {
+    imageUri = 'https://facebook.github.io/react/logo-og.png';
+  }
+
+  return (
+    <View style={[styles.base, styles.imgContainer]}>
+      <Image style={styles.img} source={{ uri: imageUri }} />
+    </View>
+  );
+};
+
+const renderIcon = (status) => {
+  if (status === true) {
+    return (
+      <View style={[styles.base, styles.status]}>
+        <Octicons name="circle-slash" size={40} color="#cd5c5c" />
+      </View>
+    );
+  }
+
+  return (
+    <View style={[styles.base, styles.status]}>
+      <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57" />
+    </View>
+  );
+};
+
+const renderButton = (status, navigate) => {
+  if (status === true) {
+    return (
+      <View style={[styles.base, styles.buttonContainer]}>
+        <Button
+          icon={<MaterialCommunityIcons name="keyboard-return" size={30} color="white" />}
+          title="返却"
+          titleStyle={{ fontWeight: '700' }}
+          buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
+          iconContainerStyle={{ marginRight: 10 }}
+          onPress={() => navigate('LentScan', { action: 'return' })}
+        />
+      </View>
+    );
+  }
+
+  return (
+    <View style={[styles.base, styles.buttonContainer]}>
+      <Button
+        icon={<MaterialCommunityIcons name="book-open-page-variant" size={30} color="white" />}
+        title="貸出"
+        titleStyle={{ fontWeight: '700' }}
+        buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
+        iconContainerStyle={{ marginRight: 10 }}
+        onPress={() => navigate('LentScan', { action: 'lend' })}
+      />
+    </View>
+  );
+};
+
 export default class DetailScreen extends Component {
   static navigationOptions = {
     title: '詳細',
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentStatus: this.props.navigation.state.params.item.status
-    };
-  }
-
-  renderImage = () => {
-    let imageUri = this.props.navigation.state.params.item.image;
-    if (imageUri === 'none') {
-      imageUri = 'https://facebook.github.io/react/logo-og.png';
-    }
-
-    return (
-      <View style={[styles.base, styles.imgContainer]}>
-        <Image style={styles.img} source={{ uri: imageUri }} />
-      </View>
-    );
-  };
-
-  renderTags = () => {
-    const { tags } = this.props.navigation.state.params.item;
-    let formatted = [];
-    let formattedTag;
-
-    for (let tag of tags) {
-      formattedTag = <Text style={styles.tagText}>{icon(tag.name)}{tag.name}</Text>;
-      formatted.push(
-        <View
-          style={styles.tag}
-          key={tag.id}
-        >
-          {formattedTag}
-        </View>
-      );
-    }
-
-    return (
-      <View style={[styles.base, styles.tagContainer]}>
-        <ScrollView horizontal>
-          {formatted}
-        </ScrollView>
-      </View>
-    );
-  };
-
-  renderIcon = () => {
-    if (this.state.currentStatus === true) {
-      return (
-        <View style={[styles.base, styles.status]}>
-          <Octicons name="circle-slash" size={40} color="#cd5c5c" />
-        </View>
-      );
-    }
-    return (
-      <View style={[styles.base, styles.status]}>
-        <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57" />
-      </View>
-    );
-  };
-
-  renderButton = () => {
-    const { navigate } = this.props.navigation;
-
-    if (this.state.currentStatus === true) {
-      return (
-        <View style={[styles.base, styles.buttonContainer]}>
-          <Button
-            icon={<MaterialCommunityIcons name="keyboard-return" size={30} color="white" />}
-            title="返却"
-            titleStyle={{ fontWeight: '700' }}
-            buttonStyle={{ width: 100, height: 60, backgroundColor: '#cd5c5c' }}
-            iconContainerStyle={{ marginRight: 10 }}
-            onPress={() => navigate('LentScan', { action: 'return' })}
-          />
-        </View>
-      );
-    }
-    return (
-      <View style={[styles.base, styles.buttonContainer]}>
-        <Button
-          icon={<MaterialCommunityIcons name="book-open-page-variant" size={30} color="white" />}
-          title="貸出"
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{ width: 100, height: 60, backgroundColor: '#2e8b57' }}
-          iconContainerStyle={{ marginRight: 10 }}
-          onPress={() => navigate('LentScan', { action: 'lend' })}
-        />
-      </View>
-    );
-  };
-
   render() {
+    const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    const renderImage = this.renderImage();
-    const renderTags = this.renderTags();
-    const renderIcon = this.renderIcon();
-    const renderButton = this.renderButton();
+    const { tags, status, image } = this.props.navigation.state.params.item;
 
     return (
       <View style={styles.container}>
-        {renderImage}
+        {renderImage(image)}
         <View style={styles.mainContainer}>
-          {renderTags}
+          {renderTags(tags)}
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{params.item.title}</Text>
             <Text style={styles.date}>出版日：{params.item.published_at}</Text>
           </View>
           <View style={styles.statusContainer}>
-            {renderIcon}
-            {renderButton}
+            {renderIcon(status)}
+            {renderButton(status, navigate)}
           </View>
         </View>
       </View>
