@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DetailScreen from '../../components/screens/DetailScreen';
+import DetailScreen from '../../components/DetailScreen';
 import _books from '../../api/books.json';
 
 describe('<DetailScreen />', () => {
