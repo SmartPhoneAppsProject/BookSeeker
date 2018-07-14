@@ -8,20 +8,24 @@ import {
 
 import { statusIcon as styles } from './Styles';
 
+const LendIcon = () => (
+  <View style={[styles.base, styles.status]}>
+    <Octicons name="circle-slash" size={40} color="#cd5c5c" />
+  </View>
+);
+
+const BorrowIcon = () => (
+  <View style={[styles.base, styles.status]}>
+    <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57" />
+  </View>
+);
+
 const StatusIcon = ({ status }) => {
   if (status === true) {
-    return (
-      <View style={[styles.base, styles.status]}>
-        <Octicons name="circle-slash" size={40} color="#cd5c5c" />
-      </View>
-    );
+    return <LendIcon />;
   }
 
-  return (
-    <View style={[styles.base, styles.status]}>
-      <MaterialCommunityIcons name="check-circle-outline" size={40} color="#2e8b57" />
-    </View>
-  );
+  return <BorrowIcon />;
 };
 
 StatusIcon.propTyles = {

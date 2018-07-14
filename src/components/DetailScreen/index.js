@@ -11,14 +11,10 @@ import StatusIcon from './StatusIcon';
 import LendingButton from './LendingButton';
 
 class DetailScreen extends Component {
-  static navigationOptions = {
-    title: '詳細',
-  };
-
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    const { tags, status, image } = this.props.navigation.state.params.item;
+    const { tags, status, image } = this.props.navigation.state.params.book;
 
     return (
       <View style={styles.container}>
@@ -26,8 +22,8 @@ class DetailScreen extends Component {
         <View style={styles.mainContainer}>
           <TagsList tags={tags} />
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{params.item.title}</Text>
-            <Text style={styles.date}>出版日：{params.item.published_at}</Text>
+            <Text style={styles.title}>{params.book.title}</Text>
+            <Text style={styles.date}>出版日：{params.book.published_at}</Text>
           </View>
           <View style={styles.statusContainer}>
             <StatusIcon status={status} />
@@ -41,5 +37,9 @@ class DetailScreen extends Component {
     );
   }
 }
+
+DetailScreen.navigationOptions = {
+  title: '詳細',
+};
 
 export default DetailScreen;

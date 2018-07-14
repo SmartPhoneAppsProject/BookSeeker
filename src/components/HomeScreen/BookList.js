@@ -53,7 +53,7 @@ const renderItem = (item, navigation) => {
   return (
     <ListItem
       chevronColor="#c0c0c0"
-      onPress={() => navigation.navigate('Detail', { item })}
+      onPress={() => navigation.navigate('Detail', { book: item })}
       title={item.title}
       subtitle={renderTags(item.tags)}
       subtitleNumberOfLines={1}

@@ -26,6 +26,7 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "appr": "appr",
+    "postinstall": "rndebugger-open",
     "debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'"
   },
   "jest": {
