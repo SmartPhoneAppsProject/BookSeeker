@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Text,
   View,
@@ -13,8 +14,13 @@ import LendingButton from './LendingButton';
 class DetailScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
-    const { params } = this.props.navigation.state;
-    const { tags, status, image } = this.props.navigation.state.params.book;
+    const {
+      tags,
+      status,
+      image,
+      title,
+      published_at,
+    } = this.props.navigation.state.params.book;
 
     return (
       <View style={styles.container}>
@@ -22,8 +28,8 @@ class DetailScreen extends Component {
         <View style={styles.mainContainer}>
           <TagsList tags={tags} />
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{params.book.title}</Text>
-            <Text style={styles.date}>出版日：{params.book.published_at}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.date}>出版日：{published_at}</Text>
           </View>
           <View style={styles.statusContainer}>
             <StatusIcon status={status} />
@@ -40,6 +46,16 @@ class DetailScreen extends Component {
 
 DetailScreen.navigationOptions = {
   title: '詳細',
+};
+
+DetailScreen.propTypes = {
+  book: PropTypes.shape({
+    tags: PropTypes.array.isRequired,
+    status: PropTypes.bool.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    published_at: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default DetailScreen;
