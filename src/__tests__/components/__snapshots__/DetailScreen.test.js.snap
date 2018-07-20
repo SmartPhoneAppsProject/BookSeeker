@@ -1,0 +1,688 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DetailScreen /> 正しくレンダリングされていること 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <DetailScreen
+    book={
+      Object {
+        "created_at": "2018-03-09T00:00:00Z",
+        "id": 2,
+        "image": "none",
+        "isbn": "9784774184111",
+        "published_at": "2018-02-09T00:00:00Z",
+        "status": true,
+        "tags": Array [],
+        "title": "javascript ",
+        "updated_at": "2018-03-09T00:00:00Z",
+      }
+    }
+    navigation={
+      Object {
+        "state": Object {
+          "params": Object {
+            "item": Object {
+              "created_at": "2018-03-09T00:00:00Z",
+              "id": 2,
+              "image": "none",
+              "isbn": "9784774184111",
+              "published_at": "2018-02-09T00:00:00Z",
+              "status": true,
+              "tags": Array [],
+              "title": "javascript ",
+              "updated_at": "2018-03-09T00:00:00Z",
+            },
+          },
+        },
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <BookImage
+          uri="none"
+        />,
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <TagsList
+            tags={Array []}
+          />
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+                "marginLeft": 50,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "fontSize": 20,
+                  "marginBottom": 10,
+                }
+              }
+            >
+              javascript 
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#6E6E6E",
+                  "fontSize": 14,
+                }
+              }
+            >
+              出版日：
+              2018-02-09T00:00:00Z
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 15,
+              }
+            }
+          >
+            <StatusIcon
+              status={true}
+            />
+            <LendingButton
+              navigate={undefined}
+              status={true}
+            />
+          </View>
+        </View>,
+      ],
+      "style": Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "uri": "none",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TagsList
+              tags={Array []}
+            />,
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginLeft": 50,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontSize": 20,
+                    "marginBottom": 10,
+                  }
+                }
+              >
+                javascript 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#6E6E6E",
+                    "fontSize": 14,
+                  }
+                }
+              >
+                出版日：
+                2018-02-09T00:00:00Z
+              </Text>
+            </View>,
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 15,
+                }
+              }
+            >
+              <StatusIcon
+                status={true}
+              />
+              <LendingButton
+                navigate={undefined}
+                status={true}
+              />
+            </View>,
+          ],
+          "style": Object {
+            "flex": 1,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "tags": Array [],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontSize": 20,
+                      "marginBottom": 10,
+                    }
+                  }
+                >
+                  javascript 
+                </Text>,
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#6E6E6E",
+                      "fontSize": 14,
+                    }
+                  }
+                >
+                  出版日：
+                  2018-02-09T00:00:00Z
+                </Text>,
+              ],
+              "style": Object {
+                "flex": 1,
+                "justifyContent": "center",
+                "marginLeft": 50,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "javascript ",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "fontSize": 20,
+                    "marginBottom": 10,
+                  },
+                },
+                "ref": null,
+                "rendered": "javascript ",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": Array [
+                    "出版日：",
+                    "2018-02-09T00:00:00Z",
+                  ],
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "#6E6E6E",
+                    "fontSize": 14,
+                  },
+                },
+                "ref": null,
+                "rendered": Array [
+                  "出版日：",
+                  "2018-02-09T00:00:00Z",
+                ],
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <StatusIcon
+                  status={true}
+                />,
+                <LendingButton
+                  navigate={undefined}
+                  status={true}
+                />,
+              ],
+              "style": Object {
+                "flex": 1,
+                "flexDirection": "row",
+                "marginBottom": 15,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "status": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "navigate": undefined,
+                  "status": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <BookImage
+            uri="none"
+          />,
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <TagsList
+              tags={Array []}
+            />
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginLeft": 50,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontSize": 20,
+                    "marginBottom": 10,
+                  }
+                }
+              >
+                javascript 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#6E6E6E",
+                    "fontSize": 14,
+                  }
+                }
+              >
+                出版日：
+                2018-02-09T00:00:00Z
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 15,
+                }
+              }
+            >
+              <StatusIcon
+                status={true}
+              />
+              <LendingButton
+                navigate={undefined}
+                status={true}
+              />
+            </View>
+          </View>,
+        ],
+        "style": Object {
+          "backgroundColor": "#fff",
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "uri": "none",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TagsList
+                tags={Array []}
+              />,
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "marginLeft": 50,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontSize": 20,
+                      "marginBottom": 10,
+                    }
+                  }
+                >
+                  javascript 
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#6E6E6E",
+                      "fontSize": 14,
+                    }
+                  }
+                >
+                  出版日：
+                  2018-02-09T00:00:00Z
+                </Text>
+              </View>,
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "marginBottom": 15,
+                  }
+                }
+              >
+                <StatusIcon
+                  status={true}
+                />
+                <LendingButton
+                  navigate={undefined}
+                  status={true}
+                />
+              </View>,
+            ],
+            "style": Object {
+              "flex": 1,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "tags": Array [],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "fontSize": 20,
+                        "marginBottom": 10,
+                      }
+                    }
+                  >
+                    javascript 
+                  </Text>,
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#6E6E6E",
+                        "fontSize": 14,
+                      }
+                    }
+                  >
+                    出版日：
+                    2018-02-09T00:00:00Z
+                  </Text>,
+                ],
+                "style": Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginLeft": 50,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "javascript ",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "fontSize": 20,
+                      "marginBottom": 10,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "javascript ",
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": Array [
+                      "出版日：",
+                      "2018-02-09T00:00:00Z",
+                    ],
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#6E6E6E",
+                      "fontSize": 14,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "出版日：",
+                    "2018-02-09T00:00:00Z",
+                  ],
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <StatusIcon
+                    status={true}
+                  />,
+                  <LendingButton
+                    navigate={undefined}
+                    status={true}
+                  />,
+                ],
+                "style": Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 15,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "status": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "navigate": undefined,
+                    "status": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

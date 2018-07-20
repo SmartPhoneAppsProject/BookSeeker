@@ -45,17 +45,18 @@ const renderTags = (tags) => {
   );
 };
 
-const renderItem = (item, navigation) => {
-  const status = item.status
+const renderItem = (book, navigation) => {
+  const status = book.status
     ? <Octicons name="circle-slash" size={25} color="#cd5c5c" />
     : <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />;
+  const { navigate } = navigation;
 
   return (
     <ListItem
       chevronColor="#c0c0c0"
-      onPress={() => navigation.navigate('Detail', { item })}
-      title={item.title}
-      subtitle={renderTags(item.tags)}
+      onPress={() => navigate('Detail', { book })}
+      title={book.title}
+      subtitle={renderTags(book.tags)}
       subtitleNumberOfLines={1}
       badge={{ element: status }}
     />

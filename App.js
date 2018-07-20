@@ -12,7 +12,7 @@ import reducer from './src/reducers';
 
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
 import SearchView from './src/components/HomeScreen/SearchView';
-import DetailScreen from './src/components/screens/DetailScreen';
+import DetailScreenContainer from './src/containers/DetailScreenContainer';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
 import EntryTagsScreen from './src/components/screens/EntryTagsScreen';
@@ -34,7 +34,7 @@ const RootStack = StackNavigator(
       screen: EntryTagsScreen,
     },
     Detail: {
-      screen: DetailScreen,
+      screen: DetailScreenContainer,
     },
     Search: {
       screen: SearchView,
