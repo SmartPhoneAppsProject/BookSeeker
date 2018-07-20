@@ -5,6 +5,19 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <DetailScreen
+    book={
+      Object {
+        "created_at": "2018-03-09T00:00:00Z",
+        "id": 2,
+        "image": "none",
+        "isbn": "9784774184111",
+        "published_at": "2018-02-09T00:00:00Z",
+        "status": true,
+        "tags": Array [],
+        "title": "javascript ",
+        "updated_at": "2018-03-09T00:00:00Z",
+      }
+    }
     navigation={
       Object {
         "state": Object {
@@ -38,33 +51,9 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-              },
-              Object {
-                "flex": 1,
-              },
-            ]
-          }
-        >
-          <Image
-            source={
-              Object {
-                "uri": "https://facebook.github.io/react/logo-og.png",
-              }
-            }
-            style={
-              Object {
-                "height": 300,
-                "width": 750,
-              }
-            }
-          />
-        </View>,
+        <BookImage
+          uri="none"
+        />,
         <View
           style={
             Object {
@@ -72,24 +61,9 @@ ShallowWrapper {
             }
           }
         >
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "flex": 0.5,
-                  "margin": 10,
-                },
-              ]
-            }
-          >
-            <ScrollView
-              horizontal={true}
-            />
-          </View>
+          <TagsList
+            tags={Array []}
+          />
           <View
             style={
               Object {
@@ -136,79 +110,13 @@ ShallowWrapper {
               }
             }
           >
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flex": 1,
-                  },
-                ]
-              }
-            >
-              <Icon
-                allowFontScaling={false}
-                color="#cd5c5c"
-                name="circle-slash"
-                size={40}
-              />
-            </View>
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flex": 1,
-                  },
-                ]
-              }
-            >
-              <Button
-                TouchableComponent={[Function]}
-                buttonStyle={
-                  Object {
-                    "backgroundColor": "#cd5c5c",
-                    "height": 60,
-                    "width": 100,
-                  }
-                }
-                clear={false}
-                disabled={false}
-                icon={
-                  <Icon
-                    allowFontScaling={false}
-                    color="white"
-                    name="keyboard-return"
-                    size={30}
-                  />
-                }
-                iconContainerStyle={
-                  Object {
-                    "marginRight": 10,
-                  }
-                }
-                iconRight={false}
-                loadingProps={
-                  Object {
-                    "color": "white",
-                    "size": "small",
-                  }
-                }
-                onPress={[Function]}
-                title="返却"
-                titleStyle={
-                  Object {
-                    "fontWeight": "700",
-                  }
-                }
-              />
-            </View>
+            <StatusIcon
+              status={true}
+            />
+            <LendingButton
+              navigate={undefined}
+              status={true}
+            />
           </View>
         </View>,
       ],
@@ -222,49 +130,12 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "children": <Image
-            source={
-              Object {
-                "uri": "https://facebook.github.io/react/logo-og.png",
-              }
-            }
-            style={
-              Object {
-                "height": 300,
-                "width": 750,
-              }
-            }
-          />,
-          "style": Array [
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "flex": 1,
-            },
-          ],
+          "uri": "none",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "source": Object {
-              "uri": "https://facebook.github.io/react/logo-og.png",
-            },
-            "style": Object {
-              "height": 300,
-              "width": 750,
-            },
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
+        "rendered": null,
         "type": [Function],
       },
       Object {
@@ -273,24 +144,9 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flex": 0.5,
-                    "margin": 10,
-                  },
-                ]
-              }
-            >
-              <ScrollView
-                horizontal={true}
-              />
-            </View>,
+            <TagsList
+              tags={Array []}
+            />,
             <View
               style={
                 Object {
@@ -337,79 +193,13 @@ ShallowWrapper {
                 }
               }
             >
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ]
-                }
-              >
-                <Icon
-                  allowFontScaling={false}
-                  color="#cd5c5c"
-                  name="circle-slash"
-                  size={40}
-                />
-              </View>
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ]
-                }
-              >
-                <Button
-                  TouchableComponent={[Function]}
-                  buttonStyle={
-                    Object {
-                      "backgroundColor": "#cd5c5c",
-                      "height": 60,
-                      "width": 100,
-                    }
-                  }
-                  clear={false}
-                  disabled={false}
-                  icon={
-                    <Icon
-                      allowFontScaling={false}
-                      color="white"
-                      name="keyboard-return"
-                      size={30}
-                    />
-                  }
-                  iconContainerStyle={
-                    Object {
-                      "marginRight": 10,
-                    }
-                  }
-                  iconRight={false}
-                  loadingProps={
-                    Object {
-                      "color": "white",
-                      "size": "small",
-                    }
-                  }
-                  onPress={[Function]}
-                  title="返却"
-                  titleStyle={
-                    Object {
-                      "fontWeight": "700",
-                    }
-                  }
-                />
-              </View>
+              <StatusIcon
+                status={true}
+              />
+              <LendingButton
+                navigate={undefined}
+                status={true}
+              />
             </View>,
           ],
           "style": Object {
@@ -421,35 +211,12 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
-              "children": <ScrollView
-                horizontal={true}
-              />,
-              "style": Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "flex": 0.5,
-                  "margin": 10,
-                },
-              ],
+              "tags": Array [],
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": Array [],
-                "horizontal": true,
-              },
-              "ref": null,
-              "rendered": Array [],
-              "type": [MockFunction],
-            },
+            "rendered": null,
             "type": [Function],
           },
           Object {
@@ -545,79 +312,13 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ]
-                  }
-                >
-                  <Icon
-                    allowFontScaling={false}
-                    color="#cd5c5c"
-                    name="circle-slash"
-                    size={40}
-                  />
-                </View>,
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ]
-                  }
-                >
-                  <Button
-                    TouchableComponent={[Function]}
-                    buttonStyle={
-                      Object {
-                        "backgroundColor": "#cd5c5c",
-                        "height": 60,
-                        "width": 100,
-                      }
-                    }
-                    clear={false}
-                    disabled={false}
-                    icon={
-                      <Icon
-                        allowFontScaling={false}
-                        color="white"
-                        name="keyboard-return"
-                        size={30}
-                      />
-                    }
-                    iconContainerStyle={
-                      Object {
-                        "marginRight": 10,
-                      }
-                    }
-                    iconRight={false}
-                    loadingProps={
-                      Object {
-                        "color": "white",
-                        "size": "small",
-                      }
-                    }
-                    onPress={[Function]}
-                    title="返却"
-                    titleStyle={
-                      Object {
-                        "fontWeight": "700",
-                      }
-                    }
-                  />
-                </View>,
+                <StatusIcon
+                  status={true}
+                />,
+                <LendingButton
+                  navigate={undefined}
+                  status={true}
+                />,
               ],
               "style": Object {
                 "flex": 1,
@@ -630,133 +331,24 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "class",
+                "nodeType": "function",
                 "props": Object {
-                  "children": <Icon
-                    allowFontScaling={false}
-                    color="#cd5c5c"
-                    name="circle-slash"
-                    size={40}
-                  />,
-                  "style": Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ],
+                  "status": true,
                 },
                 "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "allowFontScaling": false,
-                    "color": "#cd5c5c",
-                    "name": "circle-slash",
-                    "size": 40,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
+                "rendered": null,
                 "type": [Function],
               },
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "class",
+                "nodeType": "function",
                 "props": Object {
-                  "children": <Button
-                    TouchableComponent={[Function]}
-                    buttonStyle={
-                      Object {
-                        "backgroundColor": "#cd5c5c",
-                        "height": 60,
-                        "width": 100,
-                      }
-                    }
-                    clear={false}
-                    disabled={false}
-                    icon={
-                      <Icon
-                        allowFontScaling={false}
-                        color="white"
-                        name="keyboard-return"
-                        size={30}
-                      />
-                    }
-                    iconContainerStyle={
-                      Object {
-                        "marginRight": 10,
-                      }
-                    }
-                    iconRight={false}
-                    loadingProps={
-                      Object {
-                        "color": "white",
-                        "size": "small",
-                      }
-                    }
-                    onPress={[Function]}
-                    title="返却"
-                    titleStyle={
-                      Object {
-                        "fontWeight": "700",
-                      }
-                    }
-                  />,
-                  "style": Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ],
+                  "navigate": undefined,
+                  "status": true,
                 },
                 "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "TouchableComponent": [Function],
-                    "buttonStyle": Object {
-                      "backgroundColor": "#cd5c5c",
-                      "height": 60,
-                      "width": 100,
-                    },
-                    "clear": false,
-                    "disabled": false,
-                    "icon": <Icon
-                      allowFontScaling={false}
-                      color="white"
-                      name="keyboard-return"
-                      size={30}
-                    />,
-                    "iconContainerStyle": Object {
-                      "marginRight": 10,
-                    },
-                    "iconRight": false,
-                    "loadingProps": Object {
-                      "color": "white",
-                      "size": "small",
-                    },
-                    "onPress": [Function],
-                    "title": "返却",
-                    "titleStyle": Object {
-                      "fontWeight": "700",
-                    },
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
+                "rendered": null,
                 "type": [Function],
               },
             ],
@@ -775,33 +367,9 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "flex": 1,
-                },
-              ]
-            }
-          >
-            <Image
-              source={
-                Object {
-                  "uri": "https://facebook.github.io/react/logo-og.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 300,
-                  "width": 750,
-                }
-              }
-            />
-          </View>,
+          <BookImage
+            uri="none"
+          />,
           <View
             style={
               Object {
@@ -809,24 +377,9 @@ ShallowWrapper {
               }
             }
           >
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flex": 0.5,
-                    "margin": 10,
-                  },
-                ]
-              }
-            >
-              <ScrollView
-                horizontal={true}
-              />
-            </View>
+            <TagsList
+              tags={Array []}
+            />
             <View
               style={
                 Object {
@@ -873,79 +426,13 @@ ShallowWrapper {
                 }
               }
             >
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ]
-                }
-              >
-                <Icon
-                  allowFontScaling={false}
-                  color="#cd5c5c"
-                  name="circle-slash"
-                  size={40}
-                />
-              </View>
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 1,
-                    },
-                  ]
-                }
-              >
-                <Button
-                  TouchableComponent={[Function]}
-                  buttonStyle={
-                    Object {
-                      "backgroundColor": "#cd5c5c",
-                      "height": 60,
-                      "width": 100,
-                    }
-                  }
-                  clear={false}
-                  disabled={false}
-                  icon={
-                    <Icon
-                      allowFontScaling={false}
-                      color="white"
-                      name="keyboard-return"
-                      size={30}
-                    />
-                  }
-                  iconContainerStyle={
-                    Object {
-                      "marginRight": 10,
-                    }
-                  }
-                  iconRight={false}
-                  loadingProps={
-                    Object {
-                      "color": "white",
-                      "size": "small",
-                    }
-                  }
-                  onPress={[Function]}
-                  title="返却"
-                  titleStyle={
-                    Object {
-                      "fontWeight": "700",
-                    }
-                  }
-                />
-              </View>
+              <StatusIcon
+                status={true}
+              />
+              <LendingButton
+                navigate={undefined}
+                status={true}
+              />
             </View>
           </View>,
         ],
@@ -959,49 +446,12 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "children": <Image
-              source={
-                Object {
-                  "uri": "https://facebook.github.io/react/logo-og.png",
-                }
-              }
-              style={
-                Object {
-                  "height": 300,
-                  "width": 750,
-                }
-              }
-            />,
-            "style": Array [
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-              },
-              Object {
-                "flex": 1,
-              },
-            ],
+            "uri": "none",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "source": Object {
-                "uri": "https://facebook.github.io/react/logo-og.png",
-              },
-              "style": Object {
-                "height": 300,
-                "width": 750,
-              },
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
+          "rendered": null,
           "type": [Function],
         },
         Object {
@@ -1010,24 +460,9 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "flex": 0.5,
-                      "margin": 10,
-                    },
-                  ]
-                }
-              >
-                <ScrollView
-                  horizontal={true}
-                />
-              </View>,
+              <TagsList
+                tags={Array []}
+              />,
               <View
                 style={
                   Object {
@@ -1074,79 +509,13 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ]
-                  }
-                >
-                  <Icon
-                    allowFontScaling={false}
-                    color="#cd5c5c"
-                    name="circle-slash"
-                    size={40}
-                  />
-                </View>
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ]
-                  }
-                >
-                  <Button
-                    TouchableComponent={[Function]}
-                    buttonStyle={
-                      Object {
-                        "backgroundColor": "#cd5c5c",
-                        "height": 60,
-                        "width": 100,
-                      }
-                    }
-                    clear={false}
-                    disabled={false}
-                    icon={
-                      <Icon
-                        allowFontScaling={false}
-                        color="white"
-                        name="keyboard-return"
-                        size={30}
-                      />
-                    }
-                    iconContainerStyle={
-                      Object {
-                        "marginRight": 10,
-                      }
-                    }
-                    iconRight={false}
-                    loadingProps={
-                      Object {
-                        "color": "white",
-                        "size": "small",
-                      }
-                    }
-                    onPress={[Function]}
-                    title="返却"
-                    titleStyle={
-                      Object {
-                        "fontWeight": "700",
-                      }
-                    }
-                  />
-                </View>
+                <StatusIcon
+                  status={true}
+                />
+                <LendingButton
+                  navigate={undefined}
+                  status={true}
+                />
               </View>,
             ],
             "style": Object {
@@ -1158,35 +527,12 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
-                "children": <ScrollView
-                  horizontal={true}
-                />,
-                "style": Array [
-                  Object {
-                    "alignItems": "center",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "flex": 0.5,
-                    "margin": 10,
-                  },
-                ],
+                "tags": Array [],
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": Array [],
-                  "horizontal": true,
-                },
-                "ref": null,
-                "rendered": Array [],
-                "type": [MockFunction],
-              },
+              "rendered": null,
               "type": [Function],
             },
             Object {
@@ -1282,79 +628,13 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": Array [
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                        },
-                        Object {
-                          "flex": 1,
-                        },
-                      ]
-                    }
-                  >
-                    <Icon
-                      allowFontScaling={false}
-                      color="#cd5c5c"
-                      name="circle-slash"
-                      size={40}
-                    />
-                  </View>,
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "alignItems": "center",
-                          "justifyContent": "center",
-                        },
-                        Object {
-                          "flex": 1,
-                        },
-                      ]
-                    }
-                  >
-                    <Button
-                      TouchableComponent={[Function]}
-                      buttonStyle={
-                        Object {
-                          "backgroundColor": "#cd5c5c",
-                          "height": 60,
-                          "width": 100,
-                        }
-                      }
-                      clear={false}
-                      disabled={false}
-                      icon={
-                        <Icon
-                          allowFontScaling={false}
-                          color="white"
-                          name="keyboard-return"
-                          size={30}
-                        />
-                      }
-                      iconContainerStyle={
-                        Object {
-                          "marginRight": 10,
-                        }
-                      }
-                      iconRight={false}
-                      loadingProps={
-                        Object {
-                          "color": "white",
-                          "size": "small",
-                        }
-                      }
-                      onPress={[Function]}
-                      title="返却"
-                      titleStyle={
-                        Object {
-                          "fontWeight": "700",
-                        }
-                      }
-                    />
-                  </View>,
+                  <StatusIcon
+                    status={true}
+                  />,
+                  <LendingButton
+                    navigate={undefined}
+                    status={true}
+                  />,
                 ],
                 "style": Object {
                   "flex": 1,
@@ -1367,133 +647,24 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "function",
                   "props": Object {
-                    "children": <Icon
-                      allowFontScaling={false}
-                      color="#cd5c5c"
-                      name="circle-slash"
-                      size={40}
-                    />,
-                    "style": Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ],
+                    "status": true,
                   },
                   "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "allowFontScaling": false,
-                      "color": "#cd5c5c",
-                      "name": "circle-slash",
-                      "size": 40,
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
+                  "rendered": null,
                   "type": [Function],
                 },
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "function",
                   "props": Object {
-                    "children": <Button
-                      TouchableComponent={[Function]}
-                      buttonStyle={
-                        Object {
-                          "backgroundColor": "#cd5c5c",
-                          "height": 60,
-                          "width": 100,
-                        }
-                      }
-                      clear={false}
-                      disabled={false}
-                      icon={
-                        <Icon
-                          allowFontScaling={false}
-                          color="white"
-                          name="keyboard-return"
-                          size={30}
-                        />
-                      }
-                      iconContainerStyle={
-                        Object {
-                          "marginRight": 10,
-                        }
-                      }
-                      iconRight={false}
-                      loadingProps={
-                        Object {
-                          "color": "white",
-                          "size": "small",
-                        }
-                      }
-                      onPress={[Function]}
-                      title="返却"
-                      titleStyle={
-                        Object {
-                          "fontWeight": "700",
-                        }
-                      }
-                    />,
-                    "style": Array [
-                      Object {
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "flex": 1,
-                      },
-                    ],
+                    "navigate": undefined,
+                    "status": true,
                   },
                   "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "TouchableComponent": [Function],
-                      "buttonStyle": Object {
-                        "backgroundColor": "#cd5c5c",
-                        "height": 60,
-                        "width": 100,
-                      },
-                      "clear": false,
-                      "disabled": false,
-                      "icon": <Icon
-                        allowFontScaling={false}
-                        color="white"
-                        name="keyboard-return"
-                        size={30}
-                      />,
-                      "iconContainerStyle": Object {
-                        "marginRight": 10,
-                      },
-                      "iconRight": false,
-                      "loadingProps": Object {
-                        "color": "white",
-                        "size": "small",
-                      },
-                      "onPress": [Function],
-                      "title": "返却",
-                      "titleStyle": Object {
-                        "fontWeight": "700",
-                      },
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
+                  "rendered": null,
                   "type": [Function],
                 },
               ],

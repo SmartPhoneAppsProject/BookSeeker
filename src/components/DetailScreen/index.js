@@ -20,7 +20,7 @@ class DetailScreen extends Component {
       image,
       title,
       published_at,
-    } = this.props.navigation.state.params.book;
+    } = this.props.book;
 
     return (
       <View style={styles.container}>

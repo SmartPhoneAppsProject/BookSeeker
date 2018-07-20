@@ -13,6 +13,7 @@ describe('<DetailScreen />', () => {
       },
     };
     const wrapper = shallow(<DetailScreen
+      book={_books[0]}
       navigation={navigation}
     />);
     expect(wrapper).toMatchSnapshot();
