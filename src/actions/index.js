@@ -49,11 +49,11 @@ export const getAllBooks = () => (dispatch) => {
     });
 };
 
-export const permissionGranted = ({
+export const permissionsGranted = () => ({
   type: types.PERMISSIONS_GRANTED,
 });
 
-export const permissionDenied = ({
+export const permissionsDenied = () => ({
   type: types.PERMISSIONS_DENIED,
 });
 
@@ -61,7 +61,7 @@ export const isbnReading = () => ({
   type: types.ISBN_READING,
 });
 
-export const isbnOK = isbn => ({
+export const isbnOk = isbn => ({
   type: types.ISBN_OK,
   payload: {
     isbn,
