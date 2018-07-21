@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   View,
   Image,
-  Dimensions,
   ActivityIndicator,
 } from 'react-native';
 import {
@@ -12,18 +11,15 @@ import {
 } from 'expo';
 import { Text } from 'react-native-elements';
 
+import { index as styles } from './Styles';
 import { rentBook } from '../../utils/Network';
 import { navigate } from '../../utils/NavigationService';
 
-export default class lentScanScreen extends Component {
-  static navigationOptions = {
-    title: '貸し出し',
-  };
-
+export default class LentScanScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      janCode: null,
+      isbn: null,
       permissionsGranted: false,
       status: 'reading',
     };
@@ -34,18 +30,18 @@ export default class lentScanScreen extends Component {
     this.setState({ permissionsGranted: status === 'granted' });
   }
 
-  lendBook = (janCode) => {
+  lendBook = (isbn) => {
     const json = JSON.stringify({
-      jan_code: janCode,
+      jan_code: isbn,
       status: true,
     });
 
     this.changeBookStatus(json);
   };
 
-  returnBook = (janCode) => {
+  borrowBook = (isbn) => {
     const json = JSON.stringify({
-      jan_code: janCode,
+      jan_code: isbn,
       status: false,
     });
 
@@ -56,7 +52,6 @@ export default class lentScanScreen extends Component {
     rentBook(json)
       .then(response => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
       })
       .catch((error) => {
         console.warn(error);
@@ -72,17 +67,16 @@ export default class lentScanScreen extends Component {
   handleBarCodeRead = ({ type, data }) => {
     const { action } = this.props.navigation.state.params;
 
-    console.log(data);
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.state.janCode !== data) {
+        if (this.state.isbn !== data) {
           this.setState({
-            janCode: data,
+            isbn: data,
             status: 'ok',
           });
           const janCode = parseInt(data, 10);
           if (action === 'return') {
-            this.returnBook(janCode);
+            this.borrowBook(janCode);
           } else if (action === 'lend') {
             this.lendBook(janCode);
           }
@@ -177,71 +171,10 @@ export default class lentScanScreen extends Component {
   }
 }
 
-const { width } = Dimensions.get('window');
+LentScanScreen.navigationOptions = {
+  title: '貸し出し',
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  noPermissions: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-  noPermissionsText: {
-    color: 'white',
-  },
-  cameraScreen: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  header: {
-    alignItems: 'center',
-    margin: 5,
-  },
-  stringWarn: {
-    color: '#cd5c5c',
-  },
-  text: {
-    color: '#f3f3f3',
-    textAlign: 'center',
-  },
-  imageSize: {
-    width: 221 / 2,
-    height: 93 / 2,
-  },
-  body: {
-    alignItems: 'center',
-    margin: 5,
-  },
-  cameraContainer: {
-    width: width * (2 / 3),
-    height: width * (2 / 3),
-    borderColor: '#f3f3f3',
-    borderWidth: 1,
-  },
-  camera: {
-    flex: 1,
-  },
-  cameraInline: {
-    flex: 0.5,
-    borderColor: '#cd5c5c',
-    borderBottomWidth: 1,
-  },
-  footer: {
-    margin: 5,
-  },
-  statusOk: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: '#3eb370',
-  },
-  statusNo: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: '#e95464',
-  },
-});
+LentScanScreen.propTypes = {
+  action: PropTypes.oneOf(['borrow', 'return']).isRequired,
+};

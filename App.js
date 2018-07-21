@@ -16,7 +16,7 @@ import DetailScreenContainer from './src/containers/DetailScreenContainer';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
 import EntryTagsScreen from './src/components/screens/EntryTagsScreen';
-import LentScanScreen from './src/components/screens/LentScanScreen';
+import LentScanScreen from './src/components/LentScanScreen';
 import { setTopLevelNavigator } from './src/utils/NavigationService';
 
 const RootStack = StackNavigator(

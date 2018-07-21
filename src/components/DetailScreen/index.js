@@ -9,7 +9,7 @@ import { index as styles } from './Styles';
 import TagsList from './TagsList';
 import BookImage from './BookImage';
 import StatusIcon from './StatusIcon';
-import LendingButton from './LendingButton';
+import BorrowReturnButton from './BorrowReturnButton';
 
 class DetailScreen extends Component {
   render() {
@@ -33,7 +33,7 @@ class DetailScreen extends Component {
           </View>
           <View style={styles.statusContainer}>
             <StatusIcon status={status} />
-            <LendingButton
+            <BorrowReturnButton
               status={status}
               navigate={navigate}
             />
