@@ -30,7 +30,7 @@ export default class LentScanScreen extends Component {
     this.setState({ permissionsGranted: status === 'granted' });
   }
 
-  lendBook = (isbn) => {
+  borrowBook = (isbn) => {
     const json = JSON.stringify({
       jan_code: isbn,
       status: true,
@@ -39,7 +39,7 @@ export default class LentScanScreen extends Component {
     this.changeBookStatus(json);
   };
 
-  borrowBook = (isbn) => {
+  returnBook = (isbn) => {
     const json = JSON.stringify({
       jan_code: isbn,
       status: false,
@@ -65,7 +65,7 @@ export default class LentScanScreen extends Component {
   };
 
   handleBarCodeRead = ({ type, data }) => {
-    const { action } = this.props.navigation.state.params;
+    const { action } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
@@ -74,11 +74,11 @@ export default class LentScanScreen extends Component {
             isbn: data,
             status: 'ok',
           });
-          const janCode = parseInt(data, 10);
+          const isbn = parseInt(data, 10);
           if (action === 'return') {
-            this.borrowBook(janCode);
-          } else if (action === 'lend') {
-            this.lendBook(janCode);
+            this.returnBook(isbn);
+          } else if (action === 'borrow') {
+            this.borrowBook(isbn);
           }
           navigate('Home');
         }

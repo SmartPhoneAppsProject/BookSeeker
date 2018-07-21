@@ -13,10 +13,10 @@ import reducer from './src/reducers';
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
 import SearchView from './src/components/HomeScreen/SearchView';
 import DetailScreenContainer from './src/containers/DetailScreenContainer';
+import LentScanScreenContainer from './src/containers/LentScanScreenContainer';
 import EntryScreen from './src/components/screens/EntryScreen';
 import ScanScreen from './src/components/screens/ScanScreen';
 import EntryTagsScreen from './src/components/screens/EntryTagsScreen';
-import LentScanScreen from './src/components/LentScanScreen';
 import { setTopLevelNavigator } from './src/utils/NavigationService';
 
 const RootStack = StackNavigator(
@@ -40,7 +40,7 @@ const RootStack = StackNavigator(
       screen: SearchView,
     },
     LentScan: {
-      screen: LentScanScreen,
+      screen: LentScanScreenContainer,
     },
   },
   {

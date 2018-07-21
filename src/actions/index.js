@@ -49,3 +49,31 @@ export const getAllBooks = () => (dispatch) => {
     });
 };
 
+export const permissionGranted = ({
+  type: types.PERMISSIONS_GRANTED,
+});
+
+export const permissionDenied = ({
+  type: types.PERMISSIONS_DENIED,
+});
+
+export const isbnReading = () => ({
+  type: types.ISBN_READING,
+  payload: {
+    isbn: null,
+  },
+});
+
+export const isbnOK = isbn => ({
+  type: types.ISBN_OK,
+  payload: {
+    isbn,
+  },
+});
+
+export const isbnInvalid = () => ({
+  type: types.ISBN_INVALID,
+  payload: {
+    isbn: null,
+  },
+});
