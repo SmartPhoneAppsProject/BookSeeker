@@ -16,52 +16,32 @@ import { rentBook } from '../../utils/Network';
 import { navigate } from '../../utils/NavigationService';
 
 export default class LentScanScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isbn: null,
-      permissionsGranted: false,
-      status: 'reading',
-    };
-  }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ permissionsGranted: status === 'granted' });
+    if (status === 'granted') {
+      this.props.permissionsGranted();
+    } else {
+      this.props.permissionsDenied();
+    }
   }
 
   borrowBook = (isbn) => {
-    const json = JSON.stringify({
+    const body = JSON.stringify({
       jan_code: isbn,
       status: true,
     });
 
-    this.changeBookStatus(json);
+    this.props.requestChangeStatus(body);
   };
 
   returnBook = (isbn) => {
-    const json = JSON.stringify({
+    const body = JSON.stringify({
       jan_code: isbn,
       status: false,
     });
 
-    this.changeBookStatus(json);
-  };
-
-  changeBookStatus = (json) => {
-    rentBook(json)
-      .then(response => response.json())
-      .then((responseJson) => {
-      })
-      .catch((error) => {
-        console.warn(error);
-        rentBook(json)
-          .then(response => response.json())
-          .then((responseJson) => {
-            console.log(responseJson);
-          })
-          .catch(e => console.error(e));
-      });
+    this.props.requestChangeStatus(body);
   };
 
   handleBarCodeRead = ({ type, data }) => {
@@ -69,11 +49,8 @@ export default class LentScanScreen extends Component {
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.state.isbn !== data) {
-          this.setState({
-            isbn: data,
-            status: 'ok',
-          });
+        if (this.props.isbn !== data) {
+          this.props.isbnOk(data);
           const isbn = parseInt(data, 10);
           if (action === 'return') {
             this.returnBook(isbn);
@@ -83,13 +60,11 @@ export default class LentScanScreen extends Component {
           navigate('Home');
         }
       } else { // バーコードであるがISBNでないとき
-        this.setState({ status: 'invalid' });
+        this.props.isbnInvalid();
       }
-      setTimeout(() => {
-        this.setState({ status: 'reading' });
-      }, 1000);
+      setTimeout(() => this.props.isbnReading(), 1000);
     } else { // バーコードでないとき
-      this.setState({ status: 'reading' });
+      this.props.isbnReading();
     }
   };
 
@@ -127,9 +102,9 @@ export default class LentScanScreen extends Component {
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;
-    if (this.state.status === 'ok') {
+    if (this.props.status === 'ok') {
       statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
-    } else if (this.state.status === 'invalid') {
+    } else if (this.props.status === 'invalid') {
       statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
@@ -159,7 +134,7 @@ export default class LentScanScreen extends Component {
   };
 
   render() {
-    const screen = this.state.permissionsGranted
+    const screen = this.props.permissions
       ? this.renderScanScreen()
       : this.renderNoPermissions();
 
@@ -177,4 +152,17 @@ LentScanScreen.navigationOptions = {
 
 LentScanScreen.propTypes = {
   action: PropTypes.oneOf(['borrow', 'return']).isRequired,
+  permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
+  status: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
+  isbn: PropTypes.string,
+  permissionsGranted: PropTypes.func.isRequired,
+  permissionsDenied: PropTypes.func.isRequired,
+  isbnReading: PropTypes.func.isRequired,
+  isbnOk: PropTypes.func.isRequired,
+  isbnInvalid: PropTypes.func.isRequired,
+  requestChangeStatus: PropTypes.func.isRequired,
+};
+
+LentScanScreen.defaultProps = {
+  isbn: null,
 };

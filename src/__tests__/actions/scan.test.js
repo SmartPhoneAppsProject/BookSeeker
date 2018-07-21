@@ -6,14 +6,14 @@ describe('actions', () => {
     const expected = {
       type: types.PERMISSIONS_GRANTED,
     };
-    expect(actions.permissionGranted).toEqual(expected);
+    expect(actions.permissionsGranted()).toEqual(expected);
   });
 
   test('カメラのパーミッションが拒否されるアクションが生成されること', () => {
     const expected = {
       type: types.PERMISSIONS_DENIED,
     };
-    expect(actions.permissionDenied).toEqual(expected);
+    expect(actions.permissionsDenied()).toEqual(expected);
   });
 
   test('カメラの読み取り中のアクションが生成されること', () => {
@@ -31,7 +31,7 @@ describe('actions', () => {
         isbn,
       },
     };
-    expect(actions.isbnOK(isbn)).toEqual(expected);
+    expect(actions.isbnOk(isbn)).toEqual(expected);
   });
 
   test('カメラの読み取りエラーのアクションが生成されること', () => {
