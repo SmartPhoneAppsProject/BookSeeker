@@ -19,9 +19,6 @@ describe('actions', () => {
   test('カメラの読み取り中のアクションが生成されること', () => {
     const expected = {
       type: types.ISBN_READING,
-      payload: {
-        isbn: null,
-      },
     };
     expect(actions.isbnReading()).toEqual(expected);
   });
@@ -40,9 +37,6 @@ describe('actions', () => {
   test('カメラの読み取りエラーのアクションが生成されること', () => {
     const expected = {
       type: types.ISBN_INVALID,
-      payload: {
-        isbn: null,
-      },
     };
     expect(actions.isbnInvalid()).toEqual(expected);
   });

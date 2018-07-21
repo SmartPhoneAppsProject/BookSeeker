@@ -59,9 +59,6 @@ export const permissionDenied = ({
 
 export const isbnReading = () => ({
   type: types.ISBN_READING,
-  payload: {
-    isbn: null,
-  },
 });
 
 export const isbnOK = isbn => ({
@@ -73,7 +70,4 @@ export const isbnOK = isbn => ({
 
 export const isbnInvalid = () => ({
   type: types.ISBN_INVALID,
-  payload: {
-    isbn: null,
-  },
 });
