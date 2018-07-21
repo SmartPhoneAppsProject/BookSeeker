@@ -34,7 +34,7 @@ const scan = (state = initialState, action) => {
       return {
         ...state,
         status: 'ok',
-        isbn: action.payload.status,
+        isbn: action.payload.isbn,
       };
     case ISBN_INVALID:
       return {
