@@ -98,7 +98,7 @@ BookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     status: PropTypes.bool.isRequired,
     isbn: PropTypes.string.isRequired,
   })),
