@@ -12,7 +12,6 @@ import {
 import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
-import { rentBook } from '../../utils/Network';
 import { navigate } from '../../utils/NavigationService';
 
 export default class LentScanScreen extends Component {

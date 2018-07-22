@@ -48,7 +48,6 @@ export const getAllBooks = () => (dispatch) => {
       throw new Error(response);
     })
     .then((resJson) => {
-      console.log(resJson);
       dispatch(requestSuccess());
       dispatch(getBooks(resJson.books));
     })
