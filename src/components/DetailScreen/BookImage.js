@@ -14,9 +14,9 @@ const NoImage = () => (
   />
 );
 
-const NetworkImage = uri => (
+const NetworkImage = ({ uri }) => (
   <Image
-    style={styles.img}
+    style={{ width: 50, height: 50 }}
     source={{ uri }}
   />
 );

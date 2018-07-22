@@ -19,7 +19,7 @@ class DetailScreen extends Component {
       status,
       image,
       title,
-      published_at,
+      published,
     } = this.props.book;
 
     return (
@@ -29,7 +29,7 @@ class DetailScreen extends Component {
           <TagsList tags={tags} />
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.date}>出版日：{published_at}</Text>
+            <Text style={styles.date}>出版日：{published}</Text>
           </View>
           <View style={styles.statusContainer}>
             <StatusIcon status={status} />
@@ -52,9 +52,9 @@ DetailScreen.propTypes = {
   book: PropTypes.shape({
     tags: PropTypes.array.isRequired,
     status: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     title: PropTypes.string.isRequired,
-    published_at: PropTypes.string.isRequired,
+    published: PropTypes.string.isRequired,
   }).isRequired,
 };
 
