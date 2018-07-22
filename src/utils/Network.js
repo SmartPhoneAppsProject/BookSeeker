@@ -1,4 +1,4 @@
-import { API_ENDPOINT } from 'react-native-dotenv';
+import API_ENDPOINT from './endpoint';
 
 const baseUri = API_ENDPOINT;
 

@@ -7,7 +7,7 @@ import { StackNavigator } from 'react-navigation';
 import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { getAllMockBooks } from './src/actions';
+import { getAllBooks } from './src/actions';
 import reducer from './src/reducers';
 
 import HomeScreenContainer from './src/containers/HomeScreenContainer';
@@ -75,7 +75,7 @@ const store = createStore(
   applyMiddleware(...middleware),
 );
 
-store.dispatch(getAllMockBooks());
+store.dispatch(getAllBooks());
 
 export default class App extends Component {
   render() {
