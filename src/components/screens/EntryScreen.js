@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   View,
@@ -164,7 +165,7 @@ export default class EntryScreen extends Component {
           onCancel={this.hideDateTimePicker}
           date={this.state.chosenDate}
           locale="ja"
-          maximumDate={new Date()}
+          maximumDate={this.props.maximumDate}
           titleIOS="発行日を選択する"
           cancelTextIOS="キャンセル"
           confirmTextIOS="決定"
@@ -282,3 +283,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+
+EntryScreen.propTypes = {
+  maximumDate: PropTypes.string, // snapshotのテストのためにpropで指定可能にする
+};
+
+EntryScreen.defaultProps = {
+  maximumDate: new Date(),
+};
