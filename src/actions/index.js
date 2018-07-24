@@ -1,4 +1,6 @@
+import API_ENDPOINT from '../utils/endpoint';
 import server from '../api/server';
+import * as api from '../api';
 import * as types from '../constants/actionTypes';
 
 const request = () => ({
@@ -25,7 +27,8 @@ const getBooks = books => ({
 
 export const getAllMockBooks = () => (dispatch) => {
   dispatch(request());
-  server.getBooks()
+
+  return server.getBooks()
     .then((books) => {
       dispatch(requestSuccess());
       dispatch(getBooks(books));
@@ -38,14 +41,57 @@ export const getAllMockBooks = () => (dispatch) => {
 export const getAllBooks = () => (dispatch) => {
   dispatch(request());
 
-  return fetch('https://example.com/books')
-    .then(response => response.json())
-    .then((books) => {
+  return fetch(`${API_ENDPOINT}/books`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+    .then((resJson) => {
       dispatch(requestSuccess());
-      dispatch(getBooks(books));
+      dispatch(getBooks(resJson.books));
     })
     .catch((error) => {
       dispatch(requestFail(JSON.parse(error)));
     });
 };
 
+export const permissionsGranted = () => ({
+  type: types.PERMISSIONS_GRANTED,
+});
+
+export const permissionsDenied = () => ({
+  type: types.PERMISSIONS_DENIED,
+});
+
+export const isbnReading = () => ({
+  type: types.ISBN_READING,
+});
+
+export const isbnOk = isbn => ({
+  type: types.ISBN_OK,
+  payload: {
+    isbn,
+  },
+});
+
+export const isbnInvalid = () => ({
+  type: types.ISBN_INVALID,
+});
+
+export const requestChangeStatus = (isbn, status) => (dispatch) => {
+  dispatch(request());
+
+  api.changeStatus(isbn, status)
+    .then((response) => {
+      console.log(response.json);
+      if (response.ok) {
+        return dispatch(requestSuccess());
+      }
+      throw new Error(response);
+    })
+    .catch((error) => {
+      dispatch(requestFail(JSON.parse(error)));
+    });
+};

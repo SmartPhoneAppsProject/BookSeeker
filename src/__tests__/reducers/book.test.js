@@ -1,6 +1,9 @@
 import reducer from '../../reducers/book';
 import _books from '../../api/books.json';
-import { GET_BOOK, GET_BOOKS } from '../../constants/actionTypes';
+import {
+  GET_BOOK,
+  GET_BOOKS,
+} from '../../constants/actionTypes';
 
 describe('book Reducer', () => {
   test('初期値を返すこと', () => {
@@ -14,7 +17,7 @@ describe('book Reducer', () => {
     expect(result).toEqual(expected);
   });
 
-  test('アクションがGET_BOOKSのときpayloadとstateを返すこと', () => {
+  test('GET_BOOKSアクションが正しく処理されること', () => {
     const state = {
       books: _books.slice(0, 5),
       book: _books[0],
@@ -34,7 +37,7 @@ describe('book Reducer', () => {
     expect(result).toEqual(expected);
   });
 
-  test('GET_BOOKのpayloadとstateを返すこと', () => {
+  test('GET_BOOKアクションが正しく処理されること', () => {
     const state = {
       books: _books,
       book: _books[1],

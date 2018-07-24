@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LentScanScreen /> 正しくレンダリングされること 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-around",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "margin": 5,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {},
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            Object {
+              "color": "#cd5c5c",
+            },
+          ]
+        }
+      >
+        978
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {},
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              Object {
+                "color": "#f3f3f3",
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          から始まるバーコードを画面に合わせてください
+        </Text>
+      </Text>
+    </View>
+    <Image
+      source="test-file-stub"
+      style={
+        Object {
+          "height": 46.5,
+          "width": 110.5,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "borderColor": "#f3f3f3",
+          "borderWidth": 1,
+          "height": 500,
+          "width": 500,
+        }
+      }
+    >
+      <ExponentCamera
+        autoFocus={undefined}
+        barCodeScannerEnabled={true}
+        barCodeTypes={Array []}
+        faceDetectionClassifications={undefined}
+        faceDetectionLandmarks={undefined}
+        faceDetectionMode={undefined}
+        flashMode={undefined}
+        focusDepth={0}
+        onBarCodeRead={[Function]}
+        onCameraReady={[Function]}
+        onFacesDetected={[Function]}
+        onMountError={[Function]}
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+        type={undefined}
+        whiteBalance={undefined}
+        zoom={0}
+      >
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#cd5c5c",
+              "flex": 0.5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {},
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </ExponentCamera>
+    </View>
+    <View
+      style={
+        Object {
+          "margin": 5,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#999999"
+        hidesWhenStopped={true}
+        size="large"
+      />
+    </View>
+  </View>
+</View>
+`;

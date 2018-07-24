@@ -7,18 +7,28 @@ import {
 
 import { bookImage as styles } from './Styles';
 
-const BookImage = ({ uri }) => {
-  let imageUri = uri;
-  if (imageUri === 'none') {
-    imageUri = 'https://facebook.github.io/react/logo-og.png';
-  }
+const NoImage = () => (
+  <Image
+    style={styles.img}
+    source={require('./../../../assets/no_image.png')}
+  />
+);
 
-  return (
-    <View style={[styles.base, styles.imgContainer]}>
-      <Image style={styles.img} source={{ uri: imageUri }} />
-    </View>
-  );
-};
+const NetworkImage = ({ uri }) => (
+  <Image
+    style={{ width: 50, height: 50 }}
+    source={{ uri }}
+  />
+);
+
+const BookImage = ({ uri }) => (
+  <View style={[styles.base, styles.imgContainer]}>
+    {uri ?
+      <NetworkImage uri={uri} />
+      : <NoImage />
+    }
+  </View>
+);
 
 BookImage.propTypes = {
   uri: PropTypes.string.isRequired,

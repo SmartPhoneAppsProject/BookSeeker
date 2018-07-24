@@ -39,7 +39,7 @@ export default class ScanScreen extends Component {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.state.janCode !== data) {
           this.setState({
-            janCode: data,
+            isbn: data,
             status: 'ok',
           });
           setTimeout(() => {

@@ -86,7 +86,7 @@ export const statusIcon = StyleSheet.create({
   },
 });
 
-export const lendingButton = StyleSheet.create({
+export const borrowReturnButton = StyleSheet.create({
   base: {
     justifyContent: 'center',
     alignItems: 'center',
