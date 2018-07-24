@@ -15,7 +15,7 @@ import SearchView from './src/components/HomeScreen/SearchView';
 import DetailScreenContainer from './src/containers/DetailScreenContainer';
 import LentScanScreenContainer from './src/containers/LentScanScreenContainer';
 import EntryScreen from './src/components/EntryScreen';
-import ScanScreen from './src/components/screens/ScanScreen';
+import ScanScreen from './src/components/ScanScreen';
 import EntryTagsScreen from './src/components/screens/EntryTagsScreen';
 import { setTopLevelNavigator } from './src/utils/NavigationService';
 
