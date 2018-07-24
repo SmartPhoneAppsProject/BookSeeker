@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 
 import { index as styles } from './Styles';
 import TagsList from './TagsList';
 import BookImage from './BookImage';
-import StatusIcon from './StatusIcon';
+import BookInfo from './BookInfo';
 import BorrowReturnButton from './BorrowReturnButton';
 
 class DetailScreen extends Component {
@@ -26,18 +23,17 @@ class DetailScreen extends Component {
       <View style={styles.container}>
         <BookImage uri={image} />
         <View style={styles.mainContainer}>
-          <TagsList tags={tags} />
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.date}>出版日：{published}</Text>
-          </View>
-          <View style={styles.statusContainer}>
-            <StatusIcon status={status} />
-            <BorrowReturnButton
-              status={status}
-              navigate={navigate}
+          <View style={styles.bookColumns}>
+            <TagsList tags={tags} />
+            <BookInfo
+              title={title}
+              published={published}
             />
           </View>
+          <BorrowReturnButton
+            status={status}
+            navigate={navigate}
+          />
         </View>
       </View>
     );

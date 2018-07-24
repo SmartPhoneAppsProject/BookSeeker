@@ -22,7 +22,7 @@ const NetworkImage = ({ uri }) => (
 );
 
 const BookImage = ({ uri }) => (
-  <View style={[styles.base, styles.imgContainer]}>
+  <View style={styles.container}>
     {uri ?
       <NetworkImage uri={uri} />
       : <NoImage />
@@ -31,7 +31,11 @@ const BookImage = ({ uri }) => (
 );
 
 BookImage.propTypes = {
-  uri: PropTypes.string.isRequired,
+  uri: PropTypes.string,
+};
+
+BookImage.defaultProps = {
+  uri: '',
 };
 
 export default BookImage;
