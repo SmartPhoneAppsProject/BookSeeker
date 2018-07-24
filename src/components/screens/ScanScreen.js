@@ -22,7 +22,7 @@ export default class ScanScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      janCode: null,
+      isbn: null,
       permissionsGranted: false,
       status: 'reading',
     };
@@ -37,14 +37,14 @@ export default class ScanScreen extends Component {
     console.log(data);
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.state.janCode !== data) {
+        if (this.state.isbn !== data) {
           this.setState({
             isbn: data,
             status: 'ok',
           });
           setTimeout(() => {
-            const janCode = parseInt(data, 10);
-            this.registerBook(janCode);
+            const isbn = parseInt(data, 10);
+            this.registerBook(isbn);
           }, 1000);
         }
       } else { // バーコードであるがISBNでないとき
@@ -58,15 +58,15 @@ export default class ScanScreen extends Component {
     }
   };
 
-  registerBook = (janCode) => {
+  registerBook = (isbn) => {
     const { navigation } = this.props;
     const { params } = this.props.navigation.state;
 
     const json = JSON.stringify({
       title: params.title,
       image: params.photo.base64,
-      published_at: params.publishedAt,
-      jan_code: janCode,
+      published: params.published,
+      isbn,
     });
 
     postBook(json)
