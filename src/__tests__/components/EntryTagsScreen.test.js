@@ -1,0 +1,20 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import EntryTagsScreen from '../../components/EntryTagsScreen';
+import _books from '../../api/books.json';
+
+describe('<EntryTagsScreen />', () => {
+  it('正しくレンダリングされていること', () => {
+    const navigation = {
+      state: {
+        params: {
+          item: _books[0],
+        },
+      },
+    };
+    const wrapper = shallow(<EntryTagsScreen
+      navigation={navigation}
+    />);
+    expect(wrapper).toMatchSnapshot();
+  });
+});

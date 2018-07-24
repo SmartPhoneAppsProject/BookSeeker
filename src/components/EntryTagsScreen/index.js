@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   ActivityIndicator,
   FlatList,
@@ -12,6 +11,7 @@ import {
 } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { index as styles } from './Styles';
 import {
   getTags,
   tagLinkBook,
@@ -20,10 +20,6 @@ import { icon } from '../../utils/Icons';
 import { navigate } from '../../utils/NavigationService';
 
 export default class EntryTagsScreen extends Component {
-  static navigationOptions = {
-    title: 'タグ登録',
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -37,30 +33,19 @@ export default class EntryTagsScreen extends Component {
   componentDidMount() {
     getTags()
       .then((tags) => {
-        for (let tag of tags) {
-          tag.chosen = false;
-        }
+        tags.map(tag => ({
+          ...tag,
+          chosen: false,
+        }));
         this.setState({
           tags,
         });
       })
-      .catch((error) => {
-        console.warn(error);
-        getTags()
-          .then((tags) => {
-            for (let tag of tags) {
-              tag.chosen = false;
-            }
-            this.setState({
-              tags,
-            });
-          })
-          .catch(e => console.error(e));
-      });
+      .catch(e => console.error(e));
   }
 
   changeTagChosen = (tag, itemIndex) => {
-    let { tags, chosenIds } = this.state;
+    const { tags, chosenIds } = this.state;
 
     tags[itemIndex].chosen = !tags[itemIndex].chosen;
 
@@ -79,14 +64,12 @@ export default class EntryTagsScreen extends Component {
   };
 
   buttonOnPress = () => {
-    for (let id of this.state.chosenIds) {
-      this.tagAssociateToBook(id);
-    }
+    const { chosenIds } = this.state;
+    chosenIds.forEach(id => this.tagAssociateToBook(id));
   };
 
   tagAssociateToBook = (tagId) => {
     const { book } = this.props.navigation.state.params;
-    console.warn(book.id);
 
     const json = JSON.stringify({
       book_id: book.id,
@@ -98,15 +81,7 @@ export default class EntryTagsScreen extends Component {
       .then((responseJson) => {
         console.log(responseJson);
       })
-      .catch((error) => {
-        console.warn(error);
-        tagLinkBook(json)
-          .then(response => response.json())
-          .then((responseJson) => {
-            console.log(responseJson);
-          })
-          .catch(e => console.error(e));
-      });
+      .catch(e => console.error(e));
 
     navigate('Home');
   };
@@ -177,28 +152,7 @@ export default class EntryTagsScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  isLoading: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  listContainer: {
-    flex: 9,
-    marginTop: 0,
-  },
-  listItemContainer: {
-    margin: 10,
-  },
-  buttonContainer: {
-    flex: 1,
-  },
-  formButton: {
-    backgroundColor: '#c0c0c0',
-    borderWidth: 0,
-    borderRadius: 20,
-  },
-});
+EntryTagsScreen.navigationOptions = {
+  title: 'タグ登録',
+};
+
