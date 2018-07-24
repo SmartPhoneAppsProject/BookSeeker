@@ -18,19 +18,19 @@ import {
   Entypo,
 } from '@expo/vector-icons';
 
-import { pickPhoto, takePhoto } from '../ImagePicker';
+import { pickPhoto, takePhoto } from './ImagePicker';
 import { index as styles } from './Styles';
 
 export default class EntryScreen extends Component {
   constructor(props) {
     super(props);
 
-    const date = this.props.date;
-    const formatDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const now = this.props.date;
+    const formatDate = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
 
     this.state = {
       title: '',
-      chosenDate: date,
+      chosenDate: now,
       publishedAt: formatDate,
       photo: '',
       isDateTimePickerVisible: false,
