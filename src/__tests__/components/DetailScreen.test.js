@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import DetailScreen from '../../components/DetailScreen';
 import _books from '../../api/books.json';
 
-describe('<EntryScreen />', () => {
+describe('<DetailScreen />', () => {
   it('正しくレンダリングされていること', () => {
     const navigation = {
       state: {
