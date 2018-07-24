@@ -11,7 +11,7 @@ ShallowWrapper {
         "id": 2,
         "image": "none",
         "isbn": "9784774184111",
-        "published_at": "2018-02-09T00:00:00Z",
+        "published": "2018-02-09T00:00:00Z",
         "status": true,
         "tags": Array [],
         "title": "javascript ",
@@ -27,7 +27,7 @@ ShallowWrapper {
               "id": 2,
               "image": "none",
               "isbn": "9784774184111",
-              "published_at": "2018-02-09T00:00:00Z",
+              "published": "2018-02-09T00:00:00Z",
               "status": true,
               "tags": Array [],
               "title": "javascript ",
@@ -61,63 +61,25 @@ ShallowWrapper {
             }
           }
         >
-          <TagsList
-            tags={Array []}
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <TagsList
+              tags={Array []}
+            />
+            <BookInfo
+              published="2018-02-09T00:00:00Z"
+              title="javascript "
+            />
+          </View>
+          <BorrowReturnButton
+            navigate={undefined}
+            status={true}
           />
-          <View
-            style={
-              Object {
-                "flex": 1,
-                "justifyContent": "center",
-                "marginLeft": 50,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "fontSize": 20,
-                  "marginBottom": 10,
-                }
-              }
-            >
-              javascript 
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#6E6E6E",
-                  "fontSize": 14,
-                }
-              }
-            >
-              出版日：
-              2018-02-09T00:00:00Z
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "flex": 1,
-                "flexDirection": "row",
-                "marginBottom": 15,
-              }
-            }
-          >
-            <StatusIcon
-              status={true}
-            />
-            <BorrowReturnButton
-              navigate={undefined}
-              status={true}
-            />
-          </View>
         </View>,
       ],
       "style": Object {
@@ -144,63 +106,25 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <TagsList
-              tags={Array []}
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <TagsList
+                tags={Array []}
+              />
+              <BookInfo
+                published="2018-02-09T00:00:00Z"
+                title="javascript "
+              />
+            </View>,
+            <BorrowReturnButton
+              navigate={undefined}
+              status={true}
             />,
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "marginLeft": 50,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "fontSize": 20,
-                    "marginBottom": 10,
-                  }
-                }
-              >
-                javascript 
-              </Text>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#6E6E6E",
-                    "fontSize": 14,
-                  }
-                }
-              >
-                出版日：
-                2018-02-09T00:00:00Z
-              </Text>
-            </View>,
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                  "flexDirection": "row",
-                  "marginBottom": 15,
-                }
-              }
-            >
-              <StatusIcon
-                status={true}
-              />
-              <BorrowReturnButton
-                navigate={undefined}
-                status={true}
-              />
-            </View>,
           ],
           "style": Object {
             "flex": 1,
@@ -211,147 +135,59 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <TagsList
+                  tags={Array []}
+                />,
+                <BookInfo
+                  published="2018-02-09T00:00:00Z"
+                  title="javascript "
+                />,
+              ],
+              "style": Object {
+                "flex": 1,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "tags": Array [],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "published": "2018-02-09T00:00:00Z",
+                  "title": "javascript ",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "tags": Array [],
+              "navigate": undefined,
+              "status": true,
             },
             "ref": null,
             "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": Array [
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "fontSize": 20,
-                      "marginBottom": 10,
-                    }
-                  }
-                >
-                  javascript 
-                </Text>,
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#6E6E6E",
-                      "fontSize": 14,
-                    }
-                  }
-                >
-                  出版日：
-                  2018-02-09T00:00:00Z
-                </Text>,
-              ],
-              "style": Object {
-                "flex": 1,
-                "justifyContent": "center",
-                "marginLeft": 50,
-              },
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "javascript ",
-                  "ellipsizeMode": "tail",
-                  "style": Object {
-                    "fontSize": 20,
-                    "marginBottom": 10,
-                  },
-                },
-                "ref": null,
-                "rendered": "javascript ",
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": Array [
-                    "出版日：",
-                    "2018-02-09T00:00:00Z",
-                  ],
-                  "ellipsizeMode": "tail",
-                  "style": Object {
-                    "color": "#6E6E6E",
-                    "fontSize": 14,
-                  },
-                },
-                "ref": null,
-                "rendered": Array [
-                  "出版日：",
-                  "2018-02-09T00:00:00Z",
-                ],
-                "type": [Function],
-              },
-            ],
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": Array [
-                <StatusIcon
-                  status={true}
-                />,
-                <BorrowReturnButton
-                  navigate={undefined}
-                  status={true}
-                />,
-              ],
-              "style": Object {
-                "flex": 1,
-                "flexDirection": "row",
-                "marginBottom": 15,
-              },
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "status": true,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "navigate": undefined,
-                  "status": true,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
             "type": [Function],
           },
         ],
@@ -377,63 +213,25 @@ ShallowWrapper {
               }
             }
           >
-            <TagsList
-              tags={Array []}
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <TagsList
+                tags={Array []}
+              />
+              <BookInfo
+                published="2018-02-09T00:00:00Z"
+                title="javascript "
+              />
+            </View>
+            <BorrowReturnButton
+              navigate={undefined}
+              status={true}
             />
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "marginLeft": 50,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "fontSize": 20,
-                    "marginBottom": 10,
-                  }
-                }
-              >
-                javascript 
-              </Text>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#6E6E6E",
-                    "fontSize": 14,
-                  }
-                }
-              >
-                出版日：
-                2018-02-09T00:00:00Z
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                  "flexDirection": "row",
-                  "marginBottom": 15,
-                }
-              }
-            >
-              <StatusIcon
-                status={true}
-              />
-              <BorrowReturnButton
-                navigate={undefined}
-                status={true}
-              />
-            </View>
           </View>,
         ],
         "style": Object {
@@ -460,63 +258,25 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <TagsList
-                tags={Array []}
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <TagsList
+                  tags={Array []}
+                />
+                <BookInfo
+                  published="2018-02-09T00:00:00Z"
+                  title="javascript "
+                />
+              </View>,
+              <BorrowReturnButton
+                navigate={undefined}
+                status={true}
               />,
-              <View
-                style={
-                  Object {
-                    "flex": 1,
-                    "justifyContent": "center",
-                    "marginLeft": 50,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "fontSize": 20,
-                      "marginBottom": 10,
-                    }
-                  }
-                >
-                  javascript 
-                </Text>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#6E6E6E",
-                      "fontSize": 14,
-                    }
-                  }
-                >
-                  出版日：
-                  2018-02-09T00:00:00Z
-                </Text>
-              </View>,
-              <View
-                style={
-                  Object {
-                    "flex": 1,
-                    "flexDirection": "row",
-                    "marginBottom": 15,
-                  }
-                }
-              >
-                <StatusIcon
-                  status={true}
-                />
-                <BorrowReturnButton
-                  navigate={undefined}
-                  status={true}
-                />
-              </View>,
             ],
             "style": Object {
               "flex": 1,
@@ -527,147 +287,59 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <TagsList
+                    tags={Array []}
+                  />,
+                  <BookInfo
+                    published="2018-02-09T00:00:00Z"
+                    title="javascript "
+                  />,
+                ],
+                "style": Object {
+                  "flex": 1,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "tags": Array [],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "published": "2018-02-09T00:00:00Z",
+                    "title": "javascript ",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "tags": Array [],
+                "navigate": undefined,
+                "status": true,
               },
               "ref": null,
               "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": Array [
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "fontSize": 20,
-                        "marginBottom": 10,
-                      }
-                    }
-                  >
-                    javascript 
-                  </Text>,
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "color": "#6E6E6E",
-                        "fontSize": 14,
-                      }
-                    }
-                  >
-                    出版日：
-                    2018-02-09T00:00:00Z
-                  </Text>,
-                ],
-                "style": Object {
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "marginLeft": 50,
-                },
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": "javascript ",
-                    "ellipsizeMode": "tail",
-                    "style": Object {
-                      "fontSize": 20,
-                      "marginBottom": 10,
-                    },
-                  },
-                  "ref": null,
-                  "rendered": "javascript ",
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": Array [
-                      "出版日：",
-                      "2018-02-09T00:00:00Z",
-                    ],
-                    "ellipsizeMode": "tail",
-                    "style": Object {
-                      "color": "#6E6E6E",
-                      "fontSize": 14,
-                    },
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    "出版日：",
-                    "2018-02-09T00:00:00Z",
-                  ],
-                  "type": [Function],
-                },
-              ],
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": Array [
-                  <StatusIcon
-                    status={true}
-                  />,
-                  <BorrowReturnButton
-                    navigate={undefined}
-                    status={true}
-                  />,
-                ],
-                "style": Object {
-                  "flex": 1,
-                  "flexDirection": "row",
-                  "marginBottom": 15,
-                },
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "status": true,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "navigate": undefined,
-                    "status": true,
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
               "type": [Function],
             },
           ],

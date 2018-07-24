@@ -31,7 +31,7 @@ describe('actions', () => {
     ];
     const store = mockStore();
 
-    return store.dispatch(actions.getAllBooks())
+    return store.dispatch(actions.getAllMockBooks())
       .then(() => {
         expect(store.getActions()).toEqual(expected);
       });

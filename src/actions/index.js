@@ -1,5 +1,6 @@
 import API_ENDPOINT from '../utils/endpoint';
 import server from '../api/server';
+import * as api from '../api';
 import * as types from '../constants/actionTypes';
 
 const request = () => ({
@@ -24,18 +25,18 @@ const getBooks = books => ({
   },
 });
 
-// export const getAllMockBooks = () => (dispatch) => {
-//   dispatch(request());
-//
-//   return server.getBooks()
-//     .then((books) => {
-//       dispatch(requestSuccess());
-//       dispatch(getBooks(books));
-//     })
-//     .catch((error) => {
-//       dispatch(requestFail(error));
-//     });
-// };
+export const getAllMockBooks = () => (dispatch) => {
+  dispatch(request());
+
+  return server.getBooks()
+    .then((books) => {
+      dispatch(requestSuccess());
+      dispatch(getBooks(books));
+    })
+    .catch((error) => {
+      dispatch(requestFail(error));
+    });
+};
 
 export const getAllBooks = () => (dispatch) => {
   dispatch(request());
@@ -79,18 +80,10 @@ export const isbnInvalid = () => ({
   type: types.ISBN_INVALID,
 });
 
-export const requestChangeStatus = body => (dispatch) => {
-  console.log(body);
+export const requestChangeStatus = (isbn, status) => (dispatch) => {
   dispatch(request());
 
-  return fetch(`${API_ENDPOINT}/books`, {
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body,
-  })
+  api.changeStatus(isbn, status)
     .then((response) => {
       console.log(response.json);
       if (response.ok) {

@@ -24,22 +24,12 @@ export default class LentScanScreen extends Component {
     }
   }
 
-  borrowBook = (isbn) => {
-    const body = JSON.stringify({
-      jan_code: isbn,
-      status: true,
-    });
-
-    this.props.requestChangeStatus(body);
+  borrowBook = (isbn, status = true) => {
+    this.props.requestChangeStatus(isbn, status);
   };
 
-  returnBook = (isbn) => {
-    const body = JSON.stringify({
-      jan_code: isbn,
-      status: false,
-    });
-
-    this.props.requestChangeStatus(body);
+  returnBook = (isbn, status = false) => {
+    this.props.requestChangeStatus(isbn, status);
   };
 
   handleBarCodeRead = ({ type, data }) => {
