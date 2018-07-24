@@ -5,6 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <EntryScreen
+    date={2018-07-24T06:06:25.000Z}
     maximumDate={2018-07-24T06:06:25.000Z}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -189,7 +190,7 @@ ShallowWrapper {
             <CustomDatePickerIOS
               cancelTextIOS="キャンセル"
               confirmTextIOS="決定"
-              date={2018-07-24T06:07:03.341Z}
+              date={2018-07-24T06:06:25.000Z}
               isVisible={false}
               locale="ja"
               maximumDate={2018-07-24T06:06:25.000Z}
@@ -588,7 +589,7 @@ ShallowWrapper {
               <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-07-24T06:07:03.341Z}
+                date={2018-07-24T06:06:25.000Z}
                 isVisible={false}
                 locale="ja"
                 maximumDate={2018-07-24T06:06:25.000Z}
@@ -681,7 +682,7 @@ ShallowWrapper {
               "children": <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-07-24T06:07:03.341Z}
+                date={2018-07-24T06:06:25.000Z}
                 isVisible={false}
                 locale="ja"
                 maximumDate={2018-07-24T06:06:25.000Z}
@@ -703,7 +704,7 @@ ShallowWrapper {
               "props": Object {
                 "cancelTextIOS": "キャンセル",
                 "confirmTextIOS": "決定",
-                "date": 2018-07-24T06:07:03.341Z,
+                "date": 2018-07-24T06:06:25.000Z,
                 "isVisible": false,
                 "locale": "ja",
                 "maximumDate": 2018-07-24T06:06:25.000Z,
@@ -998,7 +999,7 @@ ShallowWrapper {
               <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-07-24T06:07:03.341Z}
+                date={2018-07-24T06:06:25.000Z}
                 isVisible={false}
                 locale="ja"
                 maximumDate={2018-07-24T06:06:25.000Z}
@@ -1397,7 +1398,7 @@ ShallowWrapper {
                 <CustomDatePickerIOS
                   cancelTextIOS="キャンセル"
                   confirmTextIOS="決定"
-                  date={2018-07-24T06:07:03.341Z}
+                  date={2018-07-24T06:06:25.000Z}
                   isVisible={false}
                   locale="ja"
                   maximumDate={2018-07-24T06:06:25.000Z}
@@ -1490,7 +1491,7 @@ ShallowWrapper {
                 "children": <CustomDatePickerIOS
                   cancelTextIOS="キャンセル"
                   confirmTextIOS="決定"
-                  date={2018-07-24T06:07:03.341Z}
+                  date={2018-07-24T06:06:25.000Z}
                   isVisible={false}
                   locale="ja"
                   maximumDate={2018-07-24T06:06:25.000Z}
@@ -1512,7 +1513,7 @@ ShallowWrapper {
                 "props": Object {
                   "cancelTextIOS": "キャンセル",
                   "confirmTextIOS": "決定",
-                  "date": 2018-07-24T06:07:03.341Z,
+                  "date": 2018-07-24T06:06:25.000Z,
                   "isVisible": false,
                   "locale": "ja",
                   "maximumDate": 2018-07-24T06:06:25.000Z,
