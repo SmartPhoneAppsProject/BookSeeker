@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   View,
   Text,
   Image,
-  Dimensions,
   TouchableHighlight,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -19,22 +18,19 @@ import {
   Entypo,
 } from '@expo/vector-icons';
 
-import { pickPhoto, takePhoto } from '../ImagePicker';
+import { pickPhoto, takePhoto } from './ImagePicker';
+import { index as styles } from './Styles';
 
 export default class EntryScreen extends Component {
-  static navigationOptions = {
-    title: '本の登録',
-  };
-
   constructor(props) {
     super(props);
 
-    const date = new Date();
-    const formatDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const now = this.props.date;
+    const formatDate = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
 
     this.state = {
       title: '',
-      chosenDate: new Date(),
+      chosenDate: now,
       publishedAt: formatDate,
       photo: '',
       isDateTimePickerVisible: false,
@@ -164,7 +160,7 @@ export default class EntryScreen extends Component {
           onCancel={this.hideDateTimePicker}
           date={this.state.chosenDate}
           locale="ja"
-          maximumDate={new Date()}
+          maximumDate={this.props.maximumDate}
           titleIOS="発行日を選択する"
           cancelTextIOS="キャンセル"
           confirmTextIOS="決定"
@@ -206,79 +202,16 @@ export default class EntryScreen extends Component {
   }
 }
 
-const { width } = Dimensions.get('window');
+EntryScreen.navigationOptions = {
+  title: '本の登録',
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  photoContainer: {
-    flex: 1,
-    flexGrow: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  photo: {
-    width: width / 6,
-    height: (4 * (width / 3)) / 6,
-  },
-  photoButton: {
-    padding: 5,
-    margin: 5,
-  },
-  childContainer: {
-    flex: 1,
-    padding: 15,
-  },
-  tag: {
-    alignSelf: 'stretch',
-    paddingLeft: 20,
-  },
-  inputContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20,
-  },
-  input: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 10,
-    borderBottomWidth: 2,
-    borderColor: '#A4A4A4',
-  },
-  dateTitle: {
-    color: '#A4A4A4',
-    fontWeight: '700',
-  },
-  dateIcon: {
-    marginRight: 10,
-    marginLeft: 110,
-  },
-  dateButton: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    margin: 10,
-    width: width - 60,
-    paddingLeft: 18,
-    paddingRight: 18,
-    paddingTop: 8,
-    paddingBottom: 8,
-    borderWidth: 2,
-    borderColor: '#A4A4A4',
-    borderRadius: 7,
-  },
-  buttonContainer: {
-    backgroundColor: '#2980b6',
-    paddingVertical: 20,
-    paddingRight: 10,
-    paddingLeft: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: '700',
-  },
-  buttonIcon: {
-    marginRight: 10,
-  },
-});
+EntryScreen.propTypes = {
+  maximumDate: PropTypes.instanceOf(Date), // snapshotのテストのためにpropで指定可能にする
+  date: PropTypes.instanceOf(Date),
+};
+
+EntryScreen.defaultProps = {
+  maximumDate: new Date(),
+  date: new Date(),
+};
