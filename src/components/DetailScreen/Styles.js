@@ -6,10 +6,6 @@ import {
 const { width } = Dimensions.get('window');
 
 export const index = StyleSheet.create({
-  base: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -17,37 +13,27 @@ export const index = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  titleContainer: {
+  bookColumns: {
+    flex: 1,
+  },
+});
+
+export const bookImage = StyleSheet.create({
+  container: {
     flex: 1,
     justifyContent: 'center',
-    marginLeft: 50,
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  dateContainer: {
-    flex: 0.4,
-  },
-  date: {
-    fontSize: 14,
-    color: '#6E6E6E',
-  },
-  statusContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 15,
-  },
-  button: {
-    width: 70,
+  img: {
+    height: 300,
+    width,
   },
 });
 
 export const tagsList = StyleSheet.create({
-  tagContainer: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 0.5,
     margin: 10,
   },
   tag: {
@@ -60,38 +46,38 @@ export const tagsList = StyleSheet.create({
   },
 });
 
-export const bookImage = StyleSheet.create({
-  base: {
+export const bookInfo = StyleSheet.create({
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imgContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  title: {
+    fontSize: 20,
+    marginBottom: 10,
   },
-  img: {
-    height: 300,
-    width,
-  },
-});
-
-export const statusIcon = StyleSheet.create({
-  base: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  status: {
-    flex: 1,
+  date: {
+    fontSize: 14,
+    color: '#6E6E6E',
   },
 });
 
 export const borrowReturnButton = StyleSheet.create({
-  base: {
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonContainer: {
-    flex: 1,
+  title: {
+    fontWeight: '700',
+  },
+  button: {
+    width: 100,
+    height: 60,
+  },
+  returnColor: {
+    backgroundColor: '#cd5c5c',
+  },
+  borrowColor: {
+    backgroundColor: '#2e8b57',
   },
 });
