@@ -8,7 +8,7 @@ export const changeStatus = (isbn, status) => (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      isbn,
+      isbn: String(isbn),
       status,
     }),
   })

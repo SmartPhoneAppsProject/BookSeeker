@@ -14,7 +14,7 @@ describe('scan Reducer', () => {
     const result = reducer(state, action);
     const expected = {
       permissions: 'denied',
-      status: 'reading',
+      cameraStatus: 'reading',
       isbn: null,
     };
 
@@ -53,14 +53,14 @@ describe('scan Reducer', () => {
 
   test('ISBN_READINGアクションが正しく処理されること', () => {
     const state = {
-      status: 'invalid',
+      cameraStatus: 'invalid',
     };
     const action = {
       type: ISBN_READING,
     };
     const result = reducer(state, action);
     const expected = {
-      status: 'reading',
+      cameraStatus: 'reading',
       isbn: null,
     };
 
@@ -70,7 +70,7 @@ describe('scan Reducer', () => {
   test('ISBN_OKアクションが正しく処理されること', () => {
     const isbn = '1234567890123';
     const state = {
-      status: 'reading',
+      cameraStatus: 'reading',
     };
     const action = {
       type: ISBN_OK,
@@ -80,7 +80,7 @@ describe('scan Reducer', () => {
     };
     const result = reducer(state, action);
     const expected = {
-      status: 'ok',
+      cameraStatus: 'ok',
       isbn,
     };
 
@@ -89,14 +89,14 @@ describe('scan Reducer', () => {
 
   test('ISBN_INVALIDアクションが正しく処理されること', () => {
     const state = {
-      status: 'reading',
+      cameraStatus: 'reading',
     };
     const action = {
       type: ISBN_INVALID,
     };
     const result = reducer(state, action);
     const expected = {
-      status: 'invalid',
+      cameraStatus: 'invalid',
       isbn: null,
     };
 
