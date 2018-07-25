@@ -24,6 +24,7 @@ ShallowWrapper {
         },
       }
     }
+    photo=""
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   ActivityIndicator,
@@ -156,3 +157,13 @@ EntryTagsScreen.navigationOptions = {
   title: 'タグ登録',
 };
 
+EntryTagsScreen.propTypes = {
+  title: PropTypes.string.isRequired,
+  isbn: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  photo: PropTypes.string,
+};
+
+EntryTagsScreen.defaultProps = {
+  photo: '',
+};
