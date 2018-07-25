@@ -11,7 +11,7 @@ import LentScanScreen from '../components/LentScanScreen';
 
 const mapStateToProps = ({ scan }, props) => ({
   permissions: scan.permissions,
-  status: scan.status,
+  cameraStatus: scan.cameraStatus,
   isbn: scan.isbn,
   ...props.navigation.state.params,
 });
@@ -32,8 +32,8 @@ const mapDispatchToProps = dispatch => ({
   isbnInvalid() {
     dispatch(isbnInvalid());
   },
-  requestChangeStatus(body) {
-    dispatch(requestChangeStatus(body));
+  requestChangeStatus(isbn, status) {
+    dispatch(requestChangeStatus(isbn, status));
   },
 });
 

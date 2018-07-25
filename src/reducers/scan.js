@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   permissions: 'denied',
-  status: 'reading',
+  cameraStatus: 'reading',
   isbn: null,
 };
 
@@ -27,19 +27,19 @@ const scan = (state = initialState, action) => {
     case ISBN_READING:
       return {
         ...state,
-        status: 'reading',
+        cameraStatus: 'reading',
         isbn: null,
       };
     case ISBN_OK:
       return {
         ...state,
-        status: 'ok',
+        cameraStatus: 'ok',
         isbn: action.payload.isbn,
       };
     case ISBN_INVALID:
       return {
         ...state,
-        status: 'invalid',
+        cameraStatus: 'invalid',
         isbn: null,
       };
     default:

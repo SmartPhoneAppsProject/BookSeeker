@@ -13,6 +13,7 @@ import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
 import { navigate } from '../../utils/NavigationService';
+import book from "../../reducers/book";
 
 export default class LentScanScreen extends Component {
   async componentWillMount() {
@@ -24,27 +25,16 @@ export default class LentScanScreen extends Component {
     }
   }
 
-  borrowBook = (isbn, status = true) => {
-    this.props.requestChangeStatus(isbn, status);
-  };
-
-  returnBook = (isbn, status = false) => {
-    this.props.requestChangeStatus(isbn, status);
-  };
 
   handleBarCodeRead = ({ type, data }) => {
-    const { action } = this.props;
+    const { bookStatus } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.props.isbn !== data) {
           this.props.isbnOk(data);
           const isbn = parseInt(data, 10);
-          if (action === 'return') {
-            this.returnBook(isbn);
-          } else if (action === 'borrow') {
-            this.borrowBook(isbn);
-          }
+          this.props.requestChangeStatus(isbn, !bookStatus);
           navigate('Home');
         }
       } else { // バーコードであるがISBNでないとき
@@ -90,9 +80,9 @@ export default class LentScanScreen extends Component {
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;
-    if (this.props.status === 'ok') {
+    if (this.props.cameraStatus === 'ok') {
       statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
-    } else if (this.props.status === 'invalid') {
+    } else if (this.props.cameraStatus === 'invalid') {
       statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
@@ -139,9 +129,9 @@ LentScanScreen.navigationOptions = {
 };
 
 LentScanScreen.propTypes = {
-  action: PropTypes.oneOf(['borrow', 'return']).isRequired,
+  bookStatus: PropTypes.bool.isRequired,
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
-  status: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
+  cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
   isbn: PropTypes.string,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,
