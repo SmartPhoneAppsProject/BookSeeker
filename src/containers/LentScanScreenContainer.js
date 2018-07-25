@@ -32,8 +32,8 @@ const mapDispatchToProps = dispatch => ({
   isbnInvalid() {
     dispatch(isbnInvalid());
   },
-  requestChangeStatus(body) {
-    dispatch(requestChangeStatus(body));
+  requestChangeStatus(isbn, status) {
+    dispatch(requestChangeStatus(isbn, status));
   },
 });
 

@@ -85,9 +85,9 @@ export const requestChangeStatus = (isbn, status) => (dispatch) => {
 
   api.changeStatus(isbn, status)
     .then((response) => {
-      console.log(response);
       if (response.ok) {
         return dispatch(requestSuccess());
+        // todo reducerでbooksを変更する
       }
       throw new Error(response);
     })

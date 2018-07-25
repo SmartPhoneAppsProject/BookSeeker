@@ -13,6 +13,7 @@ import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
 import { navigate } from '../../utils/NavigationService';
+import book from "../../reducers/book";
 
 export default class LentScanScreen extends Component {
   async componentWillMount() {
@@ -24,27 +25,16 @@ export default class LentScanScreen extends Component {
     }
   }
 
-  borrowBook = (isbn) => {
-    this.props.requestChangeStatus(isbn, true);
-  };
-
-  returnBook = (isbn) => {
-    this.props.requestChangeStatus(isbn, false);
-  };
 
   handleBarCodeRead = ({ type, data }) => {
-    const { status } = this.props;
+    const { bookStatus } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.props.isbn !== data) {
           this.props.isbnOk(data);
           const isbn = parseInt(data, 10);
-          if (status) {
-            this.returnBook(isbn);
-          } else {
-            this.borrowBook(isbn);
-          }
+          this.props.requestChangeStatus(isbn, !bookStatus);
           navigate('Home');
         }
       } else { // バーコードであるがISBNでないとき
@@ -139,7 +129,7 @@ LentScanScreen.navigationOptions = {
 };
 
 LentScanScreen.propTypes = {
-  status: PropTypes.bool.isRequired,
+  bookStatus: PropTypes.bool.isRequired,
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
   cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
   isbn: PropTypes.string,

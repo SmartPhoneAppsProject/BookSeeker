@@ -21,7 +21,7 @@ const ReturnButton = ({ status, navigate }) => (
     title="返却"
     titleStyle={styles.title}
     buttonStyle={[styles.button, styles.returnColor]}
-    onPress={() => navigate('LentScan', { status })}
+    onPress={() => navigate('LentScan', { bookStatus: status })}
   />
 );
 
@@ -37,7 +37,7 @@ const BorrowButton = ({ status, navigate }) => (
     title="貸出"
     titleStyle={styles.title}
     buttonStyle={[styles.button, styles.borrowColor]}
-    onPress={() => navigate('LentScan', { status })}
+    onPress={() => navigate('LentScan', { bookStatus: status })}
   />
 );
 
