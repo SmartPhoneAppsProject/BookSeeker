@@ -9,7 +9,7 @@ import {
 
 import { borrowReturnButton as styles } from './Styles';
 
-const ReturnButton = ({ navigate }) => (
+const ReturnButton = ({ status, navigate }) => (
   <Button
     icon={
       <Octicons
@@ -21,11 +21,11 @@ const ReturnButton = ({ navigate }) => (
     title="返却"
     titleStyle={styles.title}
     buttonStyle={[styles.button, styles.returnColor]}
-    onPress={() => navigate('LentScan', { action: 'return' })}
+    onPress={() => navigate('LentScan', { status })}
   />
 );
 
-const BorrowButton = ({ navigate }) => (
+const BorrowButton = ({ status, navigate }) => (
   <Button
     icon={
       <MaterialCommunityIcons
@@ -37,15 +37,15 @@ const BorrowButton = ({ navigate }) => (
     title="貸出"
     titleStyle={styles.title}
     buttonStyle={[styles.button, styles.borrowColor]}
-    onPress={() => navigate('LentScan', { action: 'borrow' })}
+    onPress={() => navigate('LentScan', { status })}
   />
 );
 
 const BorrowReturnButton = ({ status, navigate }) => (
   <View style={styles.container}>
     {status ?
-      <ReturnButton navigate={navigate} />
-      : <BorrowButton navigate={navigate} />
+      <ReturnButton status={status} navigate={navigate} />
+      : <BorrowButton status={status} navigate={navigate} />
     }
   </View>
 );

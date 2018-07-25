@@ -24,25 +24,25 @@ export default class LentScanScreen extends Component {
     }
   }
 
-  borrowBook = (isbn, status = true) => {
-    this.props.requestChangeStatus(isbn, status);
+  borrowBook = (isbn) => {
+    this.props.requestChangeStatus(isbn, true);
   };
 
-  returnBook = (isbn, status = false) => {
-    this.props.requestChangeStatus(isbn, status);
+  returnBook = (isbn) => {
+    this.props.requestChangeStatus(isbn, false);
   };
 
   handleBarCodeRead = ({ type, data }) => {
-    const { action } = this.props;
+    const { status } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.props.isbn !== data) {
           this.props.isbnOk(data);
           const isbn = parseInt(data, 10);
-          if (action === 'return') {
+          if (status) {
             this.returnBook(isbn);
-          } else if (action === 'borrow') {
+          } else {
             this.borrowBook(isbn);
           }
           navigate('Home');
@@ -90,9 +90,9 @@ export default class LentScanScreen extends Component {
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;
-    if (this.props.status === 'ok') {
+    if (this.props.cameraStatus === 'ok') {
       statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
-    } else if (this.props.status === 'invalid') {
+    } else if (this.props.cameraStatus === 'invalid') {
       statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
@@ -139,9 +139,9 @@ LentScanScreen.navigationOptions = {
 };
 
 LentScanScreen.propTypes = {
-  action: PropTypes.oneOf(['borrow', 'return']).isRequired,
+  status: PropTypes.bool.isRequired,
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
-  status: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
+  cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
   isbn: PropTypes.string,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,

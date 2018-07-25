@@ -47,7 +47,7 @@ DetailScreen.navigationOptions = {
 DetailScreen.propTypes = {
   book: PropTypes.shape({
     tags: PropTypes.array.isRequired,
-    status: PropTypes.bool.isRequired,
+    cameraStatus: PropTypes.bool.isRequired,
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
     published: PropTypes.string.isRequired,

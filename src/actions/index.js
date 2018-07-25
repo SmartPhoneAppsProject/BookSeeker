@@ -85,7 +85,7 @@ export const requestChangeStatus = (isbn, status) => (dispatch) => {
 
   api.changeStatus(isbn, status)
     .then((response) => {
-      console.log(response.json);
+      console.log(response);
       if (response.ok) {
         return dispatch(requestSuccess());
       }

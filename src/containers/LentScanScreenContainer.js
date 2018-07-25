@@ -11,7 +11,7 @@ import LentScanScreen from '../components/LentScanScreen';
 
 const mapStateToProps = ({ scan }, props) => ({
   permissions: scan.permissions,
-  status: scan.status,
+  cameraStatus: scan.cameraStatus,
   isbn: scan.isbn,
   ...props.navigation.state.params,
 });
