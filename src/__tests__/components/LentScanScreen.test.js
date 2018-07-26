@@ -1,16 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import _book from '../../api/books.json';
 
 import LentScanScreen from '../../components/LentScanScreen';
 
 describe('<LentScanScreen />', () => {
   it('正しくレンダリングされること', () => {
+    const book = _book[0];
     const tree = renderer
       .create(<LentScanScreen
+        bookStatus
         permissions="granted"
-        status="reading"
-        isbn={null}
-        action="return"
+        cameraStatus="reading"
+        isbn={book.isbn}
         permissionsGranted={jest.fn()}
         permissionsDenied={jest.fn()}
         isbnReading={jest.fn()}
