@@ -9,7 +9,7 @@ export const LogoSAP = () => (
   <View style={styles.container}>
     <Image
       style={{ width: 35, height: 35 }}
-      source={require('../../assets/SAP.png')}
+      source={require('../../assets/SAP_white.png')}
     />
   </View>
 );

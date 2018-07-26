@@ -14,6 +14,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { index as styles } from './Styles';
 import { icon } from '../../utils/Icons';
+import API_ENDPOINT from '../../utils/endpoint';
 
 export default class EntryTagsScreen extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class EntryTagsScreen extends Component {
   }
 
   componentDidMount() {
-    fetch('https://book-seeker-staging.herokuapp.com/api/v1/tags')
+    fetch(`${API_ENDPOINT}/api/v1/tags`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -77,9 +78,8 @@ export default class EntryTagsScreen extends Component {
       tag_ids: chosenIds,
       status: false,
     });
-    console.log(body);
 
-    fetch('https://book-seeker-staging.herokuapp.com/api/v1/books', {
+    fetch(`${API_ENDPOINT}/api/v1/books`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

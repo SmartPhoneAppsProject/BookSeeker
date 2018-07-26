@@ -1,8 +1,12 @@
 {
   "expo": {
+    "name": "Book Seeker",
+    "slug": "book-seeker",
     "sdkVersion": "25.0.0",
+    "githubUrl": "https://github.com/SmartPhoneAppsProject/BookSeeker",
+    "icon": "./assets/splash.png",
     "splash": {
-      "image": "./assets/SAP_icon.png",
+      "image": "./assets/splash.png",
       "backgroundColor": "#FFFFFF"
     }
   }
