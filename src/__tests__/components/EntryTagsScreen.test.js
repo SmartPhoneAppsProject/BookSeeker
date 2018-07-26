@@ -5,15 +5,11 @@ import _books from '../../api/books.json';
 
 describe('<EntryTagsScreen />', () => {
   it('正しくレンダリングされていること', () => {
-    const navigation = {
-      state: {
-        params: {
-          item: _books[0],
-        },
-      },
-    };
+    const book = _books[0];
     const wrapper = shallow(<EntryTagsScreen
-      navigation={navigation}
+      title={book.title}
+      isbn={book.isbn}
+      published={book.published}
     />);
     expect(wrapper).toMatchSnapshot();
   });

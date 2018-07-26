@@ -13,12 +13,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { index as styles } from './Styles';
-import {
-  getTags,
-  tagLinkBook,
-} from '../../utils/Network';
 import { icon } from '../../utils/Icons';
-import { navigate } from '../../utils/NavigationService';
 
 export default class EntryTagsScreen extends Component {
   constructor(props) {
@@ -32,7 +27,13 @@ export default class EntryTagsScreen extends Component {
   }
 
   componentDidMount() {
-    getTags()
+    fetch('https://book-seeker-staging.herokuapp.com/api/v1/tags')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response);
+      })
       .then((tags) => {
         tags.map(tag => ({
           ...tag,
@@ -66,25 +67,36 @@ export default class EntryTagsScreen extends Component {
 
   buttonOnPress = () => {
     const { chosenIds } = this.state;
-    chosenIds.forEach(id => this.tagAssociateToBook(id));
-  };
+    const { navigation } = this.props;
 
-  tagAssociateToBook = (tagId) => {
-    const { book } = this.props.navigation.state.params;
-
-    const json = JSON.stringify({
-      book_id: book.id,
-      tag_id: tagId,
+    const body = JSON.stringify({
+      title: this.props.title,
+      image: this.props.image.base64,
+      published: this.props.published,
+      isbn: this.props.isbn,
+      tag_ids: chosenIds,
+      status: false,
     });
+    console.log(body);
 
-    tagLinkBook(json)
-      .then(response => response.json())
+    fetch('https://book-seeker-staging.herokuapp.com/api/v1/books', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response);
+      })
       .then((responseJson) => {
-        console.log(responseJson);
+        navigation.navigate('Home');
       })
       .catch(e => console.error(e));
-
-    navigate('Home');
   };
 
   renderTagsList = () => (
@@ -161,9 +173,9 @@ EntryTagsScreen.propTypes = {
   title: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
-  photo: PropTypes.string,
+  image: PropTypes.string,
 };
 
 EntryTagsScreen.defaultProps = {
-  photo: '',
+  image: '',
 };

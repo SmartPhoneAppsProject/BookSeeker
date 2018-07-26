@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Image,
@@ -11,7 +12,6 @@ import {
 import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
-import { postBook } from '../../utils/Network';
 
 export default class ScanScreen extends Component {
   constructor(props) {
@@ -29,6 +29,8 @@ export default class ScanScreen extends Component {
   }
 
   handleBarCodeRead = ({ type, data }) => {
+    const { navigation } = this.props;
+
     console.log(data);
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
@@ -38,8 +40,13 @@ export default class ScanScreen extends Component {
             status: 'ok',
           });
           setTimeout(() => {
-            const isbn = parseInt(data, 10);
-            this.registerBook(isbn);
+            const isbn = String(parseInt(data, 10));
+            navigation.navigate('EntryTags', {
+              title: this.props.title,
+              image: this.props.image.base64,
+              published: this.props.published,
+              isbn,
+            });
           }, 1000);
         }
       } else { // バーコードであるがISBNでないとき
@@ -51,41 +58,6 @@ export default class ScanScreen extends Component {
     } else { // バーコードでないとき
       this.setState({ status: 'reading' });
     }
-  };
-
-  registerBook = (isbn) => {
-    const { navigation } = this.props;
-    const { params } = this.props.navigation.state;
-
-    const json = JSON.stringify({
-      title: params.title,
-      image: params.photo.base64,
-      published: params.published,
-      isbn,
-    });
-
-    postBook(json)
-      .then(response => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        const book = {
-          id: responseJson.id,
-        };
-        navigation.navigate('EntryTags', { book });
-      })
-      .catch((error) => {
-        console.warn(error);
-        postBook(json)
-          .then(response => response.json())
-          .then((responseJson) => {
-            console.log(responseJson);
-            const book = {
-              id: responseJson.id,
-            };
-            navigation.navigate('EntryTags', { book });
-          })
-          .catch(e => console.error(e));
-      });
   };
 
   renderNoPermissions = () => (
@@ -170,3 +142,12 @@ ScanScreen.navigationOptions = {
   title: 'バーコードリーダー',
 };
 
+ScanScreen.propTypes = {
+  title: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  image: PropTypes.string,
+};
+
+ScanScreen.defaultProps = {
+  image: '',
+};

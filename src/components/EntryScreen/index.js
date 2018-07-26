@@ -83,10 +83,11 @@ export default class EntryScreen extends Component {
   };
 
   goScanScreen = () => {
-    this.props.navigation.navigate('Scan', {
+    const { navigate } = this.props.navigation;
+    navigate('Scan', {
       title: this.state.title,
-      photo: this.state.photo,
       published: this.state.published,
+      image: this.state.photo,
     });
   };
 
