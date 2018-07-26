@@ -33,7 +33,7 @@ export default class LentScanScreen extends Component {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.props.isbn !== data) {
           this.props.isbnOk(data);
-          const isbn = parseInt(data, 10);
+          const isbn = String(parseInt(data, 10));
           this.props.requestChangeStatus(isbn, !bookStatus);
           navigate('Home');
         }

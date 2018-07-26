@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   View,
   ActivityIndicator,
   FlatList,
@@ -12,18 +12,10 @@ import {
 } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import {
-  getTags,
-  tagLinkBook,
-} from '../../utils/Network';
+import { index as styles } from './Styles';
 import { icon } from '../../utils/Icons';
-import { navigate } from '../../utils/NavigationService';
 
 export default class EntryTagsScreen extends Component {
-  static navigationOptions = {
-    title: 'タグ登録',
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,32 +27,27 @@ export default class EntryTagsScreen extends Component {
   }
 
   componentDidMount() {
-    getTags()
-      .then((tags) => {
-        for (let tag of tags) {
-          tag.chosen = false;
+    fetch('https://book-seeker-staging.herokuapp.com/api/v1/tags')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         }
+        throw new Error(response);
+      })
+      .then((tags) => {
+        tags.map(tag => ({
+          ...tag,
+          chosen: false,
+        }));
         this.setState({
           tags,
         });
       })
-      .catch((error) => {
-        console.warn(error);
-        getTags()
-          .then((tags) => {
-            for (let tag of tags) {
-              tag.chosen = false;
-            }
-            this.setState({
-              tags,
-            });
-          })
-          .catch(e => console.error(e));
-      });
+      .catch(e => console.error(e));
   }
 
   changeTagChosen = (tag, itemIndex) => {
-    let { tags, chosenIds } = this.state;
+    const { tags, chosenIds } = this.state;
 
     tags[itemIndex].chosen = !tags[itemIndex].chosen;
 
@@ -79,36 +66,37 @@ export default class EntryTagsScreen extends Component {
   };
 
   buttonOnPress = () => {
-    for (let id of this.state.chosenIds) {
-      this.tagAssociateToBook(id);
-    }
-  };
+    const { chosenIds } = this.state;
+    const { navigation } = this.props;
 
-  tagAssociateToBook = (tagId) => {
-    const { book } = this.props.navigation.state.params;
-    console.warn(book.id);
-
-    const json = JSON.stringify({
-      book_id: book.id,
-      tag_id: tagId,
+    const body = JSON.stringify({
+      title: this.props.title,
+      image: this.props.image.base64,
+      published: this.props.published,
+      isbn: this.props.isbn,
+      tag_ids: chosenIds,
+      status: false,
     });
+    console.log(body);
 
-    tagLinkBook(json)
-      .then(response => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
+    fetch('https://book-seeker-staging.herokuapp.com/api/v1/books', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response);
       })
-      .catch((error) => {
-        console.warn(error);
-        tagLinkBook(json)
-          .then(response => response.json())
-          .then((responseJson) => {
-            console.log(responseJson);
-          })
-          .catch(e => console.error(e));
-      });
-
-    navigate('Home');
+      .then((responseJson) => {
+        navigation.navigate('Home');
+      })
+      .catch(e => console.error(e));
   };
 
   renderTagsList = () => (
@@ -177,29 +165,17 @@ export default class EntryTagsScreen extends Component {
   }
 }
 
-const
-  styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#ffffff',
-    },
-    isLoading: {
-      flex: 1,
-      paddingTop: 20,
-    },
-    listContainer: {
-      flex: 9,
-      marginTop: 0,
-    },
-    listItemContainer: {
-      margin: 10,
-    },
-    buttonContainer: {
-      flex: 1,
-    },
-    formButton: {
-      backgroundColor: '#c0c0c0',
-      borderWidth: 0,
-      borderRadius: 20,
-    },
-  });
+EntryTagsScreen.navigationOptions = {
+  title: 'タグ登録',
+};
+
+EntryTagsScreen.propTypes = {
+  title: PropTypes.string.isRequired,
+  isbn: PropTypes.string.isRequired,
+  published: PropTypes.string.isRequired,
+  image: PropTypes.string,
+};
+
+EntryTagsScreen.defaultProps = {
+  image: '',
+};

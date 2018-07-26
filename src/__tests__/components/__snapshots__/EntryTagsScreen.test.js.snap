@@ -1,0 +1,350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EntryTagsScreen /> 正しくレンダリングされていること 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <EntryTagsScreen
+    image=""
+    isbn="9784774184111"
+    published="2018-02-09T00:00:00Z"
+    title="javascript "
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <List
+          containerStyle={
+            Object {
+              "flex": 9,
+              "marginTop": 0,
+            }
+          }
+        >
+          <FlatList
+            data={Array []}
+            disableVirtualization={false}
+            extraData={true}
+            horizontal={false}
+            initialNumToRender={10}
+            keyExtractor={[Function]}
+            maxToRenderPerBatch={10}
+            numColumns={1}
+            onEndReachedThreshold={2}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            updateCellsBatchingPeriod={50}
+            windowSize={21}
+          />
+        </List>,
+        <Button
+          TouchableComponent={[Function]}
+          buttonStyle={
+            Object {
+              "backgroundColor": "#c0c0c0",
+              "borderRadius": 20,
+              "borderWidth": 0,
+            }
+          }
+          clear={false}
+          containerStyle={
+            Object {
+              "flex": 1,
+            }
+          }
+          disabled={false}
+          icon={
+            <Icon
+              allowFontScaling={false}
+              color="#ffffff"
+              name="arrow-right"
+              size={15}
+            />
+          }
+          iconRight={true}
+          loadingProps={
+            Object {
+              "color": "white",
+              "size": "small",
+            }
+          }
+          onPress={[Function]}
+          title="submit"
+        />,
+      ],
+      "style": Object {
+        "backgroundColor": "#ffffff",
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <FlatList
+            data={Array []}
+            disableVirtualization={false}
+            extraData={true}
+            horizontal={false}
+            initialNumToRender={10}
+            keyExtractor={[Function]}
+            maxToRenderPerBatch={10}
+            numColumns={1}
+            onEndReachedThreshold={2}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            updateCellsBatchingPeriod={50}
+            windowSize={21}
+          />,
+          "containerStyle": Object {
+            "flex": 9,
+            "marginTop": 0,
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "data": Array [],
+            "disableVirtualization": false,
+            "extraData": true,
+            "horizontal": false,
+            "initialNumToRender": 10,
+            "keyExtractor": [Function],
+            "maxToRenderPerBatch": 10,
+            "numColumns": 1,
+            "onEndReachedThreshold": 2,
+            "renderItem": [Function],
+            "scrollEventThrottle": 50,
+            "updateCellsBatchingPeriod": 50,
+            "windowSize": 21,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "TouchableComponent": [Function],
+          "buttonStyle": Object {
+            "backgroundColor": "#c0c0c0",
+            "borderRadius": 20,
+            "borderWidth": 0,
+          },
+          "clear": false,
+          "containerStyle": Object {
+            "flex": 1,
+          },
+          "disabled": false,
+          "icon": <Icon
+            allowFontScaling={false}
+            color="#ffffff"
+            name="arrow-right"
+            size={15}
+          />,
+          "iconRight": true,
+          "loadingProps": Object {
+            "color": "white",
+            "size": "small",
+          },
+          "onPress": [Function],
+          "title": "submit",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <List
+            containerStyle={
+              Object {
+                "flex": 9,
+                "marginTop": 0,
+              }
+            }
+          >
+            <FlatList
+              data={Array []}
+              disableVirtualization={false}
+              extraData={true}
+              horizontal={false}
+              initialNumToRender={10}
+              keyExtractor={[Function]}
+              maxToRenderPerBatch={10}
+              numColumns={1}
+              onEndReachedThreshold={2}
+              renderItem={[Function]}
+              scrollEventThrottle={50}
+              updateCellsBatchingPeriod={50}
+              windowSize={21}
+            />
+          </List>,
+          <Button
+            TouchableComponent={[Function]}
+            buttonStyle={
+              Object {
+                "backgroundColor": "#c0c0c0",
+                "borderRadius": 20,
+                "borderWidth": 0,
+              }
+            }
+            clear={false}
+            containerStyle={
+              Object {
+                "flex": 1,
+              }
+            }
+            disabled={false}
+            icon={
+              <Icon
+                allowFontScaling={false}
+                color="#ffffff"
+                name="arrow-right"
+                size={15}
+              />
+            }
+            iconRight={true}
+            loadingProps={
+              Object {
+                "color": "white",
+                "size": "small",
+              }
+            }
+            onPress={[Function]}
+            title="submit"
+          />,
+        ],
+        "style": Object {
+          "backgroundColor": "#ffffff",
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <FlatList
+              data={Array []}
+              disableVirtualization={false}
+              extraData={true}
+              horizontal={false}
+              initialNumToRender={10}
+              keyExtractor={[Function]}
+              maxToRenderPerBatch={10}
+              numColumns={1}
+              onEndReachedThreshold={2}
+              renderItem={[Function]}
+              scrollEventThrottle={50}
+              updateCellsBatchingPeriod={50}
+              windowSize={21}
+            />,
+            "containerStyle": Object {
+              "flex": 9,
+              "marginTop": 0,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "data": Array [],
+              "disableVirtualization": false,
+              "extraData": true,
+              "horizontal": false,
+              "initialNumToRender": 10,
+              "keyExtractor": [Function],
+              "maxToRenderPerBatch": 10,
+              "numColumns": 1,
+              "onEndReachedThreshold": 2,
+              "renderItem": [Function],
+              "scrollEventThrottle": 50,
+              "updateCellsBatchingPeriod": 50,
+              "windowSize": 21,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "TouchableComponent": [Function],
+            "buttonStyle": Object {
+              "backgroundColor": "#c0c0c0",
+              "borderRadius": 20,
+              "borderWidth": 0,
+            },
+            "clear": false,
+            "containerStyle": Object {
+              "flex": 1,
+            },
+            "disabled": false,
+            "icon": <Icon
+              allowFontScaling={false}
+              color="#ffffff"
+              name="arrow-right"
+              size={15}
+            />,
+            "iconRight": true,
+            "loadingProps": Object {
+              "color": "white",
+              "size": "small",
+            },
+            "onPress": [Function],
+            "title": "submit",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

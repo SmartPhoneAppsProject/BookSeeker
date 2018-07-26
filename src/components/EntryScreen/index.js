@@ -31,7 +31,7 @@ export default class EntryScreen extends Component {
     this.state = {
       title: '',
       chosenDate: now,
-      publishedAt: formatDate,
+      published: formatDate,
       photo: '',
       isDateTimePickerVisible: false,
       validation: false,
@@ -77,16 +77,17 @@ export default class EntryScreen extends Component {
     const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     this.setState({
       chosenDate: date,
-      publishedAt: formatDate,
+      published: formatDate,
     });
     this.hideDateTimePicker();
   };
 
   goScanScreen = () => {
-    this.props.navigation.navigate('Scan', {
+    const { navigate } = this.props.navigation;
+    navigate('Scan', {
       title: this.state.title,
-      photo: this.state.photo,
-      publishedAt: this.state.publishedAt,
+      published: this.state.published,
+      image: this.state.photo,
     });
   };
 
@@ -147,7 +148,7 @@ export default class EntryScreen extends Component {
       <Button
         iconRight
         icon={<Entypo name="triangle-down" size={20} color="#A4A4A4" />}
-        title={this.state.publishedAt}
+        title={this.state.published}
         titleStyle={styles.dateTitle}
         buttonStyle={styles.dateButton}
         iconContainerStyle={styles.dateIcon}
@@ -207,11 +208,11 @@ EntryScreen.navigationOptions = {
 };
 
 EntryScreen.propTypes = {
-  maximumDate: PropTypes.instanceOf(Date), // snapshotのテストのためにpropで指定可能にする
   date: PropTypes.instanceOf(Date),
+  maximumDate: PropTypes.instanceOf(Date), // snapshotのテストのためにpropで指定可能にする
 };
 
 EntryScreen.defaultProps = {
-  maximumDate: new Date(),
   date: new Date(),
+  maximumDate: new Date(),
 };

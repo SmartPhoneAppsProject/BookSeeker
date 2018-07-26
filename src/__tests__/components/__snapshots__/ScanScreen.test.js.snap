@@ -4,7 +4,11 @@ exports[`<ScanScreen /> 正しくレンダリングされていること 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ScanScreen />,
+  Symbol(enzyme.__unrendered__): <ScanScreen
+    image=""
+    published="2018-02-09T00:00:00Z"
+    title="javascript "
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
