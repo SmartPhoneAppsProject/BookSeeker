@@ -11,9 +11,10 @@ import {
   Octicons,
 } from '@expo/vector-icons';
 
+import { BookListStyles as styles } from './Styles';
 import SearchScreen from './SearchView';
 import { icon } from '../../utils/Icons';
-import { BookListStyles as styles } from './Styles';
+import EmptyComponent from './EmptyComponent';
 
 const renderTags = (tags) => {
   const formatted = [];
@@ -70,13 +71,6 @@ const BookList = (props) => {
 
   return (
     <FlatList
-      // ListHeaderComponent={
-      //   <SearchScreen
-      //     books={this.state.books}
-      //     setBooks={this.setBooks}
-      //     resetBooks={this.resetBooks}
-      //   />
-      // }
       style={styles.list}
       data={books}
       extraData={books}
@@ -84,6 +78,7 @@ const BookList = (props) => {
       renderItem={({ item }) => renderItem(item, navigation)}
       onRefresh={onRefresh}
       refreshing={isLoading}
+      ListEmptyComponent={EmptyComponent}
     />
   );
 };

@@ -35,3 +35,16 @@ export const BookListStyles = StyleSheet.create({
   },
 });
 
+export const EmptyComponent = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    marginTop: 100,
+  },
+  text: {
+    fontSize: 20,
+  },
+});
+

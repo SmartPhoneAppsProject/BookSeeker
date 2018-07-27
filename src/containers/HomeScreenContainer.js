@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getAllBooks } from '../actions';
+import { getAllMockBooks } from '../actions';
 import HomeScreen from '../components/HomeScreen';
 
 const mapStateToProps = ({ book, loading }) => ({
@@ -10,7 +10,7 @@ const mapStateToProps = ({ book, loading }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getAllBooks() {
-    dispatch(getAllBooks());
+    dispatch(getAllMockBooks());
   },
 });
 
