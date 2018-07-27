@@ -436,6 +436,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "ListEmptyComponent": [Function],
       "data": Array [
         Object {
           "created_at": "2018-03-09T00:00:00Z",
@@ -1293,6 +1294,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "ListEmptyComponent": [Function],
         "data": Array [
           Object {
             "created_at": "2018-03-09T00:00:00Z",
@@ -2234,6 +2236,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "ListEmptyComponent": [Function],
       "data": Array [
         Object {
           "created_at": "2018-03-09T00:00:00Z",
@@ -2377,6 +2380,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "ListEmptyComponent": [Function],
         "data": Array [
           Object {
             "created_at": "2018-03-09T00:00:00Z",
