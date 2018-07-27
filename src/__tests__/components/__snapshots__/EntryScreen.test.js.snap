@@ -176,6 +176,7 @@ ShallowWrapper {
               }
             }
             onPress={[Function]}
+            raised={false}
             title="2018-6-24"
             titleStyle={
               Object {
@@ -245,6 +246,7 @@ ShallowWrapper {
               }
             }
             onPress={[Function]}
+            raised={false}
             title="バーコード読み取り"
             titleStyle={
               Object {
@@ -575,6 +577,7 @@ ShallowWrapper {
                 }
               }
               onPress={[Function]}
+              raised={false}
               title="2018-6-24"
               titleStyle={
                 Object {
@@ -664,6 +667,7 @@ ShallowWrapper {
                 "size": "small",
               },
               "onPress": [Function],
+              "raised": false,
               "title": "2018-6-24",
               "titleStyle": Object {
                 "color": "#A4A4A4",
@@ -763,6 +767,7 @@ ShallowWrapper {
               }
             }
             onPress={[Function]}
+            raised={false}
             title="バーコード読み取り"
             titleStyle={
               Object {
@@ -807,6 +812,7 @@ ShallowWrapper {
               "size": "small",
             },
             "onPress": [Function],
+            "raised": false,
             "title": "バーコード読み取り",
             "titleStyle": Object {
               "color": "#fff",
@@ -985,6 +991,7 @@ ShallowWrapper {
                 }
               }
               onPress={[Function]}
+              raised={false}
               title="2018-6-24"
               titleStyle={
                 Object {
@@ -1054,6 +1061,7 @@ ShallowWrapper {
                 }
               }
               onPress={[Function]}
+              raised={false}
               title="バーコード読み取り"
               titleStyle={
                 Object {
@@ -1384,6 +1392,7 @@ ShallowWrapper {
                   }
                 }
                 onPress={[Function]}
+                raised={false}
                 title="2018-6-24"
                 titleStyle={
                   Object {
@@ -1473,6 +1482,7 @@ ShallowWrapper {
                   "size": "small",
                 },
                 "onPress": [Function],
+                "raised": false,
                 "title": "2018-6-24",
                 "titleStyle": Object {
                   "color": "#A4A4A4",
@@ -1572,6 +1582,7 @@ ShallowWrapper {
                 }
               }
               onPress={[Function]}
+              raised={false}
               title="バーコード読み取り"
               titleStyle={
                 Object {
@@ -1616,6 +1627,7 @@ ShallowWrapper {
                 "size": "small",
               },
               "onPress": [Function],
+              "raised": false,
               "title": "バーコード読み取り",
               "titleStyle": Object {
                 "color": "#fff",

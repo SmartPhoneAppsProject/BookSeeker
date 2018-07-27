@@ -23,7 +23,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <List
+        <UNDEFINED
           containerStyle={
             Object {
               "flex": 9,
@@ -46,7 +46,7 @@ ShallowWrapper {
             updateCellsBatchingPeriod={50}
             windowSize={21}
           />
-        </List>,
+        </UNDEFINED>,
         <Button
           TouchableComponent={[Function]}
           buttonStyle={
@@ -79,6 +79,7 @@ ShallowWrapper {
             }
           }
           onPress={[Function]}
+          raised={false}
           title="submit"
         />,
       ],
@@ -138,7 +139,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        "type": [Function],
+        "type": undefined,
       },
       Object {
         "instance": null,
@@ -168,6 +169,7 @@ ShallowWrapper {
             "size": "small",
           },
           "onPress": [Function],
+          "raised": false,
           "title": "submit",
         },
         "ref": null,
@@ -184,7 +186,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <List
+          <UNDEFINED
             containerStyle={
               Object {
                 "flex": 9,
@@ -207,7 +209,7 @@ ShallowWrapper {
               updateCellsBatchingPeriod={50}
               windowSize={21}
             />
-          </List>,
+          </UNDEFINED>,
           <Button
             TouchableComponent={[Function]}
             buttonStyle={
@@ -240,6 +242,7 @@ ShallowWrapper {
               }
             }
             onPress={[Function]}
+            raised={false}
             title="submit"
           />,
         ],
@@ -299,7 +302,7 @@ ShallowWrapper {
             "rendered": null,
             "type": [Function],
           },
-          "type": [Function],
+          "type": undefined,
         },
         Object {
           "instance": null,
@@ -329,6 +332,7 @@ ShallowWrapper {
               "size": "small",
             },
             "onPress": [Function],
+            "raised": false,
             "title": "submit",
           },
           "ref": null,
