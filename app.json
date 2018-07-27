@@ -2,12 +2,19 @@
   "expo": {
     "name": "Book Seeker",
     "slug": "book-seeker",
+    "version": "1.0.0",
     "sdkVersion": "25.0.0",
     "githubUrl": "https://github.com/SmartPhoneAppsProject/BookSeeker",
-    "icon": "./assets/splash.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "backgroundColor": "#FFFFFF"
+    },
+    "ios": {
+      "bundleIdentifier": "com.smarphoneappproject.bookseeker"
+    },
+    "android": {
+      "package": "com.smarphoneappproject.bookseeker"
     }
   }
 }
