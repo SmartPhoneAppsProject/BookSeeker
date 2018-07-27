@@ -1,9 +1,21 @@
 {
   "expo": {
+    "name": "Book Seeker",
+    "description": "Manage books for Smartphone Apps Project. https://github.com/SmartPhoneAppsProject/BookSeeker",
+    "slug": "book-seeker",
+    "version": "1.0.0",
     "sdkVersion": "25.0.0",
+    "githubUrl": "https://github.com/SmartPhoneAppsProject/BookSeeker",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/SAP_icon.png",
+      "image": "./assets/splash.png",
       "backgroundColor": "#FFFFFF"
+    },
+    "ios": {
+      "bundleIdentifier": "com.smartphone-apps-project.book-seeker"
+    },
+    "android": {
+      "package": "com.smartphone_apps_project.book_seeker"
     }
   }
 }

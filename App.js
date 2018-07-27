@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { AppRegistry } from 'react-native';
 import {
   createStore,
   applyMiddleware,
@@ -89,4 +90,4 @@ export default class App extends Component {
   }
 }
 
-// AppRegistry.registerComponent('BookSeeker', () => BookSeeker);
+// AppRegistry.registerComponent('BookSeeker', () => App);

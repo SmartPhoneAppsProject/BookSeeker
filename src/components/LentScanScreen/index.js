@@ -13,7 +13,6 @@ import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
 import { navigate } from '../../utils/NavigationService';
-import book from "../../reducers/book";
 
 export default class LentScanScreen extends Component {
   async componentWillMount() {
