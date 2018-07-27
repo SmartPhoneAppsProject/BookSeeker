@@ -5,10 +5,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import {
-  List,
-  ListItem,
-} from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import {
   MaterialCommunityIcons,
   Octicons,
@@ -72,25 +69,22 @@ const BookList = (props) => {
   } = props;
 
   return (
-    <List
-      containerStyle={styles.list}
-    >
-      <FlatList
-        // ListHeaderComponent={
-        //   <SearchScreen
-        //     books={this.state.books}
-        //     setBooks={this.setBooks}
-        //     resetBooks={this.resetBooks}
-        //   />
-        // }
-        data={books}
-        extraData={books}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => renderItem(item, navigation)}
-        onRefresh={onRefresh}
-        refreshing={isLoading}
-      />
-    </List>
+    <FlatList
+      // ListHeaderComponent={
+      //   <SearchScreen
+      //     books={this.state.books}
+      //     setBooks={this.setBooks}
+      //     resetBooks={this.resetBooks}
+      //   />
+      // }
+      style={styles.list}
+      data={books}
+      extraData={books}
+      keyExtractor={item => item.id}
+      renderItem={({ item }) => renderItem(item, navigation)}
+      onRefresh={onRefresh}
+      refreshing={isLoading}
+    />
   );
 };
 
