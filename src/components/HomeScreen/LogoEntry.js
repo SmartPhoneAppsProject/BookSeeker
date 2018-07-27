@@ -1,10 +1,9 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { navigate } from '../utils/NavigationService';
+import { navigate } from '../../utils/NavigationService';
+
+import { LogoEntry as styles } from './Styles';
 
 export const LogoEntry = () => (
   <TouchableOpacity
@@ -15,10 +14,4 @@ export const LogoEntry = () => (
   </TouchableOpacity>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 10,
-  },
-});
-
-export { LogoEntry as default };
+export default LogoEntry;

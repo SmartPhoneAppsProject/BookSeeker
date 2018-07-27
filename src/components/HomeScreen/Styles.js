@@ -48,3 +48,17 @@ export const EmptyComponent = StyleSheet.create({
   },
 });
 
+export const LogoSAP = StyleSheet.create({
+  container: {
+    margin: 10,
+    backgroundColor: '#c0c0c0',
+    borderRadius: 50,
+  },
+});
+
+export const LogoEntry = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+  },
+});
+

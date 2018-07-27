@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { AppLoading } from 'expo';
 import BookList from './BookList';
 import PullRefresh from './EmptyComponent';
-import { LogoEntry } from '../LogoEntry';
-import { LogoSAP } from '../LogoSAP';
+import LogoEntry from './LogoEntry';
+import LogoSAP from './LogoSAP';
 import { indexStyles as styles } from './Styles';
 
 const HomeScreen = (props) => {
