@@ -5,7 +5,7 @@ import { navigate } from '../../utils/NavigationService';
 
 import { LogoEntry as styles } from './Styles';
 
-export const LogoEntry = () => (
+const LogoEntry = () => (
   <TouchableOpacity
     style={styles.container}
     onPress={() => navigate('Entry')}

@@ -54,6 +54,10 @@ export const LogoSAP = StyleSheet.create({
     backgroundColor: '#c0c0c0',
     borderRadius: 50,
   },
+  image: {
+    width: 35,
+    height: 35,
+  },
 });
 
 export const LogoEntry = StyleSheet.create({
