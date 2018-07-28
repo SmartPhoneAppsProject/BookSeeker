@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import {
   Button,
-  List,
   ListItem,
 } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -100,14 +99,13 @@ export default class EntryTagsScreen extends Component {
   };
 
   renderTagsList = () => (
-    <List containerStyle={styles.listContainer}>
-      <FlatList
-        keyExtractor={item => item.id}
-        data={this.state.tags}
-        extraData={this.state.updated}
-        renderItem={this.renderListItem}
-      />
-    </List>
+    <FlatList
+      style={styles.listContainer}
+      keyExtractor={item => item.id}
+      data={this.state.tags}
+      extraData={this.state.updated}
+      renderItem={this.renderListItem}
+    />
   );
 
   renderListItem = ({ item, index }) => {
