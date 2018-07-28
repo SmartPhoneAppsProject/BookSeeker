@@ -4,7 +4,9 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "globals": {
     "fetch": false,
     "require": false,
@@ -37,6 +39,9 @@
       }
     ],
     "react/prop-types": [
+      0
+    ],
+    "global-require": [
       0
     ]
   }
