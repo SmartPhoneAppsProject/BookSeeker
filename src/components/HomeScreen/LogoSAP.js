@@ -6,10 +6,10 @@ import {
 
 import { LogoSAP as styles } from './Styles';
 
-export const LogoSAP = () => (
+const LogoSAP = () => (
   <View style={styles.container}>
     <Image
-      style={{ width: 35, height: 35 }}
+      style={styles.image}
       source={require('../../../assets/SAP_white.png')}
     />
   </View>
