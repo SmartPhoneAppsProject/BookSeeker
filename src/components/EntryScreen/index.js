@@ -18,7 +18,10 @@ import {
   Entypo,
 } from '@expo/vector-icons';
 
-import { pickPhoto, takePhoto } from './ImagePicker';
+import {
+  pickPhoto,
+  takePhoto,
+} from './ImagePicker';
 import { index as styles } from './Styles';
 
 export default class EntryScreen extends Component {
