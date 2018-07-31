@@ -61,21 +61,14 @@ ShallowWrapper {
             }
           }
         >
-          <View
-            style={
-              Object {
-                "flex": 1,
-              }
-            }
-          >
-            <TagsList
-              tags={Array []}
-            />
-            <BookInfo
-              published="2018-02-09T00:00:00Z"
-              title="javascript "
-            />
-          </View>
+          <TagsList
+            tags={Array []}
+          />
+          <BookInfo
+            published="2018-02-09T00:00:00Z"
+            tags={Array []}
+            title="javascript "
+          />
           <BorrowReturnButton
             navigate={undefined}
             status={true}
@@ -106,21 +99,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                }
-              }
-            >
-              <TagsList
-                tags={Array []}
-              />
-              <BookInfo
-                published="2018-02-09T00:00:00Z"
-                title="javascript "
-              />
-            </View>,
+            <TagsList
+              tags={Array []}
+            />,
+            <BookInfo
+              published="2018-02-09T00:00:00Z"
+              tags={Array []}
+              title="javascript "
+            />,
             <BorrowReturnButton
               navigate={undefined}
               status={true}
@@ -135,47 +121,25 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
-              "children": Array [
-                <TagsList
-                  tags={Array []}
-                />,
-                <BookInfo
-                  published="2018-02-09T00:00:00Z"
-                  title="javascript "
-                />,
-              ],
-              "style": Object {
-                "flex": 1,
-              },
+              "tags": Array [],
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "tags": Array [],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "published": "2018-02-09T00:00:00Z",
-                  "title": "javascript ",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "published": "2018-02-09T00:00:00Z",
+              "tags": Array [],
+              "title": "javascript ",
+            },
+            "ref": null,
+            "rendered": null,
             "type": [Function],
           },
           Object {
@@ -213,21 +177,14 @@ ShallowWrapper {
               }
             }
           >
-            <View
-              style={
-                Object {
-                  "flex": 1,
-                }
-              }
-            >
-              <TagsList
-                tags={Array []}
-              />
-              <BookInfo
-                published="2018-02-09T00:00:00Z"
-                title="javascript "
-              />
-            </View>
+            <TagsList
+              tags={Array []}
+            />
+            <BookInfo
+              published="2018-02-09T00:00:00Z"
+              tags={Array []}
+              title="javascript "
+            />
             <BorrowReturnButton
               navigate={undefined}
               status={true}
@@ -258,21 +215,14 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
-                style={
-                  Object {
-                    "flex": 1,
-                  }
-                }
-              >
-                <TagsList
-                  tags={Array []}
-                />
-                <BookInfo
-                  published="2018-02-09T00:00:00Z"
-                  title="javascript "
-                />
-              </View>,
+              <TagsList
+                tags={Array []}
+              />,
+              <BookInfo
+                published="2018-02-09T00:00:00Z"
+                tags={Array []}
+                title="javascript "
+              />,
               <BorrowReturnButton
                 navigate={undefined}
                 status={true}
@@ -287,47 +237,25 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
-                "children": Array [
-                  <TagsList
-                    tags={Array []}
-                  />,
-                  <BookInfo
-                    published="2018-02-09T00:00:00Z"
-                    title="javascript "
-                  />,
-                ],
-                "style": Object {
-                  "flex": 1,
-                },
+                "tags": Array [],
               },
               "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "tags": Array [],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {
-                    "published": "2018-02-09T00:00:00Z",
-                    "title": "javascript ",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "published": "2018-02-09T00:00:00Z",
+                "tags": Array [],
+                "title": "javascript ",
+              },
+              "ref": null,
+              "rendered": null,
               "type": [Function],
             },
             Object {

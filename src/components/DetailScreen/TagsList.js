@@ -29,7 +29,10 @@ const TagsList = ({ tags }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        horizontal
+      >
         {formatted}
       </ScrollView>
     </View>

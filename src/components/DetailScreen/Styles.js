@@ -1,44 +1,35 @@
-import {
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const index = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  mainContainer: {
-    flex: 1,
-  },
-  bookColumns: {
+  body: {
     flex: 1,
   },
 });
 
 export const bookImage = StyleSheet.create({
-  container: {
+  image: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  img: {
-    height: 300,
-    width,
+    width: undefined,
+    height: undefined,
+    marginTop: 10,
   },
 });
 
 export const tagsList = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    margin: 10,
+  },
+  scrollView: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tag: {
     margin: 3,
-    paddingVertical: 8,
   },
   tagText: {
     paddingRight: 5,
@@ -48,14 +39,16 @@ export const tagsList = StyleSheet.create({
 
 export const bookInfo = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    flex: 1.5,
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   title: {
+    flex: 1,
     fontSize: 20,
-    marginBottom: 10,
   },
   date: {
+    flex: 1,
     fontSize: 14,
     color: '#6E6E6E',
   },

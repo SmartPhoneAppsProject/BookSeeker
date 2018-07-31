@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 import { index as styles } from './Styles';
-import TagsList from './TagsList';
 import BookImage from './BookImage';
+import TagsList from './TagsList';
 import BookInfo from './BookInfo';
 import BorrowReturnButton from './BorrowReturnButton';
 
@@ -22,14 +22,13 @@ class DetailScreen extends Component {
     return (
       <View style={styles.container}>
         <BookImage uri={image} />
-        <View style={styles.mainContainer}>
-          <View style={styles.bookColumns}>
-            <TagsList tags={tags} />
-            <BookInfo
-              title={title}
-              published={published}
-            />
-          </View>
+        <View style={styles.body}>
+          <TagsList tags={tags} />
+          <BookInfo
+            title={title}
+            published={published}
+            tags={tags}
+          />
           <BorrowReturnButton
             status={status}
             navigate={navigate}

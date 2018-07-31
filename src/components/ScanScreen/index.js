@@ -31,7 +31,6 @@ export default class ScanScreen extends Component {
   handleBarCodeRead = ({ type, data }) => {
     const { navigation } = this.props;
 
-    console.log(data);
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
         if (this.state.isbn !== data) {
