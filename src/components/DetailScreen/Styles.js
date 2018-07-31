@@ -15,6 +15,7 @@ export const bookImage = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
+    marginTop: 10,
   },
 });
 

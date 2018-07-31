@@ -8,6 +8,7 @@ const BookImage = ({ uri }) => (
   <Image
     style={styles.image}
     source={{ uri }}
+    resizeMode="contain"
   />
 );
 
