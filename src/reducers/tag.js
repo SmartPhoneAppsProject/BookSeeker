@@ -1,16 +1,15 @@
-import { GET_TAG } from '../constants/actionTypes';
+import { GET_TAGS } from '../constants/actionTypes';
 
 const initialState = {
   tags: [],
 };
 
-// fixme
 const tag = (state = initialState, action) => {
   switch (action.type) {
-    case GET_TAG:
+    case GET_TAGS:
       return {
         ...state,
-        tag: state.tasks.concat([action.tag]),
+        tags: action.payload.tags,
       };
     default:
       return state;
