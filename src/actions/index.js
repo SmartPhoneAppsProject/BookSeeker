@@ -95,3 +95,46 @@ export const requestChangeStatus = (isbn, status) => (dispatch) => {
       dispatch(requestFail(JSON.parse(error)));
     });
 };
+
+export const changeTitle = title => ({
+  type: types.CHANGE_TITLE,
+  payload: {
+    title,
+  },
+});
+
+export const chooseDate = date => ({
+  type: types.CHOOSE_DATE,
+  payload: {
+    date,
+  },
+});
+
+export const changePublished = published => ({
+  type: types.CHANGE_PUBLISHED,
+  payload: {
+    published,
+  },
+});
+
+export const pickPhoto = photo => ({
+  type: types.PICK_PHOTO,
+  payload: {
+    photo,
+  },
+});
+
+export const toggleDatetimePicker = visibility => ({
+  type: types.TOGGLE_DATETIME_PICKER,
+  payload: {
+    datetimePickerVisible: !visibility,
+  },
+});
+
+export const validateTitle = errorMessage => ({
+  type: types.VALIDATE_TITLE,
+  payload: {
+    validation: true,
+    errorMessage,
+  },
+});
