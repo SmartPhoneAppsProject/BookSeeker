@@ -2,8 +2,7 @@ import reducer from '../../reducers/form';
 import {
   CHANGE_TITLE,
   CHOOSE_DATE,
-  CHANGE_PUBLISHED,
-  PICK_PHOTO,
+  CHOOSE_PHOTO,
   TOGGLE_DATETIME_PICKER,
   VALIDATE_TITLE,
 } from '../../constants/actionTypes';
@@ -13,12 +12,15 @@ describe('form Reducer', () => {
     const state = undefined;
     const action = {};
     const result = reducer(state, action);
+    const current = new Date();
+    const chosenDate = new Date(current.getFullYear(), current.getMonth(), current.getDate());
+    const formatDate = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
     const expected = {
       title: '',
-      chosenDate: '',
-      published: '',
+      chosenDate,
+      published: formatDate,
       photo: '',
-      isDateTimePickerVisible: false,
+      dateTimePickerVisible: false,
       validation: false,
       errorMessage: '',
     };
@@ -39,6 +41,7 @@ describe('form Reducer', () => {
     const result = reducer(state, action);
     const expected = {
       title: action.payload.title,
+      validation: false,
     };
 
     expect(result).toEqual(expected);
@@ -46,35 +49,18 @@ describe('form Reducer', () => {
 
   test('CHOOSE_DATEアクションが正しく処理されること', () => {
     const state = {
-      date: new Date(2017, 11, 11),
+      chosenDate: new Date(2017, 11, 11),
     };
     const action = {
       type: CHOOSE_DATE,
       payload: {
-        date: new Date(2018, 1, 1),
+        chosenDate: new Date(2018, 0, 1),
       },
     };
     const result = reducer(state, action);
     const expected = {
-      date: action.payload.date,
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('CHANGE_PUBLISHEDアクションが正しく処理されること', () => {
-    const state = {
-      published: new Date(2017, 11, 11),
-    };
-    const action = {
-      type: CHANGE_PUBLISHED,
-      payload: {
-        published: new Date(2018, 1, 1),
-      },
-    };
-    const result = reducer(state, action);
-    const expected = {
-      published: action.payload.published,
+      chosenDate: new Date(2018, 0, 1),
+      published: '2018-1-1',
     };
 
     expect(result).toEqual(expected);
@@ -85,7 +71,7 @@ describe('form Reducer', () => {
       photo: '',
     };
     const action = {
-      type: PICK_PHOTO,
+      type: CHOOSE_PHOTO,
       payload: {
         photo: 'base64',
       },
@@ -100,17 +86,17 @@ describe('form Reducer', () => {
   test('TOGGLE_DATETIME_PICKERアクションが正しく処理されること', () => {
     const visibility = true;
     const state = {
-      datetimePickerVisible: false,
+      dateTimePickerVisible: false,
     };
     const action = {
       type: TOGGLE_DATETIME_PICKER,
       payload: {
-        datetimePickerVisible: visibility,
+        dateTimePickerVisible: visibility,
       },
     };
     const result = reducer(state, action);
     const expected = {
-      datetimePickerVisible: action.payload.datetimePickerVisible,
+      dateTimePickerVisible: action.payload.dateTimePickerVisible,
     };
     expect(result).toEqual(expected);
   });

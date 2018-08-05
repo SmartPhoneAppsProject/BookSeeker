@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import {
   changeTitle,
   chooseDate,
-  changePublished,
-  pickPhoto,
-  toggleDatetimePicker,
+  choosePhoto,
+  toggleDateTimePicker,
   validateTitle,
 } from '../actions';
 import EntryScreen from '../components/EntryScreen';
@@ -14,7 +13,7 @@ const mapStateToProps = ({ form }) => ({
   chosenDate: form.chosenDate,
   published: form.published,
   photo: form.photo,
-  isDateTimePickerVisible: form.isDateTimePickerVisible,
+  dateTimePickerVisible: form.dateTimePickerVisible,
   validation: form.validation,
   errorMessage: form.errorMessage,
 });
@@ -26,14 +25,11 @@ const mapDispatchToProps = dispatch => ({
   chooseDate(date) {
     dispatch(chooseDate(date));
   },
-  changePublished(published) {
-    dispatch(changePublished(published));
+  choosePhoto(photo) {
+    dispatch(choosePhoto(photo));
   },
-  pickPhoto(photo) {
-    dispatch(pickPhoto(photo));
-  },
-  toggleDatetimePicker(visibility) {
-    dispatch(toggleDatetimePicker(visibility));
+  toggleDateTimePicker(visibility) {
+    dispatch(toggleDateTimePicker(visibility));
   },
   validateTitle(errorMessage) {
     dispatch(validateTitle(errorMessage));

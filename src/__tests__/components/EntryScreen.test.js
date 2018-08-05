@@ -4,10 +4,30 @@ import EntryScreen from '../../components/EntryScreen';
 
 describe('<EntryScreen />', () => {
   it('正しくレンダリングされていること', () => {
-    const mockDate = new Date('Tue Jul 24 2018 15:06:25 GMT+0900');
+    const current = new Date(2018, 1, 1);
+    const formatDate = '2018-1-1';
+    const title = '';
+    const chosenDate = current;
+    const published = formatDate;
+    const photo = '';
+    const dateTimePickerVisible = false;
+    const validation = false;
+    const errorMessage = '';
     const wrapper = shallow(<EntryScreen
-      maximumDate={mockDate}
-      date={mockDate}
+      title={title}
+      chosenDate={chosenDate}
+      published={published}
+      photo={photo}
+      dateTimePickerVisible={dateTimePickerVisible}
+      validation={validation}
+      errorMessage={errorMessage}
+      changeTitle={jest.fn()}
+      chooseDate={jest.fn()}
+      choosePhoto={jest.fn()}
+      toggleDateTimePicker={jest.fn()}
+      validateTitle={jest.fn()}
+
+      currentTime={current}
     />);
     expect(wrapper).toMatchSnapshot();
   });

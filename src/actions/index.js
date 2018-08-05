@@ -103,31 +103,24 @@ export const changeTitle = title => ({
   },
 });
 
-export const chooseDate = date => ({
+export const chooseDate = chosenDate => ({
   type: types.CHOOSE_DATE,
   payload: {
-    date,
+    chosenDate,
   },
 });
 
-export const changePublished = published => ({
-  type: types.CHANGE_PUBLISHED,
-  payload: {
-    published,
-  },
-});
-
-export const pickPhoto = photo => ({
-  type: types.PICK_PHOTO,
+export const choosePhoto = photo => ({
+  type: types.CHOOSE_PHOTO,
   payload: {
     photo,
   },
 });
 
-export const toggleDatetimePicker = visibility => ({
+export const toggleDateTimePicker = visibility => ({
   type: types.TOGGLE_DATETIME_PICKER,
   payload: {
-    datetimePickerVisible: !visibility,
+    dateTimePickerVisible: visibility,
   },
 });
 

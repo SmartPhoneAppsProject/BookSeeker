@@ -13,48 +13,44 @@ describe('form actions', () => {
     expect(actions.changeTitle(title)).toEqual(expected);
   });
 
-  test('datetimePickerの日付を変更するアクションが生成されること', () => {
-    const date = new Date();
+  test('DatetimePickerの日付を変更するアクションが生成されること', () => {
+    const chosenDate = new Date(2018, 1, 1);
     const expected = {
       type: types.CHOOSE_DATE,
       payload: {
-        date,
+        chosenDate,
       },
     };
-    expect(actions.chooseDate(date)).toEqual(expected);
-  });
-
-  test('出版日を変更するアクションが生成されること', () => {
-    const published = new Date();
-    const expected = {
-      type: types.CHANGE_PUBLISHED,
-      payload: {
-        published,
-      },
-    };
-    expect(actions.changePublished(published)).toEqual(expected);
+    expect(actions.chooseDate(chosenDate)).toEqual(expected);
   });
 
   test('写真を取得するアクションが生成されること', () => {
     const photo = 'base64';
     const expected = {
-      type: types.PICK_PHOTO,
+      type: types.CHOOSE_PHOTO,
       payload: {
         photo,
       },
     };
-    expect(actions.pickPhoto(photo)).toEqual(expected);
+    expect(actions.choosePhoto(photo)).toEqual(expected);
   });
 
   test('DatetimePickerの表示を切り替えるアクションが生成されること', () => {
-    const datetimePickerVisible = false;
-    const expected = {
+    const dateTimePickerVisible = true;
+    const visible = {
       type: types.TOGGLE_DATETIME_PICKER,
       payload: {
-        datetimePickerVisible: !datetimePickerVisible,
+        dateTimePickerVisible,
       },
     };
-    expect(actions.toggleDatetimePicker()).toEqual(expected);
+    const invisible = {
+      type: types.TOGGLE_DATETIME_PICKER,
+      payload: {
+        dateTimePickerVisible,
+      },
+    };
+    expect(actions.toggleDateTimePicker(dateTimePickerVisible)).toEqual(visible);
+    expect(actions.toggleDateTimePicker(dateTimePickerVisible)).toEqual(invisible);
   });
 
   test('タイトルのバリデーションを行うアクションが生成されること', () => {

@@ -1,18 +1,20 @@
 import {
   CHANGE_TITLE,
   CHOOSE_DATE,
-  CHANGE_PUBLISHED,
-  PICK_PHOTO,
+  CHOOSE_PHOTO,
   TOGGLE_DATETIME_PICKER,
   VALIDATE_TITLE,
 } from '../constants/actionTypes';
 
+const current = new Date();
+// month 0 ~ 11
+const formatDate = date => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 const initialState = {
   title: '',
-  chosenDate: '',
-  published: '',
+  chosenDate: new Date(current.getFullYear(), current.getMonth(), current.getDate()),
+  published: formatDate(current),
   photo: '',
-  isDateTimePickerVisible: false,
+  dateTimePickerVisible: false,
   validation: false,
   errorMessage: '',
 };
@@ -23,18 +25,15 @@ const form = (state = initialState, action) => {
       return {
         ...state,
         title: action.payload.title,
+        validation: false,
       };
     case CHOOSE_DATE:
       return {
         ...state,
-        date: action.payload.date,
+        chosenDate: action.payload.chosenDate,
+        published: formatDate(action.payload.chosenDate),
       };
-    case CHANGE_PUBLISHED:
-      return {
-        ...state,
-        published: action.payload.published,
-      };
-    case PICK_PHOTO:
+    case CHOOSE_PHOTO:
       return {
         ...state,
         photo: action.payload.photo,
@@ -42,7 +41,7 @@ const form = (state = initialState, action) => {
     case TOGGLE_DATETIME_PICKER:
       return {
         ...state,
-        datetimePickerVisible: action.payload.datetimePickerVisible,
+        dateTimePickerVisible: action.payload.dateTimePickerVisible,
       };
     case VALIDATE_TITLE:
       return {
