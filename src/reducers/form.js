@@ -13,7 +13,7 @@ const initialState = {
   title: '',
   chosenDate: new Date(current.getFullYear(), current.getMonth(), current.getDate()),
   published: formatDate(current),
-  photo: '',
+  photo: {},
   dateTimePickerVisible: false,
   validation: false,
   errorMessage: '',

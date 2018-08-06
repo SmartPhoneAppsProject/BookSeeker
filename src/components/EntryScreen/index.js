@@ -44,18 +44,15 @@ export default class EntryScreen extends Component {
   handleTakePhoto = async () => {
     const photo = await takePhoto();
     this.props.choosePhoto(photo);
-    // this.setState({ photo });
   };
 
   handlePickPhoto = async () => {
     const photo = await pickPhoto();
     this.props.choosePhoto(photo);
-    // this.setState({ photo });
   };
 
 
   handleDatePicked = (date) => {
-    console.log(date);
     this.props.chooseDate(date);
     this.props.toggleDateTimePicker(false);
   };
@@ -190,7 +187,13 @@ EntryScreen.propTypes = {
   title: PropTypes.string.isRequired,
   chosenDate: PropTypes.instanceOf(Date).isRequired,
   published: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  photo: PropTypes.shape({
+    uri: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    exif: PropTypes.string,
+    base64: PropTypes.string,
+  }).isRequired,
   dateTimePickerVisible: PropTypes.bool.isRequired,
   validation: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,

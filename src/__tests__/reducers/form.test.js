@@ -19,7 +19,7 @@ describe('form Reducer', () => {
       title: '',
       chosenDate,
       published: formatDate,
-      photo: '',
+      photo: {},
       dateTimePickerVisible: false,
       validation: false,
       errorMessage: '',
