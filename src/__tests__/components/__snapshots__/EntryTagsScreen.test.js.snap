@@ -5,9 +5,92 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <EntryTagsScreen
+    getAllTags={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
     image=""
     isbn="9784774184111"
     published="2018-02-09T00:00:00Z"
+    tags={
+      Array [
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 1,
+          "name": "Ruby",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 2,
+          "name": "Android",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 3,
+          "name": "Go",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 4,
+          "name": "Swift",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 10,
+          "name": "Python",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 11,
+          "name": "C",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-10T00:00:00Z",
+          "id": 12,
+          "name": "JavaScript",
+          "updated_at": "2018-03-10T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-12T00:00:00Z",
+          "id": 13,
+          "name": "HTML",
+          "updated_at": "2018-03-12T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-12T00:00:00Z",
+          "id": 14,
+          "name": "CSS",
+          "updated_at": "2018-03-12T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-12T00:00:00Z",
+          "id": 15,
+          "name": "TypeScript",
+          "updated_at": "2018-03-12T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-12T00:00:00Z",
+          "id": 16,
+          "name": "PHP",
+          "updated_at": "2018-03-12T00:00:00Z",
+        },
+        Object {
+          "created_at": "2018-03-12T00:00:00Z",
+          "id": 17,
+          "name": "People",
+          "updated_at": "2018-03-12T00:00:00Z",
+        },
+      ]
+    }
     title="javascript "
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -24,9 +107,159 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <FlatList
-          data={Array []}
+          data={
+            Array [
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 1,
+                "name": "Ruby",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 2,
+                "name": "Android",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 3,
+                "name": "Go",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 4,
+                "name": "Swift",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 10,
+                "name": "Python",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 11,
+                "name": "C",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 12,
+                "name": "JavaScript",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 13,
+                "name": "HTML",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 14,
+                "name": "CSS",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 15,
+                "name": "TypeScript",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 16,
+                "name": "PHP",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 17,
+                "name": "People",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+            ]
+          }
           disableVirtualization={false}
-          extraData={true}
+          extraData={
+            Array [
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 1,
+                "name": "Ruby",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 2,
+                "name": "Android",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 3,
+                "name": "Go",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 4,
+                "name": "Swift",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 10,
+                "name": "Python",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 11,
+                "name": "C",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 12,
+                "name": "JavaScript",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 13,
+                "name": "HTML",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 14,
+                "name": "CSS",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 15,
+                "name": "TypeScript",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 16,
+                "name": "PHP",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 17,
+                "name": "People",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+            ]
+          }
           horizontal={false}
           initialNumToRender={10}
           keyExtractor={[Function]}
@@ -92,9 +325,155 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "data": Array [],
+          "data": Array [
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 1,
+              "name": "Ruby",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 2,
+              "name": "Android",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 3,
+              "name": "Go",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 4,
+              "name": "Swift",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 10,
+              "name": "Python",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 11,
+              "name": "C",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 12,
+              "name": "JavaScript",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 13,
+              "name": "HTML",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 14,
+              "name": "CSS",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 15,
+              "name": "TypeScript",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 16,
+              "name": "PHP",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 17,
+              "name": "People",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+          ],
           "disableVirtualization": false,
-          "extraData": true,
+          "extraData": Array [
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 1,
+              "name": "Ruby",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 2,
+              "name": "Android",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 3,
+              "name": "Go",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 4,
+              "name": "Swift",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 10,
+              "name": "Python",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 11,
+              "name": "C",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-10T00:00:00Z",
+              "id": 12,
+              "name": "JavaScript",
+              "updated_at": "2018-03-10T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 13,
+              "name": "HTML",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 14,
+              "name": "CSS",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 15,
+              "name": "TypeScript",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 16,
+              "name": "PHP",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+            Object {
+              "created_at": "2018-03-12T00:00:00Z",
+              "id": 17,
+              "name": "People",
+              "updated_at": "2018-03-12T00:00:00Z",
+            },
+          ],
           "horizontal": false,
           "initialNumToRender": 10,
           "keyExtractor": [Function],
@@ -160,9 +539,159 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <FlatList
-            data={Array []}
+            data={
+              Array [
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 1,
+                  "name": "Ruby",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 2,
+                  "name": "Android",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 3,
+                  "name": "Go",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 4,
+                  "name": "Swift",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 10,
+                  "name": "Python",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 11,
+                  "name": "C",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 12,
+                  "name": "JavaScript",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 13,
+                  "name": "HTML",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 14,
+                  "name": "CSS",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 15,
+                  "name": "TypeScript",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 16,
+                  "name": "PHP",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 17,
+                  "name": "People",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+              ]
+            }
             disableVirtualization={false}
-            extraData={true}
+            extraData={
+              Array [
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 1,
+                  "name": "Ruby",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 2,
+                  "name": "Android",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 3,
+                  "name": "Go",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 4,
+                  "name": "Swift",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 10,
+                  "name": "Python",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 11,
+                  "name": "C",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-10T00:00:00Z",
+                  "id": 12,
+                  "name": "JavaScript",
+                  "updated_at": "2018-03-10T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 13,
+                  "name": "HTML",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 14,
+                  "name": "CSS",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 15,
+                  "name": "TypeScript",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 16,
+                  "name": "PHP",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+                Object {
+                  "created_at": "2018-03-12T00:00:00Z",
+                  "id": 17,
+                  "name": "People",
+                  "updated_at": "2018-03-12T00:00:00Z",
+                },
+              ]
+            }
             horizontal={false}
             initialNumToRender={10}
             keyExtractor={[Function]}
@@ -228,9 +757,155 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "data": Array [],
+            "data": Array [
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 1,
+                "name": "Ruby",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 2,
+                "name": "Android",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 3,
+                "name": "Go",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 4,
+                "name": "Swift",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 10,
+                "name": "Python",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 11,
+                "name": "C",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 12,
+                "name": "JavaScript",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 13,
+                "name": "HTML",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 14,
+                "name": "CSS",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 15,
+                "name": "TypeScript",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 16,
+                "name": "PHP",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 17,
+                "name": "People",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+            ],
             "disableVirtualization": false,
-            "extraData": true,
+            "extraData": Array [
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 1,
+                "name": "Ruby",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 2,
+                "name": "Android",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 3,
+                "name": "Go",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 4,
+                "name": "Swift",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 10,
+                "name": "Python",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 11,
+                "name": "C",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-10T00:00:00Z",
+                "id": 12,
+                "name": "JavaScript",
+                "updated_at": "2018-03-10T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 13,
+                "name": "HTML",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 14,
+                "name": "CSS",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 15,
+                "name": "TypeScript",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 16,
+                "name": "PHP",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+              Object {
+                "created_at": "2018-03-12T00:00:00Z",
+                "id": 17,
+                "name": "People",
+                "updated_at": "2018-03-12T00:00:00Z",
+              },
+            ],
             "horizontal": false,
             "initialNumToRender": 10,
             "keyExtractor": [Function],

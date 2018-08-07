@@ -57,6 +57,39 @@ export const getAllBooks = () => (dispatch) => {
     });
 };
 
+const getTags = tags => ({
+  type: types.GET_TAGS,
+  payload: {
+    tags,
+  },
+});
+
+export const getAllTags = () => (dispatch) => {
+  dispatch(request());
+
+  return fetch(`${API_ENDPOINT}/tags`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+    .then((resJson) => {
+      dispatch(requestSuccess());
+      dispatch(getTags(resJson));
+    })
+    .catch((error) => {
+      dispatch(requestFail(JSON.parse(error)));
+    });
+};
+
+export const toggleChosenFromId = id => ({
+  type: types.TOGGLE_CHOSEN,
+  payload: {
+    id,
+  },
+});
+
 export const permissionsGranted = () => ({
   type: types.PERMISSIONS_GRANTED,
 });
@@ -80,7 +113,7 @@ export const isbnInvalid = () => ({
   type: types.ISBN_INVALID,
 });
 
-export const requestChangeStatus = (isbn, status) => (dispatch) => {
+export const changeStatusFromIsbn = (isbn, status) => (dispatch) => {
   dispatch(request());
 
   api.changeStatus(isbn, status)

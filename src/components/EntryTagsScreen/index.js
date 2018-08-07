@@ -16,64 +16,32 @@ import { icon } from '../../utils/Icons';
 import API_ENDPOINT from '../../utils/endpoint';
 
 export default class EntryTagsScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      appState: 'isLoading', // or error or success
-      tags: [],
-      chosenIds: [],
-      updated: true,
-    };
-  }
-
   componentDidMount() {
-    fetch(`${API_ENDPOINT}/api/v1/tags`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response);
-      })
-      .then((tags) => {
-        tags.map(tag => ({
-          ...tag,
-          chosen: false,
-        }));
-        this.setState({
-          tags,
-        });
-      })
-      .catch(e => console.error(e));
+    this.props.getAllTags();
   }
-
-  changeTagChosen = (tag, itemIndex) => {
-    const { tags, chosenIds } = this.state;
-
-    tags[itemIndex].chosen = !tags[itemIndex].chosen;
-
-    if (tags[itemIndex].chosen) {
-      chosenIds.push(tag.id);
-    } else {
-      const searchIndex = tags.indexOf(tag.id);
-      chosenIds.splice(searchIndex, 1);
-    }
-
-    this.setState({
-      tags,
-      updated: !this.state.updated, // re-render BookList
-      chosenIds,
-    });
-  };
 
   buttonOnPress = () => {
-    const { chosenIds } = this.state;
-    const { navigation } = this.props;
+    const {
+      title,
+      image,
+      published,
+      isbn,
+      tags,
+      navigation,
+    } = this.props;
+
+    const chosenIds = tags.reduce((accumulator, current) => {
+      if (current.chosen) {
+        accumulator.push(current.id);
+      }
+      return accumulator;
+    }, []);
 
     const body = JSON.stringify({
-      title: this.props.title,
-      image: this.props.image.base64,
-      published: this.props.published,
-      isbn: this.props.isbn,
+      title,
+      image,
+      published,
+      isbn,
       tag_ids: chosenIds,
       status: false,
     });
@@ -98,17 +66,21 @@ export default class EntryTagsScreen extends Component {
       .catch(e => console.error(e));
   };
 
-  renderTagsList = () => (
-    <FlatList
-      style={styles.listContainer}
-      keyExtractor={item => item.id}
-      data={this.state.tags}
-      extraData={this.state.updated}
-      renderItem={this.renderListItem}
-    />
-  );
+  renderTagsList = () => {
+    const { tags } = this.props;
 
-  renderListItem = ({ item, index }) => {
+    return (
+      <FlatList
+        style={styles.listContainer}
+        keyExtractor={item => item.id}
+        data={tags}
+        extraData={tags}
+        renderItem={this.renderListItem}
+      />
+    );
+  }
+
+  renderListItem = ({ item }) => {
     const status = item.chosen
       ? <MaterialCommunityIcons name="check-circle-outline" size={25} color="#2e8b57" />
       : <View />;
@@ -116,7 +88,7 @@ export default class EntryTagsScreen extends Component {
     return (
       <ListItem
         containerStyle={styles.listItemContainer}
-        onPress={() => this.changeTagChosen(item, index)}
+        onPress={() => this.props.toggleChosenFromId(item.id)}
         title={` ${item.name}`}
         leftIcon={
           icon(item.name)
@@ -145,9 +117,10 @@ export default class EntryTagsScreen extends Component {
   );
 
   render() {
+    const { isLoading } = this.props;
     const tags = this.renderTagsList();
     const button = this.renderButton();
-    if (this.state.appState === 'success') {
+    if (isLoading) {
       return (
         <View style={styles.isLoading}>
           <ActivityIndicator />
@@ -168,10 +141,18 @@ EntryTagsScreen.navigationOptions = {
 };
 
 EntryTagsScreen.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    chosen: PropTypes.bool,
+  })).isRequired,
   title: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
   image: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
+  getAllTags: PropTypes.func.isRequired,
+  toggleChosenFromId: PropTypes.func.isRequired,
 };
 
 EntryTagsScreen.defaultProps = {

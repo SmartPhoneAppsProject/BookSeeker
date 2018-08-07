@@ -5,7 +5,7 @@ import {
   isbnReading,
   isbnOk,
   isbnInvalid,
-  requestChangeStatus,
+  changeStatusFromIsbn,
 } from '../actions';
 import LentScanScreen from '../components/LentScanScreen';
 
@@ -32,8 +32,8 @@ const mapDispatchToProps = dispatch => ({
   isbnInvalid() {
     dispatch(isbnInvalid());
   },
-  requestChangeStatus(isbn, status) {
-    dispatch(requestChangeStatus(isbn, status));
+  changeStatusFromIsbn(isbn, status) {
+    dispatch(changeStatusFromIsbn(isbn, status));
   },
 });
 
