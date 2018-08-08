@@ -12,7 +12,7 @@ ShallowWrapper {
     currentTime={2018-01-31T15:00:00.000Z}
     dateTimePickerVisible={false}
     errorMessage=""
-    photo=""
+    image={Object {}}
     published="2018-1-1"
     title=""
     toggleDateTimePicker={[MockFunction]}
@@ -44,7 +44,20 @@ ShallowWrapper {
             }
           }
         >
-          <View />
+          <Image
+            resizeMode="contain"
+            source={
+              Object {
+                "uri": undefined,
+              }
+            }
+            style={
+              Object {
+                "height": 166.66666666666666,
+                "width": 125,
+              }
+            }
+          />
           <TouchableHighlight
             activeOpacity={0.85}
             delayPressOut={100}
@@ -110,7 +123,6 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              displayError={true}
               errorMessage=""
               errorStyle={
                 Object {
@@ -283,7 +295,20 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View />,
+            <Image
+              resizeMode="contain"
+              source={
+                Object {
+                  "uri": undefined,
+                }
+              }
+              style={
+                Object {
+                  "height": 166.66666666666666,
+                  "width": 125,
+                }
+              }
+            />,
             <TouchableHighlight
               activeOpacity={0.85}
               delayPressOut={100}
@@ -337,7 +362,16 @@ ShallowWrapper {
             "instance": null,
             "key": undefined,
             "nodeType": "class",
-            "props": Object {},
+            "props": Object {
+              "resizeMode": "contain",
+              "source": Object {
+                "uri": undefined,
+              },
+              "style": Object {
+                "height": 166.66666666666666,
+                "width": 125,
+              },
+            },
             "ref": null,
             "rendered": null,
             "type": [Function],
@@ -442,7 +476,6 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              displayError={true}
               errorMessage=""
               errorStyle={
                 Object {
@@ -477,7 +510,6 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              displayError={true}
               errorMessage=""
               errorStyle={
                 Object {
@@ -509,7 +541,6 @@ ShallowWrapper {
                 "borderColor": "#A4A4A4",
                 "marginBottom": 10,
               },
-              "displayError": true,
               "errorMessage": "",
               "errorStyle": Object {
                 "color": "#cd5c5c",
@@ -859,7 +890,20 @@ ShallowWrapper {
               }
             }
           >
-            <View />
+            <Image
+              resizeMode="contain"
+              source={
+                Object {
+                  "uri": undefined,
+                }
+              }
+              style={
+                Object {
+                  "height": 166.66666666666666,
+                  "width": 125,
+                }
+              }
+            />
             <TouchableHighlight
               activeOpacity={0.85}
               delayPressOut={100}
@@ -925,7 +969,6 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                displayError={true}
                 errorMessage=""
                 errorStyle={
                   Object {
@@ -1098,7 +1141,20 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View />,
+              <Image
+                resizeMode="contain"
+                source={
+                  Object {
+                    "uri": undefined,
+                  }
+                }
+                style={
+                  Object {
+                    "height": 166.66666666666666,
+                    "width": 125,
+                  }
+                }
+              />,
               <TouchableHighlight
                 activeOpacity={0.85}
                 delayPressOut={100}
@@ -1152,7 +1208,16 @@ ShallowWrapper {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
-              "props": Object {},
+              "props": Object {
+                "resizeMode": "contain",
+                "source": Object {
+                  "uri": undefined,
+                },
+                "style": Object {
+                  "height": 166.66666666666666,
+                  "width": 125,
+                },
+              },
               "ref": null,
               "rendered": null,
               "type": [Function],
@@ -1257,7 +1322,6 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                displayError={true}
                 errorMessage=""
                 errorStyle={
                   Object {
@@ -1292,7 +1356,6 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                displayError={true}
                 errorMessage=""
                 errorStyle={
                   Object {
@@ -1324,7 +1387,6 @@ ShallowWrapper {
                   "borderColor": "#A4A4A4",
                   "marginBottom": 10,
                 },
-                "displayError": true,
                 "errorMessage": "",
                 "errorStyle": Object {
                   "color": "#cd5c5c",

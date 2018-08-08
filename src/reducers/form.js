@@ -16,7 +16,7 @@ const initialState = {
   image: {},
   dateTimePickerVisible: false,
   validation: false,
-  errorMessage: '',
+  errorMessage: ' ',
 };
 
 const form = (state = initialState, action) => {

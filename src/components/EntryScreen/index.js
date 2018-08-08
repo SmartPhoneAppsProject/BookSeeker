@@ -72,8 +72,7 @@ export default class EntryScreen extends Component {
           returnKeyType="done"
           placeholder="タイトル"
           shake={this.props.validation}
-          displayError
-          errorStyle={{ color: '#cd5c5c' }}
+          errorStyle={styles.inputError}
           errorMessage={this.props.errorMessage}
           maxLength={100}
         />
