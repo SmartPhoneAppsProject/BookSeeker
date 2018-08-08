@@ -17,7 +17,7 @@ export const index = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  photo: {
+  image: {
     width: width / 6,
     height: (4 * (width / 3)) / 6,
   },

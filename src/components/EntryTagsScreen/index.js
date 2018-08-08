@@ -13,7 +13,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { index as styles } from './Styles';
 import { icon } from '../../utils/Icons';
-import API_ENDPOINT from '../../utils/endpoint';
 
 export default class EntryTagsScreen extends Component {
   componentDidMount() {
@@ -23,12 +22,13 @@ export default class EntryTagsScreen extends Component {
   buttonOnPress = () => {
     const {
       title,
-      image,
       published,
       isbn,
       tags,
+      postBook,
       navigation,
     } = this.props;
+    const image = this.props.image.base;
 
     const chosenIds = tags.reduce((accumulator, current) => {
       if (current.chosen) {
@@ -37,33 +37,8 @@ export default class EntryTagsScreen extends Component {
       return accumulator;
     }, []);
 
-    const body = JSON.stringify({
-      title,
-      image,
-      published,
-      isbn,
-      tag_ids: chosenIds,
-      status: false,
-    });
-
-    fetch(`${API_ENDPOINT}/api/v1/books`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body,
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response);
-      })
-      .then((responseJson) => {
-        navigation.navigate('Home');
-      })
-      .catch(e => console.error(e));
+    postBook(title, image, published, isbn, chosenIds);
+    navigation.navigate('Home');
   };
 
   renderTagsList = () => {
@@ -149,12 +124,16 @@ EntryTagsScreen.propTypes = {
   title: PropTypes.string.isRequired,
   isbn: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
-  image: PropTypes.string,
+  image: PropTypes.shape({
+    uri: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    exif: PropTypes.string,
+    base64: PropTypes.string,
+  }).isRequired,
   isLoading: PropTypes.bool.isRequired,
   getAllTags: PropTypes.func.isRequired,
   toggleChosenFromId: PropTypes.func.isRequired,
+  postBook: PropTypes.func.isRequired,
 };
 
-EntryTagsScreen.defaultProps = {
-  image: '',
-};

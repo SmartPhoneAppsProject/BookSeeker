@@ -25,14 +25,14 @@ describe('form actions', () => {
   });
 
   test('写真を取得するアクションが生成されること', () => {
-    const photo = 'base64';
+    const image = { uri: 'base64' };
     const expected = {
       type: types.CHOOSE_PHOTO,
       payload: {
-        photo,
+        image,
       },
     };
-    expect(actions.choosePhoto(photo)).toEqual(expected);
+    expect(actions.choosePhoto(image)).toEqual(expected);
   });
 
   test('DatetimePickerの表示を切り替えるアクションが生成されること', () => {

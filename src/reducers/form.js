@@ -13,7 +13,7 @@ const initialState = {
   title: '',
   chosenDate: new Date(current.getFullYear(), current.getMonth(), current.getDate()),
   published: formatDate(current),
-  photo: {},
+  image: {},
   dateTimePickerVisible: false,
   validation: false,
   errorMessage: '',
@@ -36,7 +36,7 @@ const form = (state = initialState, action) => {
     case CHOOSE_PHOTO:
       return {
         ...state,
-        photo: action.payload.photo,
+        image: action.payload.image,
       };
     case TOGGLE_DATETIME_PICKER:
       return {

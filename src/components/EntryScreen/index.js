@@ -58,13 +58,8 @@ export default class EntryScreen extends Component {
   };
 
   goScanScreen = () => {
-    const { title, published, photo } = this.props;
     const { navigate } = this.props.navigation;
-    navigate('Scan', {
-      title,
-      published,
-      photo,
-    });
+    navigate('Scan');
   };
 
   renderTitleContainer = () => (
@@ -87,12 +82,12 @@ export default class EntryScreen extends Component {
   );
 
   renderPhotoContainer = () => {
-    const photo = this.props.photo
+    const photo = this.props.image
       ? (
         <Image
-          style={styles.photo}
+          style={styles.image}
           resizeMode="contain"
-          source={{ uri: this.props.photo.uri }}
+          source={{ uri: this.props.image.uri }}
         />
       )
       : <View />;
@@ -187,7 +182,7 @@ EntryScreen.propTypes = {
   title: PropTypes.string.isRequired,
   chosenDate: PropTypes.instanceOf(Date).isRequired,
   published: PropTypes.string.isRequired,
-  photo: PropTypes.shape({
+  image: PropTypes.shape({
     uri: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number,

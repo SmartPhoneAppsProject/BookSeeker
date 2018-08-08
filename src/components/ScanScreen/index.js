@@ -16,7 +16,6 @@ import { index as styles } from './Styles';
 export default class ScanScreen extends Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    // this.setState({ permissionsGranted: status === 'granted' });
     if (status === 'granted') {
       this.props.permissionsGranted();
     } else {
@@ -24,32 +23,27 @@ export default class ScanScreen extends Component {
     }
   }
 
-  goEntryTagsScreen = (isbn) => {
-    const { navigation } = this.props;
-    navigation.navigate('EntryTags', {
-      title: this.props.title,
-      image: this.props.image.base64,
-      published: this.props.published,
-      isbn,
-    });
-  }
-
   handleBarCodeRead = ({ type, data }) => {
+    const {
+      isbn,
+      isbnOk,
+      isbnInvalid,
+      isbnReading,
+      navigation,
+    } = this.props;
+
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.props.isbn !== data) {
-          this.props.isbnOk(data);
-          const isbn = String(parseInt(data, 10));
-          this.goEntryTagsScreen(isbn);
+        if (isbn !== data) {
+          isbnOk(String(parseInt(data, 10)));
+          navigation.navigate('EntryTags');
         }
       } else { // バーコードであるがISBNでないとき
-        this.props.isbnInvalid();
+        isbnInvalid();
+        setTimeout(() => isbnReading(), 1000);
       }
-      setTimeout(() => {
-        setTimeout(() => this.props.isbnReading(), 1000);
-      }, 1000);
     } else { // バーコードでないとき
-      this.props.isbnReading();
+      isbnReading();
     }
   };
 
@@ -136,18 +130,12 @@ ScanScreen.navigationOptions = {
 };
 
 ScanScreen.propTypes = {
-  title: PropTypes.string.isRequired,
-  published: PropTypes.string.isRequired,
-  image: PropTypes.string,
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
   cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
+  isbn: PropTypes.string.isRequired,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,
   isbnReading: PropTypes.func.isRequired,
   isbnOk: PropTypes.func.isRequired,
   isbnInvalid: PropTypes.func.isRequired,
-};
-
-ScanScreen.defaultProps = {
-  image: '',
 };

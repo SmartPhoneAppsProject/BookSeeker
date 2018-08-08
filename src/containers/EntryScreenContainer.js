@@ -12,7 +12,7 @@ const mapStateToProps = ({ form }) => ({
   title: form.title,
   chosenDate: form.chosenDate,
   published: form.published,
-  photo: form.photo,
+  image: form.image,
   dateTimePickerVisible: form.dateTimePickerVisible,
   validation: form.validation,
   errorMessage: form.errorMessage,

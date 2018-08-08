@@ -19,7 +19,7 @@ describe('form Reducer', () => {
       title: '',
       chosenDate,
       published: formatDate,
-      photo: {},
+      image: {},
       dateTimePickerVisible: false,
       validation: false,
       errorMessage: '',
@@ -68,17 +68,17 @@ describe('form Reducer', () => {
 
   test('PICK_PHOTOアクションが正しく処理されること', () => {
     const state = {
-      photo: '',
+      image: '',
     };
     const action = {
       type: CHOOSE_PHOTO,
       payload: {
-        photo: 'base64',
+        image: 'base64',
       },
     };
     const result = reducer(state, action);
     const expected = {
-      photo: action.payload.photo,
+      image: action.payload.image,
     };
     expect(result).toEqual(expected);
   });

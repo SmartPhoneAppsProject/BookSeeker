@@ -57,6 +57,32 @@ export const getAllBooks = () => (dispatch) => {
     });
 };
 
+export const postBook = (title, image, published, isbn, chosenIds) => (dispatch) => {
+  console.log(JSON.stringify({
+    title,
+    image,
+    published,
+    isbn,
+    tag_ids: chosenIds,
+    status: false,
+  }));
+
+  api.postBook(title, image, published, isbn, chosenIds)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+    .then((resJson) => {
+      console.log(resJson);
+      dispatch(requestSuccess());
+    })
+    .catch((error) => {
+      dispatch(requestFail(JSON.parse(error)));
+    });
+};
+
 const getTags = tags => ({
   type: types.GET_TAGS,
   payload: {
@@ -143,10 +169,10 @@ export const chooseDate = chosenDate => ({
   },
 });
 
-export const choosePhoto = photo => ({
+export const choosePhoto = image => ({
   type: types.CHOOSE_PHOTO,
   payload: {
-    photo,
+    image,
   },
 });
 
