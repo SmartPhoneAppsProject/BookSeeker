@@ -46,7 +46,6 @@ export default class EntryTagsScreen extends Component {
 
     return (
       <FlatList
-        style={styles.listContainer}
         keyExtractor={item => item.id}
         data={tags}
         extraData={tags}

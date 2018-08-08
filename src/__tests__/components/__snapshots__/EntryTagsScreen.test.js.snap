@@ -12,8 +12,10 @@ ShallowWrapper {
         ],
       }
     }
-    image=""
+    image={Object {}}
+    isLoading={false}
     isbn="9784774184111"
+    postBook={[MockFunction]}
     published="2018-02-09T00:00:00Z"
     tags={
       Array [
@@ -92,6 +94,7 @@ ShallowWrapper {
       ]
     }
     title="javascript "
+    toggleChosenFromId={[MockFunction]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

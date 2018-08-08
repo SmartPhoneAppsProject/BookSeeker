@@ -8,7 +8,7 @@ const initialState = {
   title: '',
   chosenDate: new Date(2018, 1, 1),
   published: '2018-1-1',
-  image: '',
+  image: {},
   dateTimePickerVisible: false,
   validation: false,
   errorMessage: '',

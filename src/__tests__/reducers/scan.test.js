@@ -15,7 +15,7 @@ describe('scan Reducer', () => {
     const expected = {
       permissions: 'denied',
       cameraStatus: 'reading',
-      isbn: null,
+      isbn: '',
     };
 
     expect(result).toEqual(expected);

@@ -12,7 +12,11 @@ describe('<EntryTagsScreen />', () => {
       title={book.title}
       isbn={book.isbn}
       published={book.published}
+      image={{}}
+      isLoading={false}
       getAllTags={jest.fn()}
+      postBook={jest.fn()}
+      toggleChosenFromId={jest.fn()}
     />);
     expect(wrapper).toMatchSnapshot();
   });

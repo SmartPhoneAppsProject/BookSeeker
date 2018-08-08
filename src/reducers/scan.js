@@ -28,7 +28,7 @@ const scan = (state = initialState, action) => {
       return {
         ...state,
         cameraStatus: 'reading',
-        isbn: null,
+        isbn: '',
       };
     case ISBN_OK:
       return {

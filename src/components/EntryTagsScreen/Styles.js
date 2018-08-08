@@ -11,17 +11,14 @@ export const index = StyleSheet.create({
   },
   listContainer: {
     flex: 9,
-    marginTop: 0,
-  },
-  listItemContainer: {
-    margin: 10,
   },
   buttonContainer: {
-    flex: 1,
+    justifyContent: 'flex-end',
   },
   formButton: {
     backgroundColor: '#c0c0c0',
     borderWidth: 0,
     borderRadius: 20,
+    margin: 20,
   },
 });
