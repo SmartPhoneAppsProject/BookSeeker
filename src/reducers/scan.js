@@ -9,7 +9,7 @@ import {
 const initialState = {
   permissions: 'denied',
   cameraStatus: 'reading',
-  isbn: null,
+  isbn: '',
 };
 
 const scan = (state = initialState, action) => {
@@ -28,7 +28,7 @@ const scan = (state = initialState, action) => {
       return {
         ...state,
         cameraStatus: 'reading',
-        isbn: null,
+        isbn: '',
       };
     case ISBN_OK:
       return {

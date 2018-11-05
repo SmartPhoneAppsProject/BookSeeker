@@ -17,7 +17,7 @@ export const index = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  photo: {
+  image: {
     width: width / 6,
     height: (4 * (width / 3)) / 6,
   },
@@ -43,6 +43,9 @@ export const index = StyleSheet.create({
     marginBottom: 10,
     borderBottomWidth: 2,
     borderColor: '#A4A4A4',
+  },
+  inputError: {
+    color: '#cd5c5c',
   },
   dateTitle: {
     color: '#A4A4A4',

@@ -14,48 +14,36 @@ import { Text } from 'react-native-elements';
 import { index as styles } from './Styles';
 
 export default class ScanScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isbn: null,
-      permissionsGranted: false,
-      status: 'reading',
-    };
-  }
-
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ permissionsGranted: status === 'granted' });
+    if (status === 'granted') {
+      this.props.permissionsGranted();
+    } else {
+      this.props.permissionsDenied();
+    }
   }
 
   handleBarCodeRead = ({ type, data }) => {
-    const { navigation } = this.props;
+    const {
+      isbn,
+      isbnOk,
+      isbnInvalid,
+      isbnReading,
+      navigation,
+    } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.state.isbn !== data) {
-          this.setState({
-            isbn: data,
-            status: 'ok',
-          });
-          setTimeout(() => {
-            const isbn = String(parseInt(data, 10));
-            navigation.navigate('EntryTags', {
-              title: this.props.title,
-              image: this.props.image.base64,
-              published: this.props.published,
-              isbn,
-            });
-          }, 1000);
+        if (isbn !== data) {
+          isbnOk(String(parseInt(data, 10)));
+          navigation.navigate('EntryTags');
         }
       } else { // バーコードであるがISBNでないとき
-        this.setState({ status: 'invalid' });
+        isbnInvalid();
+        setTimeout(() => isbnReading(), 1000);
       }
-      setTimeout(() => {
-        this.setState({ status: 'reading' });
-      }, 1000);
     } else { // バーコードでないとき
-      this.setState({ status: 'reading' });
+      isbnReading();
     }
   };
 
@@ -93,9 +81,9 @@ export default class ScanScreen extends Component {
 
   renderFooter = () => {
     let statusText = <ActivityIndicator size="large" />;
-    if (this.state.status === 'ok') {
+    if (this.props.cameraStatus === 'ok') {
       statusText = <Text h4 style={styles.statusOk}>読み取りました</Text>;
-    } else if (this.state.status === 'invalid') {
+    } else if (this.props.cameraStatus === 'invalid') {
       statusText = <Text h4 style={styles.statusNo}>数字をお確かめください</Text>;
     }
 
@@ -125,7 +113,7 @@ export default class ScanScreen extends Component {
   };
 
   render() {
-    const screen = this.state.permissionsGranted
+    const screen = this.props.permissions
       ? this.renderScanScreen()
       : this.renderNoPermissions();
 
@@ -142,11 +130,12 @@ ScanScreen.navigationOptions = {
 };
 
 ScanScreen.propTypes = {
-  title: PropTypes.string.isRequired,
-  published: PropTypes.string.isRequired,
-  image: PropTypes.string,
-};
-
-ScanScreen.defaultProps = {
-  image: '',
+  permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
+  cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
+  isbn: PropTypes.string.isRequired,
+  permissionsGranted: PropTypes.func.isRequired,
+  permissionsDenied: PropTypes.func.isRequired,
+  isbnReading: PropTypes.func.isRequired,
+  isbnOk: PropTypes.func.isRequired,
+  isbnInvalid: PropTypes.func.isRequired,
 };

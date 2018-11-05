@@ -19,6 +19,7 @@ describe('<LentScanScreen />', () => {
         isbnOk={jest.fn()}
         isbnInvalid={jest.fn()}
         requestChangeStatus={jest.fn()}
+        changeStatusFromIsbn={jest.fn()}
       />)
       .toJSON();
     expect(tree).toMatchSnapshot();

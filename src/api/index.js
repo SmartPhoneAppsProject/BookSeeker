@@ -30,3 +30,21 @@ export const register = (title, isbn, image, published, tagIds) => (
     }),
   })
 );
+
+export const postBook = (title, image, published, isbn, chosenIds) => (
+  fetch(`${API_ENDPOINT}/books`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      image,
+      published,
+      isbn,
+      tag_ids: chosenIds,
+      status: false,
+    }),
+  })
+);

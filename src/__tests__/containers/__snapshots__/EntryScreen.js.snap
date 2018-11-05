@@ -1,22 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EntryScreen /> 正しくレンダリングされていること 1`] = `
+exports[`<EntryScreenContainer /> 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <EntryScreen
-    changeTitle={[MockFunction]}
-    chooseDate={[MockFunction]}
-    choosePhoto={[MockFunction]}
-    chosenDate={2018-01-31T15:00:00.000Z}
-    currentTime={2018-01-31T15:00:00.000Z}
-    dateTimePickerVisible={false}
+    changePublished={[Function]}
+    changeTitle={[Function]}
+    chooseDate={[Function]}
+    chosenDate=""
+    date={2018-08-04T09:14:21.527Z}
     errorMessage=""
-    image={Object {}}
-    published="2018-1-1"
+    isDateTimePickerVisible={false}
+    maximumDate={2018-08-04T09:14:21.527Z}
+    photo=""
+    pickPhoto={[Function]}
+    published=""
     title=""
-    toggleDateTimePicker={[MockFunction]}
-    validateTitle={[MockFunction]}
+    toggleDatetimePicker={[Function]}
+    validateTitle={[Function]}
     validation={false}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -44,20 +46,7 @@ ShallowWrapper {
             }
           }
         >
-          <Image
-            resizeMode="contain"
-            source={
-              Object {
-                "uri": undefined,
-              }
-            }
-            style={
-              Object {
-                "height": 166.66666666666666,
-                "width": 125,
-              }
-            }
-          />
+          <View />
           <TouchableHighlight
             activeOpacity={0.85}
             delayPressOut={100}
@@ -123,7 +112,8 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              errorMessage=""
+              displayError={true}
+              errorMessage=" "
               errorStyle={
                 Object {
                   "color": "#cd5c5c",
@@ -200,7 +190,7 @@ ShallowWrapper {
             }
             onPress={[Function]}
             raised={false}
-            title="2018-1-1"
+            title="2018-7-4"
             titleStyle={
               Object {
                 "color": "#A4A4A4",
@@ -214,10 +204,10 @@ ShallowWrapper {
             <CustomDatePickerIOS
               cancelTextIOS="キャンセル"
               confirmTextIOS="決定"
-              date={2018-01-31T15:00:00.000Z}
+              date={2018-08-04T09:14:21.527Z}
               isVisible={false}
               locale="ja"
-              maximumDate={2018-01-31T15:00:00.000Z}
+              maximumDate={2018-08-04T09:14:21.527Z}
               mode="date"
               neverDisableConfirmIOS={false}
               onCancel={[Function]}
@@ -295,20 +285,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <Image
-              resizeMode="contain"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "height": 166.66666666666666,
-                  "width": 125,
-                }
-              }
-            />,
+            <View />,
             <TouchableHighlight
               activeOpacity={0.85}
               delayPressOut={100}
@@ -362,16 +339,7 @@ ShallowWrapper {
             "instance": null,
             "key": undefined,
             "nodeType": "class",
-            "props": Object {
-              "resizeMode": "contain",
-              "source": Object {
-                "uri": undefined,
-              },
-              "style": Object {
-                "height": 166.66666666666666,
-                "width": 125,
-              },
-            },
+            "props": Object {},
             "ref": null,
             "rendered": null,
             "type": [Function],
@@ -476,7 +444,8 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              errorMessage=""
+              displayError={true}
+              errorMessage=" "
               errorStyle={
                 Object {
                   "color": "#cd5c5c",
@@ -510,7 +479,8 @@ ShallowWrapper {
                   "marginBottom": 10,
                 }
               }
-              errorMessage=""
+              displayError={true}
+              errorMessage=" "
               errorStyle={
                 Object {
                   "color": "#cd5c5c",
@@ -541,7 +511,8 @@ ShallowWrapper {
                 "borderColor": "#A4A4A4",
                 "marginBottom": 10,
               },
-              "errorMessage": "",
+              "displayError": true,
+              "errorMessage": " ",
               "errorStyle": Object {
                 "color": "#cd5c5c",
               },
@@ -620,7 +591,7 @@ ShallowWrapper {
               }
               onPress={[Function]}
               raised={false}
-              title="2018-1-1"
+              title="2018-7-4"
               titleStyle={
                 Object {
                   "color": "#A4A4A4",
@@ -634,10 +605,10 @@ ShallowWrapper {
               <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-01-31T15:00:00.000Z}
+                date={2018-08-04T09:14:21.527Z}
                 isVisible={false}
                 locale="ja"
-                maximumDate={2018-01-31T15:00:00.000Z}
+                maximumDate={2018-08-04T09:14:21.527Z}
                 mode="date"
                 neverDisableConfirmIOS={false}
                 onCancel={[Function]}
@@ -710,7 +681,7 @@ ShallowWrapper {
               },
               "onPress": [Function],
               "raised": false,
-              "title": "2018-1-1",
+              "title": "2018-7-4",
               "titleStyle": Object {
                 "color": "#A4A4A4",
                 "fontWeight": "700",
@@ -728,10 +699,10 @@ ShallowWrapper {
               "children": <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-01-31T15:00:00.000Z}
+                date={2018-08-04T09:14:21.527Z}
                 isVisible={false}
                 locale="ja"
-                maximumDate={2018-01-31T15:00:00.000Z}
+                maximumDate={2018-08-04T09:14:21.527Z}
                 mode="date"
                 neverDisableConfirmIOS={false}
                 onCancel={[Function]}
@@ -750,10 +721,10 @@ ShallowWrapper {
               "props": Object {
                 "cancelTextIOS": "キャンセル",
                 "confirmTextIOS": "決定",
-                "date": 2018-01-31T15:00:00.000Z,
+                "date": 2018-08-04T09:14:21.527Z,
                 "isVisible": false,
                 "locale": "ja",
-                "maximumDate": 2018-01-31T15:00:00.000Z,
+                "maximumDate": 2018-08-04T09:14:21.527Z,
                 "mode": "date",
                 "neverDisableConfirmIOS": false,
                 "onCancel": [Function],
@@ -890,20 +861,7 @@ ShallowWrapper {
               }
             }
           >
-            <Image
-              resizeMode="contain"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "height": 166.66666666666666,
-                  "width": 125,
-                }
-              }
-            />
+            <View />
             <TouchableHighlight
               activeOpacity={0.85}
               delayPressOut={100}
@@ -969,7 +927,8 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                errorMessage=""
+                displayError={true}
+                errorMessage=" "
                 errorStyle={
                   Object {
                     "color": "#cd5c5c",
@@ -1046,7 +1005,7 @@ ShallowWrapper {
               }
               onPress={[Function]}
               raised={false}
-              title="2018-1-1"
+              title="2018-7-4"
               titleStyle={
                 Object {
                   "color": "#A4A4A4",
@@ -1060,10 +1019,10 @@ ShallowWrapper {
               <CustomDatePickerIOS
                 cancelTextIOS="キャンセル"
                 confirmTextIOS="決定"
-                date={2018-01-31T15:00:00.000Z}
+                date={2018-08-04T09:14:21.527Z}
                 isVisible={false}
                 locale="ja"
-                maximumDate={2018-01-31T15:00:00.000Z}
+                maximumDate={2018-08-04T09:14:21.527Z}
                 mode="date"
                 neverDisableConfirmIOS={false}
                 onCancel={[Function]}
@@ -1141,20 +1100,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <Image
-                resizeMode="contain"
-                source={
-                  Object {
-                    "uri": undefined,
-                  }
-                }
-                style={
-                  Object {
-                    "height": 166.66666666666666,
-                    "width": 125,
-                  }
-                }
-              />,
+              <View />,
               <TouchableHighlight
                 activeOpacity={0.85}
                 delayPressOut={100}
@@ -1208,16 +1154,7 @@ ShallowWrapper {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
-              "props": Object {
-                "resizeMode": "contain",
-                "source": Object {
-                  "uri": undefined,
-                },
-                "style": Object {
-                  "height": 166.66666666666666,
-                  "width": 125,
-                },
-              },
+              "props": Object {},
               "ref": null,
               "rendered": null,
               "type": [Function],
@@ -1322,7 +1259,8 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                errorMessage=""
+                displayError={true}
+                errorMessage=" "
                 errorStyle={
                   Object {
                     "color": "#cd5c5c",
@@ -1356,7 +1294,8 @@ ShallowWrapper {
                     "marginBottom": 10,
                   }
                 }
-                errorMessage=""
+                displayError={true}
+                errorMessage=" "
                 errorStyle={
                   Object {
                     "color": "#cd5c5c",
@@ -1387,7 +1326,8 @@ ShallowWrapper {
                   "borderColor": "#A4A4A4",
                   "marginBottom": 10,
                 },
-                "errorMessage": "",
+                "displayError": true,
+                "errorMessage": " ",
                 "errorStyle": Object {
                   "color": "#cd5c5c",
                 },
@@ -1466,7 +1406,7 @@ ShallowWrapper {
                 }
                 onPress={[Function]}
                 raised={false}
-                title="2018-1-1"
+                title="2018-7-4"
                 titleStyle={
                   Object {
                     "color": "#A4A4A4",
@@ -1480,10 +1420,10 @@ ShallowWrapper {
                 <CustomDatePickerIOS
                   cancelTextIOS="キャンセル"
                   confirmTextIOS="決定"
-                  date={2018-01-31T15:00:00.000Z}
+                  date={2018-08-04T09:14:21.527Z}
                   isVisible={false}
                   locale="ja"
-                  maximumDate={2018-01-31T15:00:00.000Z}
+                  maximumDate={2018-08-04T09:14:21.527Z}
                   mode="date"
                   neverDisableConfirmIOS={false}
                   onCancel={[Function]}
@@ -1556,7 +1496,7 @@ ShallowWrapper {
                 },
                 "onPress": [Function],
                 "raised": false,
-                "title": "2018-1-1",
+                "title": "2018-7-4",
                 "titleStyle": Object {
                   "color": "#A4A4A4",
                   "fontWeight": "700",
@@ -1574,10 +1514,10 @@ ShallowWrapper {
                 "children": <CustomDatePickerIOS
                   cancelTextIOS="キャンセル"
                   confirmTextIOS="決定"
-                  date={2018-01-31T15:00:00.000Z}
+                  date={2018-08-04T09:14:21.527Z}
                   isVisible={false}
                   locale="ja"
-                  maximumDate={2018-01-31T15:00:00.000Z}
+                  maximumDate={2018-08-04T09:14:21.527Z}
                   mode="date"
                   neverDisableConfirmIOS={false}
                   onCancel={[Function]}
@@ -1596,10 +1536,10 @@ ShallowWrapper {
                 "props": Object {
                   "cancelTextIOS": "キャンセル",
                   "confirmTextIOS": "決定",
-                  "date": 2018-01-31T15:00:00.000Z,
+                  "date": 2018-08-04T09:14:21.527Z,
                   "isVisible": false,
                   "locale": "ja",
-                  "maximumDate": 2018-01-31T15:00:00.000Z,
+                  "maximumDate": 2018-08-04T09:14:21.527Z,
                   "mode": "date",
                   "neverDisableConfirmIOS": false,
                   "onCancel": [Function],
@@ -1722,6 +1662,16 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
       },
     },
   },

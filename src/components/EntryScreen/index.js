@@ -25,73 +25,41 @@ import {
 import { index as styles } from './Styles';
 
 export default class EntryScreen extends Component {
-  constructor(props) {
-    super(props);
-
-    const now = this.props.date;
-    const formatDate = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-
-    this.state = {
-      title: '',
-      chosenDate: now,
-      published: formatDate,
-      photo: '',
-      isDateTimePickerVisible: false,
-      validation: false,
-      errorMessage: ' ',
-    };
-  }
-
   onChangeTitleText = (text) => {
-    this.setState({
-      title: text,
-      validation: false,
-      errorMessage: ' ',
-    });
+    this.props.changeTitle(text);
 
     if (!text) {
-      this.setState({
-        validation: true,
-        errorMessage: '無効な値です。',
-      });
+      this.props.validateTitle('タイトルを入力してください');
     }
   };
 
   showDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: true });
+    this.props.toggleDateTimePicker(true);
   };
 
   hideDateTimePicker = () => {
-    this.setState({ isDateTimePickerVisible: false });
+    this.props.toggleDateTimePicker(false);
   };
 
   handleTakePhoto = async () => {
     const photo = await takePhoto();
-    this.setState({ photo });
+    this.props.choosePhoto(photo);
   };
 
   handlePickPhoto = async () => {
     const photo = await pickPhoto();
-    this.setState({ photo });
+    this.props.choosePhoto(photo);
   };
 
 
   handleDatePicked = (date) => {
-    const formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    this.setState({
-      chosenDate: date,
-      published: formatDate,
-    });
-    this.hideDateTimePicker();
+    this.props.chooseDate(date);
+    this.props.toggleDateTimePicker(false);
   };
 
   goScanScreen = () => {
     const { navigate } = this.props.navigation;
-    navigate('Scan', {
-      title: this.state.title,
-      published: this.state.published,
-      image: this.state.photo,
-    });
+    navigate('Scan');
   };
 
   renderTitleContainer = () => (
@@ -99,14 +67,13 @@ export default class EntryScreen extends Component {
       <View style={styles.inputContainer}>
         <Input
           containerStyle={styles.input}
-          onChangeText={text => this.onChangeTitleText(text)}
-          value={this.state.title}
+          onChangeText={this.onChangeTitleText}
+          value={this.props.title}
           returnKeyType="done"
           placeholder="タイトル"
-          shake={this.state.validation}
-          displayError
-          errorStyle={{ color: '#cd5c5c' }}
-          errorMessage={this.state.errorMessage}
+          shake={this.props.validation}
+          errorStyle={styles.inputError}
+          errorMessage={this.props.errorMessage}
           maxLength={100}
         />
       </View>
@@ -114,12 +81,12 @@ export default class EntryScreen extends Component {
   );
 
   renderPhotoContainer = () => {
-    const photo = this.state.photo
+    const photo = this.props.image
       ? (
         <Image
-          style={styles.photo}
+          style={styles.image}
           resizeMode="contain"
-          source={{ uri: this.state.photo.uri }}
+          source={{ uri: this.props.image.uri }}
         />
       )
       : <View />;
@@ -129,14 +96,14 @@ export default class EntryScreen extends Component {
         {photo}
         <TouchableHighlight
           style={styles.photoButton}
-          onPress={() => this.handleTakePhoto()}
+          onPress={this.handleTakePhoto}
           underlayColor="#dcdcdc"
         >
           <MaterialIcons name="photo-camera" size={40} color="#a9a9a9" />
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.photoButton}
-          onPress={() => this.handlePickPhoto()}
+          onPress={this.handlePickPhoto}
           underlayColor="#dcdcdc"
         >
           <FontAwesome name="photo" size={40} color="#a9a9a9" />
@@ -151,7 +118,7 @@ export default class EntryScreen extends Component {
       <Button
         iconRight
         icon={<Entypo name="triangle-down" size={20} color="#A4A4A4" />}
-        title={this.state.published}
+        title={this.props.published}
         titleStyle={styles.dateTitle}
         buttonStyle={styles.dateButton}
         iconContainerStyle={styles.dateIcon}
@@ -159,12 +126,12 @@ export default class EntryScreen extends Component {
       />
       <View style={styles.showDateTimePicker}>
         <DateTimePicker
-          isVisible={this.state.isDateTimePickerVisible}
+          isVisible={this.props.dateTimePickerVisible}
           onConfirm={this.handleDatePicked}
           onCancel={this.hideDateTimePicker}
-          date={this.state.chosenDate}
+          date={this.props.chosenDate}
           locale="ja"
-          maximumDate={this.props.maximumDate}
+          maximumDate={this.props.currentTime}
           titleIOS="発行日を選択する"
           cancelTextIOS="キャンセル"
           confirmTextIOS="決定"
@@ -211,11 +178,28 @@ EntryScreen.navigationOptions = {
 };
 
 EntryScreen.propTypes = {
-  date: PropTypes.instanceOf(Date),
-  maximumDate: PropTypes.instanceOf(Date), // snapshotのテストのためにpropで指定可能にする
+  title: PropTypes.string.isRequired,
+  chosenDate: PropTypes.instanceOf(Date).isRequired,
+  published: PropTypes.string.isRequired,
+  image: PropTypes.shape({
+    uri: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    exif: PropTypes.string,
+    base64: PropTypes.string,
+  }).isRequired,
+  dateTimePickerVisible: PropTypes.bool.isRequired,
+  validation: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  changeTitle: PropTypes.func.isRequired,
+  chooseDate: PropTypes.func.isRequired,
+  choosePhoto: PropTypes.func.isRequired,
+  toggleDateTimePicker: PropTypes.func.isRequired,
+  validateTitle: PropTypes.func.isRequired,
+
+  currentTime: PropTypes.instanceOf(Date),
 };
 
 EntryScreen.defaultProps = {
-  date: new Date(),
-  maximumDate: new Date(),
+  currentTime: new Date(),
 };

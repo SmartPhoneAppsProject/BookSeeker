@@ -33,7 +33,7 @@ export default class LentScanScreen extends Component {
         if (this.props.isbn !== data) {
           this.props.isbnOk(data);
           const isbn = String(parseInt(data, 10));
-          this.props.requestChangeStatus(isbn, !bookStatus);
+          this.props.changeStatusFromIsbn(isbn, !bookStatus);
           navigate('Home');
         }
       } else { // バーコードであるがISBNでないとき
@@ -137,7 +137,7 @@ LentScanScreen.propTypes = {
   isbnReading: PropTypes.func.isRequired,
   isbnOk: PropTypes.func.isRequired,
   isbnInvalid: PropTypes.func.isRequired,
-  requestChangeStatus: PropTypes.func.isRequired,
+  changeStatusFromIsbn: PropTypes.func.isRequired,
 };
 
 LentScanScreen.defaultProps = {
