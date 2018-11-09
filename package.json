@@ -18,11 +18,12 @@
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "echo \"no jest\"",
+    "start": "expo start",
+    "eject": "expo eject",
+    "android": "expo android",
+    "ios": "expo ios",
+    "test": "echo no tests",
+    "appr": "appr",
     "test:watch": "npm test -- --watch",
     "postinstall": "rndebugger-open",
     "debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'"
