@@ -1,9 +1,9 @@
 import {
   PERMISSIONS_GRANTED,
   PERMISSIONS_DENIED,
-  ISBN_READING,
-  ISBN_OK,
-  ISBN_INVALID,
+  READING_ISBN,
+  VALID_ISBN,
+  INVALID_ISBN,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -24,23 +24,21 @@ const scan = (state = initialState, action) => {
         ...state,
         permissions: 'denied',
       };
-    case ISBN_READING:
+    case READING_ISBN:
       return {
         ...state,
         cameraStatus: 'reading',
-        isbn: '',
       };
-    case ISBN_OK:
+    case VALID_ISBN:
       return {
         ...state,
         cameraStatus: 'ok',
         isbn: action.payload.isbn,
       };
-    case ISBN_INVALID:
+    case INVALID_ISBN:
       return {
         ...state,
         cameraStatus: 'invalid',
-        isbn: null,
       };
     default:
       return state;

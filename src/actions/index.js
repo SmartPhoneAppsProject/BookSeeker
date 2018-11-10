@@ -124,19 +124,19 @@ export const permissionsDenied = () => ({
   type: types.PERMISSIONS_DENIED,
 });
 
-export const isbnReading = () => ({
-  type: types.ISBN_READING,
+export const readingISBN = () => ({
+  type: types.READING_ISBN,
 });
 
-export const isbnOk = isbn => ({
-  type: types.ISBN_OK,
+export const validISNB = isbn => ({
+  type: types.VALID_ISBN,
   payload: {
     isbn,
   },
 });
 
-export const isbnInvalid = () => ({
-  type: types.ISBN_INVALID,
+export const invalidISBN = () => ({
+  type: types.INVALID_ISBN,
 });
 
 export const changeStatusFromIsbn = (isbn, status) => (dispatch) => {

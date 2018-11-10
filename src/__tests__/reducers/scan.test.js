@@ -2,9 +2,9 @@ import reducer from '../../reducers/scan';
 import {
   PERMISSIONS_GRANTED,
   PERMISSIONS_DENIED,
-  ISBN_READING,
-  ISBN_OK,
-  ISBN_INVALID,
+  READING_ISBN,
+  VALID_ISBN,
+  INVALID_ISBN,
 } from '../../constants/actionTypes';
 
 describe('scan Reducer', () => {
@@ -56,7 +56,7 @@ describe('scan Reducer', () => {
       cameraStatus: 'invalid',
     };
     const action = {
-      type: ISBN_READING,
+      type: READING_ISBN,
     };
     const result = reducer(state, action);
     const expected = {
@@ -73,7 +73,7 @@ describe('scan Reducer', () => {
       cameraStatus: 'reading',
     };
     const action = {
-      type: ISBN_OK,
+      type: VALID_ISBN,
       payload: {
         isbn,
       },
@@ -92,7 +92,7 @@ describe('scan Reducer', () => {
       cameraStatus: 'reading',
     };
     const action = {
-      type: ISBN_INVALID,
+      type: INVALID_ISBN,
     };
     const result = reducer(state, action);
     const expected = {

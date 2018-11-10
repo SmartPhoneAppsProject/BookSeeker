@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import {
   permissionsGranted,
   permissionsDenied,
-  isbnReading,
-  isbnOk,
-  isbnInvalid,
+  readingISBN,
+  validISNB,
+  invalidISBN,
 } from '../actions';
 import ScanScreen from '../components/ScanScreen';
 
@@ -22,14 +22,14 @@ const mapDispatchToProps = dispatch => ({
   permissionsDenied() {
     dispatch(permissionsDenied());
   },
-  isbnReading() {
-    dispatch(isbnReading());
+  readingISBN() {
+    dispatch(readingISBN());
   },
-  isbnOk(isbn) {
-    dispatch(isbnOk(isbn));
+  validISBN(isbn) {
+    dispatch(validISNB(isbn));
   },
-  isbnInvalid() {
-    dispatch(isbnInvalid());
+  invalidISBN() {
+    dispatch(invalidISBN());
   },
 });
 

@@ -25,27 +25,24 @@ export default class ScanScreen extends Component {
 
   handleBarCodeRead = ({ type, data }) => {
     const {
-      isbn,
-      isbnOk,
-      isbnInvalid,
-      isbnReading,
+      validISBN,
+      invalidISBN,
+      readingISBN,
       navigation,
     } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       console.log(data);
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (isbn !== data) {
-          isbnOk(String(parseInt(data, 10)));
-          navigation.navigate('EntryTags');
-        }
-      } else { // バーコードであるがISBNでないとき
-        isbnInvalid();
-        setTimeout(() => isbnReading(), 1000);
+        validISBN(String(parseInt(data, 10)));
+        navigation.navigate('EntryTags');
+        return;
       }
-    } else { // バーコードでないとき
-      isbnReading();
+      invalidISBN();
+      setTimeout(() => readingISBN(), 1000);
+      return;
     }
+    readingISBN();
   };
 
   renderNoPermissions = () => (
@@ -133,10 +130,9 @@ ScanScreen.navigationOptions = {
 ScanScreen.propTypes = {
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
   cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
-  isbn: PropTypes.string.isRequired,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,
-  isbnReading: PropTypes.func.isRequired,
-  isbnOk: PropTypes.func.isRequired,
-  isbnInvalid: PropTypes.func.isRequired,
+  readingISBN: PropTypes.func.isRequired,
+  validISBN: PropTypes.func.isRequired,
+  invalidISBN: PropTypes.func.isRequired,
 };
