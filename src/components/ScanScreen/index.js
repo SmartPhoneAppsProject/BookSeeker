@@ -32,9 +32,9 @@ export default class ScanScreen extends Component {
     } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
-      console.log(data);
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        validISBN(String(parseInt(data, 10)));
+        const isbn = String(parseInt(data, 10));
+        validISBN(isbn);
         navigation.navigate('EntryTags');
         return;
       }

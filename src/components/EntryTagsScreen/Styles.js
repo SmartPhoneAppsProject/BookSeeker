@@ -22,3 +22,16 @@ export const index = StyleSheet.create({
     margin: 20,
   },
 });
+
+export const EmptyTags = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    marginTop: 100,
+  },
+  text: {
+    fontSize: 20,
+  },
+});

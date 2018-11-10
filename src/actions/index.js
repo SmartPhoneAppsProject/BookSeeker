@@ -1,4 +1,3 @@
-import API_ENDPOINT from '../utils/endpoint';
 import server from '../api/server';
 import * as api from '../api';
 import * as types from '../constants/actionTypes';
@@ -31,7 +30,9 @@ export const getAllMockBooks = () => (dispatch) => {
   return server.getBooks()
     .then((books) => {
       dispatch(requestSuccess());
-      dispatch(getBooks(books));
+      if (books) {
+        dispatch(getBooks(books));
+      }
     })
     .catch((error) => {
       dispatch(requestFail(error));
@@ -41,16 +42,10 @@ export const getAllMockBooks = () => (dispatch) => {
 export const getAllBooks = () => (dispatch) => {
   dispatch(request());
 
-  return fetch(`${API_ENDPOINT}/books`)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response);
-    })
-    .then((resJson) => {
+  return api.getAllBooks()
+    .then((books) => {
       dispatch(requestSuccess());
-      dispatch(getBooks(resJson.books));
+      dispatch(getBooks(books));
     })
     .catch((error) => {
       dispatch(requestFail(JSON.parse(error)));
@@ -68,12 +63,6 @@ export const postBook = (title, image, published, isbn, chosenIds) => (dispatch)
   }));
 
   api.postBook(title, image, published, isbn, chosenIds)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response);
-    })
     .then((resJson) => {
       console.log(resJson);
       dispatch(requestSuccess());
@@ -93,16 +82,12 @@ const getTags = tags => ({
 export const getAllTags = () => (dispatch) => {
   dispatch(request());
 
-  return fetch(`${API_ENDPOINT}/tags`)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response);
-    })
-    .then((resJson) => {
+  return api.getAllTags()
+    .then((tags) => {
       dispatch(requestSuccess());
-      dispatch(getTags(resJson));
+      if (tags) {
+        dispatch(getTags(tags));
+      }
     })
     .catch((error) => {
       dispatch(requestFail(JSON.parse(error)));
@@ -143,12 +128,11 @@ export const changeStatusFromIsbn = (isbn, status) => (dispatch) => {
   dispatch(request());
 
   api.changeStatus(isbn, status)
-    .then((response) => {
-      if (response.ok) {
-        return dispatch(requestSuccess());
-        // todo reducerでbooksを変更する
-      }
-      throw new Error(response);
+    .then((resJson) => {
+      console.log(resJson);
+      dispatch(requestSuccess());
+      // todo reducerでbooksのstatusを変更する
+      // todo またはgetAllBooksを行う
     })
     .catch((error) => {
       dispatch(requestFail(JSON.parse(error)));

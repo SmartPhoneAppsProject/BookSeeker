@@ -26,23 +26,27 @@ export default class LentScanScreen extends Component {
 
 
   handleBarCodeRead = ({ type, data }) => {
-    const { bookStatus } = this.props;
+    const {
+      bookStatus,
+      validISBN,
+      invalidISBN,
+      readingISBN,
+      changeStatusFromIsbn,
+    } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.props.isbn !== data) {
-          this.props.validISBN(data);
-          const isbn = String(parseInt(data, 10));
-          this.props.changeStatusFromIsbn(isbn, !bookStatus);
-          navigate('Home');
-        }
-      } else { // バーコードであるがISBNでないとき
-        this.props.invalidISBN();
+        const isbn = String(parseInt(data, 10));
+        validISBN(isbn);
+        changeStatusFromIsbn(isbn, !bookStatus);
+        navigate('Home');
+        return;
       }
-      setTimeout(() => this.props.readingISBN(), 1000);
-    } else { // バーコードでないとき
-      this.props.readingISBN();
+      invalidISBN();
+      setTimeout(() => readingISBN(), 1000);
+      return;
     }
+    readingISBN();
   };
 
   renderNoPermissions = () => (
