@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Generate .env file
-          command: echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env
+          command: echo 'API_ENDPOINT='$API_ENDPOINT_STAGING > .env.js
 
       - restore_cache:
           key: yarn-v1-{{ checksum "package.json" }}
