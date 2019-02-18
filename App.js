@@ -70,7 +70,6 @@ const middleware = [thunk];
 if (__DEV__ === true) {
   middleware.push(createLogger());
 }
-console.log(`the current env is ${process.env.NODE_ENV}`);
 
 const store = createStore(
   reducer,

@@ -44,7 +44,6 @@ export const getAllBooks = () => (dispatch) => {
 
   return api.getAllBooks()
     .then((books) => {
-      console.log(books);
       dispatch(requestSuccess());
       dispatch(getBooks(books));
     })

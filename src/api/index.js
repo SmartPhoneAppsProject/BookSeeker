@@ -1,7 +1,5 @@
 import { API_ENDPOINT } from 'react-native-dotenv';
 
-console.log(API_ENDPOINT);
-
 export const changeStatus = (isbn, status) => (
   fetch(`${API_ENDPOINT}/books`, {
     method: 'PUT',
@@ -73,15 +71,13 @@ export const getAllTags = () => (
     })
 );
 
-export const getAllBooks = () => {
-  console.log(`${API_ENDPOINT}/books`);
-  return fetch(`${API_ENDPOINT}/books`)
+export const getAllBooks = () => (
+  fetch(`${API_ENDPOINT}/books`)
     .then((response) => {
-      console.log(response);
       if (response.ok) {
         return response.json();
       }
       throw new Error(response);
     })
-    .then(resJson => resJson.books);
-};
+    .then(resJson => resJson.books)
+);
