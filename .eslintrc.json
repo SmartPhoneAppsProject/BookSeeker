@@ -10,7 +10,7 @@
   "globals": {
     "fetch": false,
     "require": false,
-    "__DEV__": false,
+    "__DEV__": false
   },
   "env": {
     "jest/globals": true

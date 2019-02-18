@@ -79,5 +79,5 @@ export const getAllBooks = () => (
       }
       throw new Error(response);
     })
-    .then(resJson => resJson.books)
+    .then(resJson => resJson)
 );
