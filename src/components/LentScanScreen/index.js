@@ -26,23 +26,27 @@ export default class LentScanScreen extends Component {
 
 
   handleBarCodeRead = ({ type, data }) => {
-    const { bookStatus } = this.props;
+    const {
+      bookStatus,
+      validISBN,
+      invalidISBN,
+      readingISBN,
+      changeStatusFromIsbn,
+    } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
       if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        if (this.props.isbn !== data) {
-          this.props.isbnOk(data);
-          const isbn = String(parseInt(data, 10));
-          this.props.changeStatusFromIsbn(isbn, !bookStatus);
-          navigate('Home');
-        }
-      } else { // バーコードであるがISBNでないとき
-        this.props.isbnInvalid();
+        const isbn = String(parseInt(data, 10));
+        validISBN(isbn);
+        changeStatusFromIsbn(isbn, !bookStatus);
+        navigate('Home');
+        return;
       }
-      setTimeout(() => this.props.isbnReading(), 1000);
-    } else { // バーコードでないとき
-      this.props.isbnReading();
+      invalidISBN();
+      setTimeout(() => readingISBN(), 1000);
+      return;
     }
+    readingISBN();
   };
 
   renderNoPermissions = () => (
@@ -134,9 +138,9 @@ LentScanScreen.propTypes = {
   isbn: PropTypes.string,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,
-  isbnReading: PropTypes.func.isRequired,
-  isbnOk: PropTypes.func.isRequired,
-  isbnInvalid: PropTypes.func.isRequired,
+  readingISBN: PropTypes.func.isRequired,
+  validISBN: PropTypes.func.isRequired,
+  invalidISBN: PropTypes.func.isRequired,
   changeStatusFromIsbn: PropTypes.func.isRequired,
 };
 

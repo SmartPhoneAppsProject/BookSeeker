@@ -11,9 +11,9 @@ export const REQUEST_API_FAIL = 'REQUEST_API_FAIL';
 // scan
 export const PERMISSIONS_DENIED = 'PERMISSIONS_DENIED';
 export const PERMISSIONS_GRANTED = 'PERMISSIONS_GRANTED';
-export const ISBN_READING = 'ISBN_READING';
-export const ISBN_OK = 'ISBN_OK';
-export const ISBN_INVALID = 'ISBN_INVALID';
+export const READING_ISBN = 'READING_ISBN';
+export const VALID_ISBN = 'VALID_ISBN';
+export const INVALID_ISBN = 'INVALID_ISBN';
 // form
 export const CHANGE_TITLE = 'CHANGE_TITLE';
 export const CHOOSE_DATE = 'CHOOSE_DATE';

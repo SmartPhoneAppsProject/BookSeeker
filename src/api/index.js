@@ -12,6 +12,12 @@ export const changeStatus = (isbn, status) => (
       status,
     }),
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
 );
 
 export const register = (title, isbn, image, published, tagIds) => (
@@ -47,4 +53,31 @@ export const postBook = (title, image, published, isbn, chosenIds) => (
       status: false,
     }),
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+);
+
+export const getAllTags = () => (
+  fetch(`${API_ENDPOINT}/tags`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+);
+
+export const getAllBooks = () => (
+  fetch(`${API_ENDPOINT}/books`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response);
+    })
+    .then(resJson => resJson.books)
 );

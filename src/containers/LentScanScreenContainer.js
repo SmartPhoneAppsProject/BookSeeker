@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import {
   permissionsGranted,
   permissionsDenied,
-  isbnReading,
-  isbnOk,
-  isbnInvalid,
+  readingISBN,
+  validISNB,
+  invalidISBN,
   changeStatusFromIsbn,
 } from '../actions';
 import LentScanScreen from '../components/LentScanScreen';
@@ -23,14 +23,14 @@ const mapDispatchToProps = dispatch => ({
   permissionsDenied() {
     dispatch(permissionsDenied());
   },
-  isbnReading() {
-    dispatch(isbnReading());
+  readingISBN() {
+    dispatch(readingISBN());
   },
-  isbnOk(isbn) {
-    dispatch(isbnOk(isbn));
+  validISBN(isbn) {
+    dispatch(validISNB(isbn));
   },
-  isbnInvalid() {
-    dispatch(isbnInvalid());
+  invalidISBN() {
+    dispatch(invalidISBN());
   },
   changeStatusFromIsbn(isbn, status) {
     dispatch(changeStatusFromIsbn(isbn, status));

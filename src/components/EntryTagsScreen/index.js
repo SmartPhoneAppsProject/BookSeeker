@@ -11,6 +11,7 @@ import {
 } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import EmptyTags from './EmptyTags';
 import { index as styles } from './Styles';
 import { icon } from '../../utils/Icons';
 
@@ -50,9 +51,10 @@ export default class EntryTagsScreen extends Component {
         data={tags}
         extraData={tags}
         renderItem={this.renderListItem}
+        ListEmptyComponent={EmptyTags}
       />
     );
-  }
+  };
 
   renderListItem = ({ item }) => {
     const status = item.chosen
