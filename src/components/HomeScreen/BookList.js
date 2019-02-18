@@ -30,7 +30,7 @@ const renderTags = (tags) => {
     const tag = (
       <View
         style={styles.subtitleView}
-        key={tags[i].id}
+        key={`${tags[i].id}`}
       >
         {tagName}
       </View>
@@ -74,7 +74,7 @@ const BookList = (props) => {
       style={styles.list}
       data={books}
       extraData={books}
-      keyExtractor={item => item.id}
+      keyExtractor={item => `${item.id}`}
       renderItem={({ item }) => renderItem(item, navigation)}
       onRefresh={onRefresh}
       refreshing={isLoading}

@@ -17,6 +17,7 @@ import { navigate } from '../../utils/NavigationService';
 export default class LentScanScreen extends Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+
     if (status === 'granted') {
       this.props.permissionsGranted();
     } else {

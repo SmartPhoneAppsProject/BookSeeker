@@ -1,6 +1,7 @@
 import {
   REQUEST_API_SUCCESS,
-  REQUEST_API_FAIL, REQUEST_API,
+  REQUEST_API_FAIL,
+  REQUEST_API,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -26,7 +27,7 @@ const loading = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error,
+        error: `${action.payload.error}`,
       };
     default:
       return state;

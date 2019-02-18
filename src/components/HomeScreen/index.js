@@ -14,6 +14,7 @@ const HomeScreen = (props) => {
   }
 
   if (props.error) {
+    console.warn(props.error);
     return <PullRefresh refresh={props.getAllBooks} />;
   }
 

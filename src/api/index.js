@@ -1,4 +1,4 @@
-import API_ENDPOINT from '../utils/endpoint';
+import { API_ENDPOINT } from 'react-native-dotenv';
 
 export const changeStatus = (isbn, status) => (
   fetch(`${API_ENDPOINT}/books`, {
