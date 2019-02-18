@@ -1,4 +1,4 @@
-import server from '../api/server';
+import server from '../api/mockServer';
 import * as api from '../api';
 import * as types from '../constants/actionTypes';
 
@@ -35,7 +35,7 @@ export const getAllMockBooks = () => (dispatch) => {
       }
     })
     .catch((error) => {
-      dispatch(requestFail(error));
+      dispatch(requestFail(`${error}`));
     });
 };
 
@@ -44,11 +44,12 @@ export const getAllBooks = () => (dispatch) => {
 
   return api.getAllBooks()
     .then((books) => {
+      console.log(books);
       dispatch(requestSuccess());
       dispatch(getBooks(books));
     })
     .catch((error) => {
-      dispatch(requestFail(JSON.parse(error)));
+      dispatch(requestFail(error));
     });
 };
 
