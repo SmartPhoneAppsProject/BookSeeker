@@ -71,11 +71,6 @@ export const getAllTags = () => (
     })
 );
 
-const renamePropToStr = (oldProp, newProp, { [oldProp]: value, ...others }) => ({
-  [newProp]: `${value}`,
-  ...others,
-});
-
 export const getAllBooks = () => (
   fetch(`${API_ENDPOINT}/books`)
     .then((response) => {
@@ -84,15 +79,13 @@ export const getAllBooks = () => (
       }
       throw new Error(response);
     })
-    .then(resJson => resJson.map(book => renamePropToStr('jan_code', 'jancode', book))
-      .map(book => renamePropToStr('published_at', 'published', book)))
-  // {
-  //   const { jan_code: jancode, published_at: published, ...others } = book;
-  //
-  //   return {
-  //     jancode,
-  //     published,
-  //    ...others,
-  //   };
-  // })
+    .then(resJson => resJson.map((book) => {
+      const { jan_code: jancode, published_at: published, ...others } = book;
+
+      return {
+        jancode: `${jancode}`,
+        published,
+        ...others,
+      };
+    }))
 );
