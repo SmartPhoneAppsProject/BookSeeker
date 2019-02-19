@@ -43,7 +43,7 @@ HomeScreen.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
     status: PropTypes.bool.isRequired,
-    isbn: PropTypes.string.isRequired,
+    jancode: PropTypes.string.isRequired,
   })),
   getAllBooks: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,

@@ -8,7 +8,7 @@ import EntryTagsScreen from '../components/EntryTagsScreen';
 
 const mapStateToProps = (state, props) => ({
   tags: state.tag.tags,
-  isbn: state.scan.isbn,
+  jancode: state.scan.jancode,
   title: state.form.title,
   published: state.form.published,
   image: state.form.image,
@@ -23,8 +23,8 @@ const mapDispatchToProps = dispatch => ({
   toggleChosenFromId(id) {
     dispatch(toggleChosenFromId(id));
   },
-  postBook(title, image, published, isbn, chosenIds) {
-    dispatch(postBook(title, image, published, isbn, chosenIds));
+  postBook(title, image, published, jancode, chosenIds) {
+    dispatch(postBook(title, image, published, jancode, chosenIds));
   },
 });
 

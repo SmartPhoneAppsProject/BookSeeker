@@ -29,25 +29,25 @@ export default class LentScanScreen extends Component {
   handleBarCodeRead = ({ type, data }) => {
     const {
       bookStatus,
-      validISBN,
-      invalidISBN,
-      readingISBN,
-      changeStatusFromIsbn,
+      validJANCODE,
+      invalidJANCODE,
+      readingJANCODE,
+      changeStatusFromJancode,
     } = this.props;
 
     if (BarCodeScanner.Constants.BarCodeType.ean13 === type) {
-      if (data.slice(0, 3) === '978') { // ISBNを読み取ったとき
-        const isbn = String(parseInt(data, 10));
-        validISBN(isbn);
-        changeStatusFromIsbn(isbn, !bookStatus);
+      if (data.slice(0, 3) === '978') { // JANCODEを読み取ったとき
+        const jancode = String(parseInt(data, 10));
+        validJANCODE(jancode);
+        changeStatusFromJancode(jancode, !bookStatus);
         navigate('Home');
         return;
       }
-      invalidISBN();
-      setTimeout(() => readingISBN(), 1000);
+      invalidJANCODE();
+      setTimeout(() => readingJANCODE(), 1000);
       return;
     }
-    readingISBN();
+    readingJANCODE();
   };
 
   renderNoPermissions = () => (
@@ -107,7 +107,7 @@ export default class LentScanScreen extends Component {
         {header}
         <Image
           style={styles.imageSize}
-          source={require('../../../assets/ISBN_sample.png')}
+          source={require('../../../assets/JANCODE_sample.png')}
         />
         {camera}
         {footer}
@@ -136,15 +136,15 @@ LentScanScreen.propTypes = {
   bookStatus: PropTypes.bool.isRequired,
   permissions: PropTypes.oneOf(['granted', 'denied']).isRequired,
   cameraStatus: PropTypes.oneOf(['reading', 'ok', 'invalid']).isRequired,
-  isbn: PropTypes.string,
+  jancode: PropTypes.string,
   permissionsGranted: PropTypes.func.isRequired,
   permissionsDenied: PropTypes.func.isRequired,
-  readingISBN: PropTypes.func.isRequired,
-  validISBN: PropTypes.func.isRequired,
-  invalidISBN: PropTypes.func.isRequired,
-  changeStatusFromIsbn: PropTypes.func.isRequired,
+  readingJANCODE: PropTypes.func.isRequired,
+  validJANCODE: PropTypes.func.isRequired,
+  invalidJANCODE: PropTypes.func.isRequired,
+  changeStatusFromJancode: PropTypes.func.isRequired,
 };
 
 LentScanScreen.defaultProps = {
-  isbn: null,
+  jancode: null,
 };

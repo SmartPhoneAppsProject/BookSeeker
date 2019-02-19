@@ -2,9 +2,9 @@ import reducer from '../../reducers/scan';
 import {
   PERMISSIONS_GRANTED,
   PERMISSIONS_DENIED,
-  READING_ISBN,
-  VALID_ISBN,
-  INVALID_ISBN,
+  READING_JANCODE,
+  VALID_JANCODE,
+  INVALID_JANCODE,
 } from '../../constants/actionTypes';
 
 describe('scan Reducer', () => {
@@ -15,7 +15,7 @@ describe('scan Reducer', () => {
     const expected = {
       permissions: 'denied',
       cameraStatus: 'reading',
-      isbn: '',
+      jancode: '',
     };
 
     expect(result).toEqual(expected);
@@ -51,53 +51,53 @@ describe('scan Reducer', () => {
     expect(result).toEqual(expected);
   });
 
-  test('ISBN_READINGアクションが正しく処理されること', () => {
+  test('JANCODE_READINGアクションが正しく処理されること', () => {
     const state = {
       cameraStatus: 'invalid',
     };
     const action = {
-      type: READING_ISBN,
+      type: READING_JANCODE,
     };
     const result = reducer(state, action);
     const expected = {
       cameraStatus: 'reading',
-      isbn: null,
+      jancode: null,
     };
 
     expect(result).toEqual(expected);
   });
 
-  test('ISBN_OKアクションが正しく処理されること', () => {
-    const isbn = '1234567890123';
+  test('JANCODE_OKアクションが正しく処理されること', () => {
+    const jancode = '1234567890123';
     const state = {
       cameraStatus: 'reading',
     };
     const action = {
-      type: VALID_ISBN,
+      type: VALID_JANCODE,
       payload: {
-        isbn,
+        jancode,
       },
     };
     const result = reducer(state, action);
     const expected = {
       cameraStatus: 'ok',
-      isbn,
+      jancode,
     };
 
     expect(result).toEqual(expected);
   });
 
-  test('ISBN_INVALIDアクションが正しく処理されること', () => {
+  test('JANCODE_INVALIDアクションが正しく処理されること', () => {
     const state = {
       cameraStatus: 'reading',
     };
     const action = {
-      type: INVALID_ISBN,
+      type: INVALID_JANCODE,
     };
     const result = reducer(state, action);
     const expected = {
       cameraStatus: 'invalid',
-      isbn: null,
+      jancode: null,
     };
 
     expect(result).toEqual(expected);
