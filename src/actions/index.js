@@ -52,17 +52,17 @@ export const getAllBooks = () => (dispatch) => {
     });
 };
 
-export const postBook = (title, image, published, isbn, chosenIds) => (dispatch) => {
+export const postBook = (title, image, published, jancode, chosenIds) => (dispatch) => {
   console.log(JSON.stringify({
     title,
     image,
     published,
-    isbn,
+    jancode,
     tag_ids: chosenIds,
     status: false,
   }));
 
-  api.postBook(title, image, published, isbn, chosenIds)
+  api.postBook(title, image, published, jancode, chosenIds)
     .then((resJson) => {
       console.log(resJson);
       dispatch(requestSuccess());
@@ -109,25 +109,25 @@ export const permissionsDenied = () => ({
   type: types.PERMISSIONS_DENIED,
 });
 
-export const readingISBN = () => ({
-  type: types.READING_ISBN,
+export const readingJANCODE = () => ({
+  type: types.READING_JANCODE,
 });
 
-export const validISNB = isbn => ({
-  type: types.VALID_ISBN,
+export const validISNB = jancode => ({
+  type: types.VALID_JANCODE,
   payload: {
-    isbn,
+    jancode,
   },
 });
 
-export const invalidISBN = () => ({
-  type: types.INVALID_ISBN,
+export const invalidJANCODE = () => ({
+  type: types.INVALID_JANCODE,
 });
 
-export const changeStatusFromIsbn = (isbn, status) => (dispatch) => {
+export const changeStatusFromJancode = (jancode, status) => (dispatch) => {
   dispatch(request());
 
-  api.changeStatus(isbn, status)
+  api.changeStatus(jancode, status)
     .then((resJson) => {
       console.log(resJson);
       dispatch(requestSuccess());

@@ -1,6 +1,6 @@
 import { API_ENDPOINT } from 'react-native-dotenv';
 
-export const changeStatus = (isbn, status) => (
+export const changeStatus = (jancode, status) => (
   fetch(`${API_ENDPOINT}/books`, {
     method: 'PUT',
     headers: {
@@ -8,7 +8,7 @@ export const changeStatus = (isbn, status) => (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      isbn,
+      jancode,
       status,
     }),
   })
@@ -20,7 +20,7 @@ export const changeStatus = (isbn, status) => (
     })
 );
 
-export const register = (title, isbn, image, published, tagIds) => (
+export const register = (title, jancode, image, published, tagIds) => (
   fetch(`${API_ENDPOINT}/books`, {
     method: 'POST',
     headers: {
@@ -29,7 +29,7 @@ export const register = (title, isbn, image, published, tagIds) => (
     },
     body: JSON.stringify({
       title,
-      isbn: String(isbn),
+      jancode: String(jancode),
       image,
       published,
       tag_ids: tagIds,
@@ -37,7 +37,7 @@ export const register = (title, isbn, image, published, tagIds) => (
   })
 );
 
-export const postBook = (title, image, published, isbn, chosenIds) => (
+export const postBook = (title, image, published, jancode, chosenIds) => (
   fetch(`${API_ENDPOINT}/books`, {
     method: 'POST',
     headers: {
@@ -48,7 +48,7 @@ export const postBook = (title, image, published, isbn, chosenIds) => (
       title,
       image,
       published,
-      isbn,
+      jancode,
       tag_ids: chosenIds,
       status: false,
     }),
@@ -71,6 +71,11 @@ export const getAllTags = () => (
     })
 );
 
+const renamePropToStr = (oldProp, newProp, { [oldProp]: value, ...others }) => ({
+  [newProp]: `${value}`,
+  ...others,
+});
+
 export const getAllBooks = () => (
   fetch(`${API_ENDPOINT}/books`)
     .then((response) => {
@@ -79,5 +84,15 @@ export const getAllBooks = () => (
       }
       throw new Error(response);
     })
-    .then(resJson => resJson)
+    .then(resJson => resJson.map(book => renamePropToStr('jan_code', 'jancode', book))
+      .map(book => renamePropToStr('published_at', 'published', book)))
+  // {
+  //   const { jan_code: jancode, published_at: published, ...others } = book;
+  //
+  //   return {
+  //     jancode,
+  //     published,
+  //    ...others,
+  //   };
+  // })
 );

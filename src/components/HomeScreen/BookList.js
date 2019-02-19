@@ -89,7 +89,7 @@ BookList.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.string,
     status: PropTypes.bool.isRequired,
-    isbn: PropTypes.string.isRequired,
+    jancode: PropTypes.string.isRequired,
   })),
   onRefresh: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,

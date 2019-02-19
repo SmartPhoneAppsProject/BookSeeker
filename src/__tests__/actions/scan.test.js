@@ -18,26 +18,26 @@ describe('actions', () => {
 
   test('カメラの読み取り中のアクションが生成されること', () => {
     const expected = {
-      type: types.READING_ISBN,
+      type: types.READING_JANCODE,
     };
-    expect(actions.readingISBN()).toEqual(expected);
+    expect(actions.readingJANCODE()).toEqual(expected);
   });
 
   test('カメラの読み取り完了のアクションが生成されること', () => {
-    const isbn = 1234567890123;
+    const jancode = 1234567890123;
     const expected = {
-      type: types.VALID_ISBN,
+      type: types.VALID_JANCODE,
       payload: {
-        isbn,
+        jancode,
       },
     };
-    expect(actions.validISNB(isbn)).toEqual(expected);
+    expect(actions.validISNB(jancode)).toEqual(expected);
   });
 
   test('カメラの読み取りエラーのアクションが生成されること', () => {
     const expected = {
-      type: types.INVALID_ISBN,
+      type: types.INVALID_JANCODE,
     };
-    expect(actions.invalidISBN()).toEqual(expected);
+    expect(actions.invalidJANCODE()).toEqual(expected);
   });
 });

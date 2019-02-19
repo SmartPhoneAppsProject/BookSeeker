@@ -24,7 +24,7 @@ export default class EntryTagsScreen extends Component {
     const {
       title,
       published,
-      isbn,
+      jancode,
       tags,
       postBook,
       navigation,
@@ -38,7 +38,7 @@ export default class EntryTagsScreen extends Component {
       return accumulator;
     }, []);
 
-    postBook(title, image, published, isbn, chosenIds);
+    postBook(title, image, published, jancode, chosenIds);
     navigation.navigate('Home');
   };
 
@@ -123,7 +123,7 @@ EntryTagsScreen.propTypes = {
     chosen: PropTypes.bool,
   })).isRequired,
   title: PropTypes.string.isRequired,
-  isbn: PropTypes.string.isRequired,
+  jancode: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired,
   image: PropTypes.shape({
     uri: PropTypes.string,

@@ -1,15 +1,15 @@
 import {
   PERMISSIONS_GRANTED,
   PERMISSIONS_DENIED,
-  READING_ISBN,
-  VALID_ISBN,
-  INVALID_ISBN,
+  READING_JANCODE,
+  VALID_JANCODE,
+  INVALID_JANCODE,
 } from '../constants/actionTypes';
 
 const initialState = {
   permissions: 'denied',
   cameraStatus: 'reading',
-  isbn: '',
+  jancode: '',
 };
 
 const scan = (state = initialState, action) => {
@@ -24,18 +24,18 @@ const scan = (state = initialState, action) => {
         ...state,
         permissions: 'denied',
       };
-    case READING_ISBN:
+    case READING_JANCODE:
       return {
         ...state,
         cameraStatus: 'reading',
       };
-    case VALID_ISBN:
+    case VALID_JANCODE:
       return {
         ...state,
         cameraStatus: 'ok',
-        isbn: action.payload.isbn,
+        jancode: action.payload.jancode,
       };
-    case INVALID_ISBN:
+    case INVALID_JANCODE:
       return {
         ...state,
         cameraStatus: 'invalid',

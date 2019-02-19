@@ -2,17 +2,17 @@ import { connect } from 'react-redux';
 import {
   permissionsGranted,
   permissionsDenied,
-  readingISBN,
+  readingJANCODE,
   validISNB,
-  invalidISBN,
-  changeStatusFromIsbn,
+  invalidJANCODE,
+  changeStatusFromJancode,
 } from '../actions';
 import LentScanScreen from '../components/LentScanScreen';
 
 const mapStateToProps = ({ scan }, props) => ({
   permissions: scan.permissions,
   cameraStatus: scan.cameraStatus,
-  isbn: scan.isbn,
+  jancode: scan.jancode,
   ...props.navigation.state.params,
 });
 
@@ -23,17 +23,17 @@ const mapDispatchToProps = dispatch => ({
   permissionsDenied() {
     dispatch(permissionsDenied());
   },
-  readingISBN() {
-    dispatch(readingISBN());
+  readingJANCODE() {
+    dispatch(readingJANCODE());
   },
-  validISBN(isbn) {
-    dispatch(validISNB(isbn));
+  validJANCODE(jancode) {
+    dispatch(validISNB(jancode));
   },
-  invalidISBN() {
-    dispatch(invalidISBN());
+  invalidJANCODE() {
+    dispatch(invalidJANCODE());
   },
-  changeStatusFromIsbn(isbn, status) {
-    dispatch(changeStatusFromIsbn(isbn, status));
+  changeStatusFromJancode(jancode, status) {
+    dispatch(changeStatusFromJancode(jancode, status));
   },
 });
 

@@ -12,14 +12,14 @@ describe('<LentScanScreen />', () => {
         bookStatus
         permissions="granted"
         cameraStatus="reading"
-        isbn={book.isbn}
+        jancode={book.jancode}
         permissionsGranted={jest.fn()}
         permissionsDenied={jest.fn()}
-        isbnReading={jest.fn()}
-        isbnOk={jest.fn()}
-        isbnInvalid={jest.fn()}
+        jancodeReading={jest.fn()}
+        jancodeOk={jest.fn()}
+        jancodeInvalid={jest.fn()}
         requestChangeStatus={jest.fn()}
-        changeStatusFromIsbn={jest.fn()}
+        changeStatusFromJancode={jest.fn()}
       />)
       .toJSON();
     expect(tree).toMatchSnapshot();
