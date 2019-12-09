@@ -14,8 +14,7 @@
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.67.1",
     "jest-expo": "^34.0.0",
-    "react-dom": "16.8.3",
-    "react-native-scripts": "^2.0.1"
+    "react-dom": "16.8.3"
   },
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -23,7 +22,7 @@
     "eject": "expo eject",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "test": "echo no tests",
+    "test": "jest",
     "appr": "appr",
     "test:watch": "npm test -- --watch"
   },
