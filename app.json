@@ -4,7 +4,7 @@
     "description": "Manage books for SmartPhone Apps Project. https://github.com/SmartPhoneAppsProject/BookSeeker",
     "slug": "book-seeker",
     "version": "1.0.0",
-    "sdkVersion": "31.0.0",
+    "sdkVersion": "34.0.0",
     "githubUrl": "https://github.com/SmartPhoneAppsProject/BookSeeker",
     "icon": "./assets/icon.png",
     "splash": {
@@ -16,6 +16,10 @@
     },
     "android": {
       "package": "com.smartphone_apps_project.book_seeker"
-    }
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }

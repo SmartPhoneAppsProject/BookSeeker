@@ -5,10 +5,8 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import {
-  BarCodeScanner,
-  Permissions,
-} from 'expo';
+import * as Permissions from 'expo-permissions';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Text } from 'react-native-elements';
 
 import { index as styles } from './Styles';
